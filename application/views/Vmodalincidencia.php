@@ -1,9 +1,6 @@
 <?php 
-  /*$instancia = $this->load->model('incidencia');   
-  $fuentetipo = $this->incidencia->getlistarfuenteincidencia();
-  $inciestados = $this->incidencia->getlistarestado();
-  $estados = $this->incidencia->getlistarfuenteincidencia();
-  $necesidades = $instancia->getlistarnecesidades();*/
+  $this->load->model('incidencia');   
+  $fuentetipo = $this->incidencia->getlistarfuenteincidencia();  
 ?>
 <input type="text" id="txtidincidencia" style="display:none;">
 <!-- Formulario de creacion de Incidencia -->
@@ -26,7 +23,7 @@
 							
 							<div style="margin:10px"></div>
         <div class="row" >
-					  <div class="col-xs-4 col-md-3">
+					  <div class="col-xs-4 col-md-4">
 					  <B>Fecha apertura</B>
 					    <div class='input-group date'>
 					    <input type="text" class="form-control"  id="fechaapertura" readonly="readonly" disabled>
@@ -36,7 +33,7 @@
 					    </div> 	
 			  	  </div>
 				         
-          <div class="col-xs-4 col-md-3">
+          <div class="col-xs-4 col-md-4">
 		  <B>Fecha vencimiento</B>
 						<div class='input-group date'>
 					        <input type="text" class="form-control" id="fechavencimiento" readonly="readonly"/>
@@ -50,7 +47,7 @@
 				 <div class="col-xs-4 col-md-3">
 				 <B>Tiempo resolucion</B>
  				<div class="input-group-addon">
-				<input type="time"   style="WIDTH: 108px; HEIGHT: 20px" id='tiemporesolucion' name="hora" value="00:30:00" max="24:00:00" min="00:00:00" step="1">
+				<input type="time"   style="WIDTH: 118px; HEIGHT: 20px" id='tiemporesolucion' name="hora" value="00:30:00" max="24:00:00" min="00:00:00" step="1">
 			    </div>
 				</div>
 
@@ -60,7 +57,7 @@
     
 	   <div style="margin:10px"></div>
        <div class="row" >
-					    	<div class="col-xs-4 col-md-5">
+					    	<div class="col-xs-4 col-md-6">
 							<B>Estado</B>
 					        	<select id="selectestado" class="form-control">
 									<?php
@@ -83,7 +80,7 @@
 					    </div>
 						<div style="margin:10px"></div>
 						<div class="row" >
-					      	<div class="col-xs-4 col-md-5">
+					      	<div class="col-xs-4 col-md-6">
 	                            <B>Impacto</B>
 	                            <select id="selectimpacto" class="form-control">
                                   	<?php
@@ -106,7 +103,7 @@
 					    </div>
 						<div style="margin:10px"></div>
 						<div class="row" >
-					      	<div class="col-xs-4 col-md-5">
+					      	<div class="col-xs-4 col-md-6">
                               <B>Tecnico asignado</B>
                               <select id="selectecnico" class="form-control">
                                   	<?php
