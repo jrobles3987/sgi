@@ -1,2 +1,0 @@
-# sgi
-proyecto de tesis
