@@ -159,7 +159,7 @@ class Menu extends CI_Controller
 			$this->load->model('usuarios');
 			$data = array(
 				'contenido' => 'menuusuariossistema', 
-				'usuarios'=>$this->usuarios->getUsuariosSistema()
+				'usuarios'=>$this->usuarios->getUsuariosSistema(),
 				'incidencia_fuente' => $this->incidencia->getlistarfuenteincidencia(),
 				'incidencia_estados' => $this->incidencia->getlistarestado(),
 				'incidencia_necesidades' => $this->incidencia->getlistarnecesidades(),
