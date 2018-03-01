@@ -1,9 +1,9 @@
 <?php 
-	$this->load->model('incidencia');			
-	$fuentetipo = $this->incidencia->getlistarfuenteincidencia();
-	$inciestados = $this->incidencia->getlistarestado();
-	//$estados = $this->incidencia->getlistarfuenteincidencia();
-	$necesidades = $this->incidencia->getlistarnecesidades();
+  $instancia = $this->load->model('incidencia');   
+  $fuentetipo = $this->incidencia->getlistarfuenteincidencia();
+  $inciestados = $this->incidencia->getlistarestado();
+  $estados = $this->incidencia->getlistarfuenteincidencia();
+  $necesidades = $instancia->getlistarnecesidades();
 ?>
 <input type="text" id="txtidincidencia" style="display:none;">
 <!-- Formulario de creacion de Incidencia -->

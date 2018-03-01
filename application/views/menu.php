@@ -45,9 +45,9 @@
   <script type="text/javascript">
 		var BASE_URL = "<?php echo base_url() ?>";
 	</script>
-  
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
+<?php include("vmodalincidencia.php"); ?>
 <div class="loading_iniciosesion" id="div_loading" style="display: none">
       <div class="loading_background">
           <img class="img_loading" src="<?=base_url('plantilla/dist/img/loading.gif') ?>"/>
@@ -266,31 +266,84 @@
 
 <script>
 
-var tipousuario =10
-var socket = io.connect('localhost:7000');
-Notificaciones();
-socket.on('connected', function (data) {
-    socket.emit('ready for data', {});
-});
-  
-socket.on('update', function (data) {
-  if (tipousuario==10) {
-    var va = data.message.payload.split(';')
-    Notificaciones();
-    notifyMe()        
-  }
-  console.log(data.message.payload);
-});
+  var tipousuario =10
+  var socket = io.connect('localhost:7000');
+  Notificaciones();
+  socket.on('connected', function (data) {
+      socket.emit('ready for data', {});
+  });
+    
+  socket.on('update', function (data) {
+    if (tipousuario==10) {
+      var va = data.message.payload.split(';');
+      Notificaciones();
+      notifyMe();
+    }
+    console.log(data.message.payload);
+  });  
 
-function myFunction(x)
+  function Notificaciones(){
+    var numIncidencias=0;
+    $.ajax({
+      type: "POST",
+      url: "<?php echo base_url('incidencias/mostrarincidentesnotificaciones');?>",
+      success: function (data) {
+
+        var json = JSON.parse(data);
+        if (json){
+          for (var i=0, len=json.length; i < len; i++) {
+            if (json[i].estado=="NUEVO")
+            {
+              $("#ul-noti").append('<li id="'+json[i].idincidencias+'" onclick="myFunction(this)"><a href="#"><i class="li_notificacion fa fa-book" style="color:green"></i>'+json[i].tituloincidencia+'  estado '+json[i].estado+'</a></li>');
+            }else{
+              $("#ul-noti").append('<li id="'+json[i].idincidencias+'" onclick="myFunction(this)"><a href="#"><i class="li_notificacion fa fa-book" style="color:blue"></i>'+json[i].tituloincidencia+'  estado '+json[i].estado+'</a></li>');
+            }
+            numIncidencias++;
+          }
+        }
+        $("#li-header").html('Tienes '+numIncidencias+' incidencias Nuevas');
+        $("#muestra").html(''+numIncidencias+'');
+        
+      },
+      error: function (xhr, exception) {
+        alert("error");
+      }
+
+    });
+  }
+
+  function notifyMe() {
+    // Let's check if the browser supports notifications
+    if (!("Notification" in window)) {
+      alert("This browser does not support desktop notification");
+    }
+
+    // Let's check whether notification permissions have already been granted
+    else if (Notification.permission === "granted") {
+      // If it's okay let's create a notification
+      var notification = new Notification("Nueva Incidencia Registrada");
+    }
+
+    // Otherwise, we need to ask the user for permission
+    else if (Notification.permission !== 'denied') {
+      Notification.requestPermission(function (permission) {
+        // If the user accepts, let's create a notification
+        if (permission === "granted") {
+          var notification = new Notification("Hi there!");
+        }
+      });
+    }
+  }
+
+  function myFunction(x)
   {
-    //alert(x.id);
     $.ajax({
             type: "POST",
             url: "<?php echo base_url('incidencias/mostrarincidentes');?>",
             data: {idincidencia: x.id},
             success: function (data) {
               var json1 = JSON.parse(data);
+              //alert(x.id);
               $('#txtidincidencia').val(x.id);
               $('#txttituloincidencia').val(json1.tituloincidencia);
               $('#fechaapertura').val(json1.fechaapertura);
@@ -310,69 +363,4 @@ function myFunction(x)
       });
     $('#vmodalincidencia').modal({show:true});  
   }
-  //inicia las tablas usando el plugin datatables
-
-    //mejor presentacion en moviles, pero problemas con alertas modificadas
-    
-    //responsive: true
-
-  
-
-function Notificaciones(){
-  var numIncidencias=0;
-  $.ajax({
-    type: "POST",
-    url: "<?php echo base_url('incidencias/mostrarincidentesnotificaciones');?>",
-    success: function (data) {
-
-      var json = JSON.parse(data);
-      if (json){
-      for (var i=0, len=json.length; i < len; i++) {
-        //console.log(json[i].idincidencias);
-        if (json[i].estado=="NUEVO")
-        {
-          $("#ul-noti").append('<li><a href="#"><i class="fa fa-book" id="'+json[i].idincidencias+'" onclick="myFunction(this)" style="color:green"></i>'+json[i].tituloincidencia+'  estado '+json[i].estado+'</a></li>');
-        }else{
-          $("#ul-noti").append('<li><a href="#"><i class="fa fa-book" id="'+json[i].idincidencias+'" onclick="myFunction(this)" style="color:blue"></i>'+json[i].tituloincidencia+'  estado '+json[i].estado+'</a></li>');
-        }
-        numIncidencias++;
-      }
-      }
-      if(numIncidencias < 1){
-        $("#li-header").html('Tienes '+numIncidencias+' incidencias Nuevas')        
-      }
-      $("#muestra").html(''+numIncidencias+'')
-      
-    },
-    error: function (xhr, exception) {
-      alert("error");
-    }
-
-  });
-}
-
-function notifyMe() {
-  // Let's check if the browser supports notifications
-  if (!("Notification" in window)) {
-    alert("This browser does not support desktop notification");
-  }
-
-  // Let's check whether notification permissions have already been granted
-  else if (Notification.permission === "granted") {
-    // If it's okay let's create a notification
-    var notification = new Notification("NUEVA INCIDENCIA REGISTRADA");
-
-  }
-
-  // Otherwise, we need to ask the user for permission
-  else if (Notification.permission !== 'denied') {
-    Notification.requestPermission(function (permission) {
-      // If the user accepts, let's create a notification
-      if (permission === "granted") {
-        var notification = new Notification("Hi there!");
-      }
-    });
-  }
-}
-
 </script>
