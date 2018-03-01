@@ -99,7 +99,7 @@ class Incidencias extends CI_Controller
 		}
 	}
 
-	public function mostrarincidentes()
+	public function Mostrarincidentes()
 	{
 		if ($this->session->userdata('login')==TRUE) {
 			$idincidencia = $this->input->post('idincidencia');
@@ -111,7 +111,7 @@ class Incidencias extends CI_Controller
 		}
 	}
 
-	public function mostrarincidentesnotificaciones()
+	public function Mostrarincidentesnotificaciones()
 	{
 		if ($this->session->userdata('login')==TRUE) {
 			$idincidencia = $this->input->post('idincidencia');

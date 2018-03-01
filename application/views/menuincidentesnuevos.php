@@ -19,7 +19,7 @@
 					      	<div class="col-xs-4 col-md-8 col-center">
 					      		<span>* Titulo de la incidencia</span>
 					        	<textarea class="form-control" id="txttituloincidencia" rows="1" style="resize: none;" autofocus></textarea>
-					      	</div>							
+					      	</div>
 					</div>
 					<div  class="row">
 						<div class="col-xs-4 col-md-8  col-center">
@@ -27,7 +27,7 @@
 							<select id="selectcategoria" class="form-control">
 							<option value="0">Seleccione la categoria de la incidencia...</option>
 								<?php
-									foreach ($categorias as $c) {
+									foreach ($incidencias_categorias as $c) {
 										echo '<option value="'.$c->idcategoria.'">'.$c->nombre.'</option>';
 									}
 								?>
@@ -63,7 +63,7 @@
 					        	<select id="selectestado" class="form-control">
 								<option value="0">Seleccione el estado de la incidencia...</option>
 									<?php
-							      		foreach ($inciestados as $k) {
+							      		foreach ($incidencia_estados as $k) {
 							      			echo '<option value="'.$k->idincidenciaestado.'">'.$k->estado.'</option>';
 							      		}
 							      	?>
@@ -74,7 +74,7 @@
                               <select id="selecturgencia" class="form-control">
                                   <option value="0">Seleccione la urgencia de incidencia...</option>
                                   	<?php
-										foreach ($necesidades as $l) {
+										foreach ($incidencia_necesidades as $l) {
 											echo '<option value="'.$l->idnecesidad.'">'.$l->nombre.'</option>';
 										}
 									?>
@@ -86,7 +86,7 @@
                               	<select id="selectimpacto" class="form-control">
                                   <option value="0">Seleccione impacto incidencia...</option>
                                   	<?php
-										foreach ($necesidades as $l) {
+										foreach ($incidencia_necesidades as $l) {
 											echo '<option value="'.$l->idnecesidad.'">'.$l->nombre.'</option>';
 										}
 									?>
@@ -97,7 +97,7 @@
                               <select id="selectprioridad" class="form-control">
                               <option value="0">Seleccione la prioridad de la incidencia...</option>
                               	<?php
-									foreach ($necesidades as $l) {
+									foreach ($incidencia_necesidades as $l) {
 										echo '<option value="'.$l->idnecesidad.'">'.$l->nombre.'</option>';
 									}
 								?>
@@ -110,7 +110,7 @@
                               <select id="selectfuenteincidencia" class="form-control"autofocus>
                                   <option value="0">Seleccione la fuente de la incidencia...</option>
                                   <?php
-                                        foreach ($fuentetipo as $j) {
+                                        foreach ($incidencia_fuente as $j) {
 											$seleccionado_fuente = '';
 											if ($j->idincidenciafuente == 1){
 												$seleccionado_fuente = 'selected';
@@ -127,7 +127,7 @@
 							  <select id="selectecnico" class="form-control">
                               <option value="0">Seleccione el Técnico...</option>
                               	<?php
-									foreach ($tecnicos as $t) {
+									foreach ($incidencia_tecnicos as $t) {
 										echo '<option value="'.$t->idpersonal.'">'.$t->nombres.'</option>';
 									}
 								?>

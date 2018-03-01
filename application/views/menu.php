@@ -356,6 +356,7 @@
               $('#selecfuenteincidencia').val(json1.idincidenciafuente);
               $('#seleclocalizacion').val(json1.idlugarincidente);
               $('#txtareadescripcion').val(json1.descripcion);
+              $('#selectcategoria').val(json1.idcategoria);
             },
             error: function (xhr, exception) {
               alert("Ocurrio un error recargue la pagina...");

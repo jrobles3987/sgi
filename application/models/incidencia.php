@@ -20,12 +20,11 @@ class incidencia extends CI_Model
 	  }
 	  
 	public function getlistarestado()
-	{
+	  {
 		$this->db->order_by('estado','asc');
 		$result=$this->db->get('incidencias.v_incidencia_estado');
 		if ($result->num_rows()>0)
-		{ 
-			return $result->result();
+		{ return $result->result();
 		}else {
 			return null;
 		}
@@ -144,10 +143,9 @@ public function setGuardarincidencia($data) // escribe bien.l.
 			incidencias.usuariocreador,
 			incidencias.ultimamodificacion,
 			incidencias.tecnicoasignado,
-			incidencias.idincidenciaestado = incidencias_estados.idincidenciaestado
+			incidencias.idcategoria
 			FROM incidencias.incidencias,incidencias.incidencias_estados
-			WHERE
-			idincidencias = ".$idincidencia.";");
+			WHERE idincidencias = ".$idincidencia.";");
 	  	if ($result->num_rows()>0)
 	  	{ 
 			return $result->row();

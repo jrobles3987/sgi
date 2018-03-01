@@ -1,7 +1,3 @@
-<?php 
-  $this->load->model('incidencia');   
-  $fuentetipo = $this->incidencia->getlistarfuenteincidencia();  
-?>
 <input type="text" id="txtidincidencia" style="display:none;">
 <!-- Formulario de creacion de Incidencia -->
 <div class="modal fade" id="vmodalincidencia" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
@@ -14,12 +10,23 @@
       
       <div class="modal-body">
       <div class="panel panel-default panel-fade col-md-10 col-center"> 
-                <div class="row">
-					      	<div class="col-xs-4 col-md-6">
-							  <B>Titulo de la incidencia</B>
-							<textarea class="form-control" id="txttituloincidencia" rows="1" style="resize: none;"></textarea>
-					      	</div>
-  					      </div>	<!-- cierre tirulo incidencia -->
+            <div class="row">
+		      	<div class="col-xs-4 col-md-6">
+					<B>Titulo de la incidencia</B>
+					<textarea class="form-control" id="txttituloincidencia" rows="1" style="resize: none;"></textarea>
+		      	</div>
+		      	<div class="col-xs-4 col-md-5">
+					<span>* Categoria de la incidencia</span>
+					<select id="selectcategoria" class="form-control">
+					<option value="0">Seleccione la categoria de la incidencia...</option>
+						<?php
+							foreach ($incidencias_categorias as $c) {
+								echo '<option value="'.$c->idcategoria.'">'.$c->nombre.'</option>';
+							}
+						?>
+					</select>
+			    </div> 
+		    </div>	<!-- cierre tirulo incidencia -->
 							
 							<div style="margin:10px"></div>
         <div class="row" >
