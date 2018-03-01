@@ -1,3 +1,4 @@
+
 Apache:
 activar los modulos 
 rewrite_module, session_cookie_module, session_module,
