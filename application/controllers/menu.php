@@ -138,7 +138,7 @@ class Menu extends CI_Controller
 			$this->load->model('incidencia');
 			$this->load->model('usuarios');
 			$data = array(
-				'contenido' => 'reportes/reporte-encidencia',
+				'contenido' => 'reportes/reporte-incidencia',
 				'incidencia_fuente' => $this->incidencia->getlistarfuenteincidencia(),
 				'incidencia_estados' => $this->incidencia->getlistarestado(),
 				'incidencia_necesidades' => $this->incidencia->getlistarnecesidades(),

@@ -167,7 +167,7 @@ class Consultas_insidencias extends CI_Controller {
                     <td class="cabecera center width80">
                       <div class="titulo t1">UNIVERSIDAD TÉCNICA DE MANABÍ</div>
                       <div class="titulo t2">CENTRO DE COMPUTO</div>
-                      <div class="titulo t3">REPORTE DE INSIDENCIAS</div>
+                      <div class="titulo t3">REPORTE DE INCIDENCIAS</div>
                       <div class="titulo t3"></div>
                     </td>
                     <td class="logo2"></td>
@@ -237,8 +237,8 @@ $num +=1;
                     <td class="bloqueA"><div id="contenidoBloque">
                       <table class="bloqueGeneral">
                         <tr>
-                        <td id="estado"><label>Reporte Insidencias:</label><label class="datos">En General</label></td>
-                        <td id="total"><label>Total de registros:</label><label class="datos"> '.$c_enfermeria.'</label></td>
+                        <td id="estado"><label>Reporte Incidencias: </label><label class="datos">En General</label></td>
+                        <td id="total"><label>Total de registros: </label><label class="datos"> '.$c_enfermeria.'</label></td>
                         </tr>
                       </table>
                     </div></td>

@@ -17,7 +17,7 @@
             </button>
             <ul class="dropdown-menu">
               <!-- <?php// if ($area_asignada == 'ENFERMERIA'): ?> -->
-                <li><a class="btn-parte_diaria" href="#parte_diaria">Insidencias</a></li>
+                <li><a class="btn-parte_diaria" href="#parte_diaria">Incidencias</a></li>
                 <li><a class="btn-con_mensual" href="#con_mensual">Vida Util</a></li>
               <!-- <li role="separator" class="divider"></li> -->
             </ul>
@@ -37,16 +37,16 @@
     <div class="row">
       <div hidden class="form-group col-md-11 filtros f-parte_diaria">
         <label class="control-label">Fecha Inicio:</label>
-        <div class='input-group datetimepicker_start'>
+        <div class='input-group'>
           <input type="text" class="form-control" id="datetimepicker_start" readonly="readonly"/>
-          <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+          <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
         </div> 
       </div>
       <div hidden class="form-group col-md-11 filtros f-parte_diaria">
         <label class="control-label">Fecha final:</label>        
-        <div class='input-group datetimepicker_end'>
+        <div class='input-group'>
           <input type="text" class="form-control" id="datetimepicker_end" readonly="readonly"/>
-          <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+          <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
         </div> 
       </div>
 
@@ -145,15 +145,15 @@ $('.btn-con_mensual').click(function(e){
 });
 // configuracion para fechas enlazadas
 
-/*setTimeout(() => {
-$("#datetimepicker_start").on("dp.change", function (e) {
-  $('#datetimepicker_end').data("DateTimePicker").minDate(e.date);
-  }, 0);
-});
-setTimeout(() => {
-$("#datetimepicker_end").on("dp.change", function (e) {
-  $('#datetimepicker_start').data("DateTimePicker").maxDate(e.date);
-    }, 0);
-});*/
+// setTimeout(() => {
+// $("#datetimepicker_start").on("dp.change", function (e) {
+//   $('#datetimepicker_end').data("DateTimePicker").minDate(e.date);
+//   }, 0);
+// });
+// setTimeout(() => {
+// $("#datetimepicker_end").on("dp.change", function (e) {
+//   $('#datetimepicker_start').data("DateTimePicker").maxDate(e.date);
+//     }, 0);
+// });
 
 </script>

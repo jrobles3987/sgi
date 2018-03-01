@@ -291,6 +291,7 @@
 
         var json = JSON.parse(data);
         if (json){
+          $("#ul-noti").innerHTML='';
           for (var i=0, len=json.length; i < len; i++) {
             if (json[i].estado=="NUEVO")
             {
