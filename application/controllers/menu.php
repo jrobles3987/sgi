@@ -12,7 +12,15 @@ class Menu extends CI_Controller
 	public function index()
 	{
 		if ($this->session->userdata('login')==TRUE) {
-			$data = array('contenido' => 'menuinicio'); //menuinicio.php
+			$this->load->model('incidencia');
+			$this->load->model('usuarios');
+			$data = array(
+				'contenido' => 'menuinicio',
+				'incidencia_fuente' => $this->incidencia->getlistarfuenteincidencia(),
+				'incidencia_estados' => $this->incidencia->getlistarestado(),
+				'incidencia_necesidades' => $this->incidencia->getlistarnecesidades(),
+				'incidencia_tecnicos' => $this->usuarios->getListarUsuariosSistema()
+			); //menuinicio.php
 			$this->load->view('menu.php',$data);
 		}else{
 			$this->load->view('login');

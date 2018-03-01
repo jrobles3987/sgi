@@ -19,16 +19,17 @@ class incidencia extends CI_Model
 
 	  }
 	  
-	  public function getlistarestado()
-	  {
+	public function getlistarestado()
+	{
 		$this->db->order_by('estado','asc');
 		$result=$this->db->get('incidencias.v_incidencia_estado');
 		if ($result->num_rows()>0)
-		{ return $result->result();
+		{ 
+			return $result->result();
 		}else {
 			return null;
 		}
-		}
+	}
 		
 		public function getlistarnecesidades()
 	  {

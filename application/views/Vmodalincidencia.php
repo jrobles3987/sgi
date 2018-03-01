@@ -1,9 +1,9 @@
 <?php 
-  $instancia = $this->load->model('incidencia');   
+  /*$instancia = $this->load->model('incidencia');   
   $fuentetipo = $this->incidencia->getlistarfuenteincidencia();
   $inciestados = $this->incidencia->getlistarestado();
   $estados = $this->incidencia->getlistarfuenteincidencia();
-  $necesidades = $instancia->getlistarnecesidades();
+  $necesidades = $instancia->getlistarnecesidades();*/
 ?>
 <input type="text" id="txtidincidencia" style="display:none;">
 <!-- Formulario de creacion de Incidencia -->
@@ -62,72 +62,65 @@
        <div class="row" >
 					    	<div class="col-xs-4 col-md-5">
 							<B>Estado</B>
-					        	<select id="selectestado" class="form-control" autofocus>
-								<option value="0">Seleccione el estado de la incidencia...</option>
+					        	<select id="selectestado" class="form-control">
 									<?php
-							      		foreach ($inciestados as $k) {
+							      		foreach ($incidencia_estados as $k) {
 							      			echo '<option value="'.$k->idincidenciaestado.'">'.$k->estado.'</option>';
 							      		}
 							      	?>
 							    </select>
 					         </div>
 					      	<div class="col-xs-4 col-md-6">
-							  <B>Urgencia</B>
-                              <select id="selecturgencia" class="form-control">
-                                  <option value="0">Seleccione la urgencia de incidencia...</option>
-                                  <option value="1">Muy alta</option>
-                                  <option value="2">Alta</option>
-                                  <option value="3">media</option>
-                                  <option value="4">Baja</option>
-                                  <option value="5">Muy baja</option>
-                                  </select>	</div>
+							  	<B>Urgencia</B>
+                              	<select id="selecturgencia" class="form-control">
+                                  	<?php
+							      		foreach ($incidencia_necesidades as $k) {
+							      			echo '<option value="'.$k->idnecesidad.'">'.$k->nombre.'</option>';
+							      		}
+							      	?>
+                                </select>	
+                            </div>
 					    </div>
 						<div style="margin:10px"></div>
 						<div class="row" >
 					      	<div class="col-xs-4 col-md-5">
-                              <B>Impacto</B>
-                              <select id="selectimpacto" class="form-control">
-                                  <option value="0">Seleccione impacto incidencia...</option>
-                                  <option value="1">Muy alta</option>
-                                  <option value="2">Alta</option>
-                                  <option value="3">media</option>
-                                  <option value="4">Baja</option>
-                                  <option value="5">Muy baja</option>
-                                  </select>
+	                            <B>Impacto</B>
+	                            <select id="selectimpacto" class="form-control">
+                                  	<?php
+							      		foreach ($incidencia_necesidades as $k) {
+							      			echo '<option value="'.$k->idnecesidad.'">'.$k->nombre.'</option>';
+							      		}
+							      	?>
+                                </select>
 					      	</div>
 					      	<div class="col-xs-4 col-md-6">
-							  <B>Prioridad</B>
-                              <select id="selectprioridad" class="form-control">
-                              <option value="0">Seleccione la prioridad de la incidencia...</option>
-                              <option value="1">Mayor</option>
-                              <option value="2">Muy alta</option>
-                              <option value="3">Alta</option>
-                              <option value="4">Media</option>
-                              <option value="5">Baja</option>
-                              <option value="6">Muy baja</option>
-                              </select>
-                              </div>
+							  	<B>Prioridad</B>
+                              	<select id="selectprioridad" class="form-control">
+                              		<?php
+							    		foreach ($incidencia_necesidades as $k) {
+							    			echo '<option value="'.$k->idnecesidad.'">'.$k->nombre.'</option>';
+							    		}
+							    	?>
+                              	</select>
+                            </div>
 					    </div>
 						<div style="margin:10px"></div>
 						<div class="row" >
 					      	<div class="col-xs-4 col-md-5">
                               <B>Tecnico asignado</B>
                               <select id="selectecnico" class="form-control">
-                                  <option value="0">Seleccione tecnico...</option>
-                                  <option value="1">Nuevos</option>
-                                  <option value="2">En curso(asignada)</option>
-                                  <option value="3">En curso(planificada)</option>
-                                  <option value="4">En espera</option>
-                                  <option value="5">Resuelto</option>
-                                  <option value="6">Cerrado</option>
+                                  	<?php
+							    		foreach ($incidencia_tecnicos as $k) {
+							    			echo '<option value="'.$k->idpersonal.'">'.$k->nombres.'</option>';
+							    		}
+							    	?>
                               </select>
 					      	</div>
 					      	<div class="col-xs-4 col-md-6">
                               <B>Fuente</B>
                               <select id="selectfuenteincidencia" class="form-control"autofocus>
-                                  <option value="0">Seleccione la fuente de la incidencia...</option>
                                   <?php
-                                        foreach ($fuentetipo as $j) {
+                                        foreach ($incidencia_fuente as $j) {
                                             echo '<option value="'.$j->idincidenciafuente.'">'.$j->nombre.'</option>';
                                         }
                                     ?>

@@ -361,6 +361,6 @@
               alert("Ocurrio un error recargue la pagina...");
             }
       });
-    $('#vmodalincidencia').modal({show:true});  
+    $('#vmodalincidencia').modal({show:true});
   }
 </script>
