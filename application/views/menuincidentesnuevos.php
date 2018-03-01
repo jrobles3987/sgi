@@ -151,6 +151,7 @@
 					      	<div class="col-xs-4 col-md-12">
 					      		<span>* Descripcion</span>
 					        	<textarea class="form-control" id="txtareadescripcion" rows="2" style="resize: none;"></textarea>
+					        	<div style="margin:10px"></div>
 					      	</div>
 					    </div>	
 				    </div>
@@ -166,6 +167,7 @@
                 </div>
 			</div>
 		</div>
+</div>
 </div>
 <script src="<?=base_url('plantilla/dist/js/menuingresoactivos.js');?>"></script>
 <script >
