@@ -6,7 +6,7 @@ $active_record = TRUE;
 // Conexion a Base de datos del sistema SGI
 $db['default']['hostname'] = 'localhost';
 $db['default']['username'] = 'postgres';
-$db['default']['password'] = '12345';
+$db['default']['password'] = 'admin';
 $db['default']['database'] = 'sistemasutm';
 $db['default']['dbdriver'] = 'postgre';
 $db['default']['port'] 	   = '5432';
@@ -24,7 +24,7 @@ $db['default']['stricton'] = FALSE;
 // Conexion a Base de datos de logueo de SGA
 $db['usuarios']['hostname'] = 'localhost';
 $db['usuarios']['username'] = 'postgres';
-$db['usuarios']['password'] = '12345';
+$db['usuarios']['password'] = 'admin';
 $db['usuarios']['database'] = 'db_sgacnx';
 $db['usuarios']['dbdriver'] = 'postgre';
 $db['usuarios']['port'] 	= '5432';
@@ -42,7 +42,7 @@ $db['usuarios']['stricton'] = FALSE;
 // Conexion a Base de datos del personal del sistema SGA
 $db['personal']['hostname'] = 'localhost';
 $db['personal']['username'] = 'postgres';
-$db['personal']['password'] = '12345';
+$db['personal']['password'] = 'admin';
 $db['personal']['database'] = 'dba_sga';
 $db['personal']['dbdriver'] = 'postgre';
 $db['personal']['port']     = '5432';
