@@ -33,7 +33,7 @@
 								if($usuarios){
 									foreach ($usuarios as $fila) {				
 										$num++;
-                                        echo '<TR id="'.$fila->cedula.'" onclick="myFunction(this)"><TD>'.$num.'</TD><TD>'.$fila->cedula.'</TD><TD>'.$fila->nombres.'</TD><TD>'.$fila->emailutm.'</TD><TD>'.$fila->rol.'</TD></TR>'; 
+                                        echo '<TR id="'.$fila->cedula.'" onclick="myFunctionUsuarios(this)"><TD>'.$num.'</TD><TD>'.$fila->cedula.'</TD><TD>'.$fila->nombres.'</TD><TD>'.$fila->emailutm.'</TD><TD>'.$fila->rol.'</TD></TR>'; 
                                         //echo $fila->idpersonal;
 									}
 								}
@@ -55,7 +55,7 @@
 		$('#vmodalusuariosingreso').modal({show:true});
 	});
 
-	function myFunction(x)
+	function myFunctionUsuarios(x)
 	{		$('#div_loading_cargando').css('display','inline');
 			$.ajax({
 	            type: "POST",

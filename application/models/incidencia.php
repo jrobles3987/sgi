@@ -173,4 +173,19 @@ public function setGuardarincidencia($data) // escribe bien.l.
 	  	}
 	}
 
+	public function getHistorialTecnico($idpersonal = '')
+	{
+
+		$result = $this->db->query("SELECT count(incidencias.idincidencias) as incidencias_activas
+									FROM incidencias.incidencias,incidencias.incidencias_estados
+									WHERE incidencias.idincidenciaestado = incidencias_estados.idincidenciaestado and incidencias_estados.estado <> 'CERRADO' and incidencias_estados.estado <> 'RESUELTO' and incidencias.tecnicoasignado = ".$idpersonal.";
+									");
+		if ($result->num_rows()>0)
+	  	{ 
+			return $result->row();
+	  	}else {
+		  	return null;
+	  	}
+	}
+
 }

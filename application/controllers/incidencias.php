@@ -123,4 +123,17 @@ class Incidencias extends CI_Controller
 		}
 	}
 
+	public function MostrarTrabajosActivosTecnico()
+	{
+		if ($this->session->userdata('login')==TRUE) {
+			$idpersonal = $this->input->post('idpersonal');
+			$idincidencia = $this->input->post('idincidencia');
+			$this->load->model('incidencia');
+			$trabajosactivos = $this->incidencia->getHistorialTecnico($idpersonal);					
+			echo json_encode($trabajosactivos);
+		}else{
+			show_404();
+		}
+	}
+
 }

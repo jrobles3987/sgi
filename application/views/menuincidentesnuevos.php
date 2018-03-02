@@ -133,6 +133,8 @@
 								?>
                               </select>
 					      	</div>
+					      	<div class="col-xs-4 col-md-6" id="num_trabajosactivos">
+					      	</div>
 						</div>
 					    <div class="row" >
 					    	<div class="col-xs-6 col-md-12">
@@ -322,5 +324,24 @@
 		
 			} 		
 		});
-	});	 
+	});	
+
+	$('#selectecnico2').change(function(){
+		$('#selectecnico2 option:selected').each(function(){
+			idpersonal= $('#selectecnico2').val();
+			$.post("<?php echo base_url('incidencias/MostrarTrabajosActivosTecnico');?>", {
+				idpersonal: idpersonal
+			}, function(data){
+				if(data){
+					 var json = JSON.parse(data);
+					$("#num_trabajosactivos").html('<p>Tiene '+json.incidencias_activas+' trabajos asignados</p>');
+					if(idpersonal != '0'){
+						$('#num_trabajosactivos').css('display','inline');
+					}else{
+						$('#num_trabajosactivos').css('display','none');
+					}
+				}					
+			});
+		});
+	});
 </script>
