@@ -134,7 +134,7 @@
                               </select>
 					      	</div>
 					      	<div class="col-xs-4 col-md-6" id="num_trabajosactivos">
-					      	</div>
+					      	</div>					      	
 						</div>
 					    <div class="row" >
 					    	<div class="col-xs-6 col-md-12">
@@ -333,13 +333,30 @@
 				idpersonal: idpersonal
 			}, function(data){
 				if(data){
-					 var json = JSON.parse(data);
-					$("#num_trabajosactivos").html('<p>Tiene '+json.incidencias_activas+' trabajos asignados</p>');
-					if(idpersonal != '0'){
-						$('#num_trabajosactivos').css('display','inline');
-					}else{
-						$('#num_trabajosactivos').css('display','none');
-					}
+					$.post("<?php echo base_url('incidencias/MostrarCalificacionTrabajosTecnico');?>", {
+						idpersonal: idpersonal
+					}, function(data2){
+						if(data2){
+							var json1 = JSON.parse(data);
+							var json2 = JSON.parse(data2);
+							if (json1.incidencias_activas != null){
+								msj1 = '<p>Tiene '+json1.incidencias_activas+' trabajos asignados.</p>';
+							}
+							if (json2.calificacionusuario != null) {
+								msj2 = '<p>Promedio de nivel de satisfacción de usuarios para incidencias resueltas: '+json2.calificacionusuario+'/10</p>';
+							}else{
+								msj2 = '<p>No tiene calificaciones de usuarios para las incidencias resueltas.</p>';
+							}
+							
+
+							$("#num_trabajosactivos").html( msj1 + msj2 );
+							if(idpersonal != '0'){
+								$('#num_trabajosactivos').css('display','inline');
+							}else{
+								$('#num_trabajosactivos').css('display','none');
+							}
+						}
+					});					
 				}					
 			});
 		});

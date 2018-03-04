@@ -188,4 +188,19 @@ public function setGuardarincidencia($data) // escribe bien.l.
 	  	}
 	}
 
+	public function getPromediosCalificacionTecnico($idpersonal = '')
+	{
+
+		$result = $this->db->query("SELECT ROUND(avg(incidencias.calificacionusuario),0) as calificacionusuario, ROUND(avg(incidencias.calificacionadministrativa),0) as calificacionadministrativa
+									FROM incidencias.incidencias,incidencias.incidencias_estados
+									WHERE incidencias.idincidenciaestado = incidencias_estados.idincidenciaestado and (incidencias_estados.estado = 'CERRADO' or incidencias_estados.estado = 'RESUELTO') and incidencias.tecnicoasignado = ".$idpersonal.";
+									");
+		if ($result->num_rows()>0)
+	  	{ 
+			return $result->row();
+	  	}else {
+		  	return null;
+	  	}
+	}
+
 }

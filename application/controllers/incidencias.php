@@ -127,10 +127,21 @@ class Incidencias extends CI_Controller
 	{
 		if ($this->session->userdata('login')==TRUE) {
 			$idpersonal = $this->input->post('idpersonal');
-			$idincidencia = $this->input->post('idincidencia');
 			$this->load->model('incidencia');
 			$trabajosactivos = $this->incidencia->getHistorialTecnico($idpersonal);					
 			echo json_encode($trabajosactivos);
+		}else{
+			show_404();
+		}
+	}
+
+	public function MostrarCalificacionTrabajosTecnico()
+	{
+		if ($this->session->userdata('login')==TRUE) {
+			$idpersonal = $this->input->post('idpersonal');
+			$this->load->model('incidencia');
+			$calificaciontrabajos = $this->incidencia->getPromediosCalificacionTecnico($idpersonal);					
+			echo json_encode($calificaciontrabajos);
 		}else{
 			show_404();
 		}
