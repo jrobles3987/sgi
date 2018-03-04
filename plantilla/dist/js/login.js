@@ -19,7 +19,7 @@ $(document).ready(function() {
                         $(".errorsession").append(json.password).css({"display":"block"});
                         $(".password").css({"background-color": "#DAF7A6", "font-style": "oblique"});
                     }
-                    $('#div_loading').css('display','none');                                               
+                    $('#div_loading').css('display','none');
                 }else{
                     if(json.res == "success" && json.sess == false) {
                         $(".errorsession").append(json.mensaje).css({"display":"block"});
@@ -30,10 +30,14 @@ $(document).ready(function() {
                     }                    
                 }            
             },
+            complete : function(xhr, status) {
+                $('#div_loading').css('display','none');
+            },
             error: function (xhr, exception) {
                    
             }
         });
         e.preventDefault();
+
     });
 });

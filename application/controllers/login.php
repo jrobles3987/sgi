@@ -27,17 +27,19 @@ class Login extends CI_Controller
 				);
 
 			}else{
-
-				$data = array();
 				$this->load->model('usuarios');
-				$login = $this->usuarios->getLogin($usuario, $password);
 				$this->load->model('personas');
-				$datos = $this->personas->getDatosSesionPersonas($usuario);
+
+				$login = $this->usuarios->getLogin($usuario, $password);
+				$datos = $this->personas->getDatosSesionPersonas($usuario);				
 
 				if ($login!=null || $datos!=null) {
 
 					if( $login->msj=='Ok.'){
-						$data = array(  
+						$credenciales = $this->usuarios->getCredencialesPersonal($datos->idpersonal);
+						if ($credenciales) {
+							if ($credenciales->idrol != 1) {
+								$data = array(  
 									"idusuario" => $datos->idpersonal,
 									"cedula"	=> $datos->cedula, 
 									"user" 		=> $usuario, 
@@ -45,13 +47,27 @@ class Login extends CI_Controller
 									"apeuser" 	=> $datos->apellido1.' '.$datos->apellido2,
 									//"idfoto" 	=> $datos->idfichero_foto,
 									"login"   	=> TRUE);
-						$this->session->set_userdata($data);
-						$data = array(
-							"res"			=>		"success",
-							"sess"			=>		TRUE,
-							"redireccion"	=>		base_url("menu"),
-							"mensaje" 		=>		"El usuario esta logueado"
-						);
+								$this->session->set_userdata($data);
+								$data = array(
+									"res"			=>		"success",
+									"sess"			=>		TRUE,
+									"redireccion"	=>		base_url("menu"),
+									"mensaje" 		=>		"El usuario esta logueado"
+								);	
+							}else{
+								$data = array(
+									"res"			=>		"success",
+									"sess"			=>		FALSE,
+									"mensaje" 		=>		"No se pudo iniciar sesión debido a que sus credenciales no son las apropiadas para manipular el sistema"
+								);	
+							}
+						}else{
+							$data = array(
+								"res"			=>		"success",
+								"sess"			=>		FALSE,
+								"mensaje" 		=>		"No se pudo iniciar sesión debido a que sus credenciales no son las apropiadas para ingresar al Sistema."
+							);	
+						}
 
 					} else {
 

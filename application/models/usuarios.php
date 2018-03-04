@@ -96,4 +96,16 @@ class Usuarios extends CI_Model
 		}
 	}
 
+	public function getCredencialesPersonal($idpersonal = '')
+	{
+		$result = $this->db->query("SELECT idpersonal, idrol, estado 
+									FROM incidencias.v_listar_personal_rol 
+									WHERE idpersonal = ".$idpersonal." and estado = 'S';");
+		if($result->num_rows() > 0 ){
+			return $result->result();
+		}else{
+			return null;
+		}
+	}
+
 }
