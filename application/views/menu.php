@@ -47,7 +47,7 @@
 	</script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
-<?php include("vmodalincidencia.php"); ?>
+<?php include("incidencias/vmodalincidencia.php"); ?>
 <div class="loading_iniciosesion" id="div_loading" style="display: none">
       <div class="loading_background">
           <img class="img_loading" src="<?=base_url('plantilla/dist/img/loading.gif') ?>"/>

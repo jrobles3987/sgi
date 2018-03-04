@@ -38,7 +38,7 @@ class Menu extends CI_Controller
 			$this->load->model('incidencia');
 			$this->load->model('usuarios');		
 			$data = array(
-				'contenido' => 'menuingresoequipos',
+				'contenido' => 'equipos/menuingresoequipos',
 				'incidencia_fuente' => $this->incidencia->getlistarfuenteincidencia(),
 				'incidencia_estados' => $this->incidencia->getlistarestado(),
 				'incidencia_necesidades' => $this->incidencia->getlistarnecesidades(),
@@ -59,7 +59,7 @@ class Menu extends CI_Controller
 			$this->load->model('incidencia');
 			$this->load->model('usuarios');		
 			$data = array(
-				'contenido' => 'menuingresoequiposlote',
+				'contenido' => 'equipos/menuingresoequiposlote',
 				'incidencia_fuente' => $this->incidencia->getlistarfuenteincidencia(),
 				'incidencia_estados' => $this->incidencia->getlistarestado(),
 				'incidencia_necesidades' => $this->incidencia->getlistarnecesidades(),
@@ -79,7 +79,7 @@ class Menu extends CI_Controller
 			$this->load->model('incidencia');
 			$this->load->model('usuarios');
 			$data = array(
-				'contenido' => 'menuingresosistemas', 
+				'contenido' => 'equipos/menuingresosistemas', 
 				'tiposbienes' => $this->tiposbienes->getListarTiposBienesSistemas(),
 				'incidencia_fuente' => $this->incidencia->getlistarfuenteincidencia(),
 				'incidencia_estados' => $this->incidencia->getlistarestado(),
@@ -99,7 +99,7 @@ class Menu extends CI_Controller
 			$this->load->model('incidencia');
 			$this->load->model('usuarios');
 			$data = array(
-				'contenido' => 'menuincidentes', 
+				'contenido' => 'incidencias/menuincidentes', 
 				'incidentes'=>$this->incidencia->getlistartabla(),
 				'incidencia_fuente' => $this->incidencia->getlistarfuenteincidencia(),
 				'incidencia_estados' => $this->incidencia->getlistarestado(),
@@ -120,7 +120,7 @@ class Menu extends CI_Controller
 			$this->load->model('incidencia');
 			$this->load->model('usuarios');
 			$data = array(
-				'contenido'   => 'menuincidentesnuevos.php',
+				'contenido'   => 'incidencias/menuincidentesnuevos',
 				'incidencia_fuente' => $this->incidencia->getlistarfuenteincidencia(),
 				'incidencia_estados' => $this->incidencia->getlistarestado(),
 				'incidencia_necesidades' => $this->incidencia->getlistarnecesidades(),
@@ -159,7 +159,7 @@ class Menu extends CI_Controller
 			$this->load->model('incidencia');
 			$this->load->model('usuarios');
 			$data = array(
-				'contenido' => 'menuusuariossistema', 
+				'contenido' => 'usuarios/menuusuariossistema', 
 				'usuarios'=>$this->usuarios->getUsuariosSistema(),
 				'incidencia_fuente' => $this->incidencia->getlistarfuenteincidencia(),
 				'incidencia_estados' => $this->incidencia->getlistarestado(),
