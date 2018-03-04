@@ -17,6 +17,7 @@ class Menu extends CI_Controller
 			$this->load->model('usuarios');
 			$data = array(
 				'contenido' => 'menuinicio',
+				'incidentes'=>$this->incidencia->getlistartabla(),
 				'incidencia_fuente' => $this->incidencia->getlistarfuenteincidencia(),
 				'incidencia_estados' => $this->incidencia->getlistarestado(),
 				'incidencia_necesidades' => $this->incidencia->getlistarnecesidades(),

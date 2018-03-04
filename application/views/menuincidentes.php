@@ -24,7 +24,7 @@
 					<div class="panel panel-default col-md-6 col-center" style="padding: 1px,1px,1px,1px">
 						
 					    <center>
-						<B>Inidencias en observacion</B>
+						<B>Inidencias registradas en el sistema</B>
 						<center/>
 							
 					  	

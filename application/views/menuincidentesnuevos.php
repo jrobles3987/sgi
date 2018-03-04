@@ -64,7 +64,11 @@
 								<option value="0">Seleccione el estado de la incidencia...</option>
 									<?php
 							      		foreach ($incidencia_estados as $k) {
-							      			echo '<option value="'.$k->idincidenciaestado.'">'.$k->estado.'</option>';
+							      			$seleccionado_estado = '';
+											if ($k->idincidenciaestado == 1){
+												$seleccionado_estado = 'selected';
+											}
+							      			echo '<option value="'.$k->idincidenciaestado.'" '.$seleccionado_estado.'>'.$k->estado.'</option>';
 							      		}
 							      	?>
 							    </select>
@@ -75,7 +79,11 @@
                                   <option value="0">Seleccione la urgencia de incidencia...</option>
                                   	<?php
 										foreach ($incidencia_necesidades as $l) {
-											echo '<option value="'.$l->idnecesidad.'">'.$l->nombre.'</option>';
+											$seleccionado_urgencia = '';
+											if ($l->idnecesidad == 3){
+												$seleccionado_urgencia = 'selected';
+											}
+											echo '<option value="'.$l->idnecesidad.'" '.$seleccionado_urgencia.'>'.$l->nombre.'</option>';
 										}
 									?>
                                   </select>	</div>
@@ -87,22 +95,30 @@
                                   <option value="0">Seleccione impacto incidencia...</option>
                                   	<?php
 										foreach ($incidencia_necesidades as $l) {
-											echo '<option value="'.$l->idnecesidad.'">'.$l->nombre.'</option>';
+											$seleccionado_urgencia = '';
+											if ($l->idnecesidad == 3){
+												$seleccionado_urgencia = 'selected';
+											}
+											echo '<option value="'.$l->idnecesidad.'" '.$seleccionado_urgencia.'>'.$l->nombre.'</option>';
 										}
 									?>
                                 </select>
 					      	</div>
 					      	<div class="col-xs-4 col-md-6">
                               <span>* Prioridad</span>
-                              <select id="selectprioridad2" class="form-control">
-                              <option value="0">Seleccione la prioridad de la incidencia...</option>
-                              	<?php
-									foreach ($incidencia_necesidades as $l) {
-										echo '<option value="'.$l->idnecesidad.'">'.$l->nombre.'</option>';
-									}
-								?>
-                              </select>
-                              </div>
+	                              <select id="selectprioridad2" class="form-control">
+	                              <option value="0">Seleccione la prioridad de la incidencia...</option>
+	                              	<?php
+										foreach ($incidencia_necesidades as $l) {
+											$seleccionado_urgencia = '';
+											if ($l->idnecesidad == 3){
+												$seleccionado_urgencia = 'selected';
+											}
+											echo '<option value="'.$l->idnecesidad.'" '.$seleccionado_urgencia.'>'.$l->nombre.'</option>';
+										}
+									?>
+	                              </select>
+                            </div>
 					    </div>
 					    <div class="row" >					      	
 					      	<div class="col-xs-4 col-md-6">

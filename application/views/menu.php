@@ -99,7 +99,7 @@
                   <!-- end notification -->
                 </ul>
               </li>
-              <li class="footer"><a href="#"> Ver todas</a></li>
+              <li class="footer"><a href="<?=base_url('menu/incidentes')?>"> Ver todas</a></li>
             </ul>
           </li>
           <!-- User Account Menu -->

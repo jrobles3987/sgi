@@ -1,4 +1,4 @@
-<div class="row container col-lg-11 col-center">
+<div class="row container col-lg-12 col-center">
 	<!-- Formulario de creacion de Marcas -->	
 	<div class="pnatallabloqueado" id="formcrearmarcas">
 		<div class="ventana_adicional">	
@@ -91,7 +91,7 @@
 			</div>
 
 			<div class="panel-body">
-				<div class="panel panel-default panel-fade col-md-8 col-center">
+				<div class="panel panel-default panel-fade col-md-10 col-center">
 			        <div style="margin: 10px">
 				        <div class="row" >
 					      	<div class="col-xs-4 col-md-6">
