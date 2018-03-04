@@ -8,23 +8,29 @@
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.6 -->
-  <link rel="stylesheet" href="<?=base_url('plantilla/bootstrap/css/bootstrap.css')?>">
+  <link rel="stylesheet" type="text/css" href="<?=base_url('plantilla/bootstrap/css/bootstrap.css')?>">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
   <!-- Ionicons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
   <!-- datepicker -->
   <link rel="stylesheet" type="text/css" href="<?=base_url('plantilla/plugins/datepicker/bootstrap-datepicker.min.css')?>">
+  <link rel="stylesheet" type="text/css" href="<?=base_url('plantilla/plugins/daterangepicker/daterangepicker.css')?>">
   <!-- Theme style -->
   <link rel="stylesheet" type="text/css" href="<?=base_url('plantilla/dist/css/styles.css')?>">
-  <link rel="stylesheet" href="<?=base_url('plantilla/dist/css/SGI.css')?>">
-  <link rel="stylesheet" href="<?=base_url('plantilla/dist/css/skins/skin-blue.css')?>">
+  <link rel="stylesheet" type="text/css" href="<?=base_url('plantilla/dist/css/SGI.css')?>">
+  <link rel="stylesheet" type="text/css" href="<?=base_url('plantilla/dist/css/skins/skin-blue.css')?>">
   <!-- Datatables -->
-  <link rel="stylesheet" href="<?=base_url('plantilla/plugins/datatables/DataTables-1.10.16/css/dataTables.bootstrap.min.css')?>">
-  <link rel="stylesheet" href="<?=base_url('plantilla/plugins/datatables/Responsive-2.2.1/css/responsive.bootstrap.min.css')?>">
+  <link rel="stylesheet" type="text/css" href="<?=base_url('plantilla/plugins/datatables/DataTables-1.10.16/css/dataTables.bootstrap.min.css')?>">
+  <link rel="stylesheet" type="text/css" href="<?=base_url('plantilla/plugins/datatables/Responsive-2.2.1/css/responsive.bootstrap.min.css')?>">
   <!-- Diseños Aplicacion -->
   <link rel="stylesheet" type="text/css" href="<?=base_url('plantilla/dist/css/login.css')?>">
+  <!--Alertas-->
   <link rel="stylesheet" type="text/css" href="<?=base_url('plantilla/plugins/sweetalert/sweetalert.css')?>">
+  <link rel="stylesheet" type="text/css" href="<?=base_url('plantilla/plugins/alertifyjs/css/alertify.css')?>">
+  <link rel="stylesheet" type="text/css" href="<?=base_url('plantilla/plugins/toastr/toastr.css')?>">
+  <!-- Select2 -->
+  <link rel="stylesheet" type="text/css" href="<?=base_url('plantilla/plugins/select2/select2.css')?>">
 
   <!-- REQUIRED JS SCRIPTS -->
   <!-- jQuery 2.2.3 -->
@@ -33,7 +39,14 @@
   <script src="<?=base_url('plantilla/bootstrap/js/bootstrap.min.js')?>"></script>
   <!-- datepicker -->
   <script src="<?=base_url('plantilla/plugins/datepicker/bootstrap-datepicker.min.js')?>"></script>
+  <script src="<?=base_url('plantilla/plugins/daterangepicker/moment.js')?>"></script>
+  <script src="<?=base_url('plantilla/plugins/daterangepicker/daterangepicker.js')?>"></script>
+  <!--Alertas-->
   <script src="<?=base_url('plantilla/plugins/sweetalert/sweetalert.min.js')?>"></script>
+  <script src="<?=base_url('plantilla/plugins/alertifyjs/alertify.js')?>"></script>
+  <script src="<?=base_url('plantilla/plugins/toastr/toastr.js')?>"></script>
+  <!-- Select2 -->
+  <script src="<?=base_url('plantilla/plugins/select2/select2.js')?>"></script>
   <!-- AdminLTE App -->
   <script src="<?=base_url('plantilla/dist/js/app.min.js')?>"></script>
   <script src="<?=base_url('plantilla/dist/js/menu.js')?>"></script>
@@ -270,7 +283,7 @@
 </html>
 <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
 <script>
-
+  $(".select2js").select2();
   $(function () {
     if(localStorage.expandedMenu==0) {
         $("body").addClass('sidebar-collapse');

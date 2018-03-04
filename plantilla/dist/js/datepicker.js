@@ -1,18 +1,18 @@
 $(document).ready(function() {
+    
     $('.date').datepicker({
-    	autoclose: true,
-    	orientation: "bottom"
+    	"autoclose": true,
+    	"orientation": "bottom"
     });
 
-    $('#datetimepicker_start').datepicker({
-    	autoclose: true,
-    	orientation: "bottom",
-    	format: 'yyyy-mm-dd'
+    $('.daterange').daterangepicker({
+        "format": 'yyyy-mm-dd',
+        "autoApply": true,
+        "opens": "center"
     });
 
-    $('#datetimepicker_end').datepicker({
-    	autoclose: true,
-    	orientation: "bottom",
-    	format: 'yyyy-mm-dd'
-    });
+    $('.daterangeico span').click(function() {
+          $(this).parent().find('input').click();
+    });     
+
 });
