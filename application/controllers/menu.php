@@ -21,7 +21,7 @@ class Menu extends CI_Controller
 				'incidencia_fuente' => $this->incidencia->getlistarfuenteincidencia(),
 				'incidencia_estados' => $this->incidencia->getlistarestado(),
 				'incidencia_necesidades' => $this->incidencia->getlistarnecesidades(),
-				'incidencia_tecnicos' => $this->usuarios->getListarUsuariosSistema(),
+				'incidencia_tecnicos' => $this->usuarios->getListarUsuariosSistemaTipo('Técnico'),
 				'incidencias_categorias'  => $this->incidencia->getlistarcategorias()
 			);
 			$this->load->view('menu.php',$data);
@@ -42,7 +42,7 @@ class Menu extends CI_Controller
 				'incidencia_fuente' => $this->incidencia->getlistarfuenteincidencia(),
 				'incidencia_estados' => $this->incidencia->getlistarestado(),
 				'incidencia_necesidades' => $this->incidencia->getlistarnecesidades(),
-				'incidencia_tecnicos' => $this->usuarios->getListarUsuariosSistema(),
+				'incidencia_tecnicos' => $this->usuarios->getListarUsuariosSistemaTipo('Técnico'),
 				'incidencias_categorias'  => $this->incidencia->getlistarcategorias(),
 				'tiposbienes' => $this->tiposbienes->getListarTiposBienesEquipos(),
 				'marcas' => $this->marcas->getListarMarcas()
@@ -63,7 +63,7 @@ class Menu extends CI_Controller
 				'incidencia_fuente' => $this->incidencia->getlistarfuenteincidencia(),
 				'incidencia_estados' => $this->incidencia->getlistarestado(),
 				'incidencia_necesidades' => $this->incidencia->getlistarnecesidades(),
-				'incidencia_tecnicos' => $this->usuarios->getListarUsuariosSistema(),
+				'incidencia_tecnicos' => $this->usuarios->getListarUsuariosSistemaTipo('Técnico'),
 				'incidencias_categorias'  => $this->incidencia->getlistarcategorias()
 			);
 			$this->load->view('menu.php',$data);
@@ -84,7 +84,7 @@ class Menu extends CI_Controller
 				'incidencia_fuente' => $this->incidencia->getlistarfuenteincidencia(),
 				'incidencia_estados' => $this->incidencia->getlistarestado(),
 				'incidencia_necesidades' => $this->incidencia->getlistarnecesidades(),
-				'incidencia_tecnicos' => $this->usuarios->getListarUsuariosSistema(),
+				'incidencia_tecnicos' => $this->usuarios->getListarUsuariosSistemaTipo('Técnico'),
 				'incidencias_categorias'  => $this->incidencia->getlistarcategorias()
 			);
 			$this->load->view('menu.php',$data);
@@ -104,7 +104,7 @@ class Menu extends CI_Controller
 				'incidencia_fuente' => $this->incidencia->getlistarfuenteincidencia(),
 				'incidencia_estados' => $this->incidencia->getlistarestado(),
 				'incidencia_necesidades' => $this->incidencia->getlistarnecesidades(),
-				'incidencia_tecnicos' => $this->usuarios->getListarUsuariosSistema(),
+				'incidencia_tecnicos' => $this->usuarios->getListarUsuariosSistemaTipo('Técnico'),
 				'incidencias_categorias'  => $this->incidencia->getlistarcategorias()
 			);
 			$this->load->view('menu.php',$data);
@@ -124,7 +124,7 @@ class Menu extends CI_Controller
 				'incidencia_fuente' => $this->incidencia->getlistarfuenteincidencia(),
 				'incidencia_estados' => $this->incidencia->getlistarestado(),
 				'incidencia_necesidades' => $this->incidencia->getlistarnecesidades(),
-				'incidencia_tecnicos' => $this->usuarios->getListarUsuariosSistema(),
+				'incidencia_tecnicos' => $this->usuarios->getListarUsuariosSistemaTipo('Técnico'),
 				'incidencias_categorias'  => $this->incidencia->getlistarcategorias()
 			);			
 			$this->load->view('menu.php',$data);
@@ -143,7 +143,7 @@ class Menu extends CI_Controller
 				'incidencia_fuente' => $this->incidencia->getlistarfuenteincidencia(),
 				'incidencia_estados' => $this->incidencia->getlistarestado(),
 				'incidencia_necesidades' => $this->incidencia->getlistarnecesidades(),
-				'incidencia_tecnicos' => $this->usuarios->getListarUsuariosSistema(),
+				'incidencia_tecnicos' => $this->usuarios->getListarUsuariosSistemaTipo('Técnico'),
 				'incidencias_categorias'  => $this->incidencia->getlistarcategorias()
 			);
 			$this->load->view('menu.php',$data);
@@ -164,7 +164,7 @@ class Menu extends CI_Controller
 				'incidencia_fuente' => $this->incidencia->getlistarfuenteincidencia(),
 				'incidencia_estados' => $this->incidencia->getlistarestado(),
 				'incidencia_necesidades' => $this->incidencia->getlistarnecesidades(),
-				'incidencia_tecnicos' => $this->usuarios->getListarUsuariosSistema(),
+				'incidencia_tecnicos' => $this->usuarios->getListarUsuariosSistemaTipo('Técnico'),
 				'incidencias_categorias'  => $this->incidencia->getlistarcategorias()
 			);
 			$this->load->view('menu.php',$data);

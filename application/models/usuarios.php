@@ -64,7 +64,7 @@ class Usuarios extends CI_Model
 		}else{
 			return null;
 		}
-	}
+	}	
 
 	public function getUsuariosRol()
 	{
@@ -76,9 +76,9 @@ class Usuarios extends CI_Model
 		}
 	}
 
-	public function getListarUsuariosSistema()
+	public function getListarUsuariosSistemaTipo($tipo = '')
 	{
-		$result = $this->db->query("SELECT * FROM incidencias.v_listar_usuariospersonal WHERE v_listar_usuariospersonal.rol = 'Técnico';");
+		$result = $this->db->query("SELECT * FROM incidencias.v_listar_usuariospersonal WHERE v_listar_usuariospersonal.rol = '".$tipo."';");
 		if($result->num_rows() > 0 ){
 			return $result->result();
 		}else{
@@ -102,7 +102,7 @@ class Usuarios extends CI_Model
 									FROM incidencias.v_listar_personal_rol 
 									WHERE idpersonal = ".$idpersonal." and estado = 'S';");
 		if($result->num_rows() > 0 ){
-			return $result->result();
+			return $result->row();
 		}else{
 			return null;
 		}

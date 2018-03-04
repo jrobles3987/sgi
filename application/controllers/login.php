@@ -31,20 +31,22 @@ class Login extends CI_Controller
 				$this->load->model('personas');
 
 				$login = $this->usuarios->getLogin($usuario, $password);
-				$datos = $this->personas->getDatosSesionPersonas($usuario);				
+				$datos = $this->personas->getDatosSesionPersonas($usuario);
 
 				if ($login!=null || $datos!=null) {
 
 					if( $login->msj=='Ok.'){
 						$credenciales = $this->usuarios->getCredencialesPersonal($datos->idpersonal);
 						if ($credenciales) {
-							if ($credenciales->idrol != 1) {
+							//print_r ($credenciales);
+							if ($credenciales->idrol == '1') {
 								$data = array(  
 									"idusuario" => $datos->idpersonal,
 									"cedula"	=> $datos->cedula, 
 									"user" 		=> $usuario, 
 									"nomuser" 	=> $datos->nombres,
 									"apeuser" 	=> $datos->apellido1.' '.$datos->apellido2,
+									"rol"		=> $credenciales->idrol,
 									//"idfoto" 	=> $datos->idfichero_foto,
 									"login"   	=> TRUE);
 								$this->session->set_userdata($data);
@@ -58,7 +60,7 @@ class Login extends CI_Controller
 								$data = array(
 									"res"			=>		"success",
 									"sess"			=>		FALSE,
-									"mensaje" 		=>		"No se pudo iniciar sesión debido a que sus credenciales no son las apropiadas para manipular el sistema"
+									"mensaje" 		=>		"No se pudo iniciar sesión debido a que sus credenciales no son las apropiadas para ingresar al Sistema."
 								);	
 							}
 						}else{
