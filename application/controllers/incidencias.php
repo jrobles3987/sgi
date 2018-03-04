@@ -114,7 +114,6 @@ class Incidencias extends CI_Controller
 	public function Mostrarincidentesnotificaciones()
 	{
 		if ($this->session->userdata('login')==TRUE) {
-			$idincidencia = $this->input->post('idincidencia');
 			$this->load->model('incidencia');
 			$incidencias = $this->incidencia->getmostrarincidenciasnotificacion();					
 			echo json_encode($incidencias);

@@ -83,18 +83,18 @@
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
           <!-- Notifications Menu -->
-          <li class="dropdown notifications-menu">
+          <li class="dropdown notifications-menu" title="Incidencias Nuevas">
             <!-- Menu toggle button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-bell-o"></i>
-              <span class="label label-warning " id='muestra'></span>
+              <span class="label label-warning " id='muestra1'></span>
             </a>
-            <ul class="dropdown-menu" style="width: 500px;">
+            <ul class="dropdown-menu" style="width: 600px;">
 
-              <li class="header" id='li-header'> </li>
+              <li class="header" id='li-header1'> </li>
               <li>
                 <!-- Inner Menu: contains the notifications -->
-                <ul class="menu" id='ul-noti'>
+                <ul class="menu" id='ul-noti1'>
                   
                   <!-- end notification -->
                 </ul>
@@ -102,6 +102,27 @@
               <li class="footer"><a href="<?=base_url('menu/incidentes')?>"> Ver todas</a></li>
             </ul>
           </li>
+
+          <li class="dropdown notifications-menu" title="Incidencias En Curso">
+            <!-- Menu toggle button -->
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <i class="fa fa-calendar-check-o"></i>
+              <span class="label label-warning " id='muestra2'></span>
+            </a>
+            <ul class="dropdown-menu" style="width: 600px;">
+
+              <li class="header" id='li-header2'> </li>
+              <li>
+                <!-- Inner Menu: contains the notifications -->
+                <ul class="menu" id='ul-noti2'>
+                  
+                  <!-- end notification -->
+                </ul>
+              </li>
+              <li class="footer"><a href="<?=base_url('menu/incidentes')?>"> Ver todas</a></li>
+            </ul>
+          </li>
+
           <!-- User Account Menu -->
           <li class="dropdown user user-menu">
             <!-- Menu Toggle Button -->
@@ -249,6 +270,7 @@
 </html>
 <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
 <script>
+
   $(function () {
     if(localStorage.expandedMenu==0) {
         $("body").addClass('sidebar-collapse');
@@ -265,7 +287,6 @@
 </script>
 
 <script>
-
   var tipousuario =10
   var socket = io.connect('localhost:7000');
   Notificaciones();
@@ -282,28 +303,34 @@
     console.log(data.message.payload);
   });  
 
-  function Notificaciones(){
-    var numIncidencias=0;
+  function Notificaciones(tiponotificacion){
+    var numIncidencias1=0;
+    var numIncidencias2=0;
+
     $.ajax({
       type: "POST",
       url: "<?php echo base_url('incidencias/mostrarincidentesnotificaciones');?>",
       success: function (data) {
-
         var json = JSON.parse(data);
         if (json){
-          $("#ul-noti").innerHTML='';
+          $("#ul-noti1").innerHTML='';
+          $("#ul-noti2").innerHTML='';
           for (var i=0, len=json.length; i < len; i++) {
+            
             if (json[i].estado=="NUEVO")
             {
-              $("#ul-noti").append('<li id="'+json[i].idincidencias+'" onclick="myFunction(this)"><a href="#"><i class="li_notificacion fa fa-book" style="color:green"></i>'+json[i].tituloincidencia+'  estado '+json[i].estado+'</a></li>');
+              $("#ul-noti1").append('<li id="'+json[i].idincidencias+'" onclick="myFunction(this)"><a href="#"><i class="li_notificacion fa fa-book" style="color:green"></i>'+json[i].tituloincidencia+'  estado '+json[i].estado+'</a></li>');
+              numIncidencias1++;
             }else{
-              $("#ul-noti").append('<li id="'+json[i].idincidencias+'" onclick="myFunction(this)"><a href="#"><i class="li_notificacion fa fa-book" style="color:blue"></i>'+json[i].tituloincidencia+'  estado '+json[i].estado+'</a></li>');
-            }
-            numIncidencias++;
+              $("#ul-noti2").append('<li id="'+json[i].idincidencias+'" onclick="myFunction(this)"><a href="#"><i class="li_notificacion fa fa-book" style="color:blue"></i>'+json[i].tituloincidencia+'  estado '+json[i].estado+'</a></li>');
+              numIncidencias2++;
+            }            
           }
         }
-        $("#li-header").html('Tienes '+numIncidencias+' incidencias Nuevas');
-        $("#muestra").html(''+numIncidencias+'');
+        $("#li-header1").html('Tienes '+numIncidencias1+' incidencias Nuevas');
+        $("#muestra1").html(''+numIncidencias1+'');
+        $("#li-header2").html('Tienes '+numIncidencias2+' incidencias Nuevas');
+        $("#muestra2").html(''+numIncidencias2+'');
         
       },
       error: function (xhr, exception) {

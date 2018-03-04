@@ -156,15 +156,15 @@ public function setGuardarincidencia($data) // escribe bien.l.
 
 	public function getmostrarincidenciasnotificacion()
 	{
-	  	$result = $this->db->query("SELECT incidencias.tituloincidencia,
-									incidencias_estados.estado,
-									incidencias.idincidencias
-									from incidencias.incidencias,
-									incidencias.incidencias_estados
-									where incidencias.idincidenciaestado = incidencias_estados.idincidenciaestado
-								    and  estado <> 'CERRADO' ORDER BY fechaapertura DESC;
-	
-									");
+  		$result = $this->db->query("SELECT incidencias.tituloincidencia,
+								incidencias_estados.estado,
+								incidencias.idincidencias
+								from incidencias.incidencias,
+								incidencias.incidencias_estados
+								where incidencias.idincidenciaestado = incidencias_estados.idincidenciaestado
+							    and  (estado = 'NUEVO' or estado = 'EN CURSO (ASIGNADO)' or estado = 'EN CURSO (PLANIFICACIÓN)')ORDER BY fechahoracreacion DESC;
+		");
+	  	
 	  	if ($result->num_rows()>0)
 	  	{ 
 			return $result->result();
