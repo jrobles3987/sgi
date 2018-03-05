@@ -96,11 +96,18 @@ class Usuarios extends CI_Model
 		}
 	}
 
-	public function getCredencialesPersonal($idpersonal = '')
+	public function getCredencialesPersonal($idpersonal = '', $tipo = '')
 	{
-		$result = $this->db->query("SELECT idpersonal, idrol, estado 
-									FROM incidencias.v_listar_personal_rol 
-									WHERE idpersonal = ".$idpersonal." and estado = 'S';");
+		if ($tipo == 1){
+			$result = $this->db->query("SELECT idpersonal, idrol, rol
+										FROM incidencias.v_listar_usuariospersonal 
+										WHERE idpersonal = ".$idpersonal.";");	
+		}else{
+			$result = $this->db->query("SELECT idpersonal, idrol
+										FROM incidencias.v_listar_personal_rol 
+										WHERE idpersonal = ".$idpersonal." and estado = 'S';");
+		}
+		
 		if($result->num_rows() > 0 ){
 			return $result->row();
 		}else{

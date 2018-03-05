@@ -32,37 +32,41 @@ class Login extends CI_Controller
 
 				$login = $this->usuarios->getLogin($usuario, $password);
 				$datos = $this->personas->getDatosSesionPersonas($usuario);
+				$datos = $this->personas->getDatosSesionPersonas($usuario);
 
 				if ($login!=null || $datos!=null) {
 
 					if( $login->msj=='Ok.'){
-						$credenciales = $this->usuarios->getCredencialesPersonal($datos->idpersonal);
+						$credenciales = $this->usuarios->getCredencialesPersonal($datos->idpersonal,1);
+						$idrol = $credenciales->idrol;
+						if(!$credenciales){
+							$credenciales = $this->usuarios->getCredencialesPersonal($datos->idpersonal,2);
+							$idrol=0;
+						}
 						if ($credenciales) {
-							//print_r ($credenciales);
-							if ($credenciales->idrol == '1') {
-								$data = array(  
-									"idusuario" => $datos->idpersonal,
-									"cedula"	=> $datos->cedula, 
-									"user" 		=> $usuario, 
-									"nomuser" 	=> $datos->nombres,
-									"apeuser" 	=> $datos->apellido1.' '.$datos->apellido2,
-									"rol"		=> $credenciales->idrol,
-									//"idfoto" 	=> $datos->idfichero_foto,
-									"login"   	=> TRUE);
-								$this->session->set_userdata($data);
-								$data = array(
-									"res"			=>		"success",
-									"sess"			=>		TRUE,
-									"redireccion"	=>		base_url("menu"),
-									"mensaje" 		=>		"El usuario esta logueado"
-								);	
+							$nombrerol = '';
+							if ($idrol==0) {
+								$nombrerol = 'Usuario';
 							}else{
-								$data = array(
-									"res"			=>		"success",
-									"sess"			=>		FALSE,
-									"mensaje" 		=>		"No se pudo iniciar sesión debido a que sus credenciales no son las apropiadas para ingresar al Sistema."
-								);	
+								$nombrerol = $credenciales->rol;
 							}
+							$data = array(  
+								"idusuario" => $datos->idpersonal,
+								"cedula"	=> $datos->cedula, 
+								"user" 		=> $usuario, 
+								"nomuser" 	=> $datos->nombres,
+								"apeuser" 	=> $datos->apellido1.' '.$datos->apellido2,
+								"rol"		=> $idrol,
+								"nombrerol" => $nombrerol,
+								//"idfoto" 	=> $datos->idfichero_foto,
+								"login"   	=> TRUE);
+							$this->session->set_userdata($data);
+							$data = array(
+								"res"			=>		"success",
+								"sess"			=>		TRUE,
+								"redireccion"	=>		base_url("menu"),
+								"mensaje" 		=>		"El usuario esta logueado"
+							);
 						}else{
 							$data = array(
 								"res"			=>		"success",

@@ -1,5 +1,5 @@
 <!-- Formulario de creacion de Incidencia -->
-<div class="row container col-lg-12 col-center">
+<div class="row container col-md-12 col-center">
 	<div class="panel panel-default panel-fade">
 		<div class="panel-body">
 			<div class="panel panel-default col-md-9 col-center" style="padding: 1px,1px,1px,1px">
@@ -17,7 +17,7 @@
 				<div  class="row">
 					<div class="col-xs-4 col-md-8  col-center">
 						<span>* Categoria de la incidencia</span>
-						<select id="selectcategoria2" class="form-control select2js">
+						<select id="selectcategoria2" class="form-control select2js" style="width: 100%;">
 						<option value="0">Seleccione la categoria de la incidencia...</option>
 							<?php
 								foreach ($incidencias_categorias as $c) {
@@ -137,37 +137,33 @@
                       </select>
 			        </div>
 				</div>
-				<div style="margin:10px"></div>
 				<div class="row">
-					<div class="col-xs-4 col-md-6">
-                      <span>* Técnico Asignado</span>
-					  <select id="selectecnico2" class="form-control select2js">
-                      <option value="0">Seleccione el Técnico...</option>
-                      	<?php
-							foreach ($incidencia_tecnicos as $t) {
-								echo '<option value="'.$t->idpersonal.'">'.$t->nombres.'</option>';
-							}
-						?>
+			      	<div class="col-xs-4 col-lg-8">
+                      <span>* Tecnico asignado</span>
+                      <select id="selectecnico2" class="form-control ">
+                      		<option value="0">Seleccione un técnico...</option>
+                          	<?php
+					    		foreach ($incidencia_tecnicos as $k) {
+					    			echo '<option value="'.$k->idpersonal.'">'.$k->nombres.'</option>';
+					    		}
+					    	?>
                       </select>
-			      	</div>
-			      	<div class="col-xs-4 col-md-6 alert alert-danger" id="num_trabajosactivos" style="display:none;">
-			      	</div>					      	
+			      	</div>			      	
 				</div>
-			    <div class="row" >
-			    	<div class="col-xs-6 col-md-12">
-			      		<span>* Localizacion</span>
-			        	<select id="selectlocalizacion2" class="form-control select2js">
-			        		<option value="0">Seleccione la localizacion incidencia...</option>
-			        		<option value="1">Bodega</option>
-			        		<option value="2">Departamento de Rectorado</option>
-			        		<option value="3">Facultad de Ciencias Informticas</option>
-			        		<option value="4">Facultad de Ciencias Administrativas y econmicas</option>
-					    </select>
-			      	</div>
-			    </div>
-				<div style="margin:10px"></div>
+				<div class="row">
+					<div class="col-xs-4 col-md-12">
+                      <span>Localización</span>
+                      <select id="selectlocaliazcion2" class="form-control ">
+                          <?php
+                                foreach ($incidencia_fuente as $j) {
+                                    echo '<option value="'.$j->idincidenciafuente.'">'.$j->nombre.'</option>';
+                                }
+                            ?>
+                      </select>
+			        </div>
+				</div>
                 <div class="row">
-			      	<div class="col-xs-4 col-md-12">
+			      	<div class="col-xs-4 col-md-11">
 			      		<span>* Descripcion</span>
 			        	<textarea class="form-control" id="txtareadescripcion2" rows="2" style="resize: none;"></textarea>
 			        	<div style="margin:10px"></div>
