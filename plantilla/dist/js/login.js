@@ -26,7 +26,7 @@ $(document).ready(function() {
                         $(".errorsession").append(json.mensaje).css({"display":"block"});
                         $(".loginname").css({"background-color": "#DAF7A6", "font-style": "oblique"});
                         $(".password").css({"background-color": "#DAF7A6", "font-style": "oblique"});
-                    }else{                                                      
+                    }else{                        
                         location.replace(json.redireccion);
                     }                    
                 }            
@@ -38,7 +38,5 @@ $(document).ready(function() {
                    
             }
         });
-        e.preventDefault();
-
     });
 });
