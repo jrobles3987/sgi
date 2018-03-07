@@ -51,6 +51,7 @@
   <!-- AdminLTE App -->
   <script src="<?=base_url('plantilla/dist/js/app.min.js')?>"></script>
   <script src="<?=base_url('plantilla/dist/js/menu.js')?>"></script>
+  <script src="<?=base_url('plantilla/dist/js/validacionformularios.js')?>"></script>
   <!-- Datatables -->
   <script src="<?=base_url('plantilla/plugins/datatables/DataTables-1.10.16/js/jquery.dataTables.js')?>"></script>
   <script src="<?=base_url('plantilla/plugins/datatables/DataTables-1.10.16/js/dataTables.bootstrap.min.js')?>"></script>
