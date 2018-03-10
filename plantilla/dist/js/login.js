@@ -2,7 +2,7 @@ $(document).ready(function() {
     $("form").on("submit", function(e) {
         $('#div_loading').css('display','inline');
         $.ajax({
-            type: "GET",
+            type: "POST",
             url: $(this).attr("action"),
             data: $(this).serialize(),
             success: function (data) {
@@ -35,7 +35,7 @@ $(document).ready(function() {
                 $('#div_loading').css('display','none');
             },
             error: function (xhr, exception) {
-                   
+                alert('error');
             }
         });
     });

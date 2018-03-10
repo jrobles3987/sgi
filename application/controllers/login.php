@@ -5,9 +5,8 @@
 class Login extends CI_Controller
 {	
 	
-	public function iniciasesion()
-	{
-
+	public function iniciasesion( $usuario ='',$password='' )
+	{	
 		if ($this->input->is_ajax_request()) {
 
 			$this->form_validation->set_rules('loginname', 'Usuarios', 'trim|required|xss_clean');
