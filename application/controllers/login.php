@@ -5,10 +5,10 @@
 class Login extends CI_Controller
 {	
 	
-	public function iniciasesion($usuario ='',$password='')
+	public function iniciasesion()
 	{
 
-		//if ($this->input->is_ajax_request()) {
+		if ($this->input->is_ajax_request()) {
 
 			$this->form_validation->set_rules('loginname', 'Usuarios', 'trim|required|xss_clean');
 			$this->form_validation->set_rules('password', 'Contraseña', 'trim|required|xss_clean');
@@ -94,9 +94,9 @@ class Login extends CI_Controller
 				}
 			}
 			echo json_encode($data);
-		/*}else{
+		}else{
 			show_404();
-		}*/
+		}
 	}
 
 	public function logout()

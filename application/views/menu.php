@@ -285,7 +285,6 @@
 </html>
 <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
 <script>
-  $(".select2js").select2();
   $(function () {
     if(localStorage.expandedMenu==0) {
         $("body").addClass('sidebar-collapse');

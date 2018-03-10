@@ -2,7 +2,7 @@ $(document).ready(function() {
     $("form").on("submit", function(e) {
         $('#div_loading').css('display','inline');
         $.ajax({
-            type: "POST",
+            type: "GET",
             url: $(this).attr("action"),
             data: $(this).serialize(),
             success: function (data) {
