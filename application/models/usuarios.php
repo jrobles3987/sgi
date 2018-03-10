@@ -64,7 +64,7 @@ class Usuarios extends CI_Model
 		}else{
 			return null;
 		}
-	}
+	}	
 
 	public function getUsuariosRol()
 	{
@@ -76,9 +76,9 @@ class Usuarios extends CI_Model
 		}
 	}
 
-	public function getListarUsuariosSistema()
+	public function getListarUsuariosSistemaTipo($tipo = '')
 	{
-		$result = $this->db->query("SELECT * FROM incidencias.v_listar_usuariospersonal WHERE v_listar_usuariospersonal.rol = 'Técnico';");
+		$result = $this->db->query("SELECT * FROM incidencias.v_listar_usuariospersonal WHERE v_listar_usuariospersonal.rol = '".$tipo."';");
 		if($result->num_rows() > 0 ){
 			return $result->result();
 		}else{
@@ -89,6 +89,25 @@ class Usuarios extends CI_Model
 	public function setUsuariosSistemas($idpersonal = '', $idrol = '')
 	{
 		$result = $this->db->query("SELECT incidencias.f_ingreso_usuarios_personal(".$idpersonal.",".$idrol.");");
+		if($result->num_rows() > 0 ){
+			return $result->row();
+		}else{
+			return null;
+		}
+	}
+
+	public function getCredencialesPersonal($idpersonal = '', $tipo = '')
+	{
+		if ($tipo == 1){
+			$result = $this->db->query("SELECT idpersonal, idrol, rol
+										FROM incidencias.v_listar_usuariospersonal 
+										WHERE idpersonal = ".$idpersonal.";");	
+		}else{
+			$result = $this->db->query("SELECT idpersonal, idrol
+										FROM incidencias.v_listar_personal_rol 
+										WHERE idpersonal = ".$idpersonal." and estado = 'S';");
+		}
+		
 		if($result->num_rows() > 0 ){
 			return $result->row();
 		}else{

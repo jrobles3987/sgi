@@ -14,7 +14,36 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://localhost:81/sgi/';
+define('SERVER_NAME_DEV', 'localhost:81');
+define('SERVER_NAME_EMPRESA', '192.168.1.11:81');
+define('SERVER_NAME_FINAL', 'utm.edu.ec');
+define('SERVER_NAME_FINAL1', 'www.utm.edu.ec');
+define('SERVER_NAME_LOCAL', '192.168.1.21');
+
+//Obtenemos el nombre actual para el servidor donde nos encontramos
+$nombreServerActual = $_SERVER['SERVER_NAME'];
+switch ($nombreServerActual) {
+    case SERVER_NAME_DEV:
+        //  $config['base_url'] = "http://localhost:9876/genesiseducativo";
+        $config['base_url'] = "http://localhost:81/sgi";
+        break;
+    case SERVER_NAME_EMPRESA:
+        $config['base_url'] = "http://192.168.1.11:81/sgi";
+        break;
+    case SERVER_NAME_FINAL:
+        $config['base_url'] = "http://utm.edu.ec/sgi";
+        break;
+    case SERVER_NAME_FINAL1:
+        $config['base_url'] = "http://utm.edu.ec/sgi";
+        break;
+    case SERVER_NAME_LOCAL:
+        $config['base_url'] = "http://utm.edu.ec/sgi";
+        break;
+    default:
+        //  $config['base_url'] = "http://localhost:9876/genesiseducativo";
+        $config['base_url'] = "http://localhost:81/sgi";
+        break;
+}
 
 /*
 |--------------------------------------------------------------------------

@@ -8,7 +8,7 @@ class Login extends CI_Controller
 	public function iniciasesion($usuario ='',$password='')
 	{
 
-		if ($this->input->is_ajax_request()) {
+		//if ($this->input->is_ajax_request()) {
 
 			$this->form_validation->set_rules('loginname', 'Usuarios', 'trim|required|xss_clean');
 			$this->form_validation->set_rules('password', 'Contraseña', 'trim|required|xss_clean');
@@ -27,31 +27,53 @@ class Login extends CI_Controller
 				);
 
 			}else{
-
-				$data = array();
 				$this->load->model('usuarios');
-				$login = $this->usuarios->getLogin($usuario, $password);
 				$this->load->model('personas');
+
+				$login = $this->usuarios->getLogin($usuario, $password);
+				$datos = $this->personas->getDatosSesionPersonas($usuario);
 				$datos = $this->personas->getDatosSesionPersonas($usuario);
 
 				if ($login!=null || $datos!=null) {
 
 					if( $login->msj=='Ok.'){
-						$data = array(  
-									"idusuario" => $datos->idpersonal,
-									"cedula"	=> $datos->cedula, 
-									"user" 		=> $usuario, 
-									"nomuser" 	=> $datos->nombres,
-									"apeuser" 	=> $datos->apellido1.' '.$datos->apellido2,
-									//"idfoto" 	=> $datos->idfichero_foto,
-									"login"   	=> TRUE);
-						$this->session->set_userdata($data);
-						$data = array(
-							"res"			=>		"success",
-							"sess"			=>		TRUE,
-							"redireccion"	=>		base_url("menu"),
-							"mensaje" 		=>		"El usuario esta logueado"
-						);
+						$credenciales = $this->usuarios->getCredencialesPersonal($datos->idpersonal,1);
+						$idrol = $credenciales->idrol;
+						if(!$credenciales){
+							$credenciales = $this->usuarios->getCredencialesPersonal($datos->idpersonal,2);
+							$idrol=0;
+						}
+						if ($credenciales) {
+							$nombrerol = '';
+							if ($idrol==0) {
+								$nombrerol = 'Usuario';
+							}else{
+								$nombrerol = $credenciales->rol;
+							}
+							$data = array(  
+								"idusuario" => $datos->idpersonal,
+								"cedula"	=> $datos->cedula, 
+								"user" 		=> $usuario, 
+								"nomuser" 	=> $datos->nombres,
+								"apeuser" 	=> $datos->apellido1.' '.$datos->apellido2,
+								"rol"		=> $idrol,
+								"nombrerol" => $nombrerol,
+								//"idfoto" 	=> $datos->idfichero_foto,
+								"login"   	=> TRUE);
+							$this->session->set_userdata($data);
+							$data = array(
+								"res"			=>		"success",
+								"sess"			=>		TRUE,
+								"redireccion"	=>		base_url("menu"),
+								"mensaje" 		=>		"El usuario esta logueado"
+							);
+						}else{
+							$data = array(
+								"res"			=>		"success",
+								"sess"			=>		FALSE,
+								"mensaje" 		=>		"No se pudo iniciar sesión debido a que sus credenciales no son las apropiadas para ingresar al Sistema."
+							);	
+						}
 
 					} else {
 
@@ -72,9 +94,9 @@ class Login extends CI_Controller
 				}
 			}
 			echo json_encode($data);
-		}else{
+		/*}else{
 			show_404();
-		}
+		}*/
 	}
 
 	public function logout()

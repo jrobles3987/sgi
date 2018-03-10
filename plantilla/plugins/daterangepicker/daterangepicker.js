@@ -71,11 +71,11 @@
         this.cancelClass = 'btn-default';
 
         this.locale = {
-            format: 'MM/DD/YYYY',
+            format: 'DD/MM/YYYY',
             separator: ' - ',
-            applyLabel: 'Apply',
-            cancelLabel: 'Cancel',
-            weekLabel: 'W',
+            applyLabel: 'Aceptar',
+            cancelLabel: 'Cancelar',
+            weekLabel: 'D',
             customRangeLabel: 'Custom Range',
             daysOfWeek: moment.weekdaysMin(),
             monthNames: moment.monthsShort(),
@@ -1332,7 +1332,7 @@
                   }
               } else {
                   //ignore times when comparing dates if time picker is not enabled
-                  if (this.startDate.format('YYYY-MM-DD') == this.ranges[range][0].format('YYYY-MM-DD') && this.endDate.format('YYYY-MM-DD') == this.ranges[range][1].format('YYYY-MM-DD')) {
+                  if (this.startDate.format('DD-MM-YYYY') == this.ranges[range][0].format('DD-MM-YYYY') && this.endDate.format('DD-MM-YYYY') == this.ranges[range][1].format('DD-MM-YYYY')) {
                       customRange = false;
                       this.chosenLabel = this.container.find('.ranges li:eq(' + i + ')').addClass('active').html();
                       break;

@@ -156,15 +156,15 @@ public function setGuardarincidencia($data) // escribe bien.l.
 
 	public function getmostrarincidenciasnotificacion()
 	{
-	  	$result = $this->db->query("SELECT incidencias.tituloincidencia,
-									incidencias_estados.estado,
-									incidencias.idincidencias
-									from incidencias.incidencias,
-									incidencias.incidencias_estados
-									where incidencias.idincidenciaestado = incidencias_estados.idincidenciaestado
-								    and  estado <> 'CERRADO' ORDER BY fechaapertura DESC;
-	
-									");
+  		$result = $this->db->query("SELECT incidencias.tituloincidencia,
+								incidencias_estados.estado,
+								incidencias.idincidencias
+								from incidencias.incidencias,
+								incidencias.incidencias_estados
+								where incidencias.idincidenciaestado = incidencias_estados.idincidenciaestado
+							    and  (estado = 'NUEVO' or estado = 'EN CURSO (ASIGNADO)' or estado = 'EN CURSO (PLANIFICACIÓN)')ORDER BY fechahoracreacion DESC;
+		");
+	  	
 	  	if ($result->num_rows()>0)
 	  	{ 
 			return $result->result();
@@ -179,6 +179,21 @@ public function setGuardarincidencia($data) // escribe bien.l.
 		$result = $this->db->query("SELECT count(incidencias.idincidencias) as incidencias_activas
 									FROM incidencias.incidencias,incidencias.incidencias_estados
 									WHERE incidencias.idincidenciaestado = incidencias_estados.idincidenciaestado and incidencias_estados.estado <> 'CERRADO' and incidencias_estados.estado <> 'RESUELTO' and incidencias.tecnicoasignado = ".$idpersonal.";
+									");
+		if ($result->num_rows()>0)
+	  	{ 
+			return $result->row();
+	  	}else {
+		  	return null;
+	  	}
+	}
+
+	public function getPromediosCalificacionTecnico($idpersonal = '')
+	{
+
+		$result = $this->db->query("SELECT ROUND(avg(incidencias.calificacionusuario),0) as calificacionusuario, ROUND(avg(incidencias.calificacionadministrativa),0) as calificacionadministrativa
+									FROM incidencias.incidencias,incidencias.incidencias_estados
+									WHERE incidencias.idincidenciaestado = incidencias_estados.idincidenciaestado and (incidencias_estados.estado = 'CERRADO' or incidencias_estados.estado = 'RESUELTO') and incidencias.tecnicoasignado = ".$idpersonal.";
 									");
 		if ($result->num_rows()>0)
 	  	{ 

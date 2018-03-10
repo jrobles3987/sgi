@@ -70,14 +70,15 @@
                             Utilice su cuenta del SGA para ingresar al sistema
                         </div>
                     </div>
-                    <div class="errorsession alert alert-danger" align="center" style="display: none;"></div>
+                    <div class="row">
+                        <div class="col-md-12 col-center">
+                            <div class="errorsession alert alert-danger" align="center" style="display: none;"></div>
+                        </div>                
+                    </div>
                 </div>
-            </div>
-        </div>
-    </div>
-    <footer>
-        <strong>&copy; All Rights Reserved - 2017 <a href="http://utm.edu.ec" target="_blank">Universidad Técnica de Manabí</a>.</strong>
-    </footer>
+            </div>            
+        </div>       
+    </div>    
 <!-- jQuery 2.2.3 -->
 <script src="<?=base_url()?>plantilla/plugins/jQuery/jquery-2.2.3.min.js"></script>
 <!-- Bootstrap 3.3.6 -->
