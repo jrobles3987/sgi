@@ -6,7 +6,7 @@ $(document).ready(function() {
             url: $(this).attr("action"),
             data: $(this).serialize(),
             success: function (data) {
-                console.log(data);
+                //console.log(data);
                 var json = JSON.parse(data);
                 $(".errorsession").html("").css({"display":"none"});
                 $(".loginname").css({"background-color": "#fff", "font-style": "normal"});
@@ -35,8 +35,9 @@ $(document).ready(function() {
                 $('#div_loading').css('display','none');
             },
             error: function (xhr, exception) {
-                alert('error');
+               
             }
         });
+        e.preventDefault();
     });
 });

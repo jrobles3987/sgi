@@ -31,13 +31,16 @@ class Login extends CI_Controller
 
 				$login = $this->usuarios->getLogin($usuario, $password);
 				$datos = $this->personas->getDatosSesionPersonas($usuario);
-				$datos = $this->personas->getDatosSesionPersonas($usuario);
+				//$datos = $this->personas->getDatosSesionPersonas($usuario);
 
 				if ($login!=null || $datos!=null) {
 
 					if( $login->msj=='Ok.'){
-						$credenciales = $this->usuarios->getCredencialesPersonal($datos->idpersonal,1);
-						$idrol = $credenciales->idrol;
+						$idpersonal = $datos->idpersonal;
+						$credenciales = $this->usuarios->getCredencialesPersonal($idpersonal,1);
+						if($credenciales){
+							$idrol = $credenciales->idrol;
+						}						
 						if(!$credenciales){
 							$credenciales = $this->usuarios->getCredencialesPersonal($datos->idpersonal,2);
 							$idrol=0;
@@ -94,9 +97,81 @@ class Login extends CI_Controller
 			}
 			echo json_encode($data);
 		}else{
-			show_404();
+			echo json_encode('error');
 		}
 	}
+
+	/*public function iniciasesion($usuario ='',$password='')
+	{
+
+		if ($this->input->is_ajax_request()) {
+
+			$this->form_validation->set_rules('loginname', 'Usuarios', 'trim|required|xss_clean');
+			$this->form_validation->set_rules('password', 'Contraseña', 'trim|required|xss_clean');
+			$this->form_validation->set_message('required', 'El campo %s es requerido');
+			//$this->form_validation->set_message('max_length', 'El campo %s no puede tener menos de %s caracteres');
+			//$this->form_validation->set_message('min_length', 'El campo %s debe tener más de %s caracteres');
+
+			$usuario 	= $this->input->post('loginname').'@utm.edu.ec';
+			$password   = $this->input->post('password');
+
+			if($this->form_validation->run() == FALSE ){
+				$data = array(					
+					"loginname"		=>		form_error("loginname"),
+					"password"		=>		form_error("password"),
+					"res"			=>		"error"
+				);
+
+			}else{
+
+				$data = array();
+				$this->load->model('usuarios');
+				$login = $this->usuarios->getLogin($usuario, $password);
+				$this->load->model('personas');
+				$datos = $this->personas->getDatosSesionPersonas($usuario);
+
+				if ($login!=null || $datos!=null) {
+
+					if( $login->msj=='Ok.'){
+						$data = array(  
+									"idusuario" => $datos->idpersonal,
+									"cedula"	=> $datos->cedula, 
+									"user" 		=> $usuario, 
+									"nomuser" 	=> $datos->nombres,
+									"apeuser" 	=> $datos->apellido1.' '.$datos->apellido2,
+									//"idfoto" 	=> $datos->idfichero_foto,
+									"login"   	=> TRUE);
+						$this->session->set_userdata($data);
+						$data = array(
+							"res"			=>		"success",
+							"sess"			=>		TRUE,
+							"redireccion"	=>		base_url("menu"),
+							"mensaje" 		=>		"El usuario esta logueado"
+						);
+
+					} else {
+
+						if ($login->msj=='no') {
+							$data = array(
+							"res"			=>		"success",
+							"sess"			=>		FALSE,						
+							"mensaje" 		=>		"La contraseña es incorrecta porfavor vuleva a intentarlo");
+						} else {
+							$data = array(
+							"res"			=>		"success",
+							"sess"			=>		FALSE,
+							"mensaje" 		=>		$login->msj);
+						}										
+					}
+				}else{
+					show_404();
+				}
+			}
+			echo json_encode($data);
+		}else{
+			show_404();
+		}
+	}*/
 
 	public function logout()
 	{

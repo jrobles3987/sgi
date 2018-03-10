@@ -85,5 +85,6 @@
 <script src="<?=base_url()?>plantilla/bootstrap/js/bootstrap.min.js"></script>
 <!-- login -->
 <script src="<?=base_url('plantilla/dist/js/login.js')?>"></script>
+
 </body>
 </html>
