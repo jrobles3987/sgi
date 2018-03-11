@@ -303,6 +303,9 @@
 <script>
   var tipousuario =10
   var socket = io.connect('localhost:7000');
+  var estado_incidencia;
+  var titulo_incidencia;
+  var va = '';
   Notificaciones();
   socket.on('connected', function (data) {
       socket.emit('ready for data', {});
@@ -310,11 +313,11 @@
     
   socket.on('update', function (data) {
     if (tipousuario==10) {
-      var va = data.message.payload.split(';');
+      va = data.message.payload.split(';');
       Notificaciones();
       notifyMe();
     }
-    console.log(data.message.payload);
+    //console.log(data.message.payload);
   });  
 
   function Notificaciones(tiponotificacion){
@@ -338,14 +341,13 @@
             }else{
               $("#ul-noti2").append('<li id="'+json[i].idincidencias+'" onclick="myFunction(this)"><a href="#"><i class="li_notificacion fa fa-book" style="color:blue"></i>'+json[i].tituloincidencia+'  estado '+json[i].estado+'</a></li>');
               numIncidencias2++;
-            }            
+            }
           }
         }
         $("#li-header1").html('Tienes '+numIncidencias1+' incidencias Nuevas');
         $("#muestra1").html(''+numIncidencias1+'');
-        $("#li-header2").html('Tienes '+numIncidencias2+' incidencias Nuevas');
-        $("#muestra2").html(''+numIncidencias2+'');
-        
+        $("#li-header2").html('Tienes '+numIncidencias2+' incidencias En Curso');
+        $("#muestra2").html(''+numIncidencias2+'');        
       },
       error: function (xhr, exception) {
         alert("error");
@@ -355,6 +357,16 @@
   }
 
   function notifyMe() {
+
+    toastr.info(va[0], "Incidencias con estado: "+va[1]+ " registrada",{
+      "timeOut": "0",
+      "extendedTImeout": "0",
+      "closeButton": true,
+      "positionClass": "toast-bottom-left"
+    });
+
+  }
+  /*function notifyMe() {
     // Let's check if the browser supports notifications
     if (!("Notification" in window)) {
       alert("This browser does not support desktop notification");
@@ -375,7 +387,7 @@
         }
       });
     }
-  }
+  }*/
 
   function myFunction(x)
   {

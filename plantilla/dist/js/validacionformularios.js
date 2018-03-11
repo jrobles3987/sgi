@@ -13,7 +13,7 @@ function Validar_Formularios () {
 	});
 
 	if(error > 0){
-		event.preventDefault();
+		//event.preventDefault();
 		toastr.info("Debe llenar todos los campos obligatorios del formulario","Atención",{
 			"timeOut": "5000",
 			"extendedTImeout": "5000",

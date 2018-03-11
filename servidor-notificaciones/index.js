@@ -1,6 +1,6 @@
 
 const { Client } = require('pg')
-var conString = "tcp://postgres:12345@localhost:5432/sistemasutm";
+var conString = "tcp://postgres:admin@localhost:5432/sistemasutm";
 const client = new Client(conString)
 
 client.connect()
@@ -20,5 +20,5 @@ io.sockets.on('connection', function (socket) {
 });
 
 function newFunction() {
-    console.log('Conectado al puerto: 7000');
+    //console.log('Conectado al puerto: 7000');
 }
