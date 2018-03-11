@@ -283,7 +283,7 @@
 </body>
 
 </html>
-<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+<script src="<?=base_url('plantilla/plugins/socket/socket.io-1.2.0.js')?>"></script>
 <script>
   $(function () {
     if(localStorage.expandedMenu==0) {
@@ -366,28 +366,10 @@
     });
 
   }
-  /*function notifyMe() {
-    // Let's check if the browser supports notifications
-    if (!("Notification" in window)) {
-      alert("This browser does not support desktop notification");
-    }
 
-    // Let's check whether notification permissions have already been granted
-    else if (Notification.permission === "granted") {
-      // If it's okay let's create a notification
-      var notification = new Notification("Nueva Incidencia Registrada");
-    }
-
-    // Otherwise, we need to ask the user for permission
-    else if (Notification.permission !== 'denied') {
-      Notification.requestPermission(function (permission) {
-        // If the user accepts, let's create a notification
-        if (permission === "granted") {
-          var notification = new Notification("Hi there!");
-        }
-      });
-    }
-  }*/
+  function formato(texto){
+    return texto.replace(/^(\d{4})-(\d{2})-(\d{2})$/g,'$3/$2/$1');
+  }
 
   function myFunction(x)
   {
@@ -399,7 +381,7 @@
               var json1 = JSON.parse(data);
               //alert(x.id);
               $('#txtidincidencia').val(x.id);
-              $('#txttituloincidencia').val(json1.tituloincidencia);
+              $('#txttituloincidencia').val(json1.tituloincidencia);              
               $('#fechaapertura').val(json1.fechaapertura);
               $('#fechavencimiento').val(json1.fechavencimiento);
               $('#selectestado').val(json1.idincidenciaestado);
@@ -411,9 +393,23 @@
               $('#seleclocalizacion').val(json1.idlugarincidente);
               $('#txtareadescripcion').val(json1.descripcion);
               $('#selectcategoria').val(json1.idcategoria);
+              var fechaapertura = formato(json1.fechaapertura);
+              var fechavencimiento = formato(json1.fechavencimiento);
+              $('.daterange2').daterangepicker({
+                  format: 'yyyy-mm-dd',
+                  autoApply: true,
+                  opens: 'center',
+                  startDate: fechaapertura,
+                  endDate: fechavencimiento
+              });
             },
             error: function (xhr, exception) {
-              alert("Ocurrio un error recargue la pagina...");
+              toastr.warning("Se ha detectado un error al cargar los datos... Recargue la Página","",{
+                "timeOut": "7000",
+                "extendedTImeout": "7000",
+                "closeButton": true,
+                "positionClass": "toast-bottom-left"
+              });
             }
       });
     $('#vmodalincidencia').modal({show:true});

@@ -9,10 +9,10 @@
 			<div class="panel panel-default panel-fade col-md-10 col-center">				
 				<div style="margin:10px"></div>
            		 <div class="row">
-				      	<div class="col-xs-4 col-md-8 col-center">
-				      		<span>* Titulo de la incidencia</span>
-				        	<textarea class="form-control requerido" id="txttituloincidencia2" rows="1" style="resize: none;" autofocus></textarea>
-				      	</div>
+			      	<div class="col-xs-4 col-md-8 col-center">
+			      		<span>* Titulo de la incidencia</span>
+			        	<textarea class="form-control requerido" id="txttituloincidencia2" rows="1" style="resize: none;" autofocus></textarea>
+			      	</div>
 				</div>
 				<div  class="row">
 					<div class="col-xs-4 col-md-8  col-center">
@@ -184,7 +184,12 @@
 </div>
 <script src="<?=base_url('plantilla/dist/js/datepicker.js');?>"></script>
 <script >
-	$(document).ready(function() {		
+	$(document).ready(function() {
+		$('.daterange').daterangepicker({
+	        format: 'yyyy-mm-dd',
+	        autoApply: true,
+	        opens: 'center'
+	    });
 		//variables del formulario		
 		var dataform
 		//// Funcion valodar formulario
@@ -240,7 +245,7 @@
 							});
 							//setTimeout ("location.replace('<?php echo base_url('menu/Incidentes')?>');", 3000);							
 		                }else{
-		                	swal("","Ocurrio un error al guardar!","error");
+		                	//swal("","Ocurrio un error al guardar!","error");
 		                	toastr.success("Datos Guardados correctamente","",{
 								"timeOut": "5000",
 								"extendedTImeout": "5000",
