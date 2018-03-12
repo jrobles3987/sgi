@@ -140,10 +140,11 @@ class Menu extends CI_Controller
 	public function ingresonuevaincidencia()
 	{	
 		
-		if ($this->session->userdata('login')==TRUE) {			
-			if ( $this->session->userdata('rol')!=0 ) {	
-				$this->load->model('incidencia');
-				$this->load->model('usuarios');
+		if ($this->session->userdata('login')==TRUE) {	
+			$this->load->model('incidencia');
+			$this->load->model('usuarios');		
+			$this->load->model('localizacion');
+			if ( $this->session->userdata('rol')!=0 ) {					
 				$data = array(
 					'contenido'   => 'incidencias/menuincidentesnuevos',
 					'incidencia_fuente' => $this->incidencia->getlistarfuenteincidencia(),
@@ -154,6 +155,13 @@ class Menu extends CI_Controller
 				);			
 				$this->load->view('menu',$data);
 			}else{
+				$data = array(
+					'contenido'   => 'incidencias/menuincidentesnuevosnormal',
+					'incidencia_necesidades' => $this->incidencia->getlistarnecesidades(),
+					'incidencia_estados' => $this->incidencia->getlistarestado(),
+					'localizacion' => $this->localizacion->getLocalizacion(),
+					'incidencias_categorias'  => $this->incidencia->getlistarcategorias()
+				);
 				$this->load->view('menu2',$data);
 			}
 		}else{

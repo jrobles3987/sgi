@@ -204,7 +204,7 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="<?=base_url('menu/incidentes')?>">Nuevas Incidencias</a></li>
+            <li><a href="<?=base_url('menu/ingresonuevaincidencia')?>">Nuevas Incidencias</a></li>
             <li><a href="#">Cambios en Incidencias</a></li>
             <li><a href="#">Estadísticas</a></li>
             <li><a href="#">Calificaciones de Incidencias</a></li>
