@@ -103,7 +103,7 @@ class Usuarios extends CI_Model
 										FROM incidencias.v_listar_usuariospersonal 
 										WHERE idpersonal = ".$idpersonal.";");	
 		}else{
-			$result = $this->db->query("SELECT idpersonal, idrol
+			$result = $this->db->query("SELECT idpersonal, idrol, rol
 										FROM incidencias.v_listar_personal_rol 
 										WHERE idpersonal = ".$idpersonal." and estado = 'S';");
 		}

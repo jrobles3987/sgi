@@ -40,18 +40,12 @@ class Login extends CI_Controller
 						$credenciales = $this->usuarios->getCredencialesPersonal($idpersonal,1);
 						if($credenciales){
 							$idrol = $credenciales->idrol;
-						}						
-						if(!$credenciales){
-							$credenciales = $this->usuarios->getCredencialesPersonal($datos->idpersonal,2);
-							$idrol=0;
 						}
-						if ($credenciales) {
-							$nombrerol = '';
-							if ($idrol==0) {
-								$nombrerol = 'Usuario';
-							}else{
-								$nombrerol = $credenciales->rol;
-							}
+						if(!$credenciales){
+							$credenciales = $this->usuarios->getCredencialesPersonal($idpersonal,2);
+							$idrol = 0;
+						}
+						if ($credenciales) {							
 							$data = array(  
 								"idusuario" => $datos->idpersonal,
 								"cedula"	=> $datos->cedula, 
@@ -59,7 +53,7 @@ class Login extends CI_Controller
 								"nomuser" 	=> $datos->nombres,
 								"apeuser" 	=> $datos->apellido1.' '.$datos->apellido2,
 								"rol"		=> $idrol,
-								"nombrerol" => $nombrerol,
+								"nombrerol" => $credenciales->rol,
 								//"idfoto" 	=> $datos->idfichero_foto,
 								"login"   	=> TRUE);
 							$this->session->set_userdata($data);

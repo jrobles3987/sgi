@@ -7,17 +7,16 @@ class incidencia extends CI_Model
 
 	public function getlistarfuenteincidencia()
 	{
-  //$this->db-where('idincidenciafuente',$idfuenteincidencia);
-  $this->db->order_by('nombre','asc');
-  $result=$this->db->get('incidencias.v_fuente_incidencias');
-  if($result->num_rows()>0)
+  		//$this->db-where('idincidenciafuente',$idfuenteincidencia);
+		$this->db->order_by('nombre','asc');
+	  	$result=$this->db->get('incidencias.v_fuente_incidencias');
+	  	if($result->num_rows()>0)
   		{
-	  return $result->result();
+	  		return $result->result();
 		}else{
-	  return null;
+	  		return null;
   		}
-
-	  }
+	}
 	  
 	public function getlistarestado()
 	  {
@@ -30,31 +29,31 @@ class incidencia extends CI_Model
 		}
 	}
 		
-		public function getlistarnecesidades()
-	  {
-			$this->db->order_by('idnecesidad','asc');
-			$result=$this->db->get('incidencias.incidencias_necesidad');
-			if ($result->num_rows()>0)
-			{ 
-				return $result->result();
-			}else {
-				return null;
-			}
-	  }
+	public function getlistarnecesidades()
+	{
+		$this->db->order_by('idnecesidad','asc');
+		$result=$this->db->get('incidencias.incidencias_necesidad');
+		if ($result->num_rows()>0)
+		{ 
+			return $result->result();
+		}else {
+			return null;
+		}
+	}
 
-	  public function getlistarcategorias()
-	  {
-			$this->db->order_by('nombre','asc');
-			$result=$this->db->get('incidencias.incidencias_categorias');
-			if ($result->num_rows()>0)
-			{ 
-				return $result->result();
-			}else {
-				return null;
-			}
-	  }
+  	public function getlistarcategorias()
+  	{
+		$this->db->order_by('nombre','asc');
+		$result=$this->db->get('incidencias.incidencias_categorias');
+		if ($result->num_rows()>0)
+		{ 
+			return $result->result();
+		}else {
+			return null;
+		}
+  	}
 
-public function setGuardarincidencia($data) // escribe bien.l.
+	public function setGuardarincidencia($data) // escribe bien.l.
 	{//pasa los mismos nombres que en el controlador solo estan demas a la comilla urgencia impacto prioridad 
 		$result = $this->db->query("SELECT
 	    incidencias.f_ingreso_incidencias(
@@ -120,6 +119,18 @@ public function setGuardarincidencia($data) // escribe bien.l.
 	  	{
 			return $result->result();
 	  	}else {
+			return null;
+	  	}
+	}
+
+	public function getListartablaUsuarioNormal($usuario_creador = '')
+	{	
+		//$this->db-where('creador', $usuario_creador);
+		//$this->db->order_by('fechaapertura','DESC');
+	  	$result=$this->db->query('SELECT * FROM incidencias.v_listar_incidencias WHERE creador = '.$usuario_creador.' ORDER BY fechaapertura DESC');
+	  	if ($result->num_rows()>0){
+			return $result->result();
+	  	}else{
 			return null;
 	  	}
 	}

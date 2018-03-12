@@ -13,9 +13,9 @@ class Menu extends CI_Controller
 	public function index()
 	{	
 		if ($this->session->userdata('login')==TRUE) {
-			if ( $this->session->userdata('rol')!=0 ) {
-				$this->load->model('incidencia');
-				$this->load->model('usuarios');
+			$this->load->model('incidencia');
+			$this->load->model('usuarios');
+			if ( $this->session->userdata('rol')!=0 ) {				
 				$data = array(
 					'contenido' => 'menuinicio',
 					'incidentes'=>$this->incidencia->getlistartabla(),
@@ -27,7 +27,11 @@ class Menu extends CI_Controller
 				);
 				$this->load->view('menu',$data);
 			}else{
-				$this->load->view('menu2');
+				$data = array(
+					'contenido' => 'menuinicio2',
+					'incidentes'=>$this->incidencia->getListartablaUsuarioNormal($this->session->userdata('idusuario'))
+				);
+				$this->load->view('menu2',$data);
 			}
 		}else{
 			$this->load->view('login');

@@ -14,7 +14,6 @@ class Incidencias extends CI_Controller
 		}
 	}
 
-
 	public function Guardarincidencias()
 	{	
 		if ($this->input->is_ajax_request()) {

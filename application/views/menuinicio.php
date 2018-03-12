@@ -118,7 +118,6 @@
           <!-- /.box -->
         </div>
 </div>
-<script src="<?=base_url('plantilla/dist/js/menuinicio.js')?>"></script>
 <script type="text/javascript">
 	$('#tablaincidencias1').dataTable({
 		//quitar para paginacion por defecto

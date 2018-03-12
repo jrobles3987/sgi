@@ -31,7 +31,9 @@
   <link rel="stylesheet" type="text/css" href="<?=base_url('plantilla/dist/css/styles.css')?>">
   <link rel="stylesheet" type="text/css" href="<?=base_url('plantilla/dist/css/SGI.css')?>">
   <link rel="stylesheet" type="text/css" href="<?=base_url('plantilla/dist/css/skins/skin-blue.css')?>">
-  
+  <!-- Load c3.css -->
+  <link rel="stylesheet" type="text/css" href="<?=base_url('plantilla/plugins/c3js/c3.css')?>">
+
 
   <!-- REQUIRED JS SCRIPTS -->
   <!-- jQuery 2.2.3 -->
@@ -56,6 +58,9 @@
   <script src="<?=base_url('plantilla/plugins/datatables/DataTables-1.10.16/js/dataTables.bootstrap.min.js')?>"></script>
   <script src="<?=base_url('plantilla/plugins/datatables/Responsive-2.2.1/js/dataTables.responsive.min.js')?>"></script>
   <script src="<?=base_url('plantilla/plugins/datatables/Responsive-2.2.1/js/responsive.bootstrap.min.js')?>"></script>
+  <!-- Load d3.js and c3.js -->
+  <script src="<?=base_url('plantilla/plugins/c3js/c3.js')?>"></script>
+  <script src="<?=base_url('plantilla/plugins/d3js/d3.v3.min.js')?>"></script>
   <script type="text/javascript">
 		var BASE_URL = "<?php echo base_url() ?>";
 	</script>
@@ -192,24 +197,6 @@
       <!-- Sidebar Menu -->
       <ul class="sidebar-menu">
         <li class="header">Menu</li>
-        <!-- Optionally, you can add icons to the links -->
-        <li class="treeview">
-          <a href="#"><i class="fa fa-laptop"></i> <span>Equipos y Sistemas</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="<?=base_url('menu/ingresoequipos')?>">Agregar nuevos equipos</a></li>
-            <li><a href="<?=base_url('menu/ingresoequiposexcel')?>">Agregar nuevos equipos en Lote</a></li>
-            <li><a href="<?=base_url('menu/listadoequipos')?>">Listado de Equipos</a></li>
-            <li><a href="<?=base_url('menu/ingresosistemas')?>">Agregar nuevos sistemas</a></li>
-            <li><a href="#">Modificar equipos</a></li>
-            <li><a href="#">Modificar sistemas</a></li>
-            <li><a href="#">Dar de baja a equipos</a></li>
-            <li><a href="<?=base_url('menu/reportes')?>">Reportes</a></li>
-          </ul>
-        </li>
         <li class="treeview">
           <a href="#"><i class="fa fa-cogs"></i> <span>Gestión</span>
             <span class="pull-right-container">
@@ -217,46 +204,10 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="<?=base_url('menu/incidentes')?>">Incidentes</a></li>
-            <li><a href="#">Problemas</a></li>
-            <li><a href="#">Cambios</a></li>
+            <li><a href="<?=base_url('menu/incidentes')?>">Nuevas Incidencias</a></li>
+            <li><a href="#">Cambios en Incidencias</a></li>
             <li><a href="#">Estadísticas</a></li>
-            <li><a href="#">Incidentes recurrentes</a></li>
-          </ul>
-        </li>
-        <li class="treeview">
-          <a href="#"><i class="fa fa-wrench"></i> <span>Herramientas</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="#">Docuementos</a></li>
-            <li><a href="#">Plantillas</a></li>
-          </ul>
-        </li>
-        <li class="treeview">
-          <a href="#"><i class="fa fa-cubes"></i> <span>Administración</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="<?=base_url('menu/UsuariosSistema')?>">Usuarios</a></li>
-            <li><a href="#">Perfiles</a></li>
-          </ul>
-        </li>
-        <li class="treeview">
-          <a href="#"><i class="fa fa-gear"></i> <span>Configuración</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="#">Marcas y modelos de equipos</a></li>
-            <li><a href="#">Estados de Incidencias</a></li>
-            <li><a href="#">Fuentes de ingresos de incidencias</a></li>
-            <li><a href="<?=base_url('menu/respaldos')?>">Respaldos de BD</a></li>
+            <li><a href="#">Calificaciones de Incidencias</a></li>
           </ul>
         </li>
       </ul>
@@ -282,9 +233,8 @@
 </body>
 
 </html>
-<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+<script src="<?=base_url('plantilla/plugins/socket/socket.io-1.2.0.js')?>"></script>
 <script>
-  $(".select2js").select2();
   $(function () {
     if(localStorage.expandedMenu==0) {
         $("body").addClass('sidebar-collapse');
