@@ -236,7 +236,36 @@ class Menu extends CI_Controller
 				$this->load->view('menu',$data);
 			}else{
 				$data = array(
-					'contenido' => 'vistas_normal/estadisticas'
+					'contenido' => 'vistas_normal/menuestadisticas'
+				);
+				$this->load->view('menu2',$data);
+			}
+		}else{
+			$this->load->view('login');
+		}
+	}
+
+
+	public function Calificacion_Incidencias()
+	{
+		if ($this->session->userdata('login')==TRUE) {
+			$this->load->model('incidencia');
+			if ( $this->session->userdata('rol')!=0 ) {	
+				$this->load->model('usuarios');
+				$data = array(
+					'contenido' => 'usuarios/menuusuariossistema', 
+					'usuarios'=>$this->usuarios->getUsuariosSistema(),
+					'incidencia_fuente' => $this->incidencia->getlistarfuenteincidencia(),
+					'incidencia_estados' => $this->incidencia->getlistarestado(),
+					'incidencia_necesidades' => $this->incidencia->getlistarnecesidades(),
+					'incidencia_tecnicos' => $this->usuarios->getListarUsuariosSistemaTipo('Técnico'),
+					'incidencias_categorias'  => $this->incidencia->getlistarcategorias()
+				);
+				$this->load->view('menu',$data);
+			}else{
+				$data = array(
+					'contenido' => 'vistas_normal/menuincidentescalificacion',
+					'incidentes'=>$this->incidencia->getListartablaUsuarioNormal($this->session->userdata('idusuario'))
 				);
 				$this->load->view('menu2',$data);
 			}

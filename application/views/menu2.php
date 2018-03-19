@@ -208,7 +208,7 @@
             <li><a href="<?=base_url('menu/ingresonuevaincidencia')?>">Nuevas Incidencias</a></li>
             <li><a href="#">Cambios en Incidencias</a></li>
             <li><a href="<?=base_url('menu/Estadisticas_Incidencias')?>">Estadísticas</a></li>
-            <li><a href="#">Calificaciones de Incidencias</a></li>
+            <li><a href="<?=base_url('menu/Calificacion_Incidencias')?>">Calificación de Incidencias</a></li>
           </ul>
         </li>
       </ul>
