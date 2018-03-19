@@ -145,4 +145,15 @@ class Incidencias extends CI_Controller
 		}
 	}
 
+	public function EstadisticasIncidenciasEstados()
+	{
+		if ($this->session->userdata('login')==TRUE) {
+			$this->load->model('incidencia');
+			$estadistica_estados = $this->incidencia->getEstadisticasIncidenciasEstados($this->session->userdata('idusuario'));					
+			echo json_encode($estadistica_estados);
+		}else{
+			show_404();
+		}
+	}
+
 }

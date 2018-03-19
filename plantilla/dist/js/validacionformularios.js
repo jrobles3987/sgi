@@ -4,10 +4,10 @@ function Validar_Formularios () {
 		if($(elem).val() == '' || $(elem).val()==0){
 			$(elem).css({'border':'1px solid red'});
 			//$(elem).css({'background-color': '#F3F781'});
-			error++;
+			error++;			
 		}else{
 			$(elem).css({'box-shadow':'none'});
-			$(elem).css({'border-color':'#d2d6de'});
+			$(elem).css({'border-color':'#d2d6de'});					
 			//$(elem).css({'background-color': '#FFFFFF'});
 		}
 	});
@@ -20,7 +20,7 @@ function Validar_Formularios () {
 			"closeButton": true,
 			"positionClass": "toast-bottom-left"
 		});
-		return false;	
+		return false;
 	}else{
 		return true;
 	}

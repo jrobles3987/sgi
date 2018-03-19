@@ -156,7 +156,7 @@ class Menu extends CI_Controller
 				$this->load->view('menu',$data);
 			}else{
 				$data = array(
-					'contenido'   => 'incidencias/menuincidentesnuevosnormal',
+					'contenido'   => 'vistas_normal/menuincidentesnuevos',
 					'incidencia_necesidades' => $this->incidencia->getlistarnecesidades(),
 					'incidencia_estados' => $this->incidencia->getlistarestado(),
 					'localizacion' => $this->localizacion->getLocalizacion(),
@@ -210,6 +210,34 @@ class Menu extends CI_Controller
 				);
 				$this->load->view('menu',$data);
 			}else{
+				$this->load->view('menu2',$data);
+			}
+		}else{
+			$this->load->view('login');
+		}
+	}
+
+
+	public function Estadisticas_Incidencias()
+	{
+		if ($this->session->userdata('login')==TRUE) {
+			if ( $this->session->userdata('rol')!=0 ) {	
+				$this->load->model('incidencia');
+				$this->load->model('usuarios');
+				$data = array(
+					'contenido' => 'usuarios/menuusuariossistema', 
+					'usuarios'=>$this->usuarios->getUsuariosSistema(),
+					'incidencia_fuente' => $this->incidencia->getlistarfuenteincidencia(),
+					'incidencia_estados' => $this->incidencia->getlistarestado(),
+					'incidencia_necesidades' => $this->incidencia->getlistarnecesidades(),
+					'incidencia_tecnicos' => $this->usuarios->getListarUsuariosSistemaTipo('Técnico'),
+					'incidencias_categorias'  => $this->incidencia->getlistarcategorias()
+				);
+				$this->load->view('menu',$data);
+			}else{
+				$data = array(
+					'contenido' => 'vistas_normal/estadisticas'
+				);
 				$this->load->view('menu2',$data);
 			}
 		}else{

@@ -55,28 +55,27 @@ class incidencia extends CI_Model
 
 	public function setGuardarincidencia($data) // escribe bien.l.
 	{//pasa los mismos nombres que en el controlador solo estan demas a la comilla urgencia impacto prioridad 
-		$result = $this->db->query("SELECT
-	    incidencias.f_ingreso_incidencias(
-				'".$data['fechaapertura']."',
-				'".$data['fechavencimiento']."',
-				null,
-				null,
-				".$data['idincidenciaestado'].", 
-				".$data['urgencia'].",  
-				".$data['impacto'].",
-				".$data['prioridad'].",
-				".$data['idincidenciafuente'].",
-				'".$data['tituloincidencia']."',
-				'".$data['descripcion']."',
-				".$this->session->userdata('idusuario').",
-				".$data['tecnicoasignado'].",
-				".$data['idlugarincidente'].",
-				".$data['idcategorias']." 
-											);");
+		$result = $this->db->query("SELECT incidencias.f_ingreso_incidencias(
+									'".$data['fechaapertura']."',
+									'".$data['fechavencimiento']."',
+									null,
+									null,
+									".$data['idincidenciaestado'].", 
+									".$data['urgencia'].",  
+									".$data['impacto'].",
+									".$data['prioridad'].",
+									".$data['idincidenciafuente'].",
+									'".$data['tituloincidencia']."',
+									'".$data['descripcion']."',
+									".$this->session->userdata('idusuario').",
+									".$data['tecnicoasignado'].",
+									".$data['idlugarincidente'].",
+									".$data['idcategorias']." 
+								);");
 		// $this->db->insert('incidencias.incidencias', $data);
 	//'17/12/2017','17/12/2017','17/12/2017','17/12/2017',1,'NORMAL','NORMAL','NORMAL',1,'TITULO 1','DESCRIPCION 1','1','1'
 
-		if($result->num_rows() > 0 ){		// cuando ya vengan bien validades de la vista, ninguno lleva comillas simples
+		if($result->num_rows() > 0 ){// cuando ya vengan bien validades de la vista, ninguno lleva comillas simples
 			return $result->row();
 		}else{
 			return null;
@@ -213,5 +212,22 @@ class incidencia extends CI_Model
 		  	return null;
 	  	}
 	}
+
+	public function getEstadisticasIncidenciasEstados($idusuariocreador = '')
+	{
+
+		$result = $this->db->query("SELECT incidencias_estados.estado,count(incidencias.idincidencias) as conteo
+									FROM incidencias.incidencias,incidencias.incidencias_estados 
+									WHERE incidencias.idincidenciaestado = incidencias_estados.idincidenciaestado and incidencias.usuariocreador = ".$idusuariocreador."
+									GROUP BY incidencias.idincidenciaestado,incidencias_estados.estado
+									ORDER BY incidencias_estados.estado;
+									");
+		if ($result->num_rows()>0)
+	  	{ 
+			return $result->result();
+	  	}else {
+		  	return null;
+	  	}
+	}	
 
 }

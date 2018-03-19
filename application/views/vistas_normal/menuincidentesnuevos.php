@@ -19,7 +19,7 @@
 					<div class="col-xs-4 col-md-6">
 						<span>* Fecha de Apertura y Vencimiento</span>
 						<div class="input-group daterangeico">
-		                  	<input type="text" class="form-control pull-right daterange requerido" align="center" id="fechainicio-fechafin2" readonly="readonly">
+		                  	<input type="text" class="form-control pull-right daterange" align="center" id="fechainicio-fechafin2" readonly="readonly">
 		                  	<span class="input-group-addon">
 								<span class="fa fa-calendar"></span>
 							</span>	
@@ -27,7 +27,7 @@
 		            </div>
 		            <div class="col-xs-4 col-md-6">
 			      		<span>* Estado incidencia</span>
-			        	<select id="selectestado2" class="form-control requerido">
+			        	<select id="selectestado2" class="form-control">
 							<option value="0">Seleccione el estado de la incidencia...</option>
 							<?php
 					      		foreach ($incidencia_estados as $k) {
@@ -106,7 +106,7 @@
 </div>
 <script src="<?=base_url('plantilla/dist/js/datepicker.js');?>"></script>
 <script >
-	$(document).ready(function() {
+	//$(document).ready(function() {
 		$('.daterange').daterangepicker({
 	        format: 'yyyy-mm-dd',
 	        autoApply: true,
@@ -133,23 +133,24 @@
 				fechavencimiento: fecha2,
 				//fechaaceptacion: $('#fechaaceptacion').val(),
 				//fechaaprovacion: $('#fechaaprovacion').val(),
-				incidenciaestado: $('#selectestado2').val(),
+				incidenciaestado: 1,
 				urgencia: $('#selecturgencia2').val(),
-				impacto: $('#selectimpacto2').val(),
-				prioridad: $('#selectprioridad2').val(),
-				tecnicoasignado: $('#selectecnico2').val(),
-				idincidenciafuente: $('#selectfuenteincidencia2').val(),
+				impacto: 3,
+				prioridad: 3,
+				tecnicoasignado: 'null',
+				idincidenciafuente: 1,
 				idlocalizacion: $('#selectlocalizacion2').val(),
 				idcategorias: $('#selectcategoria2').val(),
 				descripcion: $('#txtareadescripcion2').val()
 			}
+			//console.log(dataform);
 			retorno = Validar_Formularios();
-			return retorno;			
+			return retorno;					
 		}
 	
-		$('#btn-guardar-incidencia').click(function() {
-			if(validar_formulario()){										
-				$('#div_loading').css('display','inline');
+		$('#btn-guardar-incidencia').click(function() {	
+			if(validar_formulario()){					
+				$('#div_loading').css('display','inline');				
 				$.ajax({
 		            type: "POST",
 		            url: "<?php echo base_url('incidencias/guardarincidencias');?>",
@@ -180,50 +181,15 @@
 		                $('#div_loading').css('display','none');
 		            },
 		            error: function (xhr, exception) {
-
+		            	toastr.error("Error al querer grabar los datos","Atención",{
+							"timeOut": "5000",
+							"extendedTImeout": "5000",
+							"closeButton": true,
+							"positionClass": "toast-bottom-left"
+						});
 		            }
 		        });
 			}		
 		});
-	});	
-
-	$('#selectecnico2').change(function(){
-		$('#selectecnico2 option:selected').each(function(){
-			idpersonal= $('#selectecnico2').val();
-			$.post("<?php echo base_url('incidencias/MostrarTrabajosActivosTecnico');?>", {
-				idpersonal: idpersonal
-			}, function(data){
-				if(data){
-					$.post("<?php echo base_url('incidencias/MostrarCalificacionTrabajosTecnico');?>", {
-						idpersonal: idpersonal
-					}, function(data2){
-						if(data2){
-							var json1 = JSON.parse(data);
-							var json2 = JSON.parse(data2);
-							if (json1.incidencias_activas != null){
-								msj1 = 'El técnico tiene '+json1.incidencias_activas+' trabajos asignados.';
-							}
-							if (json2.calificacionusuario != null) {
-								msj2 = 'Promedio de nivel de satisfacción de usuarios para incidencias resueltas: '+json2.calificacionusuario+'/10';
-							}else{
-								msj2 = 'El técnico no tiene calificaciones de usuarios para las incidencias resueltas.';
-							}
-							toastr.info(msj1, "Incidencias Asignadas",{
-								"timeOut": "0",
-            					"extendedTImeout": "0",
-            					"closeButton": true,
-            					"positionClass": "toast-bottom-left"
-							});
-							toastr.info(msj2, "Promedio de Calificaciones",{
-								"timeOut": "0",
-            					"extendedTImeout": "0",
-            					"closeButton": true,
-            					"positionClass": "toast-bottom-left"
-							});
-						}
-					});					
-				}					
-			});
-		});
-	});
+	//});
 </script>

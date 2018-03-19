@@ -53,6 +53,7 @@
   <!-- AdminLTE App -->
   <script src="<?=base_url('plantilla/dist/js/app.min.js')?>"></script>
   <script src="<?=base_url('plantilla/dist/js/menu.js')?>"></script>
+  <script src="<?=base_url('plantilla/dist/js/validacionformularios.js')?>"></script>
   <!-- Datatables -->
   <script src="<?=base_url('plantilla/plugins/datatables/DataTables-1.10.16/js/jquery.dataTables.js')?>"></script>
   <script src="<?=base_url('plantilla/plugins/datatables/DataTables-1.10.16/js/dataTables.bootstrap.min.js')?>"></script>
@@ -66,7 +67,7 @@
 	</script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
-<?php include("incidencias/vmodalincidencia.php"); ?>
+<?php //include("incidencias/vmodalincidencia.php"); ?>
 <div class="loading_iniciosesion" id="div_loading" style="display: none">
       <div class="loading_background">
           <img class="img_loading" src="<?=base_url('plantilla/dist/img/loading.gif') ?>"/>
@@ -198,7 +199,7 @@
       <ul class="sidebar-menu">
         <li class="header">Menu</li>
         <li class="treeview">
-          <a href="#"><i class="fa fa-cogs"></i> <span>Gestión</span>
+          <a href="#"><i class="fa fa-cogs"></i> <span>Gestión de incidencias</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -206,7 +207,7 @@
           <ul class="treeview-menu">
             <li><a href="<?=base_url('menu/ingresonuevaincidencia')?>">Nuevas Incidencias</a></li>
             <li><a href="#">Cambios en Incidencias</a></li>
-            <li><a href="#">Estadísticas</a></li>
+            <li><a href="<?=base_url('menu/Estadisticas_Incidencias')?>">Estadísticas</a></li>
             <li><a href="#">Calificaciones de Incidencias</a></li>
           </ul>
         </li>

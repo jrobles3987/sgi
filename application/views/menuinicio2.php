@@ -9,7 +9,7 @@
                   <div class="box-header with-border">
                     <h4 class="box-title" style="font-size: 25px;">
                       <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-                        Nuevas incidencias generadas SIN ASIGNAR
+                        Incidencias generadas SIN ASIGNAR
                         <span class="caret"></span>
                       </a>
 
@@ -132,7 +132,7 @@
 									$num=0;
 									if($incidentes){
 										foreach ($incidentes as $fila) {
-											if( $fila->estado == 'EN CURSO (PLANIFICACIÓN)' || $fila->estado == 'EN CURSO (ASIGNADO)') {
+											if( $fila->estado == 'RESUELTO' ) {
 												$num++;
 												echo '<TR id="'.$fila->idincidencias.'" onclick="myFunction(this)"><TD>'.$num.'</TD><TD>'.$fila->tituloincidencia.'</TD><TD>'.$fila->estado.'</TD><TD>'.$fila->fechaapertura.'</TD><TD>'.$fila->prioridad.'</TD><TD>'.$fila->usuariocreador.'</TD>
 												<TD>'.$fila->tecnicoasignado.'</TD><TD>'.$fila->ultimamodificacion.'</TD><TD>'.$fila->fechavencimiento.'</TD></TR>'; 
@@ -155,6 +155,7 @@
         </div>
 </div>
 <script type="text/javascript">
+	console.log(<?=$this->session->userdata('idusuario');?>);
 	$('#tablaincidencias1').dataTable({
 		//quitar para paginacion por defecto
 		"lengthMenu": [[5, 10, 20, -1], [5, 10, 20, "Todos"]]
@@ -171,36 +172,5 @@
 		//quitar para paginacion por defecto
 		"lengthMenu": [[5, 10, 20, -1], [5, 10, 20, "Todos"]]
 	});
-
-
-	var chart = c3.generate({
-	    data: {
-	        // iris data from R
-	        columns: [
-	        	["Nuevas", 10],
-	            ["En Curso", 30],
-	            ["En Observacion", 10],
-	            ["Resueltas", 40],
-	        ],
-	        type : 'pie',
-	        onclick: function (d, i) { console.log("onclick", d, i); },
-	        onmouseover: function (d, i) { console.log("onmouseover", d, i); },
-	        onmouseout: function (d, i) { console.log("onmouseout", d, i); }
-	    }
-	});	
-
-	setTimeout(function () {
-	    chart.load({
-	        columns: [
-	            ["Data1", 1000],
-	        ]
-	    });
-	}, 10);	
-
-	setTimeout(function () {
-	    chart.unload({
-	        ids: 'Data1'
-	    });
-	}, 400);
 
 </script>
