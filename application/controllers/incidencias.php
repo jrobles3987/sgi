@@ -156,4 +156,49 @@ class Incidencias extends CI_Controller
 		}
 	}
 
+	public function IngresarCalificacionesIncidencias()
+	{
+		if ($this->session->userdata('login')==TRUE) {
+			$idincidencia = $this->input->post('idincidencia');
+			$calificacion = $this->input->post('calificacion');
+			$detallecalificacion = $this->input->post('detallecalificacion');
+			$tipo = $this->input->post('tipo');
+			$this->load->model('incidencia');
+			$res_calificacion = $this->incidencia->setAsignarCalificacionesIncidencias($idincidencia,$calificacion,$detallecalificacion,$tipo);
+			$data= array(
+				"res" => $res_calificacion->f_ingreso_incidencias_calificaciones
+			);	
+			echo json_encode($data);
+		}else{
+			show_404();
+		}
+	}
+
+	public function ReDibujarTablaIncidenciasCalificacion()
+	{
+		if ($this->session->userdata('login')==TRUE) {
+			$this->load->model('incidencia');
+			$incidentes = $this->incidencia->getListartablaUsuarioNormal($this->session->userdata('idusuario'));			
+			echo '<TABLE id="tablaincidencias1" class="table table-striped table-bordered table-hover">';
+			echo '<THEAD>';
+			echo '<TR><TH>N°</TH><TH>Titulo</TH><TH>Fecha Apertura</TH><TH>Fecha Resolución</TH><TH>Asignado al técnico</TH></TR>';
+			echo '</THEAD>';
+			echo '<TBODY>';
+			$num=0;
+			if($incidentes){
+				foreach ($incidentes as $fila) {
+					if( $fila->estado == 'RESUELTO' ) {
+						$num++;
+						echo '<TR id="'.$fila->idincidencias.'" onclick="Llama_modal_calificacion(this)"><TD>'.$num.'</TD><TD>'.$fila->tituloincidencia.'</TD><TD>'.$fila->fechaapertura.'</TD><TD>'.$fila->fechavencimiento.'</TD>
+						<TD>'.$fila->tecnicoasignado.'</TD></TR>'; 
+					}	
+				}
+			}
+			echo '</TBODY>';		
+			echo '</TABLE>';
+		}else{
+			show_404();
+		}
+	}
+
 }

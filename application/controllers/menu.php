@@ -22,14 +22,19 @@ class Menu extends CI_Controller
 					'incidencia_fuente' => $this->incidencia->getlistarfuenteincidencia(),
 					'incidencia_estados' => $this->incidencia->getlistarestado(),
 					'incidencia_necesidades' => $this->incidencia->getlistarnecesidades(),
-					'incidencia_tecnicos' => $this->usuarios->getListarUsuariosSistemaTipo('Técnico'),
+					'incidencia_tecnicos' => $this->usuarios->getListarUsuariosSistemaTipo('TÉCNICO'),
 					'incidencias_categorias'  => $this->incidencia->getlistarcategorias()
 				);
 				$this->load->view('menu',$data);
 			}else{
 				$data = array(
 					'contenido' => 'menuinicio2',
-					'incidentes'=>$this->incidencia->getListartablaUsuarioNormal($this->session->userdata('idusuario'))
+					'incidentes'=>$this->incidencia->getListartablaUsuarioNormal($this->session->userdata('idusuario')),
+					'incidencia_fuente' => $this->incidencia->getlistarfuenteincidencia(),
+					'incidencia_estados' => $this->incidencia->getlistarestado(),
+					'incidencia_necesidades' => $this->incidencia->getlistarnecesidades(),
+					'incidencia_tecnicos' => $this->usuarios->getListarUsuariosSistemaTipo('TÉCNICO'),
+					'incidencias_categorias'  => $this->incidencia->getlistarcategorias()
 				);
 				$this->load->view('menu2',$data);
 			}
@@ -51,7 +56,7 @@ class Menu extends CI_Controller
 					'incidencia_fuente' => $this->incidencia->getlistarfuenteincidencia(),
 					'incidencia_estados' => $this->incidencia->getlistarestado(),
 					'incidencia_necesidades' => $this->incidencia->getlistarnecesidades(),
-					'incidencia_tecnicos' => $this->usuarios->getListarUsuariosSistemaTipo('Técnico'),
+					'incidencia_tecnicos' => $this->usuarios->getListarUsuariosSistemaTipo('TÉCNICO'),
 					'incidencias_categorias'  => $this->incidencia->getlistarcategorias(),
 					'tiposbienes' => $this->tiposbienes->getListarTiposBienesEquipos(),
 					'marcas' => $this->marcas->getListarMarcas()
@@ -76,7 +81,7 @@ class Menu extends CI_Controller
 					'incidencia_fuente' => $this->incidencia->getlistarfuenteincidencia(),
 					'incidencia_estados' => $this->incidencia->getlistarestado(),
 					'incidencia_necesidades' => $this->incidencia->getlistarnecesidades(),
-					'incidencia_tecnicos' => $this->usuarios->getListarUsuariosSistemaTipo('Técnico'),
+					'incidencia_tecnicos' => $this->usuarios->getListarUsuariosSistemaTipo('TÉCNICO'),
 					'incidencias_categorias'  => $this->incidencia->getlistarcategorias()
 				);
 				$this->load->view('menu',$data);
@@ -101,7 +106,7 @@ class Menu extends CI_Controller
 					'incidencia_fuente' => $this->incidencia->getlistarfuenteincidencia(),
 					'incidencia_estados' => $this->incidencia->getlistarestado(),
 					'incidencia_necesidades' => $this->incidencia->getlistarnecesidades(),
-					'incidencia_tecnicos' => $this->usuarios->getListarUsuariosSistemaTipo('Técnico'),
+					'incidencia_tecnicos' => $this->usuarios->getListarUsuariosSistemaTipo('TÉCNICO'),
 					'incidencias_categorias'  => $this->incidencia->getlistarcategorias()
 				);
 				$this->load->view('menu',$data);
@@ -125,7 +130,7 @@ class Menu extends CI_Controller
 					'incidencia_fuente' => $this->incidencia->getlistarfuenteincidencia(),
 					'incidencia_estados' => $this->incidencia->getlistarestado(),
 					'incidencia_necesidades' => $this->incidencia->getlistarnecesidades(),
-					'incidencia_tecnicos' => $this->usuarios->getListarUsuariosSistemaTipo('Técnico'),
+					'incidencia_tecnicos' => $this->usuarios->getListarUsuariosSistemaTipo('TÉCNICO'),
 					'incidencias_categorias'  => $this->incidencia->getlistarcategorias()
 				);
 				$this->load->view('menu',$data);
@@ -150,7 +155,8 @@ class Menu extends CI_Controller
 					'incidencia_fuente' => $this->incidencia->getlistarfuenteincidencia(),
 					'incidencia_estados' => $this->incidencia->getlistarestado(),
 					'incidencia_necesidades' => $this->incidencia->getlistarnecesidades(),
-					'incidencia_tecnicos' => $this->usuarios->getListarUsuariosSistemaTipo('Técnico'),
+					'incidencia_tecnicos' => $this->usuarios->getListarUsuariosSistemaTipo('TÉCNICO'),
+					'incidencia_localizacion' => $this->localizacion->getLocalizacion(),
 					'incidencias_categorias'  => $this->incidencia->getlistarcategorias()
 				);			
 				$this->load->view('menu',$data);
@@ -159,7 +165,7 @@ class Menu extends CI_Controller
 					'contenido'   => 'vistas_normal/menuincidentesnuevos',
 					'incidencia_necesidades' => $this->incidencia->getlistarnecesidades(),
 					'incidencia_estados' => $this->incidencia->getlistarestado(),
-					'localizacion' => $this->localizacion->getLocalizacion(),
+					'incidencia_localizacion' => $this->localizacion->getLocalizacion(),
 					'incidencias_categorias'  => $this->incidencia->getlistarcategorias()
 				);
 				$this->load->view('menu2',$data);
@@ -175,12 +181,13 @@ class Menu extends CI_Controller
 			if ( $this->session->userdata('rol')!=0 ) {	
 				$this->load->model('incidencia');
 				$this->load->model('usuarios');
+				$this->load->model('localizacion');
 				$data = array(
 					'contenido' => 'reportes/reporte-incidencia',
 					'incidencia_fuente' => $this->incidencia->getlistarfuenteincidencia(),
 					'incidencia_estados' => $this->incidencia->getlistarestado(),
 					'incidencia_necesidades' => $this->incidencia->getlistarnecesidades(),
-					'incidencia_tecnicos' => $this->usuarios->getListarUsuariosSistemaTipo('Técnico'),
+					'incidencia_tecnicos' => $this->usuarios->getListarUsuariosSistemaTipo('TÉCNICO'),
 					'incidencias_categorias'  => $this->incidencia->getlistarcategorias()
 				);
 				$this->load->view('menu',$data);
@@ -199,13 +206,14 @@ class Menu extends CI_Controller
 			if ( $this->session->userdata('rol')!=0 ) {	
 				$this->load->model('incidencia');
 				$this->load->model('usuarios');
+				$this->load->model('localizacion');
 				$data = array(
 					'contenido' => 'usuarios/menuusuariossistema', 
 					'usuarios'=>$this->usuarios->getUsuariosSistema(),
 					'incidencia_fuente' => $this->incidencia->getlistarfuenteincidencia(),
 					'incidencia_estados' => $this->incidencia->getlistarestado(),
 					'incidencia_necesidades' => $this->incidencia->getlistarnecesidades(),
-					'incidencia_tecnicos' => $this->usuarios->getListarUsuariosSistemaTipo('Técnico'),
+					'incidencia_tecnicos' => $this->usuarios->getListarUsuariosSistemaTipo('TÉCNICO'),
 					'incidencias_categorias'  => $this->incidencia->getlistarcategorias()
 				);
 				$this->load->view('menu',$data);
@@ -224,13 +232,14 @@ class Menu extends CI_Controller
 			if ( $this->session->userdata('rol')!=0 ) {	
 				$this->load->model('incidencia');
 				$this->load->model('usuarios');
+				$this->load->model('localizacion');
 				$data = array(
 					'contenido' => 'usuarios/menuusuariossistema', 
 					'usuarios'=>$this->usuarios->getUsuariosSistema(),
 					'incidencia_fuente' => $this->incidencia->getlistarfuenteincidencia(),
 					'incidencia_estados' => $this->incidencia->getlistarestado(),
 					'incidencia_necesidades' => $this->incidencia->getlistarnecesidades(),
-					'incidencia_tecnicos' => $this->usuarios->getListarUsuariosSistemaTipo('Técnico'),
+					'incidencia_tecnicos' => $this->usuarios->getListarUsuariosSistemaTipo('TÉCNICO'),
 					'incidencias_categorias'  => $this->incidencia->getlistarcategorias()
 				);
 				$this->load->view('menu',$data);
@@ -250,22 +259,30 @@ class Menu extends CI_Controller
 	{
 		if ($this->session->userdata('login')==TRUE) {
 			$this->load->model('incidencia');
-			if ( $this->session->userdata('rol')!=0 ) {	
-				$this->load->model('usuarios');
+			$this->load->model('localizacion');
+			$this->load->model('usuarios');
+			if ( $this->session->userdata('rol')!=0 ) {
 				$data = array(
 					'contenido' => 'usuarios/menuusuariossistema', 
 					'usuarios'=>$this->usuarios->getUsuariosSistema(),
 					'incidencia_fuente' => $this->incidencia->getlistarfuenteincidencia(),
 					'incidencia_estados' => $this->incidencia->getlistarestado(),
 					'incidencia_necesidades' => $this->incidencia->getlistarnecesidades(),
-					'incidencia_tecnicos' => $this->usuarios->getListarUsuariosSistemaTipo('Técnico'),
+					'incidencia_tecnicos' => $this->usuarios->getListarUsuariosSistemaTipo('TÉCNICO'),
+					'incidencia_localizacion' => $this->localizacion->getLocalizacion(),
 					'incidencias_categorias'  => $this->incidencia->getlistarcategorias()
 				);
 				$this->load->view('menu',$data);
 			}else{
 				$data = array(
 					'contenido' => 'vistas_normal/menuincidentescalificacion',
-					'incidentes'=>$this->incidencia->getListartablaUsuarioNormal($this->session->userdata('idusuario'))
+					'incidentes'=>$this->incidencia->getListartablaUsuarioNormal($this->session->userdata('idusuario')),
+					'incidencia_fuente' => $this->incidencia->getlistarfuenteincidencia(),
+					'incidencia_estados' => $this->incidencia->getlistarestado(),
+					'incidencia_necesidades' => $this->incidencia->getlistarnecesidades(),
+					'incidencia_tecnicos' => $this->usuarios->getListarUsuariosSistemaTipo('TÉCNICO'),
+					'incidencia_localizacion' => $this->localizacion->getLocalizacion(),
+					'incidencias_categorias'  => $this->incidencia->getlistarcategorias()
 				);
 				$this->load->view('menu2',$data);
 			}

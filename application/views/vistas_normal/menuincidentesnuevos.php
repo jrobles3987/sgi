@@ -77,7 +77,7 @@
                       <select id="selectlocalizacion2" class="form-control requerido">
                           <option value="0">Seleccione la localización de la incidencia...</option>
                           <?php
-                                foreach ($localizacion as $l) {
+                                foreach ($incidencia_localizacion as $l) {
                                     echo '<option value="'.$l->idlocalizacion.'">'.$l->nombrelocalizacion.'</option>';
                                 }
                             ?>

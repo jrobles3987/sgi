@@ -126,7 +126,7 @@ class incidencia extends CI_Model
 	{	
 		//$this->db-where('creador', $usuario_creador);
 		//$this->db->order_by('fechaapertura','DESC');
-	  	$result=$this->db->query('SELECT * FROM incidencias.v_listar_incidencias WHERE creador = '.$usuario_creador.' ORDER BY fechaapertura DESC');
+	  	$result=$this->db->query('SELECT * FROM incidencias.v_listar_incidencias WHERE creador = '.$usuario_creador.' and calificacionusuario is null ORDER BY fechaapertura DESC');
 	  	if ($result->num_rows()>0){
 			return $result->result();
 	  	}else{
@@ -228,6 +228,22 @@ class incidencia extends CI_Model
 	  	}else {
 		  	return null;
 	  	}
-	}	
+	}
+
+	public function setAsignarCalificacionesIncidencias($idincidencia='',$calificacion='',$detallecalificacion='',$tipo='')
+	{
+		
+		$result = $this->db->query("SELECT incidencias.f_ingreso_incidencias_calificaciones(
+									".$idincidencia.",
+									".$calificacion.",
+									'".$detallecalificacion."',
+									".$tipo.");");
+		if ($result->num_rows()>0)
+	  	{
+			return $result->row();
+	  	}else {
+		  	return null;
+	  	}
+	}
 
 }
