@@ -1,34 +1,31 @@
-<?php include("Vmodalincidencia.php");?>
-<?php include("Vmodalincidencia_nueva.php");?>
 <div class="row container col-lg-12 col-center">
 	<div class="panel panel-default panel-fade">
 		<div class="panel-heading">
 			<span class="panel-title">				
 				<div class="pull-right">
-					<p><a  href="#" class="btn btn-primary btn-block" id="btn_incidencias_Nuevas">Nuevas Incidencias</a></p>                           
+					<p><a  href="#" class="btn btn-primary btn-block" id="btn_estados_Nuevos">Nuevos Estados</a></p>                           
 				</div>
 				<div class="clearfix"></div>
-			</span>
+			</span>			
 		</div>
 		<div class="panel-body">
 			<div class="tab-content">
 				<div class="tab-pane fade in active" id="v_incidencias">
 					<div class="panel panel-default col-md-6 col-center" style="padding: 1px,1px,1px,1px">
-					    <center><B>Inidencias registradas en el sistema</B><center/>
+					    <center><B> Estados de Incidencias</B><center/>
 					</div>
 					<div>
-						<TABLE id="tablaincidencias" class="table table-striped table-bordered table-hover">
+						<TABLE id="tablaincidenciasestados" class="table table-striped table-bordered table-hover">
 							<?php
 								echo '<THEAD>';
-								echo '<TR><TH>N°</TH><TH>Titulo</TH><TH>Estado</TH><TH>Fecha Apertura</TH><TH>Prioridad</TH><TH>Solicitante</TH><TH>Asignado A:</TH><TH>Ultima Modificacion</TH><TH>Fecha Vencimiento</TH></TR>';
+								echo '<TR><TH>N°</TH><TH>Nombre</TH><TH>Descripción</TH></TR>';
 								echo '</THEAD>';
 								echo '<TBODY>';
 								$num=0;
-								if($incidentes){
-									foreach ($incidentes as $fila) {
+								if($incidencia_estados){
+									foreach ($incidencia_estados as $fila) {
 										$num++;
-										echo '<TR id="'.$fila->idincidencias.'" onclick="myFunction(this)"><TD>'.$num.'</TD><TD>'.$fila->tituloincidencia.'</TD><TD>'.$fila->estado.'</TD><TD>'.$fila->fechaapertura.'</TD><TD>'.$fila->prioridad.'</TD><TD>'.$fila->usuariocreador.'</TD>
-										<TD>'.$fila->tecnicoasignado.'</TD><TD>'.$fila->ultimamodificacion.'</TD><TD>'.$fila->fechavencimiento.'</TD></TR>'; 
+										echo '<TR id="'.$fila->idincidenciaestado.'" onclick="myFunctionEstados(this)"><TD>'.$num.'</TD><TD>'.$fila->estado.'</TD><TD>'.$fila->descripcion.'</TD></TR>'; 
 									}
 								}
 								echo '</TBODY>';
@@ -44,7 +41,7 @@
 	</div>
 
 <script>	
-	function myFunction(x)
+	function myFunctionEstados(x)
 	{
 		$.ajax({
             type: "POST",
@@ -74,7 +71,7 @@
 	}
 
 	//inicia las tablas usando el plugin datatables
-	$('#tablaincidencias').dataTable({
+	$('#tablaincidenciasestados').dataTable({
 		//quitar para paginacion por defecto
 		"lengthMenu": [[5, 10, 20, -1], [5, 10, 20, "Todos"]]
 	});

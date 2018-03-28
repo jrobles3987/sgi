@@ -13,27 +13,17 @@
 					<p><B>Nota:</B> Las incidencias resueltas solo se pueden calificar una sola vez, una vez guardada su calificación no podra ser modificada. </p>
 				</div>
 				<div style="margin:20px"></div>
-                	<div id="tabla_incidentes_resuletas_calificacion">
-						<TABLE id="tablaincidencias1" class="table table-striped table-bordered table-hover">
-							<?php
-								echo '<THEAD>';
-								echo '<TR><TH>N°</TH><TH>Titulo</TH><TH>Fecha Apertura</TH><TH>Fecha Resolución</TH><TH>Asignado al técnico</TH></TR>';
-								echo '</THEAD>';
-								echo '<TBODY>';
-								$num=0;
-								if($incidentes){
-									foreach ($incidentes as $fila) {
-										if( $fila->estado == 'RESUELTO' ) {
-											$num++;
-											echo '<TR id="'.$fila->idincidencias.'" onclick="Llama_modal_calificacion(this)"><TD>'.$num.'</TD><TD>'.$fila->tituloincidencia.'</TD><TD>'.$fila->fechaapertura.'</TD><TD>'.$fila->fechavencimiento.'</TD>
-											<TD>'.$fila->tecnicoasignado.'</TD></TR>'; 
-										}	
-									}
-								}
-								echo '</TBODY>';
-							?>
-						</TABLE>
-					</div>                   
+            	<div id="tabla_incidentes_resuletas_calificacion">
+					<TABLE id="tablaincidencias1" class="table table-striped table-bordered table-hover">
+						<?php
+							echo '<THEAD>';
+							echo '<TR><TH>N°</TH><TH>Titulo</TH><TH>Fecha Apertura</TH><TH>Fecha Resolución</TH><TH>Asignado al técnico</TH></TR>';
+							echo '</THEAD>';
+							echo '<TBODY>';							
+							echo '</TBODY>';
+						?>
+					</TABLE>
+				</div>                   
             </div>
             <!-- /.box-body -->
           </div>
@@ -41,13 +31,15 @@
         </div>
 </div>
 <script type="text/javascript">
+	ReDibujaTablaCalificacion();
+
 	$('#tablaincidencias1').dataTable({
 		//quitar para paginacion por defecto
 		"lengthMenu": [[5, 10, 20, -1], [5, 10, 20, "Todos"]]
 	});
 
 	function ReDibujaTablaCalificacion () {
-		$('#div_loading').css('display','inline');
+		$('#div_loading_cargando').css('display','inline');
 		$.ajax({
             type: "POST",
             url: "<?php echo base_url('incidencias/ReDibujarTablaIncidenciasCalificacion');?>",
@@ -62,7 +54,7 @@
 				});
             },
             complete : function(xhr, status) {
-                $('#div_loading').css('display','none');
+                $('#div_loading_cargando').css('display','none');
             },
             error: function (xhr, exception) {
 				alert("error");

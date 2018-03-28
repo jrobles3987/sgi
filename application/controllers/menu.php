@@ -291,5 +291,78 @@ class Menu extends CI_Controller
 		}
 	}
 
+	public function Estados_Incidencias()
+	{
+		if ($this->session->userdata('login')==TRUE) {
+			$this->load->model('incidencia');
+			$this->load->model('localizacion');
+			$this->load->model('usuarios');
+			if ( $this->session->userdata('rol')!=0 ) {
+				$data = array(
+					'contenido' => 'configuracion/menuestadosincidencias',
+					'usuarios'=>$this->usuarios->getUsuariosSistema(),
+					'incidencia_fuente' => $this->incidencia->getlistarfuenteincidencia(),
+					'incidencia_estados' => $this->incidencia->getlistarestado(),
+					'incidencia_necesidades' => $this->incidencia->getlistarnecesidades(),
+					'incidencia_tecnicos' => $this->usuarios->getListarUsuariosSistemaTipo('TÉCNICO'),
+					'incidencia_localizacion' => $this->localizacion->getLocalizacion(),
+					'incidencias_categorias'  => $this->incidencia->getlistarcategorias()
+				);
+				$this->load->view('menu',$data);
+			}else{
+				$data = array(
+					'contenido' => 'menuinicio2',
+					'incidentes'=>$this->incidencia->getListartablaUsuarioNormal($this->session->userdata('idusuario')),
+					'incidencia_fuente' => $this->incidencia->getlistarfuenteincidencia(),
+					'incidencia_estados' => $this->incidencia->getlistarestado(),
+					'incidencia_necesidades' => $this->incidencia->getlistarnecesidades(),
+					'incidencia_tecnicos' => $this->usuarios->getListarUsuariosSistemaTipo('TÉCNICO'),
+					'incidencia_localizacion' => $this->localizacion->getLocalizacion(),
+					'incidencias_categorias'  => $this->incidencia->getlistarcategorias()
+				);
+				$this->load->view('menu2',$data);
+			}
+		}else{
+			$this->load->view('login');
+		}
+
+	}
+
+	public function Planificaciones()
+	{
+		if ($this->session->userdata('login')==TRUE) {
+			$this->load->model('incidencia');
+			$this->load->model('localizacion');
+			$this->load->model('usuarios');
+			if ( $this->session->userdata('rol')!=0 ) {
+				$data = array(
+					'contenido' => 'incidencias/menuplanificaciones',
+					'incidencia_fuente' => $this->incidencia->getlistarfuenteincidencia(),
+					'incidencia_estados' => $this->incidencia->getlistarestado(),
+					'incidencia_necesidades' => $this->incidencia->getlistarnecesidades(),
+					'incidencia_tecnicos' => $this->usuarios->getListarUsuariosSistemaTipo('TÉCNICO'),
+					'incidencia_localizacion' => $this->localizacion->getLocalizacion(),
+					'incidencias_categorias'  => $this->incidencia->getlistarcategorias()
+				);
+				$this->load->view('menu',$data);
+			}else{
+				$data = array(
+					'contenido' => 'menuinicio2',
+					'incidentes'=>$this->incidencia->getListartablaUsuarioNormal($this->session->userdata('idusuario')),
+					'incidencia_fuente' => $this->incidencia->getlistarfuenteincidencia(),
+					'incidencia_estados' => $this->incidencia->getlistarestado(),
+					'incidencia_necesidades' => $this->incidencia->getlistarnecesidades(),
+					'incidencia_tecnicos' => $this->usuarios->getListarUsuariosSistemaTipo('TÉCNICO'),
+					'incidencia_localizacion' => $this->localizacion->getLocalizacion(),
+					'incidencias_categorias'  => $this->incidencia->getlistarcategorias()
+				);
+				$this->load->view('menu2',$data);
+			}
+		}else{
+			$this->load->view('login');
+		}
+
+	}
+
 
 }

@@ -16,6 +16,9 @@
   <!-- datepicker -->
   <link rel="stylesheet" type="text/css" href="<?=base_url('plantilla/plugins/datepicker/bootstrap-datepicker.min.css')?>">
   <link rel="stylesheet" type="text/css" href="<?=base_url('plantilla/plugins/daterangepicker/daterangepicker.css')?>">
+  <!-- fullCalendar 2.2.5-->
+  <link rel="stylesheet" type="text/css" href="<?=base_url('plantilla/plugins/fullcalendar/fullcalendar.min.css')?>">
+  <link rel="stylesheet" type="text/css" href="<?=base_url('plantilla/plugins/fullcalendar/fullcalendar.print.css')?>" media="print">
    <!-- Select2 -->
   <link rel="stylesheet" type="text/css" href="<?=base_url('plantilla/plugins/select2/select2.css')?>">
   <!-- Datatables -->
@@ -42,6 +45,8 @@
   <script src="<?=base_url('plantilla/plugins/datepicker/bootstrap-datepicker.min.js')?>"></script>
   <script src="<?=base_url('plantilla/plugins/daterangepicker/moment.js')?>"></script>
   <script src="<?=base_url('plantilla/plugins/daterangepicker/daterangepicker.js')?>"></script>
+  <!-- FullCalendar -->
+  <script src="<?=base_url('plantilla/plugins/fullcalendar/fullcalendar.js')?>"></script>
   <!--Alertas-->
   <script src="<?=base_url('plantilla/plugins/sweetalert/sweetalert.min.js')?>"></script>
   <script src="<?=base_url('plantilla/plugins/alertifyjs/alertify.js')?>"></script>
@@ -220,9 +225,10 @@
           <ul class="treeview-menu">
             <li><a href="<?=base_url('menu/incidentes')?>">Incidentes</a></li>
             <li><a href="#">Problemas</a></li>
-            <li><a href="#">Cambios</a></li>
-            <li><a href="#">Estadísticas</a></li>
             <li><a href="#">Incidentes recurrentes</a></li>
+            <li><a href="<?=base_url('menu/Planificaciones')?>">Planificaciones</a></li>
+            <li><a href="#">Estadísticas</a></li>
+            <li><a href="#">Reportes</a></li>
           </ul>
         </li>
         <li class="treeview">
@@ -255,7 +261,7 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="#">Marcas y modelos de equipos</a></li>
-            <li><a href="#">Estados de Incidencias</a></li>
+            <li><a href="<?=base_url('menu/Estados_Incidencias')?>">Estados de Incidencias</a></li>
             <li><a href="#">Fuentes de ingresos de incidencias</a></li>
             <li><a href="<?=base_url('menu/respaldos')?>">Respaldos de BD</a></li>
           </ul>

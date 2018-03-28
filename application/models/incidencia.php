@@ -53,6 +53,17 @@ class incidencia extends CI_Model
 		}
   	}
 
+  	public function getlistarplanificaiones()
+	{
+	  	$result=$this->db->get('incidencias.v_listar_planificaciones');
+	  	if($result->num_rows()>0)
+  		{
+	  		return $result->result();
+		}else{
+	  		return null;
+  		}
+	}
+
 	public function setGuardarincidencia($data) // escribe bien.l.
 	{//pasa los mismos nombres que en el controlador solo estan demas a la comilla urgencia impacto prioridad 
 		$result = $this->db->query("SELECT incidencias.f_ingreso_incidencias(

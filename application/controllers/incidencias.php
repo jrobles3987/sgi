@@ -201,4 +201,29 @@ class Incidencias extends CI_Controller
 		}
 	}
 
+	public function ReDibujarTablaPlanificaciones()
+	{
+		if ($this->session->userdata('login')==TRUE) {
+			$this->load->model('incidencia');
+			$planificaciones = $this->incidencia->getlistarplanificaiones();
+			echo '<TABLE id="tablaplanificaciones" class="table table-striped table-bordered table-hover">';
+			echo '<THEAD>';
+			echo '<TR><TH>N°</TH><TH>Titulo</TH><TH>Fecha Apertura</TH><TH>Fecha Finalización</TH><TH>Localización</TH></TR>';
+			echo '</THEAD>';
+			echo '<TBODY>';
+			$num=0;
+			if($planificaciones){
+				foreach ($planificaciones as $fila) {					
+					$num++;
+					echo '<TR id="'.$fila->idplanificacion.'" onclick="Llama_modal_calificacion(this)"><TD>'.$num.'</TD><TD>'.$fila->titulo.'</TD><TD>'.$fila->fecha_apertura_real.'</TD><TD>'.$fila->fecha_finalizacion_real.'</TD>
+					<TD>'.$fila->nombrelocalizacion.'</TD></TR>'; 
+				}
+			}
+			echo '</TBODY>';		
+			echo '</TABLE>';
+		}else{
+			show_404();
+		}
+	}
+
 }
