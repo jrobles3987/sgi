@@ -15,6 +15,7 @@ class Menu extends CI_Controller
 		if ($this->session->userdata('login')==TRUE) {
 			$this->load->model('incidencia');
 			$this->load->model('usuarios');
+			$this->load->model('localizacion');
 			if ( $this->session->userdata('rol')!=0 ) {				
 				$data = array(
 					'contenido' => 'menuinicio',
@@ -23,7 +24,8 @@ class Menu extends CI_Controller
 					'incidencia_estados' => $this->incidencia->getlistarestado(),
 					'incidencia_necesidades' => $this->incidencia->getlistarnecesidades(),
 					'incidencia_tecnicos' => $this->usuarios->getListarUsuariosSistemaTipo('TÉCNICO'),
-					'incidencias_categorias'  => $this->incidencia->getlistarcategorias()
+					'incidencias_categorias'  => $this->incidencia->getlistarcategorias(),
+					'incidencia_localizacion' => $this->localizacion->getLocalizacion()
 				);
 				$this->load->view('menu',$data);
 			}else{
@@ -34,7 +36,8 @@ class Menu extends CI_Controller
 					'incidencia_estados' => $this->incidencia->getlistarestado(),
 					'incidencia_necesidades' => $this->incidencia->getlistarnecesidades(),
 					'incidencia_tecnicos' => $this->usuarios->getListarUsuariosSistemaTipo('TÉCNICO'),
-					'incidencias_categorias'  => $this->incidencia->getlistarcategorias()
+					'incidencias_categorias'  => $this->incidencia->getlistarcategorias(),
+					'incidencia_localizacion' => $this->localizacion->getLocalizacion()
 				);
 				$this->load->view('menu2',$data);
 			}
@@ -50,7 +53,8 @@ class Menu extends CI_Controller
 				$this->load->model('tiposbienes');
 				$this->load->model('marcas');
 				$this->load->model('incidencia');
-				$this->load->model('usuarios');		
+				$this->load->model('usuarios');
+				$this->load->model('localizacion');
 				$data = array(
 					'contenido' => 'equipos/menuingresoequipos',
 					'incidencia_fuente' => $this->incidencia->getlistarfuenteincidencia(),
@@ -59,7 +63,8 @@ class Menu extends CI_Controller
 					'incidencia_tecnicos' => $this->usuarios->getListarUsuariosSistemaTipo('TÉCNICO'),
 					'incidencias_categorias'  => $this->incidencia->getlistarcategorias(),
 					'tiposbienes' => $this->tiposbienes->getListarTiposBienesEquipos(),
-					'marcas' => $this->marcas->getListarMarcas()
+					'marcas' => $this->marcas->getListarMarcas(),
+					'incidencia_localizacion' => $this->localizacion->getLocalizacion()
 				);
 				$this->load->view('menu',$data);
 			}else{
