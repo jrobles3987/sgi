@@ -262,7 +262,6 @@
             <li><a href="#">Marcas y modelos de equipos</a></li>
             <li><a href="<?=base_url('menu/Estados_Incidencias')?>">Estados de Incidencias</a></li>
             <li><a href="#">Fuentes de ingresos de incidencias</a></li>
-            <li><a href="<?=base_url('menu/respaldos')?>">Respaldos de BD</a></li>
           </ul>
         </li>
       </ul>
