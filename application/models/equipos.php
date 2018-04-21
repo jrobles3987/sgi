@@ -8,18 +8,17 @@ class Equipos extends CI_Model
 	public function setIngresarEquipos($data)
 	{
 		$result = $this->db->query("SELECT incidencias.f_ingreso_equipos(
-										'".$data['nombreequipo']."',
-										".$data['idmarca'].", 
-										".$data['idmodelo'].", 
 										".$data['idtipobien'].", 
 										".$data['idfamiliabien'].",
 										".$data['idsubfamiliabien'].",
-										'".$data['fechaingreso']."',
-										'".$data['descripcion']."',
-										'".$data['codigoequipo']."',
-										'".$data['codigoinventario']."',
-										".$data['idlugarequipo'].",
-										'1'
+										'".$data['fechacompra']."',
+										".$data['valorcompra'].",
+										'".$data['garantia']."',
+										'".$data['vidautil']."',
+										".$data['idpersonacustodio'].",
+										'".$data['codinventario']."',
+										'".$data['codequipo']."',
+										'".$data['descripcion']."'
 									);");
 		if($result->num_rows() > 0 ){
 			return $result->row();

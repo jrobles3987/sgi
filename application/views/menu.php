@@ -18,9 +18,7 @@
   <link rel="stylesheet" type="text/css" href="<?=base_url('plantilla/plugins/daterangepicker/daterangepicker.css')?>">
   <!-- fullCalendar 2.2.5-->
   <link rel="stylesheet" type="text/css" href="<?=base_url('plantilla/plugins/fullcalendar/fullcalendar.min.css')?>">
-  <link rel="stylesheet" type="text/css" href="<?=base_url('plantilla/plugins/fullcalendar/fullcalendar.print.css')?>" media="print">
-   <!-- Select2 -->
-  <link rel="stylesheet" type="text/css" href="<?=base_url('plantilla/plugins/select2/select2.css')?>">
+  <link rel="stylesheet" type="text/css" href="<?=base_url('plantilla/plugins/fullcalendar/fullcalendar.print.css')?>" media="print">  
   <!-- Datatables -->
   <link rel="stylesheet" type="text/css" href="<?=base_url('plantilla/plugins/datatables/DataTables-1.10.16/css/dataTables.bootstrap.min.css')?>">
   <link rel="stylesheet" type="text/css" href="<?=base_url('plantilla/plugins/datatables/Responsive-2.2.1/css/responsive.bootstrap.min.css')?>">
@@ -30,11 +28,12 @@
   <link rel="stylesheet" type="text/css" href="<?=base_url('plantilla/plugins/sweetalert/sweetalert.css')?>">
   <link rel="stylesheet" type="text/css" href="<?=base_url('plantilla/plugins/alertifyjs/css/alertify.css')?>">
   <link rel="stylesheet" type="text/css" href="<?=base_url('plantilla/plugins/toastr/toastr.css')?>">
+  <!-- Select2 -->
+  <link rel="stylesheet" type="text/css" href="<?=base_url('plantilla/plugins/select2/css/select2.css')?>">
   <!-- Theme style -->
   <link rel="stylesheet" type="text/css" href="<?=base_url('plantilla/dist/css/styles.css')?>">
   <link rel="stylesheet" type="text/css" href="<?=base_url('plantilla/dist/css/SGI.css')?>">
   <link rel="stylesheet" type="text/css" href="<?=base_url('plantilla/dist/css/skins/skin-blue.css')?>">
-  
 
   <!-- REQUIRED JS SCRIPTS -->
   <!-- jQuery 2.2.3 -->
@@ -52,7 +51,7 @@
   <script src="<?=base_url('plantilla/plugins/alertifyjs/alertify.js')?>"></script>
   <script src="<?=base_url('plantilla/plugins/toastr/toastr.js')?>"></script>
   <!-- Select2 -->
-  <script src="<?=base_url('plantilla/plugins/select2/select2.full.js')?>"></script>
+  <script src="<?=base_url('plantilla/plugins/select2/js/select2.full.js')?>"></script>
   <!-- AdminLTE App -->
   <script src="<?=base_url('plantilla/dist/js/app.min.js')?>"></script>
   <script src="<?=base_url('plantilla/dist/js/menu.js')?>"></script>

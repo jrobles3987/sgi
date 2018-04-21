@@ -1,81 +1,4 @@
 <div class="row container col-lg-12 col-center">
-	<!-- Formulario de creacion de Marcas -->	
-	<div class="pnatallabloqueado" id="formcrearmarcas">
-		<div class="ventana_adicional">	
-			<div style="margin:20px"></div>
-			<div class="panel panel-default panel-fade col-md-10 col-center" style="font-weight: bold">
-				<div class="row" >
-					<div class="col-md-7">
-						<p>Crear Marcas de Equipos</p>
-					</div>
-				</div>
-			</div>
-			<div class="panel panel-default panel-fade col-md-10 col-center">
-				<div style="margin:10px"></div>
-		        <div class="row" >
-			      	<div class="col-xs-6 col-md-8 col-center">
-			        	<span>Nombre de la Marca</span>
-			        	<input id="inp-CMnombredemarca" type="text" class="form-control input-md">
-					</div>
-			    </div>
-			    <div style="margin:20px"></div>
-			    <div class="row" >
-				      	<div class="col-md-6" id="btn-CMguardar">
-	                        <p>
-	                            <a class="btn btn-primary btn-block">Guardar Datos</a>
-	                        </p>
-	                    </div>
-	                    <div class="col-md-6" id="btn-CMcancelar">
-	                        <p>
-	                            <a class="btn btn-danger btn-block">Cancelar</a>
-	                        </p>
-	                    </div>
-			    </div>
-			</div>
-		</div>
-	</div>
-	<!-- Formulario de creacion de Modelos -->
-	<div class="pnatallabloqueado" id="formcrearmodelos">
-		<div class="ventana_adicional">	
-			<div style="margin:20px"></div>
-			<div class="panel panel-default panel-fade col-md-10 col-center" style="font-weight: bold">
-				<div class="row" >
-					<div class="col-md-7">
-						<p>Crear Modelos de Equipos</p>
-					</div>
-				</div>
-			</div>
-			<div class="panel panel-default panel-fade col-md-10 col-center">
-				<div style="margin:10px"></div>
-		        <div class="row" >
-			      	<div class="col-xs-6 col-md-8 col-center">
-			        	<span>Nombre del Modelo</span>
-			        	<input id="inp-CMonombredemodelo" type="text" class="form-control input-md">
-			      	</div>
-			    </div>
-			    <div style="margin:20px"></div>
-			    <div class="row" >
-				      	<div class="col-md-6" id="btn-CMoguardar">
-	                        <p>
-	                            <a class="btn btn-primary btn-block">Guardar Datos</a>
-	                        </p>
-	                    </div>
-	                    <div class="col-md-6" id="btn-CMocancelar">
-	                        <p>
-	                            <a class="btn btn-danger btn-block">Cancelar</a>
-	                        </p>
-	                    </div>
-			    </div>						   						   
-			</div>
-		</div>
-	</div>
-	<!-- Formulario de guardando -->
-	<div class="loading_iniciosesion" id="div_loading" style="display: none">
-        <div class="loading_background">
-            <img class="img_loading" src="<?=base_url('plantilla/dist/img/loading.gif') ?>"/>
-            <p class="txt_loading">Guardando Datos espere...</p>
-        </div>            
-    </div>
     <!-- Formulario de creacion de Equipos -->
 	<div class="col-md-12">
 		<div class="panel panel-default panel-fade">
@@ -89,15 +12,14 @@
 					<div class="clearfix"></div>
 				</span>
 			</div>
-
 			<div class="panel-body">
 				<div class="panel panel-default panel-fade col-md-10 col-center">
 			        <div style="margin: 10px">
 				        <div class="row" >
 					      	<div class="col-xs-4 col-md-6">
 					      		<span>*Tipo de Equipo</span>
-					        	<select id="selecttipoequipo" class="form-control" autofocus>
-							      	<option value="0">Seleccione el Tipo de Equipo...</option>
+					        	<select id="selecttipoequipo" class="form-control requerido2">
+					        		<option value="0">Seleccione el Tipo de Equipo</option>
 							      	<?php
 							      		foreach ($tiposbienes as $i) {
 							      			echo '<option value="'.$i->idtipobien.'">'.$i->nombretipobien.'</option>';
@@ -107,7 +29,7 @@
 					      	</div>
 					      	<div class="col-xs-4 col-md-6">
 					        	<span>*Codigo Equipo</span>
-					        	<input id="codequipo" type="text" class="form-control input-md" title="Codigo del equipo por defecto">
+					        	<input id="codequipo" type="text" class="form-control input-md requerido2" title="Codigo del equipo por defecto">
 					      	</div>
 					    </div>
 					    <div class="row" >
@@ -118,7 +40,7 @@
 					      	</div>
 					      	<div class="col-xs-4 col-md-6">
 					        	<span>*Serial de Inventario</span>
-					        	<input id="codequipoinventario" type="text" class="form-control input-md" title="Codigo del equipo asignado en Bodega">
+					        	<input id="codequipoinventario" type="text" class="form-control input-md requerido2" title="Codigo del equipo asignado en Bodega">
 					      	</div>
 					    </div>
 						
@@ -130,9 +52,9 @@
 					      	</div>
 					      	<div class="col-xs-4 col-md-6">
 					            <div class="form-group">
-					            	<span>*Fecha de Ingreso del Equipo</span>
+					            	<span>*Fecha de Compra del Equipo</span>
 					                <div class="input-group date">
-					                    <input type="text" class="form-control" id="fechaingreso" readonly="readonly">
+					                    <input type="text" class="form-control requerido2" id="fechacompra" readonly="readonly">
 					                    <span class="input-group-addon">
 					                        <span class="glyphicon glyphicon-calendar"></span>
 					                    </span>
@@ -140,88 +62,60 @@
 					            </div>
 					        </div>
 					    </div>
-
+					    <div class="row">
+					    	<div class="col-xs-4 col-md-12">
+					    		<span>*Nombre del Equipo</span>
+						    	<input id="nombreequipo" type="text" class="form-control input-md requerido2" title="Nombre del equipo">
+							</div>
+					    </div>
 						<div class="row" >
-							<div class="col-xs-4 col-md-6">
-						<span>*Precio Compra</span>
-					    <input id="codequipo" type="text" class="form-control input-md" title="Codigo del equipo por defecto">
-							</div>
-						
-							<div class="col-xs-4 col-md-6">
-						<span>*Vida util</span>
-					    <input id="codequipo" type="text" class="form-control input-md" title="Codigo del equipo por defecto">
-							</div>
-						</div>
+							<div class="col-xs-4 col-md-4">
+								<span>Precio Compra</span>
+							    <input id="preciocompra" type="text" class="form-control input-md" title="Codigo del equipo por defecto">
+							</div>						
+							<div class="col-xs-4 col-md-4">
+								<span>Vida util</span>
+							    <input id="vidautil" type="text" class="form-control input-md" title="Codigo del equipo por defecto">
+							</div>					
 					
-						<div class="row" >
-						<div class="col-xs-4 col-md-6">
-						<span>*Garantia</span>
-					    <input id="codequipo" type="text" class="form-control input-md" title="Codigo del equipo por defecto">
+							<div class="col-xs-4 col-md-4">
+								<span>Garantia</span>
+							    <input id="garantia" type="text" class="form-control input-md" title="Codigo del equipo por defecto">
 							</div>
 						</div>
-
 					    <div class="row" >
-					    	<div class="col-xs-6 col-md-12">
-					      		<span>*Localización</span>
-					        	<select id="selectlocalizacion" class="form-control">
-					        		<option value="0">Seleccione la localización del Equipo...</option>
-					        		<option value="1">Bodega</option>
-					        		<option value="2">Departamento de Rectorado</option>
-					        		<option value="3">Facultad de Ciencias Informáticas</option>
-					        		<option value="4">Facultad de Ciencias Administrativas y económicas</option>
+					    	<div class="col-xs-4 col-md-9">
+					      		<span>*Localizacion2</span>
+					        	<select id="selectlocalizacion2" class="form-control requerido2">
+					        		<option value="0">Seleccione la Localización del Equipo</option>
+							      	<?php
+		                                foreach ($incidencia_localizacion as $j) {
+		                                    echo '<option value="'.$j->idlocalizacion.'">'.$j->nombrelocalizacion.'</option>';
+		                                }
+		                            ?>
 							    </select>
 					      	</div>
 					    </div>
-				    </div>
-	          	</div>
-	          	<div style="margin:5px"></div>
-	          	<div class="panel panel-default panel-fade col-md-10 col-center" style="display:none;">	          
-			        <div style="margin: 10px">
-				        <div class="row">
-					      	<div class="col-xs-4 col-md-6">
-					      		<span>Marca de Equipos</span>
-					        	<div>
-					        		<div class="col-md-10">
-							        	<select id="selectmarca" class="form-control">
-									      	<option value="0">Seleccione la Marca del Equipo...</option>
-									      	<?php
-									      		foreach ($marcas as $m) {
-									      			echo '<option value="'.$m->idmarca.'">'.$m->nombremarca.'</option>';
-									      		}							      		
-									      	?>
-									    </select>
-									</div>
-								    <div class="col-md-2" id="btn-creamarcas" title="Agregar nuevas marcas de equipos">
-				                        <p>
-				                            <a class="btn btn-info">+</a>
-				                        </p>
-				                    </div>
-				                </div>
-					      	</div>
-					      	<div class="col-xs-4 col-md-6">
-					        	<span>Modelos de Equipos</span>
-					        	<div>
-					        		<div class="col-md-10">
-							        	<select id="selectmodelo" class="form-control" disabled="true">
-									    </select>
-									</div>
-								    <div class="col-md-2" id="btn-creamodelos" title="Agregar nuevos modelos de equipos" style="display: none">
-				                        <p>
-				                            <a class="btn btn-info">+</a>
-				                        </p>
-				                    </div>
-				                </div>
-					      	</div>
+					    <div class="row">
+					    	<input id="idcustodio" type="text" style="display: none;">
+					    	<div class="col-xs-4 col-md-4">
+					    		<span>Cédula del Custodio del Equipo</span>
+						    	<input id="cedulacustodio" type="text" class="form-control input-md" title="Nombre del equipo">
+							</div>
+							<div class="col-xs-4 col-md-8">
+					    		<span>Nombre del Custodio</span>
+						    	<input id="nombrecustodio" type="text" class="form-control input-md" title="Nombre del equipo" readonly="readonly">
+							</div>
 					    </div>
 					    <div class="row">
 					      	<div class="col-xs-4 col-md-12">
 					      		<span>Descripción</span>
-					        	<textarea class="form-control" id="txtareadescripcion" rows="3" style="resize: none;"></textarea>
+					        	<textarea class="form-control" id="descripcion" rows="3" style="resize: none;"></textarea>
 					      	</div>
-					    </div>						   
+					    </div>
 				    </div>
 	          	</div>
-	          	<div style="margin:5px"></div>
+	          	<div style="margin:5px"></div>	          	
 	          	<div class="row">
                     <div class="col-md-8"></div>
                     <div class="col-md-3" id="btn-guardar-equipo">
@@ -234,95 +128,82 @@
 		</div>
 	</div>
 </div>
-<script src="<?=base_url('plantilla/dist/js/menuingresoactivos.js');?>"></script>
+<script src="<?=base_url('plantilla/dist/js/datepicker.js');?>"></script>
 <script>
 	$(document).ready(function() {
-		
+		/*$("#selectequipo").select2({
+		    placeholder: "Seleccione la Familia del Equipo"
+		});
+		$("#selectsubequipo").select2({
+		    placeholder: "Seleccione la SubFamilia del Equipo"
+		});
+		$("#selectlocalizacion2").select2({
+		    placeholder: "Seleccione la SubFamilia del Equipo"
+		});*/
 		//variables del formulario
 		var dataform
 
+		function msj_alerta() {
+			toastr.info("Debe llenar todos los campos obligatorios del formulario","Atención",{
+				"timeOut": "5000",
+				"extendedTImeout": "5000",
+				"closeButton": true,
+				"positionClass": "toast-bottom-left"
+			});
+		}
+
 		//// Funcion valodar formulario
-		function validar_formulario(){
+		function validacion_formulario(){
 			
-			var retorno;
+			var retorno = true;
 			var numtipobien = document.getElementById("selecttipoequipo").length;
 			var numfamiliabien = document.getElementById("selectequipo").length;
 			var numsubfamiliabien = document.getElementById("selectsubequipo").length;
 			
 			dataform = {
-				nombreequipo: $('#selecttipoequipo option:selected').html(),
-				idmarca: $('#selectmarca').val(),
-				idmodelo: $('#selectmodelo').val(),
 				idtipobien: $('#selecttipoequipo').val(),
 				idfamiliabien: $('#selectequipo').val(),
-				idsubfamiliabien: $('#selectsubequipo').val(),
-				fechaingreso: $('#fechaingreso').val(),
-				descripcion: $('#txtareadescripcion').val(),
+				idsubfamiliabien: $('#selectsubequipo').val(),				
 				codigoequipo: $('#codequipo').val(),
 				codigoinventario: $('#codequipoinventario').val(),
-				idlugarequipo: $('#selectlocalizacion').val()
+				fechacompra: $('#fechacompra').val(),
+				nombreequipo: $('#nombreequipo').val(),
+				preciocompra: $('#preciocompra').val(),				
+				vidautil: $('#vidautil').val(),
+				garantia: $('#garantia').val(),
+				idcustodio: $('#idcustodio').val(),
+				idlocalizacion: $('#selectlocalizacion2').val(),
+				descripcion: $('#descripcion').val()
 			}
 
-			if ( dataform["idmarca"]==0 || !dataform["idmarca"]) {
-				dataform["idmarca"] = "null";
-			}
+			retorno = Validar_Formularios2();			
 
-			if ( dataform["idmodelo"]==0 || !dataform["idmodelo"]) {
-				dataform["idmodelo"] = "null";
-			}
-
-			if ( dataform["descripcion"]=="" || !dataform["descripcion"]) {
-				dataform["descripcion"] = "null";
-			}
-
-			if ( numtipobien > 1 && dataform["idtipobien"] != 0 ) {
-				if (numfamiliabien > 1) {
-					if ( dataform["idfamiliabien"] != 0 ) {
-						if (numsubfamiliabien > 1) {
-							if ( dataform["idsubfamiliabien"] != 0 ) {
-								dataform["nombreequipo"] = $('#selectsubequipo option:selected').html();
-								retorno = true;
-							}else{
-								retorno = false;
-							}
-						}else{
-							dataform["idsubfamiliabien"] = "null";
-							dataform["nombreequipo"] = $('#selectequipo option:selected').html();
-							retorno = true;
-						}
-					}else{
-						retorno = false;					
-					}
-				}else{
-					dataform["idfamiliabien"] = "null";
-					dataform["idsubfamiliabien"] = "null";
-					dataform["nombreequipo"] = $('#selecttipoequipo option:selected').html();
-					retorno = true;
-				}
-			}else{
-				retorno = false;
-			}
-			
-			if (retorno) {
-				if ( dataform["codigoequipo"] != "" ) {
-					if ( dataform["codigoinventario"] != "" ) {
-						if ( dataform["fechaingreso"] != "" ) {
-							if ( dataform["idlugarequipo"] != 0 ) {
-								retorno = true;
-							}else{
-								retorno = false;
-							}
+			if (numfamiliabien > 1) {
+				$('#selectequipo').css({'box-shadow':'none'});
+				$('#selectequipo').css({'border-color':'#d2d6de'});
+				$('#selectsubequipo').css({'box-shadow':'none'});
+				$('#selectsubequipo').css({'border-color':'#d2d6de'});
+				if ( dataform["idfamiliabien"] != 0 ) {
+					if (numsubfamiliabien > 1) {
+						if ( dataform["idsubfamiliabien"] != 0 ) {
+							$('#selectsubequipo').css({'box-shadow':'none'});
+							$('#selectsubequipo').css({'border-color':'#d2d6de'});
 						}else{
 							retorno = false;
+							$("#selectsubequipo").css({'border':'1px solid red'});
+							msj_alerta();
 						}
 					}else{
-						retorno = false;
+						$('#selectequipo').css({'box-shadow':'none'});
+						$('#selectequipo').css({'border-color':'#d2d6de'});
 					}
 				}else{
-					retorno = false;
+					retorno = false;					
+					$("#selectequipo").css({'border':'1px solid red'});
+					msj_alerta();					
 				}
 			}
-
+			
 			return retorno;
 		}
 
@@ -363,128 +244,53 @@
 					}
 				});
 			});
-		});
-
-		///// COMBO MARCA
-		$('#selectmarca').change(function(){
-			$('#selectmarca option:selected').each(function(){
-				idmarca= $('#selectmarca').val();
-				$.post("<?php echo base_url('marcasequipos/ListarEquiposModelos');?>", {
-					idMarcaseleccionada: idmarca
-				}, function(data){
-					$("#selectmodelo").html(data);
-					if(document.getElementById("selectmodelo").length>1){
-						document.getElementById("selectmodelo").disabled=false;
-						$("#btn-creamodelos").css('display','inline');
-					}else{
-						if (idmarca!=0) {
-							$("#selectmodelo").html('<option value="0"></option>');
-							document.getElementById("selectmodelo").disabled=true;
-							$("#btn-creamodelos").css('display','inline');
-						}else{
-							$("#selectmodelo").html('<option value="0"></option>');
-							document.getElementById("selectmodelo").disabled=true;
-							$("#btn-creamodelos").css('display','none');
-						}
-					}				
-				});
-				//$("#txtareadescripcion").val($("#txtareadescripcion").val()+' fb.idfamiliabien <> '+idfamiliabien+' and \n');
-			});
-		});
-
-		//ABRIR FORMULARIO DE MARCAS
-		$('#btn-creamarcas').click(function() {
-			$('#formcrearmarcas').toggle('slow');
-		});
-		$('#btn-CMcancelar').click(function() {
-			$('#formcrearmarcas').css('display','none');
-		});	
-
-		//ABRIR FORMULARIO DE MODELOS
-		$('#btn-creamodelos').click(function() {
-			$('#formcrearmodelos').toggle('slow');
-			$('#inp-CMnombredemodelo').val('');
-		});
-		$('#btn-CMocancelar').click(function() {
-			$('#formcrearmodelos').css('display','none');
-		});
-		
-		//GUARDAR MARCAS NUEVAS
-		$('#btn-CMguardar').click(function() {
-			var nombremarca = $('#inp-CMnombredemarca').val();
-			$('#div_loading').css('display','inline');
-			$.ajax({
-	            type: "POST",
-	            url: "<?php echo base_url('marcasequipos/GuardarEquiposMarcas');?>",
-	            data: {NombreMarca: nombremarca},
-	            success: function (data) {
-	                var json = JSON.parse(data);
-	                $('#div_loading').css('display','none');
-	                if (json.res == "t") {
-	                	$('#inp-CMnombredemarca').val("");
-	                    $('#formcrearmarcas').css('display','none');
-	                    sweetAlert("", "Datos guardados!", "success");
-	                }else{
-	                    if (json.res == "error"){
-	                		swal("","El nombre de la Marca esta vacio","info");
-	                	}else{
-	                		swal("","Ocurrio un error al guardar!","error");
-	                	}
-	                }
-	            	$.post("<?php echo base_url('marcasequipos/ListarEquiposMarcas');?>"
-					, function(data){
-						$("#selectmarca").html(data);
-					});
-	            },
-	            error: function (xhr, exception) {
-	            }
-		    });		
-		});
-		
-		//GUARDAR MODELOS NUEVOS
-		$('#btn-CMoguardar').click(function() {
-			var idmarca = $('#selectmarca').val();
-			var nombremodelo = $('#inp-CMonombredemodelo').val();
-			$('#div_loading').css('display','inline');
-			$.ajax({
-	            type: "POST",
-	            url: "<?php echo base_url('marcasequipos/GuardarEquiposModelos');?>",
-	            data: {IdMarca: idmarca, NombreModelo: nombremodelo},
-	            success: function (data) {
-	                var json = JSON.parse(data);
-	                $('#div_loading').css('display','none');
-	                if (json.res == "t") {
-	                	$('#inp-CMonombredemodelo').val("");
-	                    $('#formcrearmodelos').css('display','none');
-	                    sweetAlert("", "Datos guardados!", "success");
-	                }else{
-	                	if (json.res == "error"){
-	                		swal("","El nombre del Modelo esta vacio","info");
-	                	}else{
-	                		swal("","Ocurrio un error al guardar!","error");
-	                	}                    
-	                }            	
-	            	$.post("<?php echo base_url('marcasequipos/ListarEquiposModelos');?>", {
-						idMarcaseleccionada: idmarca
-					}, function(data){
-						document.getElementById("selectmodelo").disabled=false;
-						$("#selectmodelo").html(data);
-					});
-	            },
-	            error: function (xhr, exception) {
-	            }
-		    });
 		});			
+
+		//BUSCA CUSTODIO
+		$('#cedulacustodio').keypress(function(e) {
+		    var keycode = (document.all) ? e.keyCode : e.which;
+		    if (keycode == 13) {
+		    	$('#nombrecustodio').val("");
+			    $('#idcustodio').val("");
+		        var cedula = $('#cedulacustodio').val();
+		        if (cedula != ''){		        	
+		        	$('#div_loading_cargando').css('display','inline');					
+            		$.ajax({
+			            type: "POST",
+			            url: "<?php echo base_url('usuario/BuscarPersonal');?>",
+			            data: {cedula: cedula},
+			            success: function (data2) {						            	
+			            	if (data2!='null'){
+			                	var json = JSON.parse(data2);	
+			                }else{
+			                	var json = null;
+			                }						                
+			                if (json) {
+			                	$('#nombrecustodio').val(json[0].apellido1+" "+json[0].apellido2+" "+json[0].nombres);
+			                	$('#idcustodio').val(json[0].idpersonal);
+			                }else{
+			                	swal("","No se pudo encontrar al personal con el número de cédula introducido","error");
+			                }
+			            },
+			            complete : function(xhr, status) {
+		                	$('#div_loading_cargando').css('display','none');
+		            	},			            
+			            error: function (xhr, exception) {
+			            }
+			        });			            	
+			    }    
+		    }
+		});
 
 		//GUARDAR EQUIPOS
 		$('#btn-guardar-equipo').click(function() {
-			if(validar_formulario()){										
+			if(validacion_formulario()){										
 				$('#div_loading').css('display','inline');
 				$.ajax({
 		            type: "POST",
 		            url: "<?php echo base_url('equipo/GuardarEquipos');?>",
 		            data: dataform,
-		            success: function (data) {	            	
+		            success: function (data) {
 		                var json = JSON.parse(data);
 		                $('#div_loading').css('display','none');
 		                if (json.res=="t") {
@@ -512,8 +318,7 @@
 		            error: function (xhr, exception) {
 		            }
 		        });
-			}else{
-				swal("","Debe llenar los campos que son obligatorios","info");
+		        alert('aqui');
 			}
 		});
 	});
