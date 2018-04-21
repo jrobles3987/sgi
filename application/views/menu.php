@@ -313,6 +313,7 @@
   var va = '';
   Notificaciones();
   socket.on('connected', function (data) {
+    
       socket.emit('ready for data', {});
   });
     
