@@ -1,9 +1,14 @@
+
+<?php include("vplani.php");?>
+
 <div class="row container col-lg-12 col-center">
 	<div class="panel panel-default panel-fade">
 		<div class="panel-heading">
 			<span class="panel-title">				
 				<div class="pull-right">
-					<p><a  href="#" class="btn btn-primary btn-block" id="btn_estados_Nuevos">Nuevas Planificaciones</a></p>                           
+					<p>
+          <a  href="#" class="btn btn-primary btn-block" id="btn_incidencias_Nuevas">Nuevas Incidencias</a>
+          </p>                           
 				</div>
 				<div class="clearfix"></div>
 			</span>			
@@ -31,6 +36,26 @@
 		</div>
 	</div>
 </div>
+<script>
+
+  function LimpiarModalIngresoIncidencias () {
+    $('#txttituloincidencia2').val('');
+    $('#selectestado2').val(1);
+    $('#selecturgencia2').val(1);
+    $('#selectimpacto2').val(1);
+    $('#selectprioridad2').val(1);
+    $('#selectecnico2').val(0);
+    $('#selectfuenteincidencia2').val(1);
+    $('#selectlocalizacion2').val(0);
+    $('#selectcategoria2').val(0);
+    $('#txtareadescripcion2').val('');
+  }
+
+  $('#btn_incidencias_Nuevas').click(function() {
+    LimpiarModalIngresoIncidencias();
+    $('#vplani').modal({show:true});
+  });
+</script>
 
 <script>
 

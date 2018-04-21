@@ -131,7 +131,8 @@ class Menu extends CI_Controller
 					'incidencia_estados' => $this->incidencia->getlistarestado(),
 					'incidencia_necesidades' => $this->incidencia->getlistarnecesidades(),
 					'incidencia_tecnicos' => $this->usuarios->getListarUsuariosSistemaTipo('TÉCNICO'),
-					'incidencias_categorias'  => $this->incidencia->getlistarcategorias()
+					'incidencias_categorias'  => $this->incidencia->getlistarcategorias(),
+					'tecnicos'  => $this->incidencia->getlistarpersonal()
 				);
 				$this->load->view('menu',$data);
 			}else{
@@ -306,7 +307,8 @@ class Menu extends CI_Controller
 					'incidencia_necesidades' => $this->incidencia->getlistarnecesidades(),
 					'incidencia_tecnicos' => $this->usuarios->getListarUsuariosSistemaTipo('TÉCNICO'),
 					'incidencia_localizacion' => $this->localizacion->getLocalizacion(),
-					'incidencias_categorias'  => $this->incidencia->getlistarcategorias()
+					'incidencias_categorias'  => $this->incidencia->getlistarcategorias(),
+					'tecnicos'  => $this->incidencia->getlistarpersonal()
 				);
 				$this->load->view('menu',$data);
 			}else{
@@ -343,6 +345,7 @@ class Menu extends CI_Controller
 					'incidencia_tecnicos' => $this->usuarios->getListarUsuariosSistemaTipo('TÉCNICO'),
 					'incidencia_localizacion' => $this->localizacion->getLocalizacion(),
 					'incidencias_categorias'  => $this->incidencia->getlistarcategorias()
+
 				);
 				$this->load->view('menu',$data);
 			}else{

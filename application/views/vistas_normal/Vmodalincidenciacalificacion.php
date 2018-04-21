@@ -43,7 +43,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h5 class="modal-title" id="exampleModalLabel" align="left"><B> Calificación de Incidencias</B></h5>
+        <h5 class="modal-title" id="exampleModalLabel" align="left"><B> Creacion de nuevas Incidencias</B></h5>
       </div>
       <div class="modal-body">
       <div class="panel panel-default panel-fade col-md-11 col-center"> 

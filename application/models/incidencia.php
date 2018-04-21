@@ -257,4 +257,17 @@ class incidencia extends CI_Model
 	  	}
 	}
 
+
+		public function getlistarpersonal()
+  	{
+		$this->db->order_by('nombres','DESC');
+		$result = $this->db->query("SELECT idpersonal, nombres FROM incidencias.v_listar_usuariospersonal where rol like '%TÉCNICO%';");
+		if ($result->num_rows()>0)
+	  	{
+			return $result->row();
+	  	}else {
+		  	return null;
+	  	}
+  	}
+
 }

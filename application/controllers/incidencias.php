@@ -226,4 +226,16 @@ class Incidencias extends CI_Controller
 		}
 	}
 
+public function mostartecnicos()
+	{
+		if ($this->session->userdata('login')==TRUE) {
+			$this->load->model('incidencia');
+			$tecnicoasignado= $this->incidencia->getlistarpersonal();					
+			echo json_encode($tecnicoasignado);
+		}else{
+			show_404();
+		}
+	}
+
+
 }
