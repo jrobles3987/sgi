@@ -223,7 +223,7 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="<?=base_url('menu/incidentes')?>">Incidentes</a></li>
-            <li><a href="#">Problemas</a></li>
+            <li><a href="<?=base_url('menu/planificacion')?>">Problemas</a></li>
             <li><a href="#">Incidentes recurrentes</a></li>
             <li><a href="<?=base_url('menu/Planificaciones')?>">Planificaciones</a></li>
             <li><a href="#">Estadísticas</a></li>
@@ -289,6 +289,7 @@
 
 </html>
 <script src="<?=base_url('plantilla/plugins/socket/socket.io-1.2.0.js')?>"></script>
+<<<<<<< HEAD
 <script>
   $(function () {
     if(localStorage.expandedMenu==0) {
@@ -421,3 +422,5 @@
     $('#vmodalincidencia').modal({show:true});
   }
 </script>
+=======
+>>>>>>> 1174c84aa8d49fd46a58211f1464600e7cfac8c4
