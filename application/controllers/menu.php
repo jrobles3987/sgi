@@ -443,6 +443,28 @@ class Menu extends CI_Controller
 					'tecnicos'  => $this->incidencia->getlistarpersonal(),
 					'lista_equipos' => $this->equipos->getListarEquipos()
 
+<<<<<<< HEAD
+=======
+	public function marca_equipos()
+	{
+		if ($this->session->userdata('login')==TRUE) {
+			$this->load->model('incidencia');
+			$this->load->model('localizacion');
+			$this->load->model('usuarios');
+			if ( $this->session->userdata('rol')!=0 ) {
+				$data = array(
+					'contenido' => 'configuracion/menumarcaequipos',
+					'usuarios'=>$this->usuarios->getUsuariosSistema(),
+					'incidencia_fuente' => $this->incidencia->getlistarfuenteincidencia(),
+					'incidencia_estados' => $this->incidencia->getlistarestado(),
+					'incidencia_necesidades' => $this->incidencia->getlistarnecesidades(),
+					'incidencia_tecnicos' => $this->usuarios->getListarUsuariosSistemaTipo('TÉCNICO'),
+					'incidencia_localizacion' => $this->localizacion->getLocalizacion(),
+					'incidencias_categorias'  => $this->incidencia->getlistarcategorias(),
+					'tecnicos'  => $this->incidencia->getlistarpersonal(),
+					'listar_marcas'  => $this->incidencia->getlistarmarcas()
+
+>>>>>>> 0aa47dfd29c3ab6d5fe79fc31d7ae802bd600987
 				);
 				$this->load->view('menu',$data);
 			}
@@ -451,4 +473,8 @@ class Menu extends CI_Controller
 		}
 
 	}
+<<<<<<< HEAD
+=======
+
+>>>>>>> 0aa47dfd29c3ab6d5fe79fc31d7ae802bd600987
 }
