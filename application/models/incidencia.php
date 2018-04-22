@@ -281,6 +281,20 @@ class incidencia extends CI_Model
    		}
 
   	}
+<<<<<<< HEAD
 
+=======
+ 	public function getlistarmodelos()
+  	{
+  		$this->db->order_by('nombremodelo','DESC');
+   		$result= $this->db->query("SELECT idmodelo, nombremodelo, estado from incidencias.v_listar_modelo_equipo;");
+   		if ($result->num_rows()>0) {
+   			return $result->row();
+   		}else{
+   			return null;
+   		}
+
+  	}
+>>>>>>> f234ca1ebd26896d7471e3565891f41f5c536d57
 
 }

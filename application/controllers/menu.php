@@ -488,7 +488,11 @@ class Menu extends CI_Controller
 			$this->load->model('usuarios');
 			if ( $this->session->userdata('rol')!=0 ) {
 				$data = array(
+<<<<<<< HEAD
 					'contenido' => 'configuracion/menumarcamodelos',
+=======
+					'contenido' => 'configuracion/menumodelosequipos',
+>>>>>>> f234ca1ebd26896d7471e3565891f41f5c536d57
 					'usuarios'=>$this->usuarios->getUsuariosSistema(),
 					'incidencia_fuente' => $this->incidencia->getlistarfuenteincidencia(),
 					'incidencia_estados' => $this->incidencia->getlistarestado(),
