@@ -10,7 +10,7 @@
 		</div>
 		<div class="panel-body">
 			<div class="tab-content">
-				<div class="tab-pane fade in active" id="v_incidencias">
+				<div class="tab-pane fade in active" id="v_fuente">
 					<div class="panel panel-default col-md-6 col-center" style="padding: 1px,1px,1px,1px">
 					    <center><B> Fuentes de Incidencias</B><center/>
 					</div>
