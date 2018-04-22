@@ -3,7 +3,7 @@
 		<div class="panel-heading">
 			<span class="panel-title">				
 				<div class="pull-right">
-					<p><a  href="#" class="btn btn-primary btn-block" id="btn_fuente_Nuevas">Nuevas Marcas</a></p>                           
+					<p><a  href="#" class="btn btn-primary btn-block" id="btn_fuente_Nuevas">Nuevos Modelos</a></p>                           
 				</div>
 				<div class="clearfix"></div>
 			</span>			
@@ -22,8 +22,8 @@
 								echo '</THEAD>';
 								echo '<TBODY>';
 								$num=0;
-								if($listar_marcas){
-									foreach ($listar_marcas as $fila) {
+								if($listar_modelos){
+									foreach ($listar_modelos as $fila) {
 										$num++;
 										echo '<TR id="'.$fila->idmarca.'" onclick="myFunctionEstados(this)"><TD>'.$num.'</TD><TD>'.$fila->nombremarca.'</TD><TD>'.$fila->estado.'</TD></TR>'; 
 									}

@@ -260,6 +260,7 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="<?=base_url('menu/marca_equipos')?>">Marcas</a></li>
+            <li><a href="<?=base_url('menu/marca_modelos')?>">Modelos</a></li>
             <li><a href="<?=base_url('menu/Estados_Incidencias')?>">Estados de Incidencias</a></li>
             <li><a href="<?=base_url('menu/Fuente_Incidencia')?>">Fuentes de ingresos de incidencias</a></li>
 
