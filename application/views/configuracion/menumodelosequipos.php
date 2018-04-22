@@ -3,7 +3,7 @@
 		<div class="panel-heading">
 			<span class="panel-title">				
 				<div class="pull-right">
-					<p><a  href="#" class="btn btn-primary btn-block" id="btn_fuente_Nuevas">Nuevas Fuentes</a></p>                           
+					<p><a  href="#" class="btn btn-primary btn-block" id="btn_fuente_Nuevas">Nuevos Modelos</a></p>                           
 				</div>
 				<div class="clearfix"></div>
 			</span>			
@@ -12,20 +12,20 @@
 			<div class="tab-content">
 				<div class="tab-pane fade in active" id="v_fuente">
 					<div class="panel panel-default col-md-6 col-center" style="padding: 1px,1px,1px,1px">
-					    <center><B> Fuentes de Incidencias</B><center/>
+					    <center><B> Marcas Equipos</B><center/>
 					</div>
 					<div>
 						<TABLE id="tablaincidenciasfuentes" class="table table-striped table-bordered table-hover">
 							<?php
 								echo '<THEAD>';
-								echo '<TR><TH>N°</TH><TH>Nombre</TH></TR>';
+								echo '<TR><TH>N°</TH><TH>Nombre</TH><TH>Estado</TH></TR>';
 								echo '</THEAD>';
 								echo '<TBODY>';
 								$num=0;
-								if($incidencia_fuente){
-									foreach ($incidencia_fuente as $fila) {
+								if($listar_modelos){
+									foreach ($listar_modelos as $fila) {
 										$num++;
-										echo '<TR id="'.$fila->idincidenciafuente.'" onclick="myFunctionEstados(this)"><TD>'.$num.'</TD><TD>'.$fila->nombre.'</TD></TR>'; 
+										echo '<TR id="'.$fila->idmarca.'" onclick="myFunctionEstados(this)"><TD>'.$num.'</TD><TD>'.$fila->nombremarca.'</TD><TD>'.$fila->estado.'</TD></TR>'; 
 									}
 								}
 								echo '</TBODY>';

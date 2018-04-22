@@ -102,4 +102,16 @@ class Equipos extends CI_Model
 		}		
 	}
 
+	public function getListarEquipos()
+	{
+		try {
+			$result = $this->db->query("SELECT * from incidencias.v_listar_equipos order by fechaingreso;");
+			if($result->num_rows() > 0 ){
+				return $result->result();
+			}
+		} catch (Exception $e) {
+			return false;
+		}		
+	}
+
 }

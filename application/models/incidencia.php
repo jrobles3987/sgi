@@ -270,4 +270,17 @@ class incidencia extends CI_Model
 	  	}
   	}
 
+  	public function getlistarmarcas()
+  	{
+  		$this->db->order_by('nombremarca','DESC');
+   		$result= $this->db->query("SELECT idmarca,nombremarca,estado from incidencias.v_listar_marca_equipo;");
+   		if ($result->num_rows()>0) {
+   			return $result->row();
+   		}else{
+   			return null;
+   		}
+
+  	}
+
+
 }

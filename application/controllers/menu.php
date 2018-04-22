@@ -395,5 +395,119 @@ class Menu extends CI_Controller
 
 	}
 
+	public function Fuente_Incidencia()
+	{
+		if ($this->session->userdata('login')==TRUE) {
+			$this->load->model('incidencia');
+			$this->load->model('localizacion');
+			$this->load->model('usuarios');
+			if ( $this->session->userdata('rol')!=0 ) {
+				$data = array(
+					'contenido' => 'configuracion/menufuentesincidencias',
+					'usuarios'=>$this->usuarios->getUsuariosSistema(),
+					'incidencia_fuente' => $this->incidencia->getlistarfuenteincidencia(),
+					'incidencia_estados' => $this->incidencia->getlistarestado(),
+					'incidencia_necesidades' => $this->incidencia->getlistarnecesidades(),
+					'incidencia_tecnicos' => $this->usuarios->getListarUsuariosSistemaTipo('TÉCNICO'),
+					'incidencia_localizacion' => $this->localizacion->getLocalizacion(),
+					'incidencias_categorias'  => $this->incidencia->getlistarcategorias(),
+					'tecnicos'  => $this->incidencia->getlistarpersonal()
+
+				);
+				$this->load->view('menu',$data);
+			}
+		}else{
+			$this->load->view('login');
+		}
+
+	}
+
+	public function listadoequipos()
+	{
+		if ($this->session->userdata('login')==TRUE) {
+			$this->load->model('incidencia');
+			$this->load->model('localizacion');
+			$this->load->model('usuarios');
+			$this->load->model('equipos');
+			if ( $this->session->userdata('rol')!=0 ) {
+				$data = array(
+					'contenido' => 'equipos/menulistarequipos',
+					'usuarios'=>$this->usuarios->getUsuariosSistema(),
+					'incidencia_fuente' => $this->incidencia->getlistarfuenteincidencia(),
+					'incidencia_estados' => $this->incidencia->getlistarestado(),
+					'incidencia_necesidades' => $this->incidencia->getlistarnecesidades(),
+					'incidencia_tecnicos' => $this->usuarios->getListarUsuariosSistemaTipo('TÉCNICO'),
+					'incidencia_localizacion' => $this->localizacion->getLocalizacion(),
+					'incidencias_categorias'  => $this->incidencia->getlistarcategorias(),
+					'tecnicos'  => $this->incidencia->getlistarpersonal(),
+					'lista_equipos' => $this->equipos->getListarEquipos()
+
+				);
+				$this->load->view('menu',$data);
+			}
+		}else{
+			$this->load->view('login');
+		}
+
+	}
+
+
+	public function marca_equipos()
+	{
+		if ($this->session->userdata('login')==TRUE) {
+			$this->load->model('incidencia');
+			$this->load->model('localizacion');
+			$this->load->model('usuarios');
+			if ( $this->session->userdata('rol')!=0 ) {
+				$data = array(
+					'contenido' => 'configuracion/menumarcaequipos',
+					'usuarios'=>$this->usuarios->getUsuariosSistema(),
+					'incidencia_fuente' => $this->incidencia->getlistarfuenteincidencia(),
+					'incidencia_estados' => $this->incidencia->getlistarestado(),
+					'incidencia_necesidades' => $this->incidencia->getlistarnecesidades(),
+					'incidencia_tecnicos' => $this->usuarios->getListarUsuariosSistemaTipo('TÉCNICO'),
+					'incidencia_localizacion' => $this->localizacion->getLocalizacion(),
+					'incidencias_categorias'  => $this->incidencia->getlistarcategorias(),
+					'tecnicos'  => $this->incidencia->getlistarpersonal(),
+					'listar_marcas'  => $this->incidencia->getlistarmarcas()
+
+				);
+				$this->load->view('menu',$data);
+			}
+		}else{
+			$this->load->view('login');
+		}
+
+	}
+
+	public function marca_modelos()
+	{
+		if ($this->session->userdata('login')==TRUE) {
+			$this->load->model('incidencia');
+			$this->load->model('localizacion');
+			$this->load->model('usuarios');
+			if ( $this->session->userdata('rol')!=0 ) {
+				$data = array(
+					'contenido' => 'configuracion/menumarcamodelos',
+					'usuarios'=>$this->usuarios->getUsuariosSistema(),
+					'incidencia_fuente' => $this->incidencia->getlistarfuenteincidencia(),
+					'incidencia_estados' => $this->incidencia->getlistarestado(),
+					'incidencia_necesidades' => $this->incidencia->getlistarnecesidades(),
+					'incidencia_tecnicos' => $this->usuarios->getListarUsuariosSistemaTipo('TÉCNICO'),
+					'incidencia_localizacion' => $this->localizacion->getLocalizacion(),
+					'incidencias_categorias'  => $this->incidencia->getlistarcategorias(),
+					'tecnicos'  => $this->incidencia->getlistarpersonal(),
+					'listar_marcas'  => $this->incidencia->getlistarmarcas(),
+					'listar_modelos'  => $this->incidencia->getlistarmodelos()
+
+
+				);
+				$this->load->view('menu',$data);
+			}
+		}else{
+			$this->load->view('login');
+		}
+
+	}
 
 }
