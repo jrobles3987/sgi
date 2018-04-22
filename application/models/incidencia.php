@@ -281,9 +281,6 @@ class incidencia extends CI_Model
    		}
 
   	}
-<<<<<<< HEAD
-
-=======
  	public function getlistarmodelos()
   	{
   		$this->db->order_by('nombremodelo','DESC');
@@ -295,6 +292,5 @@ class incidencia extends CI_Model
    		}
 
   	}
->>>>>>> f234ca1ebd26896d7471e3565891f41f5c536d57
 
 }
