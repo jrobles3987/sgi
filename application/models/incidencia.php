@@ -270,17 +270,4 @@ class incidencia extends CI_Model
 	  	}
   	}
 
-  	public function getlistarfuente()
-  	{
-
-  		$this->db->order_by('nombre','DESC');
- 		 $result=$this->db->get('incidencias.v_incidencia_fuente');
-  		if ($result->num_rows()>0) {
-  			return $result->row();
-  		}else {
-  			return null;
-  		}
-
-  	}
-
 }
