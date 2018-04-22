@@ -1,0 +1,10 @@
+
+Apache:
+activar los modulos 
+rewrite_module, session_cookie_module, session_module,
+
+PHP:
+activar la configuracion
+shor open tag
+activar los modulos
+php_pgsql, php_pdo_pgsql
