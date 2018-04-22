@@ -312,11 +312,7 @@
   var va = '';
   Notificaciones();
   socket.on('connected', function (data) {
-<<<<<<< HEAD
-
-=======
->>>>>>> 6ca8baa7baab5e84697fffd7c7619c66a96a402d
-      socket.emit('ready for data', {});
+  socket.emit('ready for data', {});
   });
 
   socket.on('update', function (data) {
