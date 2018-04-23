@@ -1,14 +1,14 @@
 <?php
 /**
-* 
+*
 */
 class Equipos extends CI_Model
 {
-	
+
 	public function setIngresarEquipos($data)
 	{
 		$result = $this->db->query("SELECT incidencias.f_ingreso_equipos(
-										".$data['idtipobien'].", 
+										".$data['idtipobien'].",
 										".$data['idfamiliabien'].",
 										".$data['idsubfamiliabien'].",
 										'".$data['fechacompra']."',
@@ -29,12 +29,12 @@ class Equipos extends CI_Model
 
 	public function setBorrarEquiposSubidaArchivo($usuario)
 	{
-		$result = $this->db->query("DELETE FROM incidencias.equipos_temp where usuario='".$usuario."';");		
+		$result = $this->db->query("DELETE FROM incidencias.equipos_temp where usuario='".$usuario."';");
 	}
 
 	public function getEquiposSubidosTemp($usuario='')
 	{
-		$result = $this->db->query("SELECT * FROM incidencias.equipos_temp WHERE usuario = '$usuario';");		
+		$result = $this->db->query("SELECT * FROM incidencias.equipos_temp WHERE usuario = '$usuario';");
 		if($result->num_rows() > 0 ){
 			return $result->result();
 		}else{
@@ -45,7 +45,7 @@ class Equipos extends CI_Model
 	public function setIngresarEquiposSubidaArchivo($data)
 	{
 		try {
-			
+
 			if ($data['fechaingreso']=='' || $data['fechaingreso']==null){
 				$data['fechaingreso']="null";
 			}else{
@@ -68,8 +68,8 @@ class Equipos extends CI_Model
 
 			$result = $this->db->query("SELECT incidencias.f_ingreso_equipos_temp(
 										'".$data['nombreproducto']."',
-										'".$data['marca']."', 
-										'".$data['modelo']."', 
+										'".$data['marca']."',
+										'".$data['modelo']."',
 										".$data['fechaingreso'].",
 										'".$data['descripcion']."',
 										'".$data['codigoequipo']."',
@@ -87,7 +87,7 @@ class Equipos extends CI_Model
 			}
 		} catch (Exception $e) {
 			return false;
-		}		
+		}
 	}
 
 	public function setIngresarEquiposLote($usuario)
@@ -99,7 +99,7 @@ class Equipos extends CI_Model
 			}
 		} catch (Exception $e) {
 			return false;
-		}		
+		}
 	}
 
 	public function getListarEquipos()
@@ -111,7 +111,6 @@ class Equipos extends CI_Model
 			}
 		} catch (Exception $e) {
 			return false;
-		}		
+		}
 	}
-
 }

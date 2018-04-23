@@ -16,6 +16,9 @@
   <!-- datepicker -->
   <link rel="stylesheet" type="text/css" href="<?=base_url('plantilla/plugins/datepicker/bootstrap-datepicker.min.css')?>">
   <link rel="stylesheet" type="text/css" href="<?=base_url('plantilla/plugins/daterangepicker/daterangepicker.css')?>">
+  <!-- Bootstrap select -->
+  <link rel="stylesheet" type="text/css" href="<?=base_url('plantilla/plugins/bootstrap-select/bootstrap-select.min.css')?>">
+  <link rel="stylesheet" type="text/css" href="<?=base_url('plantilla/plugins/bootstrap-select/ajax-bootstrap-select.css')?>">
   <!-- fullCalendar 2.2.5-->
   <link rel="stylesheet" type="text/css" href="<?=base_url('plantilla/plugins/fullcalendar/fullcalendar.min.css')?>">
   <link rel="stylesheet" type="text/css" href="<?=base_url('plantilla/plugins/fullcalendar/fullcalendar.print.css')?>" media="print">
@@ -50,6 +53,10 @@
   <script src="<?=base_url('plantilla/plugins/sweetalert/sweetalert.min.js')?>"></script>
   <script src="<?=base_url('plantilla/plugins/alertifyjs/alertify.js')?>"></script>
   <script src="<?=base_url('plantilla/plugins/toastr/toastr.js')?>"></script>
+  <!-- Bootstrap select -->
+  <script src="<?=base_url('plantilla/plugins/bootstrap-select/bootstrap-select.min.js')?>"></script>
+  <script src="<?=base_url('plantilla/plugins/bootstrap-select/ajax-bootstrap-select.min.js')?>"></script>
+  <script src="<?=base_url('plantilla/plugins/bootstrap-select/ajax-bootstrap-select.es-ES.min.js')?>"></script>
   <!-- Select2 -->
   <script src="<?=base_url('plantilla/plugins/select2/js/select2.full.js')?>"></script>
   <!-- AdminLTE App -->
