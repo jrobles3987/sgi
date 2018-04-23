@@ -1,6 +1,6 @@
 <?php
 /**
-* 
+*
 */
 class Equipo extends CI_Controller
 {
@@ -9,7 +9,7 @@ class Equipo extends CI_Controller
 		if ($this->input->is_ajax_request()) {
 			$data = array(
 				'nombreequipo'		=> $this->input->post('nombreequipo'),
-				'idmarca'			=> $this->input->post('idmarca'),		
+				'idmarca'			=> $this->input->post('idmarca'),
 				'idmodelo'			=> $this->input->post('idmodelo'),
 				'idtipobien'		=> $this->input->post('idtipobien'),
 				'idfamiliabien'		=> $this->input->post('idfamiliabien'),
@@ -27,10 +27,10 @@ class Equipo extends CI_Controller
 
 				$data= array(
 					"res" => $modelos->f_ingreso_equipos
-				);	
+				);
 			}else{
 				show_404();
-			}	
+			}
 
 			echo json_encode($data);
 		}else{
@@ -49,7 +49,7 @@ class Equipo extends CI_Controller
 			$csv = $_FILES['csv']['tmp_name'];
 			$handle = fopen($csv,'r');
 			while ($data = fgetcsv($handle,10000,",","'")){
-				if ($data[0]) { 					
+				if ($data[0]) {
 					$data= array(
 						"nombreproducto" => $data[0],
 						"marca" => $data[1],
@@ -77,7 +77,7 @@ class Equipo extends CI_Controller
 			}else{
 				echo 'FALSE';
 			}
-			
+
 		}else{
 			echo 'FALSE';
 		}
@@ -102,9 +102,8 @@ class Equipo extends CI_Controller
 		echo '</TBODY>';
 		echo '</TABLE>';
 	}
-
 	public function index()
 	{
-		echo gethostbyname(); 
+		echo gethostbyname();
 	}
 }

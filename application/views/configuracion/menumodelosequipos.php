@@ -12,7 +12,11 @@
 			<div class="tab-content">
 				<div class="tab-pane fade in active" id="v_fuente">
 					<div class="panel panel-default col-md-6 col-center" style="padding: 1px,1px,1px,1px">
+<<<<<<< HEAD
+					    <center><B> Marcas Equipos</B><center/>
+=======
 					    <center><B> Modelos Equipos</B><center/>
+>>>>>>> f234ca1ebd26896d7471e3565891f41f5c536d57
 					</div>
 					<div>
 						<TABLE id="tablaincidenciasfuentes" class="table table-striped table-bordered table-hover">
@@ -25,7 +29,11 @@
 								if($listar_modelos){
 									foreach ($listar_modelos as $fila) {
 										$num++;
+<<<<<<< HEAD
+										echo '<TR id="'.$fila->idmarca.'" onclick="myFunctionEstados(this)"><TD>'.$num.'</TD><TD>'.$fila->nombremarca.'</TD><TD>'.$fila->estado.'</TD></TR>'; 
+=======
 										echo '<TR id="'.$fila->idmodelo.'" onclick="myFunctionEstados(this)"><TD>'.$num.'</TD><TD>'.$fila->nombremodelo.'</TD><TD>'.$fila->estado.'</TD></TR>'; 
+>>>>>>> f234ca1ebd26896d7471e3565891f41f5c536d57
 									}
 								}
 								echo '</TBODY>';

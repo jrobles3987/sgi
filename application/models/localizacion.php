@@ -1,6 +1,6 @@
 <?php
 /**
-* 
+*
 */
 class localizacion extends CI_Model
 {
@@ -14,5 +14,11 @@ class localizacion extends CI_Model
 		}else{
 	  		return null;
   		}
+	}
+	///busqueda de localizacion de los equipos
+public function get_equipolocal($q){
+		return $this->db->query("SELECT *
+		 FROM incidencias.localizaciones
+		WHERE (nombrelocalizacion LIKE '%$q%') LIMIT 20 offset 0")->result();
 	}
 }
