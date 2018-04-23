@@ -16,12 +16,15 @@
 			        	<textarea class="form-control requerido" id="txttituloincidencia2" rows="1" style="resize: none;" autofocus></textarea>
 			      	</div>
 				</div>
-
+<div style="margin:10px"></div>	
+						
 					<div  class="row">
-					<div class="col-xs-4 col-md-8  col-center">
-						<span>* Tecnicos Asignados</span>
-						<select2 id="tecnicos" class="form-control requerido">
-						<option value="0">Seleccione al tecnico...</option>
+					<div  class="col-xs-4 col-md-8 col-center">
+					<span>* Tecnicos Asignados</span>
+					</div>	
+					<div class="col-xs-4 col-md-8 col-center" multiple="multiple" id="tec">
+						
+						<select id="selectpicker"  class="form-control selectpicker" data-live-search="true" multiple>
 							<?php
 								foreach ($incidencia_tecnicos as $t) { /// donde llamas a la ventana esta ??? .l.
 									echo '<option value="'.$t->idpersonal.'">'.$t->nombres.'</option>';
@@ -30,24 +33,36 @@
 						</select>
 				    </div> 
 				</div>
+<div style="margin:10px"></div>			
+					<div class="row">
+					<div class="col-xs-4 col-md-8 col-center" id="#ui-datepicker-div">
+						<span>* Fecha de Apertura y Vencimiento</span>
+						<div class="input-group daterangeico">
+		                  	<input type="text" class="form-control pull-right daterange requerido" align="center" id="fechainicio-fechafin2" readonly="readonly">
+		                  	<span class="input-group-addon">
+								<span class="fa fa-calendar"></span>
+							</span>	
+		                </div>
+		            </div>
+					<div class="col-xs-4 col-md-8 col-center" id="#ui-datepicker-div" style="display:none;">
+						<span>* Fecha de apertura</span>
+						<div class='input-group date'>
+							<input type="text" class="form-control" id="fechaapertura2" readonly="readonly" value= "<?php echo date("d/m/Y");?>">
+								<span class="input-group-addon">
+									<span class="glyphicon glyphicon-calendar"></span>
+								</span>
+						</div> 	
+					</div>
+				</div>
+<div style="margin:10px"></div>	
+				 <div class="row">
+			      	<div class="col-xs-4 col-md-12 col-center">
+			      		<span>* Descripcion</span>
+			        	<textarea class="form-control requerido" id="txtareadescripcion2" rows="2" style="resize: none;"></textarea>
+			        	<div style="margin:10px"></div>
+			      	</div>
+			    </div>
 
-				 <div class="row" >
-	        	<div class="col-xs-4 col-md-4">
-					<span>* Fecha de Apertura y Vencimiento</span>
-					<div class="input-group daterangeico">
-	                  	<input type="text" class="form-control pull-right daterange2 requerido" align="center" id="fechainicio-fechafin" readonly="readonly">
-	                  	<span class="input-group-addon">
-							<span class="fa fa-calendar"></span>
-						</span>	
-	                </div>
-	            </div>
-	            </div>
-
-
-
-
-				
-                  
 	    </div>
 		<div style="margin:10px"></div>      	
 	</div>
@@ -59,4 +74,18 @@
 	</div>
 </div>
 </div>
+
+
+<script>
+	$('.selectpicker').addClass('col-lg-8').selectpicker('setStyle');
+</script>
+
+<script>
+$('#selectpicker').change(function(){
+$('#dataOutput').html('');
+var values = $('#selectpicker').val();
+for(var i = 0; i < values.length; i += 1) {
+	console.log(values)
+}});
+</script>
 

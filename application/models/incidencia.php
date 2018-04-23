@@ -92,7 +92,28 @@ class incidencia extends CI_Model
 			return null;
 		}
 	}
+
+
+	public function setguardarplanificacion (){
+		$result = $this->db->query("SELECT incidencias.f_ingreso_planificacion(
+	                              '".$data['titulo']."',
+	                              '".$data['fecha_apertura_programado']."',
+	                              '".$data['fecha_finalizacion_programado']."',
+	                              '".$data['descripcion_planificacion']."',
+	                              '".$data['idlocalizacion']."',
+	                              '".$data['informe_planificacion']."',
+	                              '".$data['fecha_apertura_real']."',
+	                              '".$data['fecha_finalizacion_real']."');");
+		if ($result->num_rows() > 0) {
+			return $result->row();
+		}else {
+			return null;
+		}
+
+	}
 	
+
+
 	public function setActualizarIncidencia($data)
 	{
 		$result = $this->db->query("SELECT

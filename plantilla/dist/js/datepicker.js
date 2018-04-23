@@ -9,6 +9,7 @@ $(document).ready(function() {
     $('.daterange').daterangepicker({
         "format": 'yyyy-mm-dd',
         "autoApply": true,
+        "autoclose": true,
         "opens": "center"
     });
 
