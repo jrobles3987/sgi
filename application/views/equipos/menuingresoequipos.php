@@ -13,7 +13,7 @@
 				</span>
 			</div>
 			<div class="panel-body">
-				<div class="panel panel-default panel-fade col-md-10 col-center">
+				<div class="panel panel-default panel-fade col-md-11 col-center">
 			        <div style="margin: 10px">
 				        <div class="row" >
 					      	<div class="col-xs-4 col-md-6">
@@ -69,23 +69,41 @@
 							</div>
 					    </div>
 						<div class="row" >
-							<div class="col-xs-4 col-md-4">
+							<div class="col-xs-2 col-md-2">
 								<span>Precio Compra</span>
-							    <input id="preciocompra" type="text" class="form-control input-md" title="Codigo del equipo por defecto">
+							    <div class="input-group">
+							    	<input id="preciocompra" type="text" class="form-control input-md"  style="text-align:right;" title="Codigo del equipo por defecto">
+							    	<span class="input-group-addon">.00</span>
+							    </div>
 							</div>						
-							<div class="col-xs-4 col-md-4">
+							<div class="col-xs-2 col-md-2">
 								<span>Vida util</span>
 							    <input id="vidautil" type="text" class="form-control input-md" title="Codigo del equipo por defecto">
-							</div>					
-					
-							<div class="col-xs-4 col-md-4">
+								<select id="vidautiltiempo" class="form-control">
+							    	<option value="AÑOS">AÑOS</option>
+							    	<option value="MESES">MESES</option>
+							    </select>
+							</div>
+							<div class="col-xs-2 col-md-2">
 								<span>Garantia</span>
 							    <input id="garantia" type="text" class="form-control input-md" title="Codigo del equipo por defecto">
+							    <select id="garantiatiempo" class="form-control">
+							    	<option value="AÑOS">AÑOS</option>
+							    	<option value="MESES">MESES</option>
+							    </select>
 							</div>
+							<input id="idcustodio" type="text" style="display: none;">
+					    	<div class="col-xs-2 col-md-2">
+					    		<span>Cédula del Custodio</span>
+						    	<input id="cedulacustodio" type="text" class="form-control input-md" title="Nombre del equipo">
+							</div>
+							<div class="col-xs-4 col-md-6">
+						    	<input id="nombrecustodio" type="text" class="form-control input-md" title="Nombre del equipo" readonly="readonly">
+							</div>	
 						</div>
 					    <div class="row" >
-					    	<div class="col-xs-4 col-md-9">
-					      		<span>*Localizacion2</span>
+					    	<div class="col-xs-4 col-md-12">
+					      		<span>*Localizacion</span>
 					        	<select id="selectlocalizacion2" class="form-control requerido2">
 					        		<option value="0">Seleccione la Localización del Equipo</option>
 							      	<?php
@@ -97,15 +115,7 @@
 					      	</div>
 					    </div>
 					    <div class="row">
-					    	<input id="idcustodio" type="text" style="display: none;">
-					    	<div class="col-xs-4 col-md-4">
-					    		<span>Cédula del Custodio del Equipo</span>
-						    	<input id="cedulacustodio" type="text" class="form-control input-md" title="Nombre del equipo">
-							</div>
-							<div class="col-xs-4 col-md-8">
-					    		<span>Nombre del Custodio</span>
-						    	<input id="nombrecustodio" type="text" class="form-control input-md" title="Nombre del equipo" readonly="readonly">
-							</div>
+					    								
 					    </div>
 					    <div class="row">
 					      	<div class="col-xs-4 col-md-12">
@@ -159,21 +169,44 @@
 			var numtipobien = document.getElementById("selecttipoequipo").length;
 			var numfamiliabien = document.getElementById("selectequipo").length;
 			var numsubfamiliabien = document.getElementById("selectsubequipo").length;
-			
+			if ($('#preciocompra').val() == ''){
+				valorcompra = 0;
+			}else{
+				valorcompra = $('#preciocompra').val();
+			}
+
+			if ($('#vidautil').val() == ''){
+				vidautil = 0;
+				vidautiltiempo = '';
+			}else{
+				vidautil = $('#vidautil').val();
+				vidautiltiempo = ('#vidautiltiempo').val();
+			}
+
+			if ($('#garantia').val() == ''){
+				garantia = 0;
+				garantiatiempo = '';
+			}else{
+				garantia = $('#garantia').val();
+				garantiatiempo = ('#garantiatiempo').val();
+			}
+
 			dataform = {
 				idtipobien: $('#selecttipoequipo').val(),
 				idfamiliabien: $('#selectequipo').val(),
 				idsubfamiliabien: $('#selectsubequipo').val(),				
-				codigoequipo: $('#codequipo').val(),
-				codigoinventario: $('#codequipoinventario').val(),
+				codequipo: $('#codequipo').val(),
+				codinventario: $('#codequipoinventario').val(),
 				fechacompra: $('#fechacompra').val(),
-				nombreequipo: $('#nombreequipo').val(),
-				preciocompra: $('#preciocompra').val(),				
-				vidautil: $('#vidautil').val(),
+				descripcion: $('#nombreequipo').val(),
+				valorcompra: valorcompra,
+				vidautil: vidautil,
 				garantia: $('#garantia').val(),
-				idcustodio: $('#idcustodio').val(),
+				idpersonacustodio: $('#idcustodio').val(),
 				idlocalizacion: $('#selectlocalizacion2').val(),
-				descripcion: $('#descripcion').val()
+				observacion: $('#descripcion').val(),
+				vidautiltiempo: $('#vidautiltiempo').val(),
+				garantiatiempo: $('#garantiatiempo').val()
 			}
 
 			retorno = Validar_Formularios2();			
@@ -202,7 +235,7 @@
 					$("#selectequipo").css({'border':'1px solid red'});
 					msj_alerta();					
 				}
-			}
+			}			
 			
 			return retorno;
 		}
@@ -288,7 +321,7 @@
 				$('#div_loading').css('display','inline');
 				$.ajax({
 		            type: "POST",
-		            url: "<?php echo base_url('equipo/GuardarEquipos');?>",
+		            url: "<?php echo base_url('equipo/GuardarEquiposComputador');?>",
 		            data: dataform,
 		            success: function (data) {
 		                var json = JSON.parse(data);
@@ -306,8 +339,7 @@
 							},
 							function(isConfirm){
 							  if (!isConfirm) {
-							  	location.reload(true);
-							    //swal("Deleted!", "Your imaginary file has been deleted.", "success");
+							  	//location.reload(true);
 							  }
 							});
 
@@ -318,7 +350,6 @@
 		            error: function (xhr, exception) {
 		            }
 		        });
-		        alert('aqui');
 			}
 		});
 	});

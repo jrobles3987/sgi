@@ -1,36 +1,39 @@
 <?php
 /**
-*
+* 
 */
 class Equipo extends CI_Controller
 {
-	public function GuardarEquipos()
+	public function GuardarEquiposComputador()
 	{
 		if ($this->input->is_ajax_request()) {
 			$data = array(
-				'nombreequipo'		=> $this->input->post('nombreequipo'),
-				'idmarca'			=> $this->input->post('idmarca'),
-				'idmodelo'			=> $this->input->post('idmodelo'),
 				'idtipobien'		=> $this->input->post('idtipobien'),
-				'idfamiliabien'		=> $this->input->post('idfamiliabien'),
+				'idfamiliabien'		=> $this->input->post('idfamiliabien'),		
 				'idsubfamiliabien'	=> $this->input->post('idsubfamiliabien'),
-				'fechaingreso'		=> $this->input->post('fechaingreso'),
+				'fechacompra'		=> $this->input->post('fechacompra'),
+				'valorcompra'		=> $this->input->post('valorcompra'),
+				'garantia'			=> $this->input->post('garantia'),
+				'vidautil'			=> $this->input->post('vidautil'),
+				'idpersonacustodio'	=> $this->input->post('idpersonacustodio'),
+				'codinventario'		=> $this->input->post('codinventario'),
+				'codequipo'			=> $this->input->post('codequipo'),
 				'descripcion'		=> $this->input->post('descripcion'),
-				'codigoequipo'		=> $this->input->post('codigoequipo'),
-				'codigoinventario'	=> $this->input->post('codigoinventario'),
-				'idlugarequipo'		=> $this->input->post('idlugarequipo')
+				'observacion'		=> $this->input->post('observacion'),
+				'idlocalizacion'	=> $this->input->post('idlocalizacion'),
+				'vidautiltiempo'	=> $this->input->post('vidautiltiempo'),
+				'garantiatiempo'	=> $this->input->post('garantiatiempo')
 			);
 
 			if ($data) {
 				$this->load->model('equipos');
-				$modelos = $this->equipos->setIngresarEquipos($data);
-
+				$modelos = $this->equipos->setIngresarEquiposComputadores($data);				
 				$data= array(
-					"res" => $modelos->f_ingreso_equipos
-				);
+					"res" => $modelos->f_ingreso_equipos_computador
+				);				
 			}else{
 				show_404();
-			}
+			}	
 
 			echo json_encode($data);
 		}else{
@@ -49,7 +52,7 @@ class Equipo extends CI_Controller
 			$csv = $_FILES['csv']['tmp_name'];
 			$handle = fopen($csv,'r');
 			while ($data = fgetcsv($handle,10000,",","'")){
-				if ($data[0]) {
+				if ($data[0]) { 					
 					$data= array(
 						"nombreproducto" => $data[0],
 						"marca" => $data[1],
@@ -77,7 +80,7 @@ class Equipo extends CI_Controller
 			}else{
 				echo 'FALSE';
 			}
-
+			
 		}else{
 			echo 'FALSE';
 		}
@@ -102,8 +105,9 @@ class Equipo extends CI_Controller
 		echo '</TBODY>';
 		echo '</TABLE>';
 	}
+
 	public function index()
 	{
-		echo gethostbyname();
+		echo gethostbyname(); 
 	}
 }
