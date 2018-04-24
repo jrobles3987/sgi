@@ -1,6 +1,6 @@
 <?php
 /**
-* 
+*
 */
 class incidencia extends CI_Model
 {
@@ -17,7 +17,7 @@ class incidencia extends CI_Model
 	  		return null;
   		}
 	}
-	  
+
 	public function getlistarestado()
 	  {
 		$this->db->order_by('estado','asc');
@@ -28,13 +28,13 @@ class incidencia extends CI_Model
 			return null;
 		}
 	}
-		
+
 	public function getlistarnecesidades()
 	{
 		$this->db->order_by('idnecesidad','asc');
 		$result=$this->db->get('incidencias.incidencias_necesidad');
 		if ($result->num_rows()>0)
-		{ 
+		{
 			return $result->result();
 		}else {
 			return null;
@@ -46,7 +46,7 @@ class incidencia extends CI_Model
 		$this->db->order_by('nombre','asc');
 		$result=$this->db->get('incidencias.incidencias_categorias');
 		if ($result->num_rows()>0)
-		{ 
+		{
 			return $result->result();
 		}else {
 			return null;
@@ -65,14 +65,14 @@ class incidencia extends CI_Model
 	}
 
 	public function setGuardarincidencia($data) // escribe bien.l.
-	{//pasa los mismos nombres que en el controlador solo estan demas a la comilla urgencia impacto prioridad 
+	{//pasa los mismos nombres que en el controlador solo estan demas a la comilla urgencia impacto prioridad
 		$result = $this->db->query("SELECT incidencias.f_ingreso_incidencias(
 									'".$data['fechaapertura']."',
 									'".$data['fechavencimiento']."',
 									null,
 									null,
-									".$data['idincidenciaestado'].", 
-									".$data['urgencia'].",  
+									".$data['idincidenciaestado'].",
+									".$data['urgencia'].",
 									".$data['impacto'].",
 									".$data['prioridad'].",
 									".$data['idincidenciafuente'].",
@@ -81,7 +81,7 @@ class incidencia extends CI_Model
 									".$this->session->userdata('idusuario').",
 									".$data['tecnicoasignado'].",
 									".$data['idlugarincidente'].",
-									".$data['idcategorias']." 
+									".$data['idcategorias']."
 								);");
 		// $this->db->insert('incidencias.incidencias', $data);
 	//'17/12/2017','17/12/2017','17/12/2017','17/12/2017',1,'NORMAL','NORMAL','NORMAL',1,'TITULO 1','DESCRIPCION 1','1','1'
@@ -111,7 +111,7 @@ class incidencia extends CI_Model
 		}
 
 	}
-	
+
 
 
 	public function setActualizarIncidencia($data)
@@ -122,13 +122,13 @@ class incidencia extends CI_Model
 				'".$data['fechavencimiento']."',
 				null,
 				null,
-				".$data['idincidenciaestado'].", 
-				".$data['urgencia'].",  
+				".$data['idincidenciaestado'].",
+				".$data['urgencia'].",
 				".$data['impacto'].",
 				".$data['prioridad'].",
 				".$data['idincidenciafuente'].",
 				'".$data['tituloincidencia']."',
-				'".$data['descripcion']."',				
+				'".$data['descripcion']."',
 				".$data['tecnicoasignado'].",
 				".$data['idlugarincidente'].",
 				".$this->session->userdata('idusuario').",
@@ -155,7 +155,7 @@ class incidencia extends CI_Model
 	}
 
 	public function getListartablaUsuarioNormal($usuario_creador = '')
-	{	
+	{
 		//$this->db-where('creador', $usuario_creador);
 		//$this->db->order_by('fechaapertura','DESC');
 	  	$result=$this->db->query('SELECT * FROM incidencias.v_listar_incidencias WHERE creador = '.$usuario_creador.' and calificacionusuario is null ORDER BY fechaapertura DESC');
@@ -189,7 +189,7 @@ class incidencia extends CI_Model
 			FROM incidencias.incidencias,incidencias.incidencias_estados
 			WHERE idincidencias = ".$idincidencia.";");
 	  	if ($result->num_rows()>0)
-	  	{ 
+	  	{
 			return $result->row();
 	  	}else {
 		  	return null;
@@ -206,9 +206,9 @@ class incidencia extends CI_Model
 								where incidencias.idincidenciaestado = incidencias_estados.idincidenciaestado
 							    and  (estado = 'NUEVO' or estado = 'EN CURSO (ASIGNADO)' or estado = 'EN CURSO (PLANIFICACIÓN)')ORDER BY fechahoracreacion DESC;
 		");
-	  	
+
 	  	if ($result->num_rows()>0)
-	  	{ 
+	  	{
 			return $result->result();
 	  	}else {
 		  	return null;
@@ -223,7 +223,7 @@ class incidencia extends CI_Model
 									WHERE incidencias.idincidenciaestado = incidencias_estados.idincidenciaestado and incidencias_estados.estado <> 'CERRADO' and incidencias_estados.estado <> 'RESUELTO' and incidencias.tecnicoasignado = ".$idpersonal.";
 									");
 		if ($result->num_rows()>0)
-	  	{ 
+	  	{
 			return $result->row();
 	  	}else {
 		  	return null;
@@ -238,7 +238,7 @@ class incidencia extends CI_Model
 									WHERE incidencias.idincidenciaestado = incidencias_estados.idincidenciaestado and (incidencias_estados.estado = 'CERRADO' or incidencias_estados.estado = 'RESUELTO') and incidencias.tecnicoasignado = ".$idpersonal.";
 									");
 		if ($result->num_rows()>0)
-	  	{ 
+	  	{
 			return $result->row();
 	  	}else {
 		  	return null;
@@ -249,13 +249,13 @@ class incidencia extends CI_Model
 	{
 
 		$result = $this->db->query("SELECT incidencias_estados.estado,count(incidencias.idincidencias) as conteo
-									FROM incidencias.incidencias,incidencias.incidencias_estados 
+									FROM incidencias.incidencias,incidencias.incidencias_estados
 									WHERE incidencias.idincidenciaestado = incidencias_estados.idincidenciaestado and incidencias.usuariocreador = ".$idusuariocreador."
 									GROUP BY incidencias.idincidenciaestado,incidencias_estados.estado
 									ORDER BY incidencias_estados.estado;
 									");
 		if ($result->num_rows()>0)
-	  	{ 
+	  	{
 			return $result->result();
 	  	}else {
 		  	return null;
@@ -264,7 +264,7 @@ class incidencia extends CI_Model
 
 	public function setAsignarCalificacionesIncidencias($idincidencia='',$calificacion='',$detallecalificacion='',$tipo='')
 	{
-		
+
 		$result = $this->db->query("SELECT incidencias.f_ingreso_incidencias_calificaciones(
 									".$idincidencia.",
 									".$calificacion.",
@@ -313,5 +313,8 @@ class incidencia extends CI_Model
    		}
 
   	}
-
+		/////////////estados incidencia
+		public function get_enca($insi){
+			return $this->db->query("SELECT * FROM incidencias.incidencias_estados WHERE idincidenciaestado = '$insi'")->row();
+	 }
 }

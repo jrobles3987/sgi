@@ -169,6 +169,7 @@ class Consultas_equipos extends CI_Controller {
                       <div class="titulo t1">UNIVERSIDAD TÉCNICA DE MANABÍ</div>
                       <div class="titulo t2">CENTRO DE COMPUTO</div>
                       <div class="titulo t3">REPORTE DE EQUIPOS POR FECHA DE INGRESO</div>
+                      <div class="titulo t3">DESDE:'.$fecha_inicio.' HASTA: '.$fecha_fin.'</div>
                       <div class="titulo t3"></div>
                     </td>
                     <td class="logo2"></td>
@@ -236,7 +237,7 @@ $num +=1;
                     <td class="bloqueA"><div id="contenidoBloque">
                       <table class="bloqueGeneral">
                         <tr>
-                        <td id="estado"><label>Reporte Incidencias: </label><label class="datos">En General</label></td>
+                        <td id="estado"><label>Reporte Fechas de Ingreso: </label><label class="datos">'.$fecha_inicio.'-----'.$fecha_fin.'</label></td>
                         <td id="total"><label>Total de registros: </label><label class="datos"> '.$c_enfermeria.'</label></td>
                         </tr>
                       </table>
@@ -246,7 +247,7 @@ $num +=1;
               try{
                 $html2pdf->writeHTML($html);
                 //$html2pdf->Output(FCPATH.'public/pruebas.pdf','F');
-                $html2pdf->Output('Reporte Incidencias.pdf');
+                $html2pdf->Output('Reporte Equipos.pdf');
               }catch(HTML2PDF_exception $e){
                 echo $e;
               }
@@ -258,7 +259,7 @@ $num +=1;
 public function get_equipo_general($fecha_inicio = '',$fecha_fin = ''){
   require_once(APPPATH.'libraries/html2pdf/html2pdf.class.php');
   $html2pdf = new HTML2PDF('L','A4', 'es');
-  $html2pdf->pdf->SetTitle('Reporte de Incidencias');
+  $html2pdf->pdf->SetTitle('Reporte de Equipos');
 
           $html = '<!DOCTYPE html><head>';
 
@@ -350,7 +351,7 @@ $num +=1;
                   <td class="bloqueA"><div id="contenidoBloque">
                     <table class="bloqueGeneral">
                       <tr>
-                      <td id="estado"><label>Reporte Incidencias: </label><label class="datos">En General</label></td>
+                      <td id="estado"><label>Reporte Equipos: </label><label class="datos">En General</label></td>
                       <td id="total"><label>Total de registros: </label><label class="datos"> '.$c_enfermeria.'</label></td>
                       </tr>
                     </table>
@@ -360,7 +361,7 @@ $num +=1;
             try{
               $html2pdf->writeHTML($html);
               //$html2pdf->Output(FCPATH.'public/pruebas.pdf','F');
-              $html2pdf->Output('REPORTE DE TODOS LOS EQUIPOS EXISTENTES.pdf');
+              $html2pdf->Output('REPORTE EQUIPOS EXISTENTE.pdf');
             }catch(HTML2PDF_exception $e){
               echo $e;
             }
@@ -373,7 +374,7 @@ $num +=1;
 public function get_equipo_compra($fecha_inicio = '',$fecha_fin = ''){
   require_once(APPPATH.'libraries/html2pdf/html2pdf.class.php');
   $html2pdf = new HTML2PDF('L','A4', 'es');
-  $html2pdf->pdf->SetTitle('Reporte de Incidencias');
+  $html2pdf->pdf->SetTitle('Reporte de Equipos');
 
           $html = '<!DOCTYPE html><head>';
 
@@ -397,7 +398,8 @@ public function get_equipo_compra($fecha_inicio = '',$fecha_fin = ''){
                   <td class="cabecera center width80">
                     <div class="titulo t1">UNIVERSIDAD TÉCNICA DE MANABÍ</div>
                     <div class="titulo t2">CENTRO DE COMPUTO</div>
-                    <div class="titulo t3">REPORTE DE TODOS LOS EQUIPOS EXISTENTES</div>
+                    <div class="titulo t3">REPORTE DE EQUIPOS FECHA COMPRA</div>
+                    <div class="titulo t3">DESDE:'.$fecha_inicio.' HASTA: '.$fecha_fin.'</div>
                     <div class="titulo t3"></div>
                   </td>
                   <td class="logo2"></td>
@@ -465,7 +467,7 @@ $num +=1;
                   <td class="bloqueA"><div id="contenidoBloque">
                     <table class="bloqueGeneral">
                       <tr>
-                      <td id="estado"><label>Reporte Incidencias: </label><label class="datos">En General</label></td>
+                      <td id="estado"><label>Reporte Equipos Fecha Compra: </label><label class="datos">'.$fecha_inicio.'-----'.$fecha_fin.'</label></td>
                       <td id="total"><label>Total de registros: </label><label class="datos"> '.$c_enfermeria.'</label></td>
                       </tr>
                     </table>
@@ -475,7 +477,7 @@ $num +=1;
             try{
               $html2pdf->writeHTML($html);
               //$html2pdf->Output(FCPATH.'public/pruebas.pdf','F');
-              $html2pdf->Output('REPORTE DE TODOS LOS EQUIPOS EXISTENTES.pdf');
+              $html2pdf->Output('Reporte Equipo.pdf');
             }catch(HTML2PDF_exception $e){
               echo $e;
             }
@@ -590,7 +592,7 @@ $num +=1;
                   <td class="bloqueA"><div id="contenidoBloque">
                     <table class="bloqueGeneral">
                       <tr>
-                      <td id="estado"><label>Reporte Incidencias: </label><label class="datos">En General</label></td>
+                      <td id="estado"><label>Reporte Localización Equipo: </label><label class="datos">'.$nombrelo->nombrelocalizacion.'</label></td>
                       <td id="total"><label>Total de registros: </label><label class="datos"> '.$c_enfermeria.'</label></td>
                       </tr>
                     </table>
@@ -600,7 +602,7 @@ $num +=1;
             try{
               $html2pdf->writeHTML($html);
               //$html2pdf->Output(FCPATH.'public/pruebas.pdf','F');
-              $html2pdf->Output('REPORTE DE TODOS LOS EQUIPOS.pdf');
+              $html2pdf->Output('REPORTE DE EQUIPOS.pdf');
             }catch(HTML2PDF_exception $e){
               echo $e;
             }
@@ -715,7 +717,7 @@ $num +=1;
                   <td class="bloqueA"><div id="contenidoBloque">
                     <table class="bloqueGeneral">
                       <tr>
-                      <td id="estado"><label>Reporte Incidencias: </label><label class="datos">En General</label></td>
+                      <td id="estado"><label>Reporte Custodio: </label><label class="datos">'.$nombrelo->nombrescompletos.'</label></td>
                       <td id="total"><label>Total de registros: </label><label class="datos"> '.$c_enfermeria.'</label></td>
                       </tr>
                     </table>
@@ -725,7 +727,7 @@ $num +=1;
             try{
               $html2pdf->writeHTML($html);
               //$html2pdf->Output(FCPATH.'public/pruebas.pdf','F');
-              $html2pdf->Output('REPORTE DE LOS CUSTODIO DE EQUIPOS.pdf');
+              $html2pdf->Output('REPORTE DE EQUIPOS.pdf');
             }catch(HTML2PDF_exception $e){
               echo $e;
             }
@@ -836,7 +838,7 @@ $num +=1;
                   <td class="bloqueA"><div id="contenidoBloque">
                     <table class="bloqueGeneral">
                       <tr>
-                      <td id="estado"><label>Reporte Incidencias: </label><label class="datos">En General</label></td>
+                      <td id="estado"><label>Reporte Estado: </label><label class="datos">'.$nombrelo->nombre.'</label></td>
                       <td id="total"><label>Total de registros: </label><label class="datos"> '.$c_enfermeria.'</label></td>
                       </tr>
                     </table>
@@ -845,8 +847,7 @@ $num +=1;
             </table>';
             try{
               $html2pdf->writeHTML($html);
-              //$html2pdf->Output(FCPATH.'public/pruebas.pdf','F');
-              $html2pdf->Output('REPORTE DE LOS CUSTODIO DE EQUIPOS.pdf');
+              $html2pdf->Output('REPORTE DE EQUIPOS.pdf');
             }catch(HTML2PDF_exception $e){
               echo $e;
             }
