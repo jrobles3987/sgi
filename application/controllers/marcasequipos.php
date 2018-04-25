@@ -1,21 +1,21 @@
 <?php
 /**
-* 
+*
 */
 class Marcasequipos extends CI_Controller
 {
 	public function ListarEquiposMarcas()
-	{					
+	{
 		$this->load->model('marcas');
 		$marcas = $this->marcas->getListarMarcas($idmarca);
 		echo '<option value="0">Seleccione la Marca del Equipo...</option>';
 		foreach ($marcas as $fila) {
 			echo '<option value="'.$fila->idmarca.'">'.$fila->nombremarca.'</option>';
-		}		
+		}
 	}
 
 	public function ListarEquiposModelos()
-	{			
+	{
 		$idmarca = $this->input->post('idMarcaseleccionada');
 
 		if ($idmarca) {
@@ -27,7 +27,7 @@ class Marcasequipos extends CI_Controller
 			}
 		}else{
 			echo '<option value="0">Seleccione el Modelo del Equipo...</option>';
-		}	
+		}
 	}
 
 	public function GuardarEquiposMarcas()
@@ -88,4 +88,28 @@ class Marcasequipos extends CI_Controller
 			show_404();
 		}
 	}
+///////////////
+public function ReDibujarTablaMarca()
+{
+	if ($this->session->userdata('login')==TRUE) {
+		$this->load->model('marcas');
+		$marcae = $this->marcas->getListarMarcas($this->session->userdata('idusuario'));
+		echo '<TABLE id="tablamarca" class="table table-striped table-bordered table-hover">';
+		echo '<THEAD>';
+		echo '<TR><TH>N°</TH><TH>Nombre</TH><TH>Estado</TH></TR>';
+		echo '</THEAD>';
+		echo '<TBODY>';
+		$num=0;
+		if($marcae){
+			foreach ($marcae as $fila) {
+					$num++;
+					echo '<TR id="'.$fila->idmarca.'" onclick="Llama_modal_calificacion(this)"><TD>'.$num.'</TD><TD>'.$fila->nombremarca.'</TD><TD>'.$fila->estado.'</TD></TR>';				
+			}
+		}
+		echo '</TBODY>';
+		echo '</TABLE>';
+	}else{
+		show_404();
+	}
 }
+}//fin controlador
