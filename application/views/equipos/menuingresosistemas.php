@@ -11,7 +11,6 @@
 					<div class="clearfix"></div>
 				</span>
 			</div>
-
 			<div class="panel-body">
 				<div class="panel panel-default panel-fade col-md-8 col-center">
 			        <div style="margin: 10px">
@@ -49,8 +48,7 @@
 					                </div>
 					            </div>
 					        </div>					      
-					    </div>
-					    
+					    </div>					    
 					    <div class="row" >
 					    	<div class="col-xs-6 col-md-12">
 					      		<span>*Localización</span>
@@ -85,15 +83,10 @@
 		</div>
 	</div>
 </div>
-
-
-<script src="<?=base_url('plantilla/dist/js/crearmarcas.js');?>"></script>
-<script src="<?=base_url('plantilla/dist/js/crearmodelos.js');?>"></script>
-<script src="<?=base_url('plantilla/dist/js/menuingresoactivos.js');?>"></script>
+<script src="<?=base_url('plantilla/dist/js/datepicker.js');?>"></script>
 <script>
 $(document).ready(function() {
 	$('#selecttipoequipo').change(function(){
-		//$('').css('display','inline');
 		$('#selecttipoequipo option:selected').each(function(){
 			idtipobien= $('#selecttipoequipo').val();
 			$.post("<?php echo base_url('bienes/listarfamiliasbienessistemas');?>", {
@@ -127,10 +120,89 @@ $(document).ready(function() {
 					document.getElementById("selectsubequipo").disabled=true;
 				}
 			});
-			//$("#txtareadescripcion").val($("#txtareadescripcion").val()+' fb.idfamiliabien = '+idfamiliabien+' or \n');
 		});
 	});
 
+	function validacion_formulario(){
+			
+		var retorno = true;
+		var numtipobien = document.getElementById("selecttipoequipo").length;
+		var numfamiliabien = document.getElementById("selectequipo").length;
+		var numsubfamiliabien = document.getElementById("selectsubequipo").length;
+		if ($('#preciocompra').val() == ''){
+			valorcompra = 0;
+		}else{
+			valorcompra = $('#preciocompra').val();
+		}
+
+		if ($('#vidautil').val() == ''){
+			vidautil = 0;
+			vidautiltiempo = '';
+		}else{
+			vidautil = $('#vidautil').val();
+			vidautiltiempo = ('#vidautiltiempo').val();
+		}
+
+		if ($('#garantia').val() == ''){
+			garantia = 0;
+			garantiatiempo = '';
+		}else{
+			garantia = $('#garantia').val();
+			garantiatiempo = ('#garantiatiempo').val();
+		}
+
+		dataform = {
+			idtipobien: $('#selecttipoequipo').val(),
+			idfamiliabien: $('#selectequipo').val(),
+			idsubfamiliabien: $('#selectsubequipo').val(),				
+			codequipo: $('#codequipo').val(),
+			codinventario: $('#codequipoinventario').val(),
+			fechacompra: $('#fechacompra').val(),
+			descripcion: $('#nombreequipo').val(),
+			valorcompra: valorcompra,
+			vidautil: vidautil,
+			garantia: $('#garantia').val(),
+			idpersonacustodio: $('#cmb_custodio').val(),
+			idlocalizacion: $('#cmb_localizacion').val(),
+			observacion: $('#descripcion').val(),
+			vidautiltiempo: $('#vidautiltiempo').val(),
+			garantiatiempo: $('#garantiatiempo').val()
+		}
+
+		retorno = Validar_Formularios2();			
+
+		if (numfamiliabien > 1) {
+			$('#selectequipo').css({'box-shadow':'none'});
+			$('#selectequipo').css({'border-color':'#d2d6de'});
+			$('#selectsubequipo').css({'box-shadow':'none'});
+			$('#selectsubequipo').css({'border-color':'#d2d6de'});
+			if ( dataform["idfamiliabien"] != 0 ) {
+				if (numsubfamiliabien > 1) {
+					if ( dataform["idsubfamiliabien"] != 0 ) {
+						$('#selectsubequipo').css({'box-shadow':'none'});
+						$('#selectsubequipo').css({'border-color':'#d2d6de'});
+					}else{
+						retorno = false;
+						$("#selectsubequipo").css({'border':'1px solid red'});
+						msj_alerta();
+					}
+				}else{
+					$('#selectequipo').css({'box-shadow':'none'});
+					$('#selectequipo').css({'border-color':'#d2d6de'});
+				}
+			}else{
+				retorno = false;					
+				$("#selectequipo").css({'border':'1px solid red'});
+				msj_alerta();					
+			}
+		}			
+		
+		return retorno;
+	}
+
+	
+
+	
 	/////////////////// busqueda de localizacion
 	var busqueda = {
 		ajax          : {
