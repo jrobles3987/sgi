@@ -299,7 +299,7 @@
         
       },
       error: function (xhr, exception) {
-        alert("error");
+        location.reload(true);
       }
 
     });
