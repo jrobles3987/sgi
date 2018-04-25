@@ -17,7 +17,7 @@
 			        <div style="margin: 10px">
 				        <div class="row" >
 					      	<div class="col-xs-4 col-md-6">
-					      		<span>Tipo de Sistema</span>
+					      		<span>*Tipo de Sistema</span>
 					        	<select id="selecttipoequipo" class="form-control" autofocus>
 							      	<option value="0">Seleccione el Tipo de Sistema...</option>
 							      	<?php
@@ -28,21 +28,21 @@
 							    </select>
 					      	</div>
 					      	<div class="col-xs-4 col-md-6">
-					        	<span>Codigo del Sistema</span>
+					        	<span>*Codigo del Sistema</span>
 					        	<input id="textinput" type="text" class="form-control input-md" title="Codigo del equipo por defecto">
 					      	</div>
 					    </div>
 					    <div class="row">
 					      	<div class="col-xs-4 col-md-6">
-					      		<span>Familia del Sistema</span>
-					        	<select id="selectequipo" class="form-control" disabled="true">
+					      		<span>*Familia del Sistema</span>
+					        	<select id="selectequipo" class="form-control requerido2" disabled="true">
 							    </select>
 					      	</div>
 					      	<div class="col-xs-4 col-md-6">
 					            <div class="form-group">
-					            	<span>Fecha de Creación del Sistema</span>
+					            	<span>*Fecha de Creación del Sistema</span>
 					                <div class='input-group date'>
-					                    <input type="text" class="form-control" id="fechaingreso" readonly="readonly">
+					                    <input type="text" class="form-control requerido2" id="fechaingreso" readonly="readonly">
 					                    <span class="input-group-addon">
 					                        <span class="glyphicon glyphicon-calendar"></span>
 					                    </span>
@@ -53,7 +53,7 @@
 					    
 					    <div class="row" >
 					    	<div class="col-xs-6 col-md-12">
-					      		<span>Localización</span>
+					      		<span>*Localización</span>
 					        	<select id="cmb_localizacion" name="busqueda" class="selectpicker busqueda requerido2" data-live-search="true" data-width="100%">
 						          <option selected disabled="disabled">Seleccione Localizacion</option>
 						        </select>
@@ -66,8 +66,8 @@
 			        <div style="margin: 10px">
 					    <div class="row">
 					      	<div class="col-xs-4 col-md-12">
-					      		<span>Descripción</span>
-					        	<textarea class="form-control" id="txtareadescripcion" rows="5" style="resize: none;"></textarea>
+					      		<span>*Descripción</span>
+					        	<textarea class="form-control requerido2" id="txtareadescripcion" rows="5" style="resize: none;"></textarea>
 					      	</div>
 					    </div>						   
 				    </div>
