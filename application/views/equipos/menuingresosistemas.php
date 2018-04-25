@@ -11,13 +11,12 @@
 					<div class="clearfix"></div>
 				</span>
 			</div>
-
 			<div class="panel-body">
 				<div class="panel panel-default panel-fade col-md-8 col-center">
 			        <div style="margin: 10px">
 				        <div class="row" >
 					      	<div class="col-xs-4 col-md-6">
-					      		<span>Tipo de Sistema</span>
+					      		<span>*Tipo de Sistema</span>
 					        	<select id="selecttipoequipo" class="form-control" autofocus>
 							      	<option value="0">Seleccione el Tipo de Sistema...</option>
 							      	<?php
@@ -28,39 +27,34 @@
 							    </select>
 					      	</div>
 					      	<div class="col-xs-4 col-md-6">
-					        	<span>Codigo del Sistema</span>
+					        	<span>*Codigo del Sistema</span>
 					        	<input id="textinput" type="text" class="form-control input-md" title="Codigo del equipo por defecto">
 					      	</div>
 					    </div>
 					    <div class="row">
 					      	<div class="col-xs-4 col-md-6">
-					      		<span>Familia del Sistema</span>
-					        	<select id="selectequipo" class="form-control" disabled="true">
+					      		<span>*Familia del Sistema</span>
+					        	<select id="selectequipo" class="form-control requerido2" disabled="true">
 							    </select>
 					      	</div>
 					      	<div class="col-xs-4 col-md-6">
 					            <div class="form-group">
-					            	<span>Fecha de Creación del Sistema</span>
+					            	<span>*Fecha de Creación del Sistema</span>
 					                <div class='input-group date'>
-					                    <input type="text" class="form-control" id="fechaingreso" readonly="readonly">
+					                    <input type="text" class="form-control requerido2" id="fechaingreso" readonly="readonly">
 					                    <span class="input-group-addon">
 					                        <span class="glyphicon glyphicon-calendar"></span>
 					                    </span>
 					                </div>
 					            </div>
 					        </div>					      
-					    </div>
-					    
+					    </div>					    
 					    <div class="row" >
 					    	<div class="col-xs-6 col-md-12">
-					      		<span>Localización</span>
-					        	<select id="selectlocalizacion" class="form-control">
-					        		<option value="0">Seleccione la localización del Sistema...</option>
-					        		<option value="1">Bodega</option>
-					        		<option value="2">Departamento de Rectorado</option>
-					        		<option value="3">Facultad de Ciencias Informáticas</option>
-					        		<option value="4">Facultad de Ciencias Administrativas y económicas</option>
-							    </select>
+					      		<span>*Localización</span>
+					        	<select id="cmb_localizacion" name="busqueda" class="selectpicker busqueda requerido2" data-live-search="true" data-width="100%">
+						          <option selected disabled="disabled">Seleccione Localizacion</option>
+						        </select>
 					      	</div>
 					    </div>
 				    </div>
@@ -70,8 +64,8 @@
 			        <div style="margin: 10px">
 					    <div class="row">
 					      	<div class="col-xs-4 col-md-12">
-					      		<span>Descripción</span>
-					        	<textarea class="form-control" id="txtareadescripcion" rows="5" style="resize: none;"></textarea>
+					      		<span>*Descripción</span>
+					        	<textarea class="form-control requerido2" id="txtareadescripcion" rows="5" style="resize: none;"></textarea>
 					      	</div>
 					    </div>						   
 				    </div>
@@ -79,7 +73,7 @@
 	          	<div style="margin:5px"></div>
 	          	<div class="row">
                     <div class="col-md-8"></div>
-                    <div class="col-md-3">
+                    <div class="col-md-3" id="btn-guardar-sistema">
                         <p>
                             <a class="btn btn-primary btn-block">Guardar Datos</a>
                         </p>
@@ -89,15 +83,10 @@
 		</div>
 	</div>
 </div>
-
-
-<script src="<?=base_url('plantilla/dist/js/crearmarcas.js');?>"></script>
-<script src="<?=base_url('plantilla/dist/js/crearmodelos.js');?>"></script>
-<script src="<?=base_url('plantilla/dist/js/menuingresoactivos.js');?>"></script>
+<script src="<?=base_url('plantilla/dist/js/datepicker.js');?>"></script>
 <script>
 $(document).ready(function() {
 	$('#selecttipoequipo').change(function(){
-		//$('').css('display','inline');
 		$('#selecttipoequipo option:selected').each(function(){
 			idtipobien= $('#selecttipoequipo').val();
 			$.post("<?php echo base_url('bienes/listarfamiliasbienessistemas');?>", {
@@ -131,8 +120,121 @@ $(document).ready(function() {
 					document.getElementById("selectsubequipo").disabled=true;
 				}
 			});
-			//$("#txtareadescripcion").val($("#txtareadescripcion").val()+' fb.idfamiliabien = '+idfamiliabien+' or \n');
 		});
 	});
+
+	function validacion_formulario(){
+			
+		var retorno = true;
+		var numtipobien = document.getElementById("selecttipoequipo").length;
+		var numfamiliabien = document.getElementById("selectequipo").length;
+		var numsubfamiliabien = document.getElementById("selectsubequipo").length;		
+
+		dataform = {
+			idtipobien: $('#selecttipoequipo').val(),
+			idfamiliabien: $('#selectequipo').val(),
+			idsubfamiliabien: $('#selectsubequipo').val(),
+			fechaingreso: $('#fechaingreso').val(),
+			idlocalizacion: $('#idlocalizacion').val(),
+			descripcion: $('#descripcion').val(),
+			codigosistema: $('#codigosistema').val()
+		}
+
+		retorno = Validar_Formularios2();			
+
+		if (numfamiliabien > 1) {
+			$('#selectequipo').css({'box-shadow':'none'});
+			$('#selectequipo').css({'border-color':'#d2d6de'});
+			$('#selectsubequipo').css({'box-shadow':'none'});
+			$('#selectsubequipo').css({'border-color':'#d2d6de'});
+			if ( dataform["idfamiliabien"] != 0 ) {
+				if (numsubfamiliabien > 1) {
+					if ( dataform["idsubfamiliabien"] != 0 ) {
+						$('#selectsubequipo').css({'box-shadow':'none'});
+						$('#selectsubequipo').css({'border-color':'#d2d6de'});
+					}else{
+						retorno = false;
+						$("#selectsubequipo").css({'border':'1px solid red'});
+						msj_alerta();
+					}
+				}else{
+					$('#selectequipo').css({'box-shadow':'none'});
+					$('#selectequipo').css({'border-color':'#d2d6de'});
+				}
+			}else{
+				retorno = false;					
+				$("#selectequipo").css({'border':'1px solid red'});
+				msj_alerta();					
+			}
+		}		
+		return retorno;
+	}
+
+	//GUARDAR EQUIPOS
+		$('#btn-guardar-sistema').click(function() {
+			if(validacion_formulario()){
+				$('#div_loading').css('display','inline');
+				$.ajax({
+		            type: "POST",
+		            url: "<?php echo base_url('equipo/GuardarEquiposComputador');?>",
+		            data: dataform,
+		            success: function (data) {
+		                var json = JSON.parse(data);
+		                $('#div_loading').css('display','none');
+		                if (json.res=="t") {
+		                	swal({
+							  title: "",
+							  text: "Datos Guardados\n Desea ingresar un nuevo equipo con las mismas características",
+							  type: "success",
+							  showCancelButton: true,
+							  confirmButtonText: "Si",
+							  cancelButtonText: "No",
+							  closeOnConfirm: true,
+							  closeOnCancel: true
+							},
+							function(isConfirm){
+							  if (!isConfirm) {
+							  	//location.reload(true);
+							  }
+							});
+
+		                }else{
+		                	swal("","Ocurrio un error al guardar!","error");
+		                }
+		            },
+		            error: function (xhr, exception) {
+		            }
+		        });
+			}
+		});
+
+
+	/////////////////// busqueda de localizacion
+	var busqueda = {
+		ajax          : {
+			url     : BASE_URL+"reportes/consultas_equipos/get_equipo_local",
+			type    : 'POST',
+			dataType: 'json',
+			data    : {
+				q: '{{{q}}}'
+			}
+		},
+		locale        : {
+			emptyTitle: 'Escriba el procedimiento a aplicar'
+		},
+		preprocessData: function (data) {
+			var i, l = data.length, array = [];
+			if (l) {
+				for (i = 0; i < l; i++) {
+					array.push($.extend(true, data[i], {
+						text : data[i].nombrelocalizacion,
+						value: data[i].idlocalizacion
+					}));
+				}
+			} 		return array;
+		}
+	};
+	$('.selectpicker').selectpicker().filter('.busqueda').ajaxSelectPicker(busqueda);
+	$('select').trigger('change');
 });
 </script>

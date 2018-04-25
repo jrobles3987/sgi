@@ -238,17 +238,6 @@
           </ul>
         </li>
         <li class="treeview">
-          <a href="#"><i class="fa fa-wrench"></i> <span>Herramientas</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="#">Docuementos</a></li>
-            <li><a href="#">Plantillas</a></li>
-          </ul>
-        </li>
-        <li class="treeview">
           <a href="#"><i class="fa fa-cubes"></i> <span>Administración</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
@@ -364,7 +353,7 @@
         $("#muestra2").html(''+numIncidencias2+'');
       },
       error: function (xhr, exception) {
-        alert("error");
+        location.reload(true);
       }
 
     });

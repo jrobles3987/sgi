@@ -7,7 +7,7 @@
 			<span class="panel-title">				
 				<div class="pull-right">
 					<p>
-          <a  href="#" class="btn btn-primary btn-block" id="btn_incidencias_Nuevas">Nuevas Incidencias</a>
+          <a  href="#" class="btn btn-primary btn-block" id="btn_incidencias_Nuevas">Nuevas Planificaciones</a>
           </p>                           
 				</div>
 				<div class="clearfix"></div>

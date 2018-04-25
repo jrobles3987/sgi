@@ -41,6 +41,35 @@ class Equipo extends CI_Controller
 		}
 	}
 
+	public function GuardarSistemas()
+	{
+		if ($this->input->is_ajax_request()) {
+			$data = array(
+				'idtipobien'		=> $this->input->post('idtipobien'),
+				'idfamiliabien'		=> $this->input->post('idfamiliabien'),		
+				'idsubfamiliabien'	=> $this->input->post('idsubfamiliabien'),
+				'fechaingreso'		=> $this->input->post('fechaingreso'),
+				'idlocalizacion'	=> $this->input->post('idlocalizacion'),
+				'descripcion'		=> $this->input->post('descripcion'),
+				'codigosistema'		=> $this->input->post('codigosistema')
+			);
+
+			if ($data) {
+				$this->load->model('equipos');
+				$modelos = $this->equipos->setIngresarSistemas($data);				
+				$data= array(
+					"res" => $modelos->f_ingreso_sistemas
+				);			
+			}else{
+				show_404();
+			}	
+
+			echo json_encode($data);
+		}else{
+			show_404();
+		}
+	}
+
 	public function SubirEquiposArchivos()
 	{
 		$estado = true;

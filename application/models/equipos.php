@@ -36,6 +36,24 @@ class Equipos extends CI_Model
 		
 	}
 
+	public function setIngresarSistemas($data)
+	{
+		$result = $this->db->query("SELECT incidencias.f_ingreso_sistemas(
+									    ".$data['idtipobien'].",
+										".$data['idfamiliabien'].",
+										".$data['idsubfamiliabien'].",
+										'".$data['fechaingreso']."',
+									    ".$data['idlocalizacion'].",
+										'".$data['descripcion']."',
+										'".$data['codigosistema']."'
+									);");
+		if($result->num_rows() > 0 ){
+			return $result->row();
+		}else{
+			return null;
+		}
+	}
+
 	public function setBorrarEquiposSubidaArchivo($usuario)
 	{
 		$result = $this->db->query("DELETE FROM incidencias.equipos_temp where usuario='".$usuario."';");		
