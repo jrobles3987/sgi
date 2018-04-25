@@ -470,7 +470,6 @@ class Menu extends CI_Controller
 					'incidencias_categorias'  => $this->incidencia->getlistarcategorias(),
 					'tecnicos'  => $this->incidencia->getlistarpersonal(),
 					'listar_marcas'  => $this->incidencia->getlistarmarcas()
-
 				);
 				$this->load->view('menu',$data);
 			}

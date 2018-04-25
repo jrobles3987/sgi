@@ -124,17 +124,17 @@ $(document).ready(function() {
 				descripcion: $('#txtareadescripcion').val(),
 				}
 
-			retorno = Validar_Formularios();
+			retorno = Validar_Formularios3();
 			return retorno;
 			
 		}
 	
 		$('#btn-guardar-incidencia').click(function() {
-			if(validar_formulario()){										
+			if(validar_formulario3()){										
 				$('#div_loading').css('display','inline');
 				$.ajax({
 		            type: "POST",
-		            url: "<?php echo base_url('incidencias/ActualizarIncidencias');?>",
+		            url: "<?php echo base_url('incidencias/planificaciones');?>",
 		            data: dataform,
 		            success: function (data) {	            	
 		                var json = JSON.parse(data);

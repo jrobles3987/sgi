@@ -238,4 +238,16 @@ public function mostartecnicos()
 	}
 
 
+	public function planificaciones()
+	{
+		if ($this->session->userdata('login')==TRUE) {
+			$this->load->model('incidencia');
+			$guardarplani= $this->incidencia->setguardarplanificacion();					
+			echo json_encode($guardarplani);
+		}else{
+			show_404();
+		}
+	}
+
+
 }
