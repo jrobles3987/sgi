@@ -16,10 +16,9 @@
               Tipos de reportes disponibles <span class="caret"></span>
             </button>
             <ul class="dropdown-menu">
-              <!-- <?php// if ($area_asignada == 'ENFERMERIA'): ?> -->
-                <li><a class="btn-parte_diaria" href="#parte_diaria">Incidencias</a></li>
-                <li><a class="btn-con_mensual" href="#con_mensual">Vida Util</a></li>
-              <!-- <li role="separator" class="divider"></li> -->
+                <li><a class="btn-parte_diaria" href="#parte_diaria">REPORTE INCIDENCIAS</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a class="btn-est_inci" href="#est_inci">REPORTE ESTADO INCIDENCIA</a></li>
             </ul>
           </div></h6>
         </div>
@@ -49,12 +48,14 @@
           <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
         </div>
       </div>
-
-      <div hidden class="form-group col-md-11 filtros f-con_mensual">
-        <label class="control-label">Mes y año del reporte a generar:</label>
-        <input id="dtp-month" placeholder="Seleccione" class="form-control dtp date" type="text">
-      </div>
-      <div hidden class="col-md-11 f-parte_diaria filtros f-con_mensual">
+<!-- ///////combo de tipos de estados de icidencia -->
+    <div hidden class="form-group filtros col-md-12 f-est_inci">
+        <label class="control-label">Seleccione Estado:</label>
+          <select id="cmb_estado_insi" class="selectpicker form-control" data-width="100%">
+            <option selected value="">Tipos Estados</option>
+          </select>
+    </div>
+      <div hidden class="col-md-11 f-parte_diaria filtros f-est_inci">
         <div class="divider"></div>
         <a class="btn btn-md btn-block btn-success generar-reporte"><i class="fa fa-file-pdf-o"></i> <strong> Generar reporte </strong> </a>
       </div>
@@ -93,11 +94,19 @@ function load_pdf(url){
   });
 }
 //
+/////////combo de las estados de equipos
+    $.getJSON(BASE_URL+'reportes/consultas_insidencias/get_estainsi',function(data){
+      $.each(data,function(key,value){
+        $('#cmb_estado_insi').append('<option value=' + value.idincidenciaestado + '>'+value.estado + '</option>');
+        $('#cmb_estado_insi').selectpicker('refresh');
+      });
+    });
 
 // se genera el pdf en base a la variable string tipo_reporte
 $('.generar-reporte').click(function(){
   var fecha_inicio = $('#datetimepicker_start').val();
   var fecha_fin = $('#datetimepicker_end').val();
+  var insi = $('#cmb_estado_insi').val();
   if (fecha_inicio == '') {
      fecha_inicio = 0;
      fecha_fin = 0;
@@ -105,22 +114,26 @@ $('.generar-reporte').click(function(){
     if (fecha_inicio == '') fecha_inicio = 'NO'
     if (fecha_fin == '') fecha_fin = 'NO'
   }
-  if (fecha_inicio!='NO' && fecha_fin!='NO' && fecha_inicio!=0 && fecha_fin!=0){
     var tamaño_hoja = $('#tamaño_hoja :selected').val();
     switch (tipo_reporte) {
       case 'parte_diaria':
+      if (fecha_inicio!='NO' && fecha_fin!='NO' && fecha_inicio!=0 && fecha_fin!=0){
         load_pdf(BASE_URL+'reportes/consultas_insidencias/get_insidencias/'+fecha_inicio+'/'+fecha_fin);
+      }else{
+        swal("","Debes llenar la fecha de inicio y de fin","info");
+      }
         break;
-        case 'con_mensual':
-          var year = $('#dtp-month').val().substr(0, 4);
-          var month = $('#dtp-month').val().substr(6, 7);
-          load_pdf(BASE_URL+'reportes/consolidado_enfermera/get_consolidado_mensual/'+id_enfermeria+'/'+month+'/'+year);
+        case 'est_inci':
+        if (insi!='') {
+          load_pdf(BASE_URL+'reportes/consultas_insidencias/get_insiesta/'+insi);
+        }
+        else {
+          swal("","Debes selecionar un estado","info");
+        }
           break;
       default:
     }
-  }else{
-    swal("","Debes llenar la fecha de inicio y de fin Tupid@","info");
-  }
+
 });
 
 // se añaden botones segun tipos de reporte
@@ -134,26 +147,14 @@ $('.btn-parte_diaria').click(function(e){
   tipo_reporte = 'parte_diaria';
 });
 //
-$('.btn-con_mensual').click(function(e){
+$('.btn-est_inci').click(function(e){
   e.preventDefault();
   $('.dtp').val('');
   $('.reporte-seleccionado').html('/ Repoerte de vida util');
   $('.filtros').hide();
   $('.alert-info').hide();
-  $('.f-con_mensual').show();
-  tipo_reporte = 'con_mensual';
+  $('.f-est_inci').show();
+  tipo_reporte = 'est_inci';
 });
-// configuracion para fechas enlazadas
-
-// setTimeout(() => {
-// $("#datetimepicker_start").on("dp.change", function (e) {
-//   $('#datetimepicker_end').data("DateTimePicker").minDate(e.date);
-//   }, 0);
-// });
-// setTimeout(() => {
-// $("#datetimepicker_end").on("dp.change", function (e) {
-//   $('#datetimepicker_start').data("DateTimePicker").maxDate(e.date);
-//     }, 0);
-// });
 
 </script>

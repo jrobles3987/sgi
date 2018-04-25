@@ -70,9 +70,17 @@ public function get_equipocusto($get_equipocusto){
     		return $this->db->query("SELECT * FROM incidencias.v_listar_equipos WHERE
                                 v_listar_equipos.idestadoequipo = '$est_equi'")->result();
     	}
-      /////////////estados esuipos
-          public function get_datos_est_equi($est_equi){
-            return $this->db->query("SELECT * FROM incidencias.equipos_estados WHERE idequiposestado = '$est_equi'")->row();
-          }
+/////////////estados esuipos
+      public function get_datos_est_equi($est_equi){
+        return $this->db->query("SELECT * FROM incidencias.equipos_estados WHERE idequiposestado = '$est_equi'")->row();
+      }
+/////////////estados esuipos
+      public function get_insiesta(){
+              return $this->db->query("SELECT * FROM incidencias.incidencias_estados")->result();
+      }
+      /////////////FINTRO PARA EL REPORTE DE ESTADO INCIDENCIAS
+      public function get_estainsi($insi){
+    		return $this->db->query("SELECT * FROM incidencias.v_listar_incidencias WHERE idincidenciaestado = '$insi'")->result();
+    	}
 }////fin
 ?>

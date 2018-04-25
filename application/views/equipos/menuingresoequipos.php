@@ -92,26 +92,19 @@
 							    	<option value="MESES">MESES</option>
 							    </select>
 							</div>
-							<input id="idcustodio" type="text" style="display: none;">
-					    	<div class="col-xs-2 col-md-2">
-					    		<span>Cédula del Custodio</span>
-						    	<input id="cedulacustodio" type="text" class="form-control input-md" title="Nombre del equipo">
-							</div>
-							<div class="col-xs-4 col-md-6">
-						    	<input id="nombrecustodio" type="text" class="form-control input-md" title="Nombre del equipo" readonly="readonly">
-							</div>	
+							<div class="form-group filtros col-md-6">
+						        <span>Custodio</span>
+						        <select id="cmb_custodio" name="custodio" class="selectpicker custodio" data-live-search="true" data-width="100%">
+						          <option value="0">Seleccione Persona</option>
+						        </select>
+					      	</div>			    		
 						</div>
 					    <div class="row" >
 					    	<div class="col-xs-4 col-md-12">
-					      		<span>*Localizacion</span>
-					        	<select id="selectlocalizacion2" class="form-control requerido2">
-					        		<option value="0">Seleccione la Localización del Equipo</option>
-							      	<?php
-		                                foreach ($incidencia_localizacion as $j) {
-		                                    echo '<option value="'.$j->idlocalizacion.'">'.$j->nombrelocalizacion.'</option>';
-		                                }
-		                            ?>
-							    </select>
+					      		<span>*Localizacion</span>					        	
+							    <select id="cmb_localizacion" name="busqueda" class="selectpicker busqueda requerido2" data-live-search="true" data-width="100%">
+						          <option selected disabled="disabled">Seleccione Localizacion</option>
+						        </select>
 					      	</div>
 					    </div>
 					    <div class="row">
@@ -140,17 +133,7 @@
 </div>
 <script src="<?=base_url('plantilla/dist/js/datepicker.js');?>"></script>
 <script>
-	$(document).ready(function() {
-		/*$("#selectequipo").select2({
-		    placeholder: "Seleccione la Familia del Equipo"
-		});
-		$("#selectsubequipo").select2({
-		    placeholder: "Seleccione la SubFamilia del Equipo"
-		});
-		$("#selectlocalizacion2").select2({
-		    placeholder: "Seleccione la SubFamilia del Equipo"
-		});*/
-		//variables del formulario
+	$(document).ready(function() {		
 		var dataform
 
 		function msj_alerta() {
@@ -202,8 +185,8 @@
 				valorcompra: valorcompra,
 				vidautil: vidautil,
 				garantia: $('#garantia').val(),
-				idpersonacustodio: $('#idcustodio').val(),
-				idlocalizacion: $('#selectlocalizacion2').val(),
+				idpersonacustodio: $('#cmb_custodio').val(),
+				idlocalizacion: $('#cmb_localizacion').val(),
 				observacion: $('#descripcion').val(),
 				vidautiltiempo: $('#vidautiltiempo').val(),
 				garantiatiempo: $('#garantiatiempo').val()
@@ -277,43 +260,7 @@
 					}
 				});
 			});
-		});			
-
-		//BUSCA CUSTODIO
-		$('#cedulacustodio').keypress(function(e) {
-		    var keycode = (document.all) ? e.keyCode : e.which;
-		    if (keycode == 13) {
-		    	$('#nombrecustodio').val("");
-			    $('#idcustodio').val("");
-		        var cedula = $('#cedulacustodio').val();
-		        if (cedula != ''){		        	
-		        	$('#div_loading_cargando').css('display','inline');					
-            		$.ajax({
-			            type: "POST",
-			            url: "<?php echo base_url('usuario/BuscarPersonal');?>",
-			            data: {cedula: cedula},
-			            success: function (data2) {						            	
-			            	if (data2!='null'){
-			                	var json = JSON.parse(data2);	
-			                }else{
-			                	var json = null;
-			                }						                
-			                if (json) {
-			                	$('#nombrecustodio').val(json[0].apellido1+" "+json[0].apellido2+" "+json[0].nombres);
-			                	$('#idcustodio').val(json[0].idpersonal);
-			                }else{
-			                	swal("","No se pudo encontrar al personal con el número de cédula introducido","error");
-			                }
-			            },
-			            complete : function(xhr, status) {
-		                	$('#div_loading_cargando').css('display','none');
-		            	},			            
-			            error: function (xhr, exception) {
-			            }
-			        });			            	
-			    }    
-		    }
-		});
+		});		
 
 		//GUARDAR EQUIPOS
 		$('#btn-guardar-equipo').click(function() {
@@ -353,4 +300,63 @@
 			}
 		});
 	});
+
+	/////////////////// busqueda de custodios
+  	var custodio = {
+  		ajax          : {
+  			url     : BASE_URL+"reportes/consultas_equipos/get_custorio_equipo",
+  			type    : 'POST',
+  			dataType: 'json',
+  			data    : {
+  				q: '{{{q}}}'
+  			}
+  		},
+  		locale        : {
+  			emptyTitle: 'Escriba el procedimiento a aplicar'
+  		},
+  		preprocessData: function (data) {
+  			var i, l = data.length, array = [];
+  			if (l) {
+  				for (i = 0; i < l; i++) {
+  					array.push($.extend(true, data[i], {
+  						text : data[i].nombrescompletos,
+  						value: data[i].idpersonal,
+  						data : {
+  							subtext: data[i].cedula
+  						}
+  					}));
+  				}
+  			} 		return array;
+  		}
+  	};
+  	$('.selectpicker').selectpicker().filter('.custodio').ajaxSelectPicker(custodio);
+  	$('select').trigger('change');
+
+    /////////////////// busqueda de localizacion
+	var busqueda = {
+		ajax          : {
+			url     : BASE_URL+"reportes/consultas_equipos/get_equipo_local",
+			type    : 'POST',
+			dataType: 'json',
+			data    : {
+				q: '{{{q}}}'
+			}
+		},
+		locale        : {
+			emptyTitle: 'Escriba el procedimiento a aplicar'
+		},
+		preprocessData: function (data) {
+			var i, l = data.length, array = [];
+			if (l) {
+				for (i = 0; i < l; i++) {
+					array.push($.extend(true, data[i], {
+						text : data[i].nombrelocalizacion,
+						value: data[i].idlocalizacion
+					}));
+				}
+			} 		return array;
+		}
+	};
+	$('.selectpicker').selectpicker().filter('.busqueda').ajaxSelectPicker(busqueda);
+	$('select').trigger('change');
 </script>

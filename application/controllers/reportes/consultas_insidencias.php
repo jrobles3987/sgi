@@ -4,6 +4,7 @@ class Consultas_insidencias extends CI_Controller {
   public function __construct() {
     parent::__construct();
     $this->load->model('reportes/reportes_model');
+    $this->load->model('incidencia');
   }
   private function get_css(){
     $html = '<style>
@@ -139,6 +140,7 @@ class Consultas_insidencias extends CI_Controller {
             </style>';
             return $html;
   }
+  ///////reporte de insidencias
   public function get_insidencias($fecha_inicio = '',$fecha_fin = ''){
     require_once(APPPATH.'libraries/html2pdf/html2pdf.class.php');
     $html2pdf = new HTML2PDF('L','A4', 'es');
@@ -156,8 +158,9 @@ class Consultas_insidencias extends CI_Controller {
             //CONSULTAS
               $inci = $this->reportes_model->get_report($fecha_inicio,$fecha_fin);
               //contador
-              $c_enfermeria = count($inci);
+              $c_contar = count($inci);
             // DISEÑO HTML
+if ($inci) {
 
             $html .= '<table class="bloqueGeneral center width100">
                   <tr>
@@ -165,7 +168,8 @@ class Consultas_insidencias extends CI_Controller {
                     <td class="cabecera center width80">
                       <div class="titulo t1">UNIVERSIDAD TÉCNICA DE MANABÍ</div>
                       <div class="titulo t2">CENTRO DE COMPUTO</div>
-                      <div class="titulo t3">REPORTE DE INCIDENCIAS</div>
+                      <div class="titulo t3">REPORTE GENERAL DE INCIDENCIAS</div>
+                      <div class="titulo t3">DESDE:'.$fecha_inicio.' HASTA: '.$fecha_fin.'</div>
                       <div class="titulo t3"></div>
                     </td>
                     <td class="logo2"></td>
@@ -236,7 +240,7 @@ $num +=1;
                       <table class="bloqueGeneral">
                         <tr>
                         <td id="estado"><label>Reporte Incidencias: </label><label class="datos">En General</label></td>
-                        <td id="total"><label>Total de registros: </label><label class="datos"> '.$c_enfermeria.'</label></td>
+                        <td id="total"><label>Total de registros: </label><label class="datos"> '.$c_contar.'</label></td>
                         </tr>
                       </table>
                     </div></td>
@@ -244,11 +248,135 @@ $num +=1;
               </table>';
               try{
                 $html2pdf->writeHTML($html);
-                //$html2pdf->Output(FCPATH.'public/pruebas.pdf','F');
                 $html2pdf->Output('Reporte Incidencias.pdf');
               }catch(HTML2PDF_exception $e){
                 echo $e;
               }
+            }else {
+              echo "NO EXISTEN DATOS";
+            }
   }
+  /////controlador estados insidencias
+  public function get_estainsi(){
+    $dato=$this->reportes_model->get_insiesta();
+    echo json_encode($dato);
+  }
+  ///////reporte de estados de insidencias
+  public function get_insiesta($insi = ''){
+    require_once(APPPATH.'libraries/html2pdf/html2pdf.class.php');
+    $html2pdf = new HTML2PDF('L','A4', 'es');
+    $html2pdf->pdf->SetTitle('Reporte Estados Incidencias');
 
-}
+            $html = '<!DOCTYPE html><head>';
+
+            $html .= $this->get_css();
+
+            $html .= '</head>
+            <meta charset="UTF-8">
+            <html lang="es">
+            <body>';
+
+            //CONSULTAS
+              $inci = $this->reportes_model->get_estainsi($insi);
+              //contador
+              $c_contar = count($inci);
+              //TIPO Estado
+              $enca= $this->incidencia->get_enca($insi);
+            // DISEÑO HTML
+if ($inci) {
+
+            $html .= '<table class="bloqueGeneral center width100">
+                  <tr>
+                    <td class="logo1"><img src="'.FCPATH.'plantilla/dist/img/logo_utm.png" width="50" height="50"></td>
+                    <td class="cabecera center width80">
+                      <div class="titulo t1">UNIVERSIDAD TÉCNICA DE MANABÍ</div>
+                      <div class="titulo t2">CENTRO DE COMPUTO</div>
+                      <div class="titulo t3">REPORTE GENERAL DE ESTADO INCIDENCIA</div>
+                      <div class="titulo t3">TIPO: '.$enca->estado.'</div>
+                      <div class="titulo t3"></div>
+                    </td>
+                    <td class="logo2"></td>
+                  </tr>
+                </table>
+                <br>
+                <table class="bloqueGeneral">
+    								<tr>
+    									<td class="bloqueA"><div id="labelBloque"><label>DATOS DEL RESPONSABLE</label></div></td>
+    								</tr>
+    								<tr>
+    									<td class="bloqueA"><div id="contenidoBloque">
+    										<table class="bloqueGeneral">
+    											<tr>
+    												<td id="cedula"><label>CÉDULA:</label><label class="datos">'.$this->session->userdata('cedula').'</label></td>
+    												<td id="nombre"><label>NOMBRES:</label><label class="datos">'. $this->session->userdata('apeuser').' '.$this->session->userdata('nomuser').'</label></td>
+    												<td id="fecha"><label>FECHA:</label><label class="datos">'.date("d/m/Y").'</label></td>
+    											</tr>
+    										</table>
+    									</div></td>
+    								</tr>
+    						</table>';
+            //TITULOS
+            $html .= '<table id="tablaBloque" class="width100">
+                  <tr class="colorheaderblue">
+                    <td width="20" class="headcolor">N°</td>
+                    <td class="hheaderblue t3 center" width="150">TITULO</td>
+                    <td class="hheaderblue t3 center" width="210">DESCRIPCIÓN</td>
+                    <td class="hheaderblue t3 center" width="80">ESTADO</td>
+                    <td class="hheaderblue t3 center" width="70">PRIORIDAD</td>
+                    <td class="hheaderblue t3 center" width="70">URGENCIA</td>
+                    <td class="hheaderblue t3 center" width="70">IMPACTO</td>
+                    <td class="hheaderblue t3 center" width="120">USUARIO CREADOR</td>
+                    <td class="hheaderblue t3 center" width="125">TÉCNICO ASIGNADO</td>
+                    <td class="hheaderblue t3 center" width="100">ULT.FECHA MODIFICACIÓN</td>
+
+                  </tr>';
+
+                //DATOS DE LA TABLA
+	              $num = 1;
+                foreach ($inci as $row) {
+                  $html .= '<tr>
+                       <td width="20" class="datos">'.$num.'</td>';
+                  $html .= '<td class="hheaderblue t4 center" width="150">'.$row->tituloincidencia.'</td>';
+
+                  $html .= '<td class="hheaderblue t4 center" width="210">'.$row->descripcion.'</td>';
+
+                  $html .= '<td class="hheaderblue t4 center" width="80">'.$row->estado.'</td>';
+                  $html .= '
+                      <td class="hheaderblue t4 center" width="70">'.$row->prioridad.'</td>';
+                  $html .= '
+                      <td class="hheaderblue t4 center" width="70">'.$row->urgencia.'</td>';
+                  $html .= '
+                      <td class="hheaderblue t4 center" width="70">'.$row->impacto.'</td>';
+                  $html .= '
+                      <td class="hheaderblue t4 center" width="120">'.$row->usuariocreador.'</td>';
+                  $html .= '
+                      <td class="hheaderblue t4 center" width="125">'.$row->tecnicoasignado.'</td>';
+                  $html .= '
+                      <td class="hheaderblue t4 center" width="100">'.$row->ultimamodificacion.'</td>
+                      </tr>';
+$num +=1;
+              }
+              $html .= '</table><br>';
+              $html .= '  <table class="bloqueGeneral">
+                <tr>
+                    <td class="bloqueA"><div id="contenidoBloque">
+                      <table class="bloqueGeneral">
+                        <tr>
+                        <td id="estado"><label>Reporte Estado Incidencias: </label><label class="datos">'.$enca->estado.'</label></td>
+                        <td id="total"><label>Total de registros: </label><label class="datos"> '.$c_contar.'</label></td>
+                        </tr>
+                      </table>
+                    </div></td>
+                  </tr>
+              </table>';
+              try{
+                $html2pdf->writeHTML($html);
+                $html2pdf->Output('Reporte Incidencias.pdf');
+              }catch(HTML2PDF_exception $e){
+                echo $e;
+              }
+            }else {
+              echo "NO EXISTEN DATOS";
+            }
+  }
+} ///fin

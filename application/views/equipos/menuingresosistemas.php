@@ -54,13 +54,9 @@
 					    <div class="row" >
 					    	<div class="col-xs-6 col-md-12">
 					      		<span>Localización</span>
-					        	<select id="selectlocalizacion" class="form-control">
-					        		<option value="0">Seleccione la localización del Sistema...</option>
-					        		<option value="1">Bodega</option>
-					        		<option value="2">Departamento de Rectorado</option>
-					        		<option value="3">Facultad de Ciencias Informáticas</option>
-					        		<option value="4">Facultad de Ciencias Administrativas y económicas</option>
-							    </select>
+					        	<select id="cmb_localizacion" name="busqueda" class="selectpicker busqueda requerido2" data-live-search="true" data-width="100%">
+						          <option selected disabled="disabled">Seleccione Localizacion</option>
+						        </select>
 					      	</div>
 					    </div>
 				    </div>
@@ -134,5 +130,33 @@ $(document).ready(function() {
 			//$("#txtareadescripcion").val($("#txtareadescripcion").val()+' fb.idfamiliabien = '+idfamiliabien+' or \n');
 		});
 	});
+
+	/////////////////// busqueda de localizacion
+	var busqueda = {
+		ajax          : {
+			url     : BASE_URL+"reportes/consultas_equipos/get_equipo_local",
+			type    : 'POST',
+			dataType: 'json',
+			data    : {
+				q: '{{{q}}}'
+			}
+		},
+		locale        : {
+			emptyTitle: 'Escriba el procedimiento a aplicar'
+		},
+		preprocessData: function (data) {
+			var i, l = data.length, array = [];
+			if (l) {
+				for (i = 0; i < l; i++) {
+					array.push($.extend(true, data[i], {
+						text : data[i].nombrelocalizacion,
+						value: data[i].idlocalizacion
+					}));
+				}
+			} 		return array;
+		}
+	};
+	$('.selectpicker').selectpicker().filter('.busqueda').ajaxSelectPicker(busqueda);
+	$('select').trigger('change');
 });
 </script>
