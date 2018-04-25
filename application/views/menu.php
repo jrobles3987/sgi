@@ -364,7 +364,7 @@
         $("#muestra2").html(''+numIncidencias2+'');
       },
       error: function (xhr, exception) {
-        alert("error");
+        location.reload(true);
       }
 
     });
