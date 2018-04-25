@@ -112,8 +112,7 @@ class incidencia extends CI_Model
 
 	}
 	
-
-
+	
 	public function setActualizarIncidencia($data)
 	{
 		$result = $this->db->query("SELECT
