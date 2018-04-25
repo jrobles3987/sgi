@@ -111,14 +111,7 @@ class incidencia extends CI_Model
 		}
 
 	}
-<<<<<<< HEAD
-	
-	
-=======
 
-
-
->>>>>>> 178719ce3654b2c04fd83e86fd340f558b91d852
 	public function setActualizarIncidencia($data)
 	{
 		$result = $this->db->query("SELECT
