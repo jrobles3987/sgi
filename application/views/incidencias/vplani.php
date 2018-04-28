@@ -51,7 +51,7 @@
 							</span>
 		                </div>
 		            </div>
-					<div class="col-xs-4 col-md-8 col-center" id="#ui-datepicker-div" style="display:none;">
+					<div class="col-xs-4 col-md-8 col-center" id="fecha_fin" style="display:none;">
 						<span>* Fecha de apertura</span>
 						<div class='input-group date'>
 							<input type="text" class="form-control requerido3" id="fechaapertura2" readonly="readonly" value= "<?php echo date("d/m/Y");?>">

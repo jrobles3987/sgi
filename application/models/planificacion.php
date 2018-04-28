@@ -1,4 +1,4 @@
-<<?php
+<?php
 /**
  *
  */
@@ -20,7 +20,7 @@ $result=$this->bd->query("INSERT INTO incidencias.planificacion_tecnicos(
 
   public function getlistarplanificaiones()
 {
-    $result=$this->bd->get('incidencias.v_listar_planificaciones');
+    $result=$this->db->get('incidencias.v_listar_planificaciones');
     if($result->num_rows()>0)
     {
       return $result->result();
