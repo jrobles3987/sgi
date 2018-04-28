@@ -108,9 +108,6 @@
 					      	</div>
 					    </div>
 					    <div class="row">
-					    								
-					    </div>
-					    <div class="row">
 					      	<div class="col-xs-4 col-md-12">
 					      		<span>Descripción</span>
 					        	<textarea class="form-control" id="descripcion" rows="3" style="resize: none;"></textarea>

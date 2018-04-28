@@ -76,12 +76,6 @@
 </div>
 <script>
 	$('.selectpicker').addClass('col-lg-8').selectpicker('setStyle');
-	$('#idtecnicos').change(function(){
-		var values = $('#idtecnicos').val();
-		//for(var i = 0; i < values.length; i ++) {
-			console.log($('#idtecnicos').val());
-		//}
-	});
 
 	$(document).ready(function() {
 

@@ -1,88 +1,4 @@
-
-<?php include("vplani.php");?>
-
-<div class="row container col-lg-12 col-center">
-	<div class="panel panel-default panel-fade">
-		<div class="panel-heading">
-			<span class="panel-title">
-				<div class="pull-right">
-					<p>
-          <a  href="#" class="btn btn-primary btn-block" id="btn_nuevasplanificaciones">Nuevas Planificaciones</a>
-          </p>
-				</div>
-				<div class="clearfix"></div>
-			</span>
-		</div>
-		<div class="row">
-			<div class="col-md-6">
-				<div style="margin:20px"></div>
-				<div id="tabla_planificacion" style="padding: 10px;">
-				<?php
-					echo '<TABLE id="tablaplanificaciones" class="table table-striped table-bordered table-hover">';
-					echo '<THEAD>';
-					echo '<TR><TH>N°</TH><TH>Titulo</TH><TH>Fecha Apertura</TH><TH>Fecha Finalización</TH><TH>Localización</TH></TR>';
-					echo '</THEAD>';
-					echo '<TBODY>';
-					echo '</TBODY>';
-					echo '</TABLE>';
-				?>
-				</div>
-			</div>
-	        <div class="col-md-6">
-				<div class="panel-body">
-					<div id="calendario_planificaciones"></div>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-<script>
- function LimpiarModalIngresoIncidencias () {
-    $('#txttituloincidencia2').val('');
-    $('#txtareadescripcion2').val('');
-    $("#selectpicker").val('');
-  }
-  $('#btn_nuevasplanificaciones').click(function() {
-    LimpiarModalIngresoIncidencias();
-    $("#selectpicker").selectpicker("render");
-    $('#vplani').modal({show:true});
-  });
-</script>
-
-
-<script>
-
-	ReDibujaTablaPlanificacion();
-	function ReDibujaTablaPlanificacion () {
-		$('#div_loading').css('display','inline');
-		$.ajax({
-            type: "POST",
-            url: "<?php echo base_url('incidencias/ReDibujarTablaPlanificaciones');?>",
-            data: {idincidencia: 1},
-            success: function (data) {
-				//var tabla = JSON.parse(data);
-				document.getElementById("tabla_planificacion").innerHTML = "";
-				document.getElementById("tabla_planificacion").innerHTML = data;
-				$('#tablaplanificaciones').dataTable({
-					//quitar para paginacion por defecto
-					"lengthMenu": [[5, 10, 20, -1], [5, 10, 20, "Todos"]]
-				});
-            },
-            complete : function(xhr, status) {
-                $('#div_loading').css('display','none');
-            },
-            error: function (xhr, exception) {
-				alert("error");
-            }
-	    });
-	}
-
-	$('#tablaplanificaciones').dataTable({
-		//quitar para paginacion por defecto
-		"lengthMenu": [[5, 10, 20, -1], [5, 10, 20, "Todos"]]
-	});
-
-  function ini_events(ele) {
+function ini_events(ele) {
       ele.each(function () {
 
         // create an Event Object (http://arshaw.com/fullcalendar/docs/event_data/Event_Object/)
@@ -104,13 +20,17 @@
       });
     }
 
-  ini_events($('#external-events div.external-event'));
-  var date = new Date();
-  var d = date.getDate(),
-      m = date.getMonth(),
-      y = date.getFullYear();
-  $('#calendario_planificaciones').fullCalendar({
-    header: {
+    ini_events($('#external-events div.external-event'));
+
+	/* initialize the calendar
+     -----------------------------------------------------------------*/
+    //Date for the calendar events (dummy data)
+    var date = new Date();
+    var d = date.getDate(),
+        m = date.getMonth(),
+        y = date.getFullYear();
+    $('#calendario_planificaciones').fullCalendar({
+      header: {
         left: 'prev,next today',
         center: 'title',
         right: 'month,agendaWeek,agendaDay'
@@ -121,8 +41,54 @@
         week: 'Semanas',
         day: 'Dias'
       },
-    events: '<?php echo base_url('Cplanificacion/ListarPlanificaciones');?>',    
-    editable: false,
+      //Random default events
+      events: [
+        {
+          title: 'All Day Event',
+          start: new Date(y, m, 1),
+          backgroundColor: "#f56954", //red
+          borderColor: "#f56954" //red
+        },
+        {
+          title: 'Long Event',
+          start: new Date(y, m, d - 5),
+          end: new Date(y, m, d - 2),
+          backgroundColor: "#f39c12", //yellow
+          borderColor: "#f39c12" //yellow
+        },
+        {
+          title: 'Meeting',
+          start: new Date(y, m, d, 10, 30),
+          allDay: false,
+          backgroundColor: "#0073b7", //Blue
+          borderColor: "#0073b7" //Blue
+        },
+        {
+          title: 'Lunch',
+          start: new Date(y, m, d, 12, 0),
+          end: new Date(y, m, d, 14, 0),
+          allDay: false,
+          backgroundColor: "#00c0ef", //Info (aqua)
+          borderColor: "#00c0ef" //Info (aqua)
+        },
+        {
+          title: 'Birthday Party',
+          start: new Date(y, m, d + 1, 19, 0),
+          end: new Date(y, m, d + 1, 22, 30),
+          allDay: false,
+          backgroundColor: "#00a65a", //Success (green)
+          borderColor: "#00a65a" //Success (green)
+        },
+        {
+          title: 'Click for Google',
+          start: new Date(y, m, 28),
+          end: new Date(y, m, 29),
+          url: 'http://google.com/',
+          backgroundColor: "#3c8dbc", //Primary (light-blue)
+          borderColor: "#3c8dbc" //Primary (light-blue)
+        }
+      ],
+      editable: false,
       droppable: true, // this allows things to be dropped onto the calendar !!!
       drop: function (date, allDay) { // this function is called when something is dropped
 
@@ -149,9 +115,10 @@
         }
 
       }
-  });
-  /* ADDING EVENTS */
-  var currColor = "#3c8dbc"; //Red by default
+    });
+
+	/* ADDING EVENTS */
+    var currColor = "#3c8dbc"; //Red by default
     //Color chooser button
     var colorChooser = $("#color-chooser-btn");
     $("#color-chooser > li > a").click(function (e) {
@@ -181,4 +148,3 @@
       //Remove event from text input
       $("#new-event").val("");
     });
-</script>

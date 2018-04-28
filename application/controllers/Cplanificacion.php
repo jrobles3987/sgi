@@ -29,30 +29,15 @@ class Cplanificacion extends CI_Controller
     }
   }
 
-  public function planificaciones()
-	{
-		if ($this->session->userdata('login')==TRUE) {
-			$this->load->model('planificacion');
-			$guardarplani= $this->incidencia->setguardarplanificacion();
-			echo json_encode($guardarplani);
-		}else{
-			show_404();
-		}
-	}
-  public function guardar_plani_tec()
+  public function ListarPlanificaciones()
   {
-    if ($this->session->userdata('login'==TRUE)) {
-      $idplanificacion->$this->input->post('idplanificacion');
-      $idtecnico->$this->input->post('idtecnico');
-      $comentario->$this->input->post('comentario');
+    //if ($this->input->is_ajax_request()) {
       $this->load->model('planificacion');
-      $res_pla_tec =$this->planificacion->setguardarplanitec($idplanificacion,$idtecnico,$comentario);
-      $data= array(
-        "res" => $res_pla_tec->setguardarplanitec());
-      echo json_encode($data);
-    }else {
+      $planificaciones = $this->planificacion->GetListarPlanificaionesCalendario();
+      echo json_encode ($planificaciones);
+    /*}else{
       show_404();
-    }
+    }*/
   }
 
   public function GuardarPlanificaciones()
