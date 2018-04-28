@@ -5,7 +5,7 @@ $active_record = TRUE;
 
 // Conexion a Base de datos del sistema SGI
 $db['default']['hostname'] = 'localhost';
-$db['default']['username'] = 'administrador';
+$db['default']['username'] = 'postgres';
 $db['default']['password'] = 'admin';
 $db['default']['database'] = 'sistemasutm';
 $db['default']['dbdriver'] = 'postgre';
