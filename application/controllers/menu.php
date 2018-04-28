@@ -364,6 +364,7 @@ class Menu extends CI_Controller
 			$this->load->model('incidencia');
 			$this->load->model('localizacion');
 			$this->load->model('usuarios');
+			$this->load->model('planificacion');
 			if ( $this->session->userdata('rol')!=0 ) {
 				$data = array(
 					'contenido' => 'incidencias/menuplanificaciones',
@@ -372,7 +373,9 @@ class Menu extends CI_Controller
 					'incidencia_necesidades' => $this->incidencia->getlistarnecesidades(),
 					'incidencia_tecnicos' => $this->usuarios->getListarUsuariosSistemaTipo('TÉCNICO'),
 					'incidencia_localizacion' => $this->localizacion->getLocalizacion(),
-					'incidencias_categorias'  => $this->incidencia->getlistarcategorias()
+					'incidencias_categorias'  => $this->incidencia->getlistarcategorias(),
+					'id_planificaciones'=>$this->planificacion->setultimaplanificacion(),
+					'planificacion_tecnico'=>$this->planificacion->setguardarplanificacion()
 
 				);
 				$this->load->view('menu',$data);

@@ -9,21 +9,28 @@
       <div class="modal-body">
 	<div class="panel panel-default panel-fade col-md-12 col-center">
 		<div class="panel-body">
-			<div style="margin:10px"></div>			
+			<div style="margin:10px"></div>
            		 <div class="row">
 			      	<div class="col-xs-4 col-md-8 col-center">
 			      		<span>* Titulo de la planificacion</span>
-			        	<textarea class="form-control requerido3" id="txttituloincidencia2" rows="1" style="resize: none;" autofocus></textarea>
+			        	<textarea class="form-control requerido3" id="txttituloplanificacion" rows="1" style="resize: none;" autofocus></textarea>
 			      	</div>
 				</div>
-<div style="margin:10px"></div>	
-						
+        <div style="margin:10px"></div>
+             		 <div class="row">
+  			      	<div class="col-xs-4 col-md-8 col-center">
+                  <span>*localizacion</span>
+  			        	<textarea class="form-control requerido3" id="txttituloincidencia2" rows="1" style="resize: none;" autofocus></textarea>
+  			      	</div>
+  				</div>
+<div style="margin:10px"></div>
+
 					<div  class="row">
 					<div  class="col-xs-4 col-md-8 col-center">
 					<span>* Tecnicos Asignados</span>
-					</div>	
+					</div>
 					<div class="col-xs-4 col-md-8 col-center" multiple="multiple" id="tec">
-						
+
 						<select id="selectpicker"  class="form-control selectpicker requerido3" data-live-search="true" multiple>
 							<?php
 								foreach ($incidencia_tecnicos as $t) { /// donde llamas a la ventana esta ??? .l.
@@ -31,9 +38,9 @@
 								}
 							?>
 						</select>
-				    </div> 
+				    </div>
 				</div>
-<div style="margin:10px"></div>			
+<div style="margin:10px"></div>
 					<div class="row">
 					<div class="col-xs-4 col-md-8 col-center" id="fechainicio-fechafin">
 						<span>* Fecha de Apertura y Vencimiento</span>
@@ -41,7 +48,7 @@
 		                  	<input type="text" class="form-control pull-right daterange requerido3" align="center" id="fechainicio-fechafin2" readonly="readonly">
 		                  	<span class="input-group-addon">
 								<span class="fa fa-calendar"></span>
-							</span>	
+							</span>
 		                </div>
 		            </div>
 					<div class="col-xs-4 col-md-8 col-center" id="#ui-datepicker-div" style="display:none;">
@@ -51,10 +58,10 @@
 								<span class="input-group-addon">
 									<span class="glyphicon glyphicon-calendar"></span>
 								</span>
-						</div> 	
+						</div>
 					</div>
 				</div>
-<div style="margin:10px"></div>	
+<div style="margin:10px"></div>
 				 <div class="row">
 			      	<div class="col-xs-4 col-md-12 col-center">
 			      		<span>* Descripcion</span>
@@ -64,17 +71,16 @@
 			    </div>
 
 	    </div>
-		<div style="margin:10px"></div>      	
+		<div style="margin:10px"></div>
 	</div>
 </div>
 </div>
-<div class="modal-footer"> 
-		<button type="button" class="btn btn-error" data-dismiss="modal"> Cerrar</button> 
-		<button type="submit" id="btn-guardar-incidencia" class="btn btn-info"> Guardar Planificaciones</button>  
+<div class="modal-footer">
+		<button type="button" class="btn btn-error" data-dismiss="modal"> Cerrar</button>
+		<button type="submit" id="btn-guardar-incidencia" class="btn btn-info"> Guardar Planificaciones</button>
 	</div>
 </div>
 </div>
-
 
 <script>
 	$('.selectpicker').addClass('col-lg-8').selectpicker('setStyle');
@@ -82,35 +88,30 @@
 
 <script>
 $('#selectpicker').change(function(){
-$('#dataOutput').html('');
 var values = $('#selectpicker').val();
-for(var i = 0; i < values.length; i += 1) {
-	console.log(values)
+for(var i = 0; i < values.length; i ++) {
+	console.count(values)
 }});
 </script>
 
+
 <script>
-	$('#submit').change(function(){
-	for(var i = 0; i < values.length; i += 1) {
-	console.log(values)
-}});
-</script>
-<script>
+
 $(document).ready(function() {
-		
+
 		//variables del formulario
 		var dataform
 
 		//// Funcion valodar formulario
 		function validar_formulario3(){
-			
+
 			var retorno = true;
 			var fechainicioyfin = $('#fechainicio-fechafin').val();
 			arreglo_fechas = fechainicioyfin.split('-');
 			var fecha1 = arreglo_fechas[0];
-			var fecha2 = arreglo_fechas[1];			
+			var fecha2 = arreglo_fechas[1];
 			dataform = {
-				//llenar con los campos que estan en la bd 
+				//llenar con los campos que estan en la bd
 				//idincidencia: $('#txtidincidencia').val(),
 				tituloincidencia: $('#txttituloincidencia2').val(),
 				fechainicio: fecha1,
@@ -120,33 +121,32 @@ $(document).ready(function() {
 				//incidenciaestado: $('#selectestado').val(),
 				//urgencia: $('#selecturgencia').val(),8
 				tecnicoasignado: $('#selectpicker').val(),
-				
 				descripcion: $('#txtareadescripcion').val(),
 				}
 
 			retorno = Validar_Formularios3();
 			return retorno;
-			
+
 		}
-	
+
 		$('#btn-guardar-incidencia').click(function() {
-			if(validar_formulario3()){										
+			if(validar_formulario3()){
 				$('#div_loading').css('display','inline');
 				$.ajax({
 		            type: "POST",
-		            url: "<?php echo base_url('incidencias/planificaciones');?>",
+		            url: "<?php echo base_url('planificacion/planificaciones');?>",
 		            data: dataform,
-		            success: function (data) {	            	
+		            success: function (data) {
 		                var json = JSON.parse(data);
 		                $('#div_loading').css('display','none');
-		                if (json.res=="t") {
+		                if (json.res=="$result") {
 							toastr.success("Datos Actualizados correctamente","",{
 								"timeOut": "5000",
 								"extendedTImeout": "5000",
 								"closeButton": true,
 								"positionClass": "toast-bottom-left"
 							});
-							//setTimeout ("location.replace('<?php echo base_url('menu/Incidentes')?>');", 3000); 							
+							//setTimeout ("location.replace('<?php echo base_url('menu/menuplanificaciones')?>');", 3000);
 		                }else{
 		                	toastr.success("Datos Guardados correctamente","",{
 								"timeOut": "5000",
@@ -162,9 +162,7 @@ $(document).ready(function() {
 		            error: function (xhr, exception) {
 		            }
 		        });
-			}		
+			}
 		});
 	});
-
-	 
 </script>

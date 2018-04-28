@@ -4,14 +4,14 @@
 <div class="row container col-lg-12 col-center">
 	<div class="panel panel-default panel-fade">
 		<div class="panel-heading">
-			<span class="panel-title">				
+			<span class="panel-title">
 				<div class="pull-right">
 					<p>
-          <a  href="#" class="btn btn-primary btn-block" id="btn_incidencias_Nuevas">Nuevas Planificaciones</a>
-          </p>                           
+          <a  href="#" class="btn btn-primary btn-block" id="btn_nuevasplanificaciones">Nuevas Planificaciones</a>
+          </p>
 				</div>
 				<div class="clearfix"></div>
-			</span>			
+			</span>
 		</div>
 		<div class="row">
 			<div class="col-md-6">
@@ -37,25 +37,18 @@
 	</div>
 </div>
 <script>
-
-  function LimpiarModalIngresoIncidencias () {
+ function LimpiarModalIngresoIncidencias () {
     $('#txttituloincidencia2').val('');
-    $('#selectestado2').val(1);
-    $('#selecturgencia2').val(1);
-    $('#selectimpacto2').val(1);
-    $('#selectprioridad2').val(1);
-    $('#selectecnico2').val(0);
-    $('#selectfuenteincidencia2').val(1);
-    $('#selectlocalizacion2').val(0);
-    $('#selectcategoria2').val(0);
     $('#txtareadescripcion2').val('');
+    $("#selectpicker").val('');
   }
-
-  $('#btn_incidencias_Nuevas').click(function() {
+  $('#btn_nuevasplanificaciones').click(function() {
     LimpiarModalIngresoIncidencias();
+    $("#selectpicker").selectpicker("render");
     $('#vplani').modal({show:true});
   });
 </script>
+
 
 <script>
 

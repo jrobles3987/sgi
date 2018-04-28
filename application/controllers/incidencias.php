@@ -1,7 +1,8 @@
 <?php
 /**
-* 
+*
 */
+
 class Incidencias extends CI_Controller
 {
 	public function Incidentesnuevos()
@@ -15,7 +16,7 @@ class Incidencias extends CI_Controller
 	}
 
 	public function Guardarincidencias()
-	{	
+	{
 		if ($this->input->is_ajax_request()) {
 			$data = array(
 				'fechaapertura'		=> $this->input->post('fechaapertura'),
@@ -23,7 +24,7 @@ class Incidencias extends CI_Controller
 				//'fechaaceptacion'	=> $this->input->post('fechaaceptacion'), ???
 				//'fechaaprovacion'	=> $this->input->post('fechaaprovacion'),
 				'idincidenciaestado'=> $this->input->post('incidenciaestado'),
-				'urgencia'			=> $this->input->post('urgencia'),		
+				'urgencia'			=> $this->input->post('urgencia'),
 				'impacto'			=> $this->input->post('impacto'),
 				'prioridad' 		=> $this->input->post('prioridad'),
 				'idincidenciafuente'=> $this->input->post('idincidenciafuente'),
@@ -44,12 +45,12 @@ class Incidencias extends CI_Controller
 
 				$data= array(
 					"res" => $modelos->f_ingreso_incidencias
-				);	
+				);
 
 				//echo json_encode($data);
 			}else{
 				//show_404();
-			}	
+			}
 			echo json_encode($data);
 		}else{
 			//show_404();
@@ -57,7 +58,7 @@ class Incidencias extends CI_Controller
 	}
 
 	public function ActualizarIncidencias()
-	{	
+	{
 		if ($this->input->is_ajax_request()) {
 			$data = array(
 				'idincidencia'		=> $this->input->post('idincidencia'),
@@ -65,7 +66,7 @@ class Incidencias extends CI_Controller
 				//'fechaaceptacion'	=> $this->input->post('fechaaceptacion'),
 				//'fechaaprovacion'	=> $this->input->post('fechaaprovacion'),
 				'idincidenciaestado'=> $this->input->post('incidenciaestado'),
-				'urgencia'			=> $this->input->post('urgencia'),		
+				'urgencia'			=> $this->input->post('urgencia'),
 				'impacto'			=> $this->input->post('impacto'),
 				'prioridad' 		=> $this->input->post('prioridad'),
 				'idincidenciafuente'=> $this->input->post('idincidenciafuente'),
@@ -86,12 +87,12 @@ class Incidencias extends CI_Controller
 
 				$data= array(
 					"res" => $modelos->f_actualiza_incidencias
-				);	
+				);
 
 				//echo json_encode($data);
 			}else{
 				//show_404();
-			}	
+			}
 			echo json_encode($data);
 		}else{
 			//show_404();
@@ -103,7 +104,7 @@ class Incidencias extends CI_Controller
 		if ($this->session->userdata('login')==TRUE) {
 			$idincidencia = $this->input->post('idincidencia');
 			$this->load->model('incidencia');
-			$equipos = $this->incidencia->getmostrarincidencias($idincidencia);					
+			$equipos = $this->incidencia->getmostrarincidencias($idincidencia);
 			echo json_encode($equipos);
 		}else{
 			show_404();
@@ -114,7 +115,7 @@ class Incidencias extends CI_Controller
 	{
 		if ($this->session->userdata('login')==TRUE) {
 			$this->load->model('incidencia');
-			$incidencias = $this->incidencia->getmostrarincidenciasnotificacion();					
+			$incidencias = $this->incidencia->getmostrarincidenciasnotificacion();
 			echo json_encode($incidencias);
 		}else{
 			show_404();
@@ -126,7 +127,7 @@ class Incidencias extends CI_Controller
 		if ($this->session->userdata('login')==TRUE) {
 			$idpersonal = $this->input->post('idpersonal');
 			$this->load->model('incidencia');
-			$trabajosactivos = $this->incidencia->getHistorialTecnico($idpersonal);					
+			$trabajosactivos = $this->incidencia->getHistorialTecnico($idpersonal);
 			echo json_encode($trabajosactivos);
 		}else{
 			show_404();
@@ -138,7 +139,7 @@ class Incidencias extends CI_Controller
 		if ($this->session->userdata('login')==TRUE) {
 			$idpersonal = $this->input->post('idpersonal');
 			$this->load->model('incidencia');
-			$calificaciontrabajos = $this->incidencia->getPromediosCalificacionTecnico($idpersonal);					
+			$calificaciontrabajos = $this->incidencia->getPromediosCalificacionTecnico($idpersonal);
 			echo json_encode($calificaciontrabajos);
 		}else{
 			show_404();
@@ -149,7 +150,7 @@ class Incidencias extends CI_Controller
 	{
 		if ($this->session->userdata('login')==TRUE) {
 			$this->load->model('incidencia');
-			$estadistica_estados = $this->incidencia->getEstadisticasIncidenciasEstados($this->session->userdata('idusuario'));					
+			$estadistica_estados = $this->incidencia->getEstadisticasIncidenciasEstados($this->session->userdata('idusuario'));
 			echo json_encode($estadistica_estados);
 		}else{
 			show_404();
@@ -167,7 +168,7 @@ class Incidencias extends CI_Controller
 			$res_calificacion = $this->incidencia->setAsignarCalificacionesIncidencias($idincidencia,$calificacion,$detallecalificacion,$tipo);
 			$data= array(
 				"res" => $res_calificacion->f_ingreso_incidencias_calificaciones
-			);	
+			);
 			echo json_encode($data);
 		}else{
 			show_404();
@@ -178,7 +179,7 @@ class Incidencias extends CI_Controller
 	{
 		if ($this->session->userdata('login')==TRUE) {
 			$this->load->model('incidencia');
-			$incidentes = $this->incidencia->getListartablaUsuarioNormal($this->session->userdata('idusuario'));			
+			$incidentes = $this->incidencia->getListartablaUsuarioNormal($this->session->userdata('idusuario'));
 			echo '<TABLE id="tablaincidencias1" class="table table-striped table-bordered table-hover">';
 			echo '<THEAD>';
 			echo '<TR><TH>N°</TH><TH>Titulo</TH><TH>Fecha Apertura</TH><TH>Fecha Resolución</TH><TH>Asignado al técnico</TH></TR>';
@@ -190,11 +191,11 @@ class Incidencias extends CI_Controller
 					if( $fila->estado == 'RESUELTO' ) {
 						$num++;
 						echo '<TR id="'.$fila->idincidencias.'" onclick="Llama_modal_calificacion(this)"><TD>'.$num.'</TD><TD>'.$fila->tituloincidencia.'</TD><TD>'.$fila->fechaapertura.'</TD><TD>'.$fila->fechavencimiento.'</TD>
-						<TD>'.$fila->tecnicoasignado.'</TD></TR>'; 
-					}	
+						<TD>'.$fila->tecnicoasignado.'</TD></TR>';
+					}
 				}
 			}
-			echo '</TBODY>';		
+			echo '</TBODY>';
 			echo '</TABLE>';
 		}else{
 			show_404();
@@ -213,13 +214,13 @@ class Incidencias extends CI_Controller
 			echo '<TBODY>';
 			$num=0;
 			if($planificaciones){
-				foreach ($planificaciones as $fila) {					
+				foreach ($planificaciones as $fila) {
 					$num++;
 					echo '<TR id="'.$fila->idplanificacion.'" onclick="Llama_modal_calificacion(this)"><TD>'.$num.'</TD><TD>'.$fila->titulo.'</TD><TD>'.$fila->fecha_apertura_real.'</TD><TD>'.$fila->fecha_finalizacion_real.'</TD>
-					<TD>'.$fila->nombrelocalizacion.'</TD></TR>'; 
+					<TD>'.$fila->nombrelocalizacion.'</TD></TR>';
 				}
 			}
-			echo '</TBODY>';		
+			echo '</TBODY>';
 			echo '</TABLE>';
 		}else{
 			show_404();
@@ -230,7 +231,7 @@ public function mostartecnicos()
 	{
 		if ($this->session->userdata('login')==TRUE) {
 			$this->load->model('incidencia');
-			$tecnicoasignado= $this->incidencia->getlistarpersonal();					
+			$tecnicoasignado= $this->incidencia->getlistarpersonal();
 			echo json_encode($tecnicoasignado);
 		}else{
 			show_404();
@@ -242,7 +243,7 @@ public function mostartecnicos()
 	{
 		if ($this->session->userdata('login')==TRUE) {
 			$this->load->model('incidencia');
-			$guardarplani= $this->incidencia->setguardarplanificacion();					
+			$guardarplani= $this->incidencia->setguardarplanificacion();
 			echo json_encode($guardarplani);
 		}else{
 			show_404();
