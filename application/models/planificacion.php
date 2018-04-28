@@ -30,7 +30,7 @@ $result=$this->bd->query("INSERT INTO incidencias.planificacion_tecnicos(
 }
 
 public function setguardarplanificacion (){
-  $result = $this->bd->query("SELECT incidencias.f_ingreso_planificacion(
+  $result = $this->db->query("SELECT incidencias.f_ingreso_planificacion(
                               '".$data['txttituloplanificacion']."',
                               '".$data['fechainicio-fechafin']."',
                               '".$data['#ui-datepicker-div']."',
