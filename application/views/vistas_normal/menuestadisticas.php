@@ -46,9 +46,7 @@
 			$.post("<?php echo base_url('incidencias/EstadisticasIncidenciasEstados');?>"
 			, function(datos){
 				if(datos){
-					var json1 = JSON.parse(datos);
-					console.log(json1);
-					
+					var json1 = JSON.parse(datos);					
 					var data = {};
 					var conteos = [];
 					json1.forEach(function(e) {

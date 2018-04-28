@@ -18,9 +18,20 @@ class planificacion extends CI_Model
     }
   }
 
-  public function getlistarplanificaiones()
+  public function GetListarPlanificaiones()
   {
       $result=$this->db->get('incidencias.v_listar_planificaciones');
+      if($result->num_rows()>0)
+      {
+        return $result->result();
+    }else{
+        return null;
+      }
+  }
+
+  public function GetListarPlanificaionesCalendario()
+  {
+      $result=$this->db->query("SELECT idplanificacion, titulo as title, descripcion_planificacion,fecha_apertura_real as start, fecha_finalizacion_real as end FROM incidencias.planificacion;");
       if($result->num_rows()>0)
       {
         return $result->result();
