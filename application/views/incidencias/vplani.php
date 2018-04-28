@@ -20,7 +20,7 @@
              		 <div class="row">
   			      	<div class="col-xs-4 col-md-8 col-center">
                   		<span>*Localizacion</span>
-						<select id="cmblocalizacion" name="busqueda" class="selectpicker busqueda" data-live-search="true" data-width="100%">
+						<select id="cmblocalizacion" name="busqueda" class="form-control selectpicker busqueda" data-live-search="true" data-width="100%">
 							<option selected disabled="disabled">Seleccione Localizacion</option>
 						</select>
   			      	</div>
@@ -75,7 +75,14 @@
 </div>
 </div>
 <script>
-	$('.selectpicker').addClass('col-lg-8').selectpicker('setStyle');
+  $('.cmblocalizacion').addClass('col-lg-8').selectpicker('setStyle');
+
+	$('#idtecnicos').change(function(){
+		var values = $('#idtecnicos').val();
+		//for(var i = 0; i < values.length; i ++) {
+			console.log($('#idtecnicos').val());
+		//}
+	});
 
 	$(document).ready(function() {
 
