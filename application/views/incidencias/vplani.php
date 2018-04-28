@@ -19,11 +19,13 @@
         <div style="margin:10px"></div>
              		 <div class="row">
   			      	<div class="col-xs-4 col-md-8 col-center">
-                  <span>*localizacion</span>
-  			        	<textarea class="form-control requerido3" id="txttituloincidencia2" rows="1" style="resize: none;" autofocus></textarea>
+                  		<span>*Localizacion</span>
+						<select id="cmblocalizacion" name="busqueda" class="selectpicker busqueda" data-live-search="true" data-width="100%">
+							<option selected disabled="disabled">Seleccione Localizacion</option>
+						</select>
   			      	</div>
   				</div>
-<div style="margin:10px"></div>
+		<div style="margin:10px"></div>
 
 					<div  class="row">
 					<div  class="col-xs-4 col-md-8 col-center">
@@ -31,7 +33,7 @@
 					</div>
 					<div class="col-xs-4 col-md-8 col-center" multiple="multiple" id="tec">
 
-						<select id="selectpicker"  class="form-control selectpicker requerido3" data-live-search="true" multiple>
+						<select id="idtecnicos"  class="form-control selectpicker" data-live-search="true" multiple>
 							<?php
 								foreach ($incidencia_tecnicos as $t) { /// donde llamas a la ventana esta ??? .l.
 									echo '<option value="'.$t->idpersonal.'">'.$t->nombres.'</option>';
@@ -40,7 +42,7 @@
 						</select>
 				    </div>
 				</div>
-<div style="margin:10px"></div>
+		<div style="margin:10px"></div>
 					<div class="row">
 					<div class="col-xs-4 col-md-8 col-center" id="fechainicio-fechafin">
 						<span>* Fecha de Apertura y Vencimiento</span>
@@ -51,17 +53,8 @@
 							</span>
 		                </div>
 		            </div>
-					<div class="col-xs-4 col-md-8 col-center" id="fecha_fin" style="display:none;">
-						<span>* Fecha de apertura</span>
-						<div class='input-group date'>
-							<input type="text" class="form-control requerido3" id="fechaapertura2" readonly="readonly" value= "<?php echo date("d/m/Y");?>">
-								<span class="input-group-addon">
-									<span class="glyphicon glyphicon-calendar"></span>
-								</span>
-						</div>
-					</div>
 				</div>
-<div style="margin:10px"></div>
+		<div style="margin:10px"></div>
 				 <div class="row">
 			      	<div class="col-xs-4 col-md-12 col-center">
 			      		<span>* Descripcion</span>
@@ -77,27 +70,20 @@
 </div>
 <div class="modal-footer">
 		<button type="button" class="btn btn-error" data-dismiss="modal"> Cerrar</button>
-		<button type="submit" id="btn-guardar-incidencia" class="btn btn-info"> Guardar Planificaciones</button>
+		<button type="submit" id="btn-guardar-planificacion" class="btn btn-info"> Guardar Planificaciones</button>
 	</div>
 </div>
 </div>
-
 <script>
 	$('.selectpicker').addClass('col-lg-8').selectpicker('setStyle');
-</script>
+	$('#idtecnicos').change(function(){
+		var values = $('#idtecnicos').val();
+		//for(var i = 0; i < values.length; i ++) {
+			console.log($('#idtecnicos').val());
+		//}
+	});
 
-<script>
-$('#selectpicker').change(function(){
-var values = $('#selectpicker').val();
-for(var i = 0; i < values.length; i ++) {
-	console.count(values)
-}});
-</script>
-
-
-<script>
-
-$(document).ready(function() {
+	$(document).ready(function() {
 
 		//variables del formulario
 		var dataform
@@ -106,54 +92,47 @@ $(document).ready(function() {
 		function validar_formulario3(){
 
 			var retorno = true;
-			var fechainicioyfin = $('#fechainicio-fechafin').val();
+			var fechainicioyfin = $('#fechainicio-fechafin2').val();
 			arreglo_fechas = fechainicioyfin.split('-');
 			var fecha1 = arreglo_fechas[0];
 			var fecha2 = arreglo_fechas[1];
 			dataform = {
-				//llenar con los campos que estan en la bd
-				//idincidencia: $('#txtidincidencia').val(),
-				tituloincidencia: $('#txttituloincidencia2').val(),
+				tituloincidencia: $('#txttituloplanificacion').val(),
 				fechainicio: fecha1,
 				fechavencimiento: fecha2,
-				//fechaaceptacion: $('#fechaaceptacion').val(),
-				//fechaaprovacion: $('#fechaaprovacion').val(),
-				//incidenciaestado: $('#selectestado').val(),
-				//urgencia: $('#selecturgencia').val(),8
-				tecnicoasignado: $('#selectpicker').val(),
-				descripcion: $('#txtareadescripcion').val(),
-				}
+				tecnicosasignados: $('#idtecnicos').val(),
+				descripcion: $('#txtareadescripcion2').val(),
+				localizacion: $('#cmblocalizacion').val()
+			}
 
 			retorno = Validar_Formularios3();
 			return retorno;
-
 		}
 
-		$('#btn-guardar-incidencia').click(function() {
+		$('#btn-guardar-planificacion').click(function() {
 			if(validar_formulario3()){
 				$('#div_loading').css('display','inline');
 				$.ajax({
 		            type: "POST",
-		            url: "<?php echo base_url('planificacion/planificaciones');?>",
+		            url: "<?php echo base_url('Cplanificacion/GuardarPlanificaciones');?>",
 		            data: dataform,
 		            success: function (data) {
 		                var json = JSON.parse(data);
 		                $('#div_loading').css('display','none');
-		                if (json.res=="$result") {
-							toastr.success("Datos Actualizados correctamente","",{
-								"timeOut": "5000",
-								"extendedTImeout": "5000",
-								"closeButton": true,
-								"positionClass": "toast-bottom-left"
-							});
-							//setTimeout ("location.replace('<?php echo base_url('menu/menuplanificaciones')?>');", 3000);
+		                if (json.res=="t") {
+        							toastr.success("Datos Actualizados correctamente","",{
+        								"timeOut": "5000",
+        								"extendedTImeout": "5000",
+        								"closeButton": true,
+        								"positionClass": "toast-bottom-left"
+        							});
 		                }else{
 		                	toastr.success("Datos Guardados correctamente","",{
-								"timeOut": "5000",
-								"extendedTImeout": "5000",
-								"closeButton": true,
-								"positionClass": "toast-bottom-left"
-							});
+        								"timeOut": "5000",
+        								"extendedTImeout": "5000",
+        								"closeButton": true,
+        								"positionClass": "toast-bottom-left"
+        							});
 		                }
 		            },
 		            complete : function(xhr, status) {
@@ -165,4 +144,32 @@ $(document).ready(function() {
 			}
 		});
 	});
+
+	/////////////////// busqueda de localizacion
+	var busqueda = {
+		ajax          : {
+			url     : BASE_URL+"reportes/consultas_equipos/get_equipo_local",
+			type    : 'POST',
+			dataType: 'json',
+			data    : {
+				q: '{{{q}}}'
+			}
+		},
+		locale        : {
+			emptyTitle: 'Escriba el procedimiento a aplicar'
+		},
+		preprocessData: function (data) {
+			var i, l = data.length, array = [];
+			if (l) {
+				for (i = 0; i < l; i++) {
+					array.push($.extend(true, data[i], {
+						text : data[i].nombrelocalizacion,
+						value: data[i].idlocalizacion
+					}));
+				}
+			} 		return array;
+		}
+	};
+	$('.selectpicker').selectpicker().filter('.busqueda').ajaxSelectPicker(busqueda);
+	$('select').trigger('change');
 </script>
