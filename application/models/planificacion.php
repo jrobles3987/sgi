@@ -4,22 +4,7 @@
  */
 class planificacion extends CI_Model
 {
-
-  function setguardarplanitec($idplanificacion='',$idtecnico='',$comentario='')
-  {
-    $result=$this->bd->query("INSERT INTO incidencias.planificacion_tecnicos(
-                          	   idplanificacion, idtecnico, comentario)
-                          	   VALUES ('".$idplanificacion."','".idtecnico."','".$comentario."');
-                            ");
-    if ($result->num_rows()>0) {
-      return $result->row();
-    }else {
-      return null;
-    }
-  }
-
-  public function GetListarPlanificaiones()
-  {
+  public function GetListarPlanificaiones(){
       $result=$this->db->get('incidencias.v_listar_planificaciones');
       if($result->num_rows()>0)
       {
@@ -29,8 +14,7 @@ class planificacion extends CI_Model
       }
   }
 
-  public function GetListarPlanificaionesCalendario()
-  {
+  public function GetListarPlanificaionesCalendario(){
       $result=$this->db->query("SELECT idplanificacion, titulo as title, descripcion_planificacion,fecha_apertura_real as start, fecha_finalizacion_real as end FROM incidencias.planificacion;");
       if($result->num_rows()>0)
       {
@@ -40,10 +24,10 @@ class planificacion extends CI_Model
       }
   }
 
-  public function setguardarplanificacion ($data){
+  public function setGuardarPlanificacion ($data){
     $bandera = true;
     $result = $this->db->query("SELECT incidencias.f_ingreso_planificacion(
-                                '".$data['tituloincidencia']."',
+                                '".$data['tituloplanificacion']."',
                                 '".$data['fechainicio']."',
                                 '".$data['fechavencimiento']."',
                                 '".$data['descripcion']."',
@@ -69,18 +53,6 @@ class planificacion extends CI_Model
       return null;
     }
   }
-
-
- public function setultimaplanificacion (){
-   $result=$this->db->query("SELECT MAX  (idplanificacion) FROM incidencias.planificacion;");
-    if($result->num_rows()>0)
-    {
-      return $result->result();
-  }else{
-      return null;
-    }
-
- }
 
 }
 ?>

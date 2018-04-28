@@ -84,7 +84,7 @@
 		var fecha1 = arreglo_fechas[0];
 		var fecha2 = arreglo_fechas[1];
 		dataform = {
-			tituloincidencia: $('#txttituloplanificacion').val(),
+			tituloplanificacion: $('#txttituloplanificacion').val(),
 			fechainicio: fecha1,
 			fechavencimiento: fecha2,
 			tecnicosasignados: $('#idtecnicos').val(),

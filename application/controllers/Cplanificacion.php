@@ -44,7 +44,7 @@ class Cplanificacion extends CI_Controller
   {
     if ($this->input->is_ajax_request()) {
       $data = array(
-        'tituloincidencia'=>$this->input->post('tituloincidencia'),
+        'tituloplanificacion'=>$this->input->post('tituloplanificacion'),
         'fechainicio' => $this->input->post('fechainicio'),
         'fechavencimiento'	=> $this->input->post('fechavencimiento'),
         'tecnicosasignados'	=> $this->input->post('tecnicosasignados'),
