@@ -75,75 +75,59 @@
 </div>
 </div>
 <script>
-  $('.cmblocalizacion').addClass('col-lg-8').selectpicker('setStyle');
-
-	$('#idtecnicos').change(function(){
-		var values = $('#idtecnicos').val();
-		//for(var i = 0; i < values.length; i ++) {
-			console.log($('#idtecnicos').val());
-		//}
-	});
-
-	$(document).ready(function() {
-
-		//variables del formulario
-		var dataform
-
-		//// Funcion valodar formulario
-		function validar_formulario3(){
-
-			var retorno = true;
-			var fechainicioyfin = $('#fechainicio-fechafin2').val();
-			arreglo_fechas = fechainicioyfin.split('-');
-			var fecha1 = arreglo_fechas[0];
-			var fecha2 = arreglo_fechas[1];
-			dataform = {
-				tituloincidencia: $('#txttituloplanificacion').val(),
-				fechainicio: fecha1,
-				fechavencimiento: fecha2,
-				tecnicosasignados: $('#idtecnicos').val(),
-				descripcion: $('#txtareadescripcion2').val(),
-				localizacion: $('#cmblocalizacion').val()
-			}
-
-			retorno = Validar_Formularios3();
-			return retorno;
+  	$('.cmblocalizacion').addClass('col-lg-8').selectpicker('setStyle');
+	var dataform
+	function validar_formulario3(){
+		var retorno = true;
+		var fechainicioyfin = $('#fechainicio-fechafin2').val();
+		arreglo_fechas = fechainicioyfin.split('-');
+		var fecha1 = arreglo_fechas[0];
+		var fecha2 = arreglo_fechas[1];
+		dataform = {
+			tituloincidencia: $('#txttituloplanificacion').val(),
+			fechainicio: fecha1,
+			fechavencimiento: fecha2,
+			tecnicosasignados: $('#idtecnicos').val(),
+			descripcion: $('#txtareadescripcion2').val(),
+			localizacion: $('#cmblocalizacion').val()
 		}
+		retorno = Validar_Formularios3();
+		return retorno;
+	}
 
-		$('#btn-guardar-planificacion').click(function() {
-			if(validar_formulario3()){
-				$('#div_loading').css('display','inline');
-				$.ajax({
-		            type: "POST",
-		            url: "<?php echo base_url('Cplanificacion/GuardarPlanificaciones');?>",
-		            data: dataform,
-		            success: function (data) {
-		                var json = JSON.parse(data);
-		                $('#div_loading').css('display','none');
-		                if (json.res=="t") {
-        							toastr.success("Datos Actualizados correctamente","",{
-        								"timeOut": "5000",
-        								"extendedTImeout": "5000",
-        								"closeButton": true,
-        								"positionClass": "toast-bottom-left"
-        							});
-		                }else{
-		                	toastr.success("Datos Guardados correctamente","",{
-        								"timeOut": "5000",
-        								"extendedTImeout": "5000",
-        								"closeButton": true,
-        								"positionClass": "toast-bottom-left"
-        							});
-		                }
-		            },
-		            complete : function(xhr, status) {
-		                $('#div_loading').css('display','none');
-		            },
-		            error: function (xhr, exception) {
-		            }
-		        });
-			}
-		});
+	$('#btn-guardar-planificacion').click(function() {
+		if(validar_formulario3()){
+			$('#div_loading').css('display','inline');
+			$.ajax({
+				type: "POST",
+				url: "<?php echo base_url('Cplanificacion/GuardarPlanificaciones');?>",
+				data: dataform,
+				success: function (data) {
+					var json = JSON.parse(data);
+					$('#div_loading').css('display','none');
+					if (json.res=="t") {
+								toastr.success("Datos Actualizados correctamente","",{
+									"timeOut": "5000",
+									"extendedTImeout": "5000",
+									"closeButton": true,
+									"positionClass": "toast-bottom-left"
+								});
+					}else{
+						toastr.success("Datos Guardados correctamente","",{
+									"timeOut": "5000",
+									"extendedTImeout": "5000",
+									"closeButton": true,
+									"positionClass": "toast-bottom-left"
+								});
+					}
+				},
+				complete : function(xhr, status) {
+					$('#div_loading').css('display','none');
+				},
+				error: function (xhr, exception) {
+				}
+			});
+		}
 	});
 
 	/////////////////// busqueda de localizacion
