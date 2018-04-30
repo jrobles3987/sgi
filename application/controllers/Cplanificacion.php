@@ -54,14 +54,18 @@ class Cplanificacion extends CI_Controller
 
       if ($data) {
         $this->load->model('planificacion');
-        $modelos = $this->planificacion->setguardarplanificacion($data);
-
-        $data= array(
-          "res" => $modelos->f_ingreso_planificacion_tecnicos
-        );
-      }else{
+        $planificacion = $this->planificacion->setguardarplanificacion($data);
+        if ($planificacion){
+          $data2= array(
+            "res" => $planificacion->f_ingreso_planificacion
+          );
+        }else{
+          $data2= array(
+            "res" => 'f'
+          );
+        }
       }
-      echo json_encode($data);
+      echo json_encode($data2);
     }else{
       show_404();
     }

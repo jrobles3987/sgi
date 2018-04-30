@@ -21,21 +21,20 @@
   			      	<div class="col-xs-4 col-md-8 col-center">
                   		<span>*Localizacion</span>
 						<select id="cmblocalizacion" name="busqueda" class="form-control selectpicker busqueda" data-live-search="true" data-width="100%">
-							<option selected disabled="disabled">Seleccione Localizacion</option>
+							<option value="0" selected disabled="disabled">Seleccione Localizacion</option>
 						</select>
   			      	</div>
   				</div>
 		<div style="margin:10px"></div>
-
 					<div  class="row">
 					<div  class="col-xs-4 col-md-8 col-center">
 					<span>* Tecnicos Asignados</span>
 					</div>
 					<div class="col-xs-4 col-md-8 col-center" multiple="multiple" id="tec">
-
 						<select id="idtecnicos"  class="form-control selectpicker" data-live-search="true" multiple>
+							<option value="0" selected disabled="disabled">Seleccione el Técnico</option>
 							<?php
-								foreach ($incidencia_tecnicos as $t) { /// donde llamas a la ventana esta ??? .l.
+								foreach ($incidencia_tecnicos as $t) { 
 									echo '<option value="'.$t->idpersonal.'">'.$t->nombres.'</option>';
 								}
 							?>
@@ -105,20 +104,23 @@
 				success: function (data) {
 					var json = JSON.parse(data);
 					$('#div_loading').css('display','none');
-					if (json.res=="t") {
-								toastr.success("Datos Actualizados correctamente","",{
-									"timeOut": "5000",
-									"extendedTImeout": "5000",
-									"closeButton": true,
-									"positionClass": "toast-bottom-left"
-								});
+					if (json.res!="f") {
+						setTimeout("$('#vplani').modal('hide');",1000)												
+						toastr.success("Datos Actualizados correctamente","",{
+							"timeOut": "5000",
+							"extendedTImeout": "5000",
+							"closeButton": true,
+							"positionClass": "toast-bottom-left"
+						});
+						ReDibujaTablaPlanificacion();
+						RedibujaCalendario();
 					}else{
-						toastr.success("Datos Guardados correctamente","",{
-									"timeOut": "5000",
-									"extendedTImeout": "5000",
-									"closeButton": true,
-									"positionClass": "toast-bottom-left"
-								});
+						toastr.error("Hubo un error al guardar los datos","",{
+							"timeOut": "5000",
+							"extendedTImeout": "5000",
+							"closeButton": true,
+							"positionClass": "toast-bottom-left"
+						});
 					}
 				},
 				complete : function(xhr, status) {
