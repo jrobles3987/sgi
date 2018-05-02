@@ -70,13 +70,13 @@ function ReDibujaTablaCalificacion () {
 					url: "<?php echo base_url('marcasequipos/ReDibujarTablaMarca');?>",
 					data: {idincidencia: 1},
 					success: function (data) {
-			//var tabla = JSON.parse(data);
-			document.getElementById("tabla_marcas_ingresadas").innerHTML = "";
-			document.getElementById("tabla_marcas_ingresadas").innerHTML = data;
-			$('#tablamarca').dataTable({
-				//quitar para paginacion por defecto
-				"lengthMenu": [[5, 10, 20, -1], [5, 10, 20, "Todos"]]
-			});
+						//var tabla = JSON.parse(data);
+						document.getElementById("tabla_marcas_ingresadas").innerHTML = "";
+						document.getElementById("tabla_marcas_ingresadas").innerHTML = data;
+						$('#tablamarca').dataTable({
+							//quitar para paginacion por defecto
+							"lengthMenu": [[5, 10, 20, -1], [5, 10, 20, "Todos"]]
+						});
 					},
 					complete : function(xhr, status) {
 							$('#div_loading_cargando').css('display','none');

@@ -52,7 +52,9 @@
 
 <script>
 
-	ReDibujaTablaPlanificacion();
+  ReDibujaTablaPlanificacion();
+  RedibujaCalendario();
+
 	function ReDibujaTablaPlanificacion () {
 		$('#div_loading').css('display','inline');
 		$.ajax({
@@ -82,28 +84,8 @@
 		"lengthMenu": [[5, 10, 20, -1], [5, 10, 20, "Todos"]]
 	});
 
-  function ini_events(ele) {
-    ele.each(function () {
-      var eventObject = {
-        title: $.trim($(this).text())
-      };        
-      $(this).data('eventObject', eventObject);
-      $(this).draggable({
-        zIndex: 1070,
-        revert: true, // will cause the event to go back to its
-        revertDuration: 0  //  original position after the drag
-      });
-
-    });
-  }
-
-  ini_events($('#external-events div.external-event'));
-  var date = new Date();
-  var d = date.getDate(),
-      m = date.getMonth(),
-      y = date.getFullYear();
-
-  $('#calendario_planificaciones').fullCalendar({
+  function RedibujaCalendario() {    
+    $('#calendario_planificaciones').fullCalendar({
     header: {
         left: 'prev,next today',
         center: 'title',
@@ -115,43 +97,10 @@
         week: 'Semanas',
         day: 'Dias'
       },
-    events: '<?php echo base_url('Cplanificacion/ListarPlanificaciones');?>',    
-    editable: false,
-      droppable: true, // this allows things to be dropped onto the calendar !!!
-      drop: function (date, allDay) { // this function is called when something is dropped
-        var originalEventObject = $(this).data('eventObject');
-        var copiedEventObject = $.extend({}, originalEventObject);
-        copiedEventObject.start = date;
-        copiedEventObject.allDay = allDay;
-        copiedEventObject.backgroundColor = $(this).css("background-color");
-        copiedEventObject.borderColor = $(this).css("border-color");
-        $('#calendar').fullCalendar('renderEvent', copiedEventObject, true);
-        if ($('#drop-remove').is(':checked')) {
-          $(this).remove();
-        }
-      }
-  });
-  /* ADDING EVENTS */
-  var currColor = "#3c8dbc"; //Red by default
-    var colorChooser = $("#color-chooser-btn");
-    $("#color-chooser > li > a").click(function (e) {
-      e.preventDefault();
-      currColor = $(this).css("color");
-      $('#add-new-event').css({"background-color": currColor, "border-color": currColor});
+      events: '<?php echo base_url('Cplanificacion/ListarPlanificaciones');?>',    
+      editable: false,
+        droppable: true
     });
-    $("#add-new-event").click(function (e) {
-      e.preventDefault();
-      var val = $("#new-event").val();
-      if (val.length == 0) {
-        return;
-      }
-
-      //Create events
-      var event = $("<div />");
-      event.css({"background-color": currColor, "border-color": currColor, "color": "#fff"}).addClass("external-event");
-      event.html(val);
-      $('#external-events').prepend(event);
-      ini_events(event);
-      $("#new-event").val("");
-    });
+  }
+  
 </script>

@@ -37,18 +37,24 @@ class planificacion extends CI_Model
       $idplanifi = $result->row();
       for ($i=0; $i < count($data['tecnicosasignados']); $i++) {
         if ($bandera) {
-          $result = $this->db->query("SELECT incidencias.f_ingreso_planificacion_tecnicos(
-                                      ".$idplanifi->f_ingreso_planificacion.",
-                                      ".$data['tecnicosasignados'][$i]."
-                                    );");
-          if ($result->num_rows() > 0) {
-            $bandera = $result->row();
-          }else {
-            $bandera = null;
+          if ($data['tecnicosasignados'][$i]){
+            $result2 = $this->db->query("SELECT incidencias.f_ingreso_planificacion_tecnicos(
+                                        ".$idplanifi->f_ingreso_planificacion.",
+                                        ".$data['tecnicosasignados'][$i]."
+                                      );");
+            if ($result2->num_rows() > 0) {
+              $bandera = array(
+                'f_ingreso_planificacion_tecnicos' => 't'
+              );
+            }else {
+              $bandera = array(
+                'f_ingreso_planificacion_tecnicos' => 't'
+              );
+            }
           }
         }
       }
-      return $bandera;
+      return $result->row();;
     }else {
       return null;
     }

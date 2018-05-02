@@ -5,7 +5,7 @@ function Validar_Formularios () {
 			$(elem).css({'border':'1px solid red'});
 			//$(elem).css({'background-color': '#F3F781'});
 			error++;
-			alert($(elem).id);
+			//alert($(elem).id);
 		}else{
 			$(elem).css({'box-shadow':'none'});
 			$(elem).css({'border-color':'#d2d6de'});					
@@ -63,7 +63,7 @@ function Validar_Formularios3 () {
 			$(elem).css({'border':'1px solid red'});
 			//$(elem).css({'background-color': '#F3F781'});
 			error++;
-			//alert($(elem).id);
+			alert($(elem).val());
 		}else{
 			$(elem).css({'box-shadow':'none'});
 			$(elem).css({'border-color':'#d2d6de'});
