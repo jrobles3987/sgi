@@ -1,5 +1,5 @@
 <div class="row container col-lg-12 col-center">
-	<div class="panel panel-default panel-fade">		
+	<div class="panel panel-default panel-fade">
 		<div class="panel-body">
 			<div class="tab-content">
 				<div class="tab-pane fade in active" id="v_incidencias">
@@ -17,8 +17,8 @@
 								if($lista_equipos){
 									foreach ($lista_equipos as $fila) {
 										$num++;
-										echo '<TR id="'.$fila->idequipo.'" onclick="myFunction(this)"><TD>'.$num.'</TD><TD>'.$fila->descripcion.'</TD><TD>'.$fila->codigoequipo.'</TD><TD>'.$fila->codinventario.'</TD><TD>'.$fila->garantia.'</TD><TD>'.$fila->valorcompra.'</TD>
-										<TD>'.$fila->fechacompra.'</TD><TD>'.$fila->fechaingreso.'</TD><TD>'.$fila->custodio.'</TD></TR>'; 
+										echo '<TR id="'.$fila->idequipo.'" onclick="myFunctio(this)"><TD>'.$num.'</TD><TD>'.$fila->descripcion.'</TD><TD>'.$fila->codigoequipo.'</TD><TD>'.$fila->codinventario.'</TD><TD>'.$fila->garantia.'</TD><TD>'.$fila->valorcompra.'</TD>
+										<TD>'.$fila->fechacompra.'</TD><TD>'.$fila->fechaingreso.'</TD><TD>'.$fila->custodio.'</TD></TR>';
 									}
 								}
 								echo '</TBODY>';
