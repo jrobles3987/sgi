@@ -216,7 +216,7 @@
             <li><a href="<?=base_url('menu/ingresoequiposexcel')?>">Agregar nuevos equipos en Lote</a></li>
             <li><a href="<?=base_url('menu/listadoequipos')?>">Listado de Equipos</a></li>
             <li><a href="<?=base_url('menu/ingresosistemas')?>">Agregar nuevos sistemas</a></li>
-            <li><a href="#">Modificar equipos</a></li>
+            <li><a href="<?=base_url('menu/listadoequipos')?>">Modificar Equipos</a></li>
             <li><a href="#">Modificar sistemas</a></li>
             <li><a href="#">Dar de baja a equipos</a></li>
             <li><a href="<?=base_url('menu/reportes_equipo')?>">Reportes</a></li>
