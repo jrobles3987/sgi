@@ -41,7 +41,7 @@ class Equipos extends CI_Model
 		$result = $this->db->query("SELECT incidencias.f_ingreso_sistemas(
 									    ".$data['idtipobien'].",
 										".$data['idfamiliabien'].",
-										".$data['idsubfamiliabien'].",
+										null,
 										'".$data['fechaingreso']."',
 									    ".$data['idlocalizacion'].",
 										'".$data['descripcion']."',

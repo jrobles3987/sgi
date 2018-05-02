@@ -28,13 +28,13 @@
 					      	</div>
 					      	<div class="col-xs-4 col-md-6">
 					        	<span>*Codigo del Sistema</span>
-					        	<input id="textinput" type="text" class="form-control input-md" title="Codigo del equipo por defecto">
+					        	<input id="codigosistema" type="text" class="form-control input-md" title="Codigo del equipo por defecto">
 					      	</div>
 					    </div>
 					    <div class="row">
 					      	<div class="col-xs-4 col-md-6">
 					      		<span>*Familia del Sistema</span>
-					        	<select id="selectequipo" class="form-control requerido2" disabled="true">
+					        	<select id="selectequipo" class="form-control" disabled="true">
 							    </select>
 					      	</div>
 					      	<div class="col-xs-4 col-md-6">
@@ -48,11 +48,11 @@
 					                </div>
 					            </div>
 					        </div>					      
-					    </div>					    
+					    </div>			    
 					    <div class="row" >
 					    	<div class="col-xs-6 col-md-12">
 					      		<span>*Localización</span>
-					        	<select id="cmb_localizacion" name="busqueda" class="selectpicker busqueda requerido2" data-live-search="true" data-width="100%">
+					        	<select id="cmb_localizacion" name="busqueda" class="selectpicker busqueda" data-live-search="true" data-width="100%">
 						          <option selected disabled="disabled">Seleccione Localizacion</option>
 						        </select>
 					      	</div>
@@ -94,19 +94,15 @@ $(document).ready(function() {
 			}, function(data){
 				$("#selectequipo").html(data);
 				if(document.getElementById("selectequipo").length>1){					
-					$("#selectsubequipo").html('<option value="0"></option>');
 					document.getElementById("selectequipo").disabled=false;
-					document.getElementById("selectsubequipo").disabled=true;
 				}else{
 					$("#selectequipo").html('<option value="0"></option>');
-					$("#selectsubequipo").html('<option value="0"></option>');
 					document.getElementById("selectequipo").disabled=true;
-					document.getElementById("selectsubequipo").disabled=true;
 				}
 			});
 		});
 	});
-	$('#selectequipo').change(function(){
+	/*$('#selectequipo').change(function(){
 		$('#selectequipo option:selected').each(function(){
 			idfamiliabien= $('#selectequipo').val();
 			$.post("<?php echo base_url('bienes/listarsubfamiliasbienes');?>", {
@@ -121,22 +117,22 @@ $(document).ready(function() {
 				}
 			});
 		});
-	});
+	});*/
 
 	function validacion_formulario(){
 			
 		var retorno = true;
 		var numtipobien = document.getElementById("selecttipoequipo").length;
 		var numfamiliabien = document.getElementById("selectequipo").length;
-		var numsubfamiliabien = document.getElementById("selectsubequipo").length;		
+		//var numsubfamiliabien = document.getElementById("selectsubequipo").length;		
 
 		dataform = {
 			idtipobien: $('#selecttipoequipo').val(),
 			idfamiliabien: $('#selectequipo').val(),
-			idsubfamiliabien: $('#selectsubequipo').val(),
+			//idsubfamiliabien: $('#selectsubequipo').val(),
 			fechaingreso: $('#fechaingreso').val(),
-			idlocalizacion: $('#idlocalizacion').val(),
-			descripcion: $('#descripcion').val(),
+			idlocalizacion: $('#cmb_localizacion').val(),
+			descripcion: document.getElementById("txtareadescripcion").value,
 			codigosistema: $('#codigosistema').val()
 		}
 
@@ -145,22 +141,9 @@ $(document).ready(function() {
 		if (numfamiliabien > 1) {
 			$('#selectequipo').css({'box-shadow':'none'});
 			$('#selectequipo').css({'border-color':'#d2d6de'});
-			$('#selectsubequipo').css({'box-shadow':'none'});
-			$('#selectsubequipo').css({'border-color':'#d2d6de'});
-			if ( dataform["idfamiliabien"] != 0 ) {
-				if (numsubfamiliabien > 1) {
-					if ( dataform["idsubfamiliabien"] != 0 ) {
-						$('#selectsubequipo').css({'box-shadow':'none'});
-						$('#selectsubequipo').css({'border-color':'#d2d6de'});
-					}else{
-						retorno = false;
-						$("#selectsubequipo").css({'border':'1px solid red'});
-						msj_alerta();
-					}
-				}else{
+			if ( dataform["idfamiliabien"] != 0 ) {				
 					$('#selectequipo').css({'box-shadow':'none'});
-					$('#selectequipo').css({'border-color':'#d2d6de'});
-				}
+					$('#selectequipo').css({'border-color':'#d2d6de'});			
 			}else{
 				retorno = false;					
 				$("#selectequipo").css({'border':'1px solid red'});
@@ -176,30 +159,26 @@ $(document).ready(function() {
 				$('#div_loading').css('display','inline');
 				$.ajax({
 		            type: "POST",
-		            url: "<?php echo base_url('equipo/GuardarEquiposComputador');?>",
+		            url: "<?php echo base_url('equipo/GuardarSistemas');?>",
 		            data: dataform,
 		            success: function (data) {
 		                var json = JSON.parse(data);
 		                $('#div_loading').css('display','none');
 		                if (json.res=="t") {
-		                	swal({
-							  title: "",
-							  text: "Datos Guardados\n Desea ingresar un nuevo equipo con las mismas características",
-							  type: "success",
-							  showCancelButton: true,
-							  confirmButtonText: "Si",
-							  cancelButtonText: "No",
-							  closeOnConfirm: true,
-							  closeOnCancel: true
-							},
-							function(isConfirm){
-							  if (!isConfirm) {
-							  	//location.reload(true);
-							  }
+		                	toastr.success("Datos Guardados correctamente","",{
+								"timeOut": "5000",
+								"extendedTImeout": "5000",
+								"closeButton": true,
+								"positionClass": "toast-bottom-left"
 							});
-
+							location.reload(true);
 		                }else{
-		                	swal("","Ocurrio un error al guardar!","error");
+		                	toastr.error("Error al guardar Datos","",{
+								"timeOut": "5000",
+								"extendedTImeout": "5000",
+								"closeButton": true,
+								"positionClass": "toast-bottom-left"
+							});
 		                }
 		            },
 		            error: function (xhr, exception) {

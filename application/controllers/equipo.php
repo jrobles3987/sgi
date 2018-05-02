@@ -46,8 +46,7 @@ class Equipo extends CI_Controller
 		if ($this->input->is_ajax_request()) {
 			$data = array(
 				'idtipobien'		=> $this->input->post('idtipobien'),
-				'idfamiliabien'		=> $this->input->post('idfamiliabien'),		
-				'idsubfamiliabien'	=> $this->input->post('idsubfamiliabien'),
+				'idfamiliabien'		=> $this->input->post('idfamiliabien'),
 				'fechaingreso'		=> $this->input->post('fechaingreso'),
 				'idlocalizacion'	=> $this->input->post('idlocalizacion'),
 				'descripcion'		=> $this->input->post('descripcion'),
