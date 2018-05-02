@@ -257,7 +257,7 @@
 					}
 				});
 			});
-		});		
+		});	
 
 		//GUARDAR EQUIPOS
 		$('#btn-guardar-equipo').click(function() {
