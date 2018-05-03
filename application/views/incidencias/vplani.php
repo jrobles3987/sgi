@@ -112,8 +112,9 @@
 							"closeButton": true,
 							"positionClass": "toast-bottom-left"
 						});
-						ReDibujaTablaPlanificacion();
-						RedibujaCalendario();
+						location.reload(true);
+						//ReDibujaTablaPlanificacion();
+						//RedibujaCalendario();
 					}else{
 						toastr.error("Hubo un error al guardar los datos","",{
 							"timeOut": "5000",
