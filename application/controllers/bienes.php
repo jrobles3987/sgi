@@ -55,4 +55,23 @@ class Bienes extends CI_Controller
 			echo '<option value="0">Seleccione la SubFamilia del Equipo...</option>';
 		}
 	}
+
+	public function VerificaTiposDeEquipos()
+	{
+		if ($this->input->is_ajax_request()) {
+			$data = array(
+				'tipobien' => $this->input->post('tipobien'),
+				'familiabien' => $this->input->post('familiabien'),
+				'subfamiliabien' => $this->input->post('subfamiliabien')
+			);
+			if($data){
+				$this->load->model('tiposbienes');
+				$tiposbienes = $this->tiposbienes->getVerificacionTiposEquipos($data);
+				echo json_encode($tiposbienes);
+			}
+		}else{
+			show_404();
+		}
+	}
+
 }
