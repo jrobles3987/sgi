@@ -1,4 +1,5 @@
 <?php include("Vmodalnueva_marca.php");?>
+<?php include("Vmodalmodificar_marca.php");?>
 
 <div class="row container col-lg-12 col-center">
 	<div class="panel panel-default panel-fade">
@@ -21,26 +22,27 @@
 <TABLE id="tablamarca" class="table table-striped table-bordered table-hover">
 <?php
 echo '<THEAD>';
-echo '<TR><TH>N°</TH><TH>Nombre</TH><TH>Estado</TH></TR>';
+echo '<TR><TH>N°</TH><TH>Nombre</TH><TH>Estado</TH><TH>Acciones</TH></TR>';
 echo '</THEAD>';
 echo '<TBODY>';
 echo '</TBODY>';
 ?>
 </TABLE>
 </div>
+
 <!-- /////fin de dibujo de tabla//////			 -->
 					<!-- <div>
 						<TABLE id="tablaincidenciasfuentes" class="table table-striped table-bordered table-hover">
 							<?php
 								echo '<THEAD>';
-								echo '<TR><TH>N°</TH><TH>Nombre</TH><TH>Estado</TH></TR>';
+								echo '<TR><TH>N°</TH><TH>Nombre</TH><TH>Estado</TH><TH>Acciones</TH></TR>';
 								echo '</THEAD>';
 								echo '<TBODY>';
 								$num=0;
 								if($listar_marcas){
 									foreach ($listar_marcas as $fila) {
 										$num++;
-										echo '<TR id="'.$fila->idmarca.'" onclick="myFunctionEstados(this)"><TD>'.$num.'</TD><TD>'.$fila->nombremarca.'</TD><TD>'.$fila->estado.'</TD></TR>';
+										echo '<TR><TD>'.$num.'</TD><TD>'.$fila->nombremarca.'</TD><TD>'.$fila->estado.'</TD></TR>';
 									}
 								}
 								echo '</TBODY>';
@@ -73,6 +75,11 @@ function ReDibujaTablaCalificacion () {
 						//var tabla = JSON.parse(data);
 						document.getElementById("tabla_marcas_ingresadas").innerHTML = "";
 						document.getElementById("tabla_marcas_ingresadas").innerHTML = data;
+						$('.modificar').click(function() {
+							// this.id;
+							marcamodal(this.id);
+							$('#Vmodalmodificar_marca').modal({show:true});
+						});
 						$('#tablamarca').dataTable({
 							//quitar para paginacion por defecto
 							"lengthMenu": [[5, 10, 20, -1], [5, 10, 20, "Todos"]]
@@ -86,8 +93,25 @@ function ReDibujaTablaCalificacion () {
 					}
 		});
 }
-
-////llamar modal
+///////////funcion llenar modal
+function marcamodal(x)
+{
+	$.ajax({
+					type: "POST",
+					url: "<?php echo base_url('marcasequipos/mostrarmarcas');?>",
+					data: {idmarca: x},
+					success: function (data) {
+			var json1 = JSON.parse(data);
+			$('#txtidmarca').val(x);
+			$('#txt_nomarca1').val(json1.nombremarca);
+					},
+					error: function (xhr, exception) {
+			alert("error");
+					}
+		});
+	$('#Vmodalmodificar_marca').modal({show:true});
+}
+////llamar modal nueva marcar
 	$('#btn_nueva_marca').click(function() {
 		LimpiarModalIngresoIncidencias();
 		$('#Vmodalnueva_marca').modal({show:true});
@@ -95,4 +119,13 @@ function ReDibujaTablaCalificacion () {
 	function LimpiarModalIngresoIncidencias(){
 		$('#txt_nomarca').val("");
 	}
+	////llamar modal modificar marcar
+		// $('.modificar').click(function() {
+		// 	LimpiarModalIngresoIncidencias();
+		// 	$('#Vmodalmodificar_marca').modal({show:true});
+		// });
+		// function LimpiarModalIngresoIncidencias(){
+		// 	$('#txt_nomarca').val("");
+		// }
+
 </script>

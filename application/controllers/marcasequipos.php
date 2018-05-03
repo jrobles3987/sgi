@@ -96,14 +96,14 @@ public function ReDibujarTablaMarca()
 		$marcae = $this->marcas->getListarMarcas($this->session->userdata('idusuario'));
 		echo '<TABLE id="tablamarca" class="table table-striped table-bordered table-hover">';
 		echo '<THEAD>';
-		echo '<TR><TH>N°</TH><TH>Nombre</TH><TH>Estado</TH></TR>';
+		echo '<TR><TH>N°</TH><TH>Nombre</TH><TH>Estado</TH><TH width="15">Acciones</TH></TR>';
 		echo '</THEAD>';
 		echo '<TBODY>';
 		$num=0;
 		if($marcae){
 			foreach ($marcae as $fila) {
 					$num++;
-					echo '<TR id="'.$fila->idmarca.'" onclick="Llama_modal_calificacion(this)"><TD>'.$num.'</TD><TD>'.$fila->nombremarca.'</TD><TD>'.$fila->estado.'</TD></TR>';				
+					echo '<TR><TD>'.$num.'</TD><TD>'.$fila->nombremarca.'</TD><TD>'.$fila->estado.'</TD><td width="15"><a title= "Modificar"  class= "btn btn-xs btn-info modificar" id="'.$fila->idmarca.'"><i class="fa fa-refresh"></i></a>   <a title= "Eliminar" class= "btn btn-xs btn-info eliminar" ><i class="fa fa-trash-o"></i></a></td></TR>';
 			}
 		}
 		echo '</TBODY>';
@@ -112,4 +112,17 @@ public function ReDibujarTablaMarca()
 		show_404();
 	}
 }
+/////
+public function mostrarmarcas()
+{
+	if ($this->session->userdata('login')==TRUE) {
+		$idmarca = $this->input->post('idmarca');
+		$this->load->model('marcas');
+		$marcas = $this->marcas->getmostrarmarcas($idmarca);
+		echo json_encode($marcas);
+	}else{
+		show_404();
+	}
+}
 }//fin controlador
+//////

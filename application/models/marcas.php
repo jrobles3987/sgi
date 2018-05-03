@@ -4,18 +4,18 @@ class Marcas extends CI_Model
 {
 	public function getListarMarcas()
 	{
-		//$this->db->order_by('idmarca','asc');	
+		//$this->db->order_by('idmarca','asc');
 		$this->db->order_by('nombremarca','asc');
 		$result = $this->db->get('incidencias.equipos_marcas');
-		if($result->num_rows() > 0 ){			
+		if($result->num_rows() > 0 ){
 			return $result->result();
 		}else{
 			return null;
-		}		
+		}
 	}
 
 	public function getListarModelos($idmarca='')
-	{	
+	{
 		$this->db->where('idmarca', $idmarca);
 		$this->db->order_by('nombremodelo','asc');
 		$result = $this->db->get('incidencias.equipos_modelos');
@@ -45,4 +45,16 @@ class Marcas extends CI_Model
 			return null;
 		}
 	}
-}
+	//////
+	public function getmostrarmarcas($IdMarca = '')
+	{
+		// $this->db->order_by('nombremarca','asc');
+		$this->db->where('idmarca',$IdMarca);
+		$result = $this->db->get('incidencias.equipos_marcas');
+		if($result->num_rows() > 0 ){
+			return $result->row();
+		}else{
+			return null;
+		}
+	}
+}///fin
