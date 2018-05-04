@@ -103,7 +103,7 @@ public function ReDibujarTablaMarca()
 		if($marcae){
 			foreach ($marcae as $fila) {
 					$num++;
-					echo '<TR><TD>'.$num.'</TD><TD>'.$fila->nombremarca.'</TD><TD>'.$fila->estado.'</TD><td width="15"><a title= "Modificar"  class= "btn btn-xs btn-info modificar" id="'.$fila->idmarca.'"><i class="fa fa-refresh"></i></a>   <a title= "Eliminar" class= "btn btn-xs btn-info eliminar" ><i class="fa fa-trash-o"></i></a></td></TR>';
+					echo '<TR><TD>'.$num.'</TD><TD>'.$fila->nombremarca.'</TD><TD>'.$fila->estado.'</TD><td width="15"><a title= "Modificar"  class= "btn btn-xs btn-info modificar" id="'.$fila->idmarca.'"><i class="fa fa-refresh"></i></a>   <a title= "Eliminar" class= "btn btn-xs btn-info eliminar" id="'.$fila->idmarca.'" ><i class="fa fa-trash-o"></i></a></td></TR>';
 			}
 		}
 		echo '</TBODY>';
@@ -124,5 +124,26 @@ public function mostrarmarcas()
 		show_404();
 	}
 }
+
+public function ActualizarIncidencias()
+{
+	if ($this->input->is_ajax_request()) {
+		$data = array(
+			'idmarca'		=> $this->input->post('idmarca'),
+			'idmarca'		=> $this->input->post('idmarca'),
+
+			//'usuariocreador'	=> $this->input->post('usuariocreador')
+		);
+
+		if ($data) {
+			$this->load->model('marcas');
+			$modelos = $this->marca->getactualizamarcas($data);
+		echo json_encode($data);
+	}else{
+		show_404();
+	}
+}
+
+
 }//fin controlador
 //////

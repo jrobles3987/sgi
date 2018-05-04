@@ -65,6 +65,13 @@ $('#tablamarca').dataTable({
 	"lengthMenu": [[5, 10, 20, -1], [5, 10, 20, "Todos"]]
 });
 
+ var datafrom
+ dataform = {
+  idmarca: $('#txttituloincidencia2').val()
+ 	tituloincidencia: $('#txttituloincidencia2').val(),
+ 	 }
+
+
 function ReDibujaTablaCalificacion () {
 	$('#div_loading_cargando').css('display','inline');
 	$.ajax({
@@ -78,6 +85,7 @@ function ReDibujaTablaCalificacion () {
 						$('.modificar').click(function() {
 							// this.id;
 							marcamodal(this.id);
+							eliminarmarca(this.id);
 							$('#Vmodalmodificar_marca').modal({show:true});
 						});
 						$('#tablamarca').dataTable({
@@ -92,6 +100,30 @@ function ReDibujaTablaCalificacion () {
 			alert("error");
 					}
 		});
+}
+
+function eliminarmarca(x){
+	$('.eliminar').click(function() {
+		swal({
+		title: "Esta seguro de eliminar el registro",
+		type: "warning",
+		showCancelButton: true,
+		confirmButtonClass: "btn-danger",
+		confirmButtonText: "Yes, delete",
+		cancelButtonText: "No, cancel",
+		timer: 4000,
+		closeOnConfirm: false,
+		closeOnCancel: false
+	},
+	function(isConfirm) {
+		if (isConfirm) {
+			swal("Deleted!", "Your imaginary file has been deleted.", "success");
+		} else {
+			swal.close();
+		}
+	});
+
+});
 }
 ///////////funcion llenar modal
 function marcamodal(x)
@@ -119,13 +151,4 @@ function marcamodal(x)
 	function LimpiarModalIngresoIncidencias(){
 		$('#txt_nomarca').val("");
 	}
-	////llamar modal modificar marcar
-		// $('.modificar').click(function() {
-		// 	LimpiarModalIngresoIncidencias();
-		// 	$('#Vmodalmodificar_marca').modal({show:true});
-		// });
-		// function LimpiarModalIngresoIncidencias(){
-		// 	$('#txt_nomarca').val("");
-		// }
-
-</script>
+	</script>

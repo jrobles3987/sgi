@@ -4,7 +4,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h5 class="modal-title" id="exampleModalLabel" align="left"><B> Registrar Nueva Marca</B></h5>
+        <h5 class="modal-title" id="exampleModalLabel" align="left"><B>Actualizar Marca</B></h5>
       </div>
       <div class="modal-body">
 	<div class="panel panel-default panel-fade col-md-12 col-center">
@@ -27,7 +27,7 @@
 </div>
 <div class="modal-footer">
 		<button type="button" class="btn btn-error" data-dismiss="modal"> Cerrar</button>
-		<button type="submit" id="btn-modficar_marca" class="btn btn-info"> Modificar Incidencia</button>
+		<button type="submit" id="btn-modficar_marca" class="btn btn-info"> Modificar Marca</button>
 	</div>
 </div>
 </div>

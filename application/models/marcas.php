@@ -57,4 +57,18 @@ class Marcas extends CI_Model
 			return null;
 		}
 	}
+
+	public function getactualizamarcas($data)
+	{
+		$this->db->where('idmarca', $idmarca);
+		$result = $this->db->query("UPDATE incidencias.equipos_marcas
+			SET idmarca=".$data['idmarca'].",
+	 nombremarca='".$data['nombremarca']."';");
+		if($result->num_rows() > 0 ){
+			return $result->row();
+		}else{
+			return null;
+		}
+	}
+
 }///fin
