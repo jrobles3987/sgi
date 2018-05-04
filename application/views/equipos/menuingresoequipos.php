@@ -129,7 +129,9 @@
 	</div>
 </div>
 <script src="<?=base_url('plantilla/dist/js/datepicker.js');?>"></script>
+<script src="<?=base_url('plantilla/dist/js/tiposequipos.js');?>"></script>
 <script>
+	VerificaTiposEquipos("<?=base_url();?>",1,1,1);
 	$(document).ready(function() {		
 		var dataform
 

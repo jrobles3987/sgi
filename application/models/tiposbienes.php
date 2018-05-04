@@ -60,4 +60,18 @@ class Tiposbienes extends CI_Model
 			return null;
 		}
 	}
+
+	public function getVerificacionTiposEquipos($data)
+	{
+		$result = $this->db->query("SELECT * FROM incidencias.equipos_tipos WHERE 
+									tipobien=".$data['tipobien'].",
+									familiabien=".$data['familiabien'].",
+									subfamiliabien=".$data['subfamiliabien'].";
+									");
+		if($result->num_rows() > 0 ){
+			return $result->result();
+		}else{
+			return null;
+		}
+	}
 }
