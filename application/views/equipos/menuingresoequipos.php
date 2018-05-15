@@ -102,7 +102,7 @@
 					    <div class="row" >
 					    	<div class="col-xs-4 col-md-12">
 					      		<span>*Localizacion</span>					        	
-							    <select id="cmb_localizacion" name="busqueda" class="selectpicker busqueda requerido2" data-live-search="true" data-width="100%">
+							    <select id="cmb_localizacion" name="busqueda" class="selectpicker busqueda" data-live-search="true" data-width="100%">
 						          <option selected disabled="disabled">Seleccione Localizacion</option>
 						        </select>
 					      	</div>
@@ -262,9 +262,10 @@
 		});	
 
 		//GUARDAR EQUIPOS
-		$('#btn-guardar-equipo').click(function() {
-			if(validacion_formulario()){										
-				$('#div_loading').css('display','inline');
+		$('#btn-guardar-equipo').click(function() {			
+			if(validacion_formulario()){
+				VerificaTiposEquipos("<?php echo base_url();?>",dataform['idtipobien'],dataform['idfamiliabien'],dataform['idsubfamiliabien']);
+				/*$('#div_loading').css('display','inline');
 				$.ajax({
 		            type: "POST",
 		            url: "<?php echo base_url('equipo/GuardarEquiposComputador');?>",
@@ -295,7 +296,7 @@
 		            },
 		            error: function (xhr, exception) {
 		            }
-		        });
+		        });*/
 			}
 		});
 	});

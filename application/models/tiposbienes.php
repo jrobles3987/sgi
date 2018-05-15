@@ -64,8 +64,8 @@ class Tiposbienes extends CI_Model
 	public function getVerificacionTiposEquipos($data)
 	{
 		$result = $this->db->query("SELECT * FROM incidencias.equipos_tipos WHERE 
-									tipobien=".$data['tipobien'].",
-									familiabien=".$data['familiabien'].",
+									tipobien=".$data['tipobien']." and
+									familiabien=".$data['familiabien']." and
 									subfamiliabien=".$data['subfamiliabien'].";
 									");
 		if($result->num_rows() > 0 ){

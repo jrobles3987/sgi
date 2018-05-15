@@ -12,7 +12,6 @@
                         Incidencias sin asignar
                         <span class="caret"></span>
                       </a>
-
                     </h4>
                   </div>
                   <div id="collapseOne" class="panel-collapse collapse">

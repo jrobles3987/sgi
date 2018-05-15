@@ -4,6 +4,7 @@ function VerificaTiposEquipos(baseurl,tipobien,familiabien,subfamiliabien){
         familiabien: familiabien,
         subfamiliabien: subfamiliabien
     }
+
     $.ajax({
         type: "POST",
         url: baseurl+"bienes/VerificaTiposDeEquipos",
