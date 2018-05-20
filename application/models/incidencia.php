@@ -310,6 +310,23 @@ class incidencia extends CI_Model
 	  	}
 	}
 
+	public function getEstadisticasIncidenciasUrgencia($idusuariocreador = '')
+	{
+
+		$result = $this->db->query("SELECT incidencias_necesidad.nombre,count(incidencias.idincidencias) as conteo
+									FROM incidencias.incidencias,incidencias.incidencias_necesidad
+									WHERE incidencias.urgencia = incidencias_necesidad.idnecesidad and incidencias.usuariocreador = ".$idusuariocreador."
+									GROUP BY incidencias.urgencia,incidencias_necesidad.nombre
+									ORDER BY incidencias.urgencia;
+									");
+		if ($result->num_rows()>0)
+	  	{
+			return $result->result();
+	  	}else {
+		  	return null;
+	  	}
+	}
+
 	public function setAsignarCalificacionesIncidencias($idincidencia='',$calificacion='',$detallecalificacion='',$tipo='')
 	{
 
@@ -362,7 +379,17 @@ class incidencia extends CI_Model
 
   	}
 		/////////////estados incidencia
-		public function get_enca($insi){
-			return $this->db->query("SELECT * FROM incidencias.incidencias_estados WHERE idincidenciaestado = '$insi'")->row();
-	 }
+	public function get_enca($insi){
+		return $this->db->query("SELECT * FROM incidencias.incidencias_estados WHERE idincidenciaestado = '$insi'")->row();
+	}
+
+	public function setEliminarIncidenciasNormal($idIncidencia)
+	{
+		try {
+			$result = $this->db->query("DELETE FROM incidencias.incidencias WHERE idincidencias = ".$idIncidencia.";");
+			return $result;
+		} catch (Exception $e) {
+			return false;
+		}		
+	}
 }

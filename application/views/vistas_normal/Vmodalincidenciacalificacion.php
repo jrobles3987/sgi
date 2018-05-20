@@ -192,21 +192,10 @@
 		    </div>
 			<div style="margin:10px"></div>
 			<div class="row">				
-				<div class="col-xs-4 col-md-5">
+				<div class="col-xs-3 col-md-3">
 					<span>Calificación</span>
 					<form>
 						<p class="clasificacion">
-						    <input id="radio1" type="radio" name="estrellas" value="10">
-						    <label for="radio1" onclick="calificaestrella(10);">★</label>
-						    <input id="radio2" type="radio" name="estrellas" value="9">
-						    <label for="radio2" onclick="calificaestrella(9);">★</label>
-						    <input id="radio3" type="radio" name="estrellas" value="8">
-						    <label for="radio3" onclick="calificaestrella(8);">★</label>
-						    <input id="radio4" type="radio" name="estrellas" value="7">
-						    <label for="radio4" onclick="calificaestrella(7);">★</label>
-						    <input id="radio5" type="radio" name="estrellas" value="6">
-						    <label for="radio5" onclick="calificaestrella(6);">★</label>
-						    <input id="radio6" type="radio" name="estrellas" value="5">
 						    <label for="radio6" onclick="calificaestrella(5);">★</label>
 						    <input id="radio7" type="radio" name="estrellas" value="4">
 						    <label for="radio7" onclick="calificaestrella(4);">★</label>
@@ -220,7 +209,7 @@
 						<input class="requerido" style="display:none" id="txtcalificacion" value="">
 					</form>
 				</div>
-				<div class="col-xs-4 col-md-7">
+				<div class="col-xs-4 col-md-9">
 		      		<span>Comentario de Calificación</span>
 		        	<textarea class="form-control" id="calificacion_txtcomentario" rows="2" style="resize: none;"></textarea>
 		        	<div style="margin:10px"></div>
@@ -248,7 +237,7 @@
 		//variables del formulario
 		var dataform
 
-		//// Funcion valodar formulario
+		//// Funcion validar formulario
 		function validar_formulario(){
 			
 			var retorno = false;		

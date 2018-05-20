@@ -102,47 +102,6 @@
       <!-- Navbar Right Menu -->
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
-          <!-- Notifications Menu -->
-          <li class="dropdown notifications-menu" title="Incidencias Nuevas">
-            <!-- Menu toggle button -->
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <i class="fa fa-bell-o"></i>
-              <span class="label label-warning " id='muestra1'></span>
-            </a>
-            <ul class="dropdown-menu" style="width: 600px;">
-
-              <li class="header" id='li-header1'> </li>
-              <li>
-                <!-- Inner Menu: contains the notifications -->
-                <ul class="menu" id='ul-noti1'>
-                  
-                  <!-- end notification -->
-                </ul>
-              </li>
-              <li class="footer"><a href="<?=base_url('menu/incidentes')?>"> Ver todas</a></li>
-            </ul>
-          </li>
-
-          <li class="dropdown notifications-menu" title="Incidencias En Curso">
-            <!-- Menu toggle button -->
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <i class="fa fa-calendar-check-o"></i>
-              <span class="label label-warning " id='muestra2'></span>
-            </a>
-            <ul class="dropdown-menu" style="width: 600px;">
-
-              <li class="header" id='li-header2'> </li>
-              <li>
-                <!-- Inner Menu: contains the notifications -->
-                <ul class="menu" id='ul-noti2'>
-                  
-                  <!-- end notification -->
-                </ul>
-              </li>
-              <li class="footer"><a href="<?=base_url('menu/incidentes')?>"> Ver todas</a></li>
-            </ul>
-          </li>
-
           <!-- User Account Menu -->
           <li class="dropdown user user-menu">
             <!-- Menu Toggle Button -->
@@ -197,19 +156,26 @@
 
       <!-- Sidebar Menu -->
       <ul class="sidebar-menu">
-        <li class="header">Menu</li>
+        <li class="header">Menu</li>        
         <li class="treeview">
-          <a href="#"><i class="fa fa-cogs"></i> <span>Gestión de incidencias</span>
+          <a href="<?=base_url('menu/IngresoNuevaIncidencia')?>"><i class="fa fa-file"></i> <span> Nuevas Incidencias</span></a>          
+        </li>
+        <li class="treeview">
+          <a href="<?=base_url('menu/Cambios_Incidencias')?>"><i class="fa fa-cogs"></i> <span> Cambios en Incidencias</span></a>
+        </li>
+        <li class="treeview">
+          <a href="<?=base_url('menu/Calificacion_Incidencias')?>"><i class="fa fa-check"></i> <span> Calificación de Incidencias</span></a>          
+        </li>
+        <li class="treeview">
+          <a href="<?=base_url('menu/Estadisticas_Incidencias')?>"><i class="fa fa-pie-chart"></i> <span> Estadísticas</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="<?=base_url('menu/ingresonuevaincidencia')?>">Nuevas Incidencias</a></li>
-            <li><a href="#">Cambios en Incidencias</a></li>
-            <li><a href="<?=base_url('menu/Estadisticas_Incidencias')?>">Estadísticas</a></li>
-            <li><a href="<?=base_url('menu/Calificacion_Incidencias')?>">Calificación de Incidencias</a></li>
-          </ul>
+            <li><a href="<?=base_url('menu/Estadisticas_IncidenciasEstados')?>">Incidencias por estados</a></li>
+            <li><a href="<?=base_url('menu/Estadisticas_IncidenciasUrgencia')?>">Incidencias por Urgencia</a></li>
+          </ul>        
         </li>
       </ul>
       <!-- /.sidebar-menu -->
@@ -252,81 +218,81 @@
 </script>
 
 <script>
-  var tipousuario =10
-  var socket = io.connect('localhost:7000');
-  Notificaciones();
-  socket.on('connected', function (data) {
-      socket.emit('ready for data', {});
-  });
+  // var tipousuario =10
+  // var socket = io.connect('localhost:7000');
+  // Notificaciones();
+  // socket.on('connected', function (data) {
+  //     socket.emit('ready for data', {});
+  // });
     
-  socket.on('update', function (data) {
-    if (tipousuario==10) {
-      var va = data.message.payload.split(';');
-      Notificaciones();
-      notifyMe();
-    }
-    console.log(data.message.payload);
-  });  
+  // socket.on('update', function (data) {
+  //   if (tipousuario==10) {
+  //     var va = data.message.payload.split(';');
+  //     Notificaciones();
+  //     notifyMe();
+  //   }
+  //   console.log(data.message.payload);
+  // });  
 
-  function Notificaciones(tiponotificacion){
-    var numIncidencias1=0;
-    var numIncidencias2=0;
+  // function Notificaciones(tiponotificacion){
+  //   var numIncidencias1=0;
+  //   var numIncidencias2=0;
 
-    $.ajax({
-      type: "POST",
-      url: "<?php echo base_url('incidencias/mostrarincidentesnotificaciones');?>",
-      success: function (data) {
-        var json = JSON.parse(data);
-        if (json){
-          $("#ul-noti1").innerHTML='';
-          $("#ul-noti2").innerHTML='';
-          for (var i=0, len=json.length; i < len; i++) {
+  //   $.ajax({
+  //     type: "POST",
+  //     url: "<?php echo base_url('incidencias/mostrarincidentesnotificaciones');?>",
+  //     success: function (data) {
+  //       var json = JSON.parse(data);
+  //       if (json){
+  //         $("#ul-noti1").innerHTML='';
+  //         $("#ul-noti2").innerHTML='';
+  //         for (var i=0, len=json.length; i < len; i++) {
             
-            if (json[i].estado=="NUEVO")
-            {
-              $("#ul-noti1").append('<li id="'+json[i].idincidencias+'" onclick="myFunction(this)"><a href="#"><i class="li_notificacion fa fa-book" style="color:green"></i>'+json[i].tituloincidencia+'  estado '+json[i].estado+'</a></li>');
-              numIncidencias1++;
-            }else{
-              $("#ul-noti2").append('<li id="'+json[i].idincidencias+'" onclick="myFunction(this)"><a href="#"><i class="li_notificacion fa fa-book" style="color:blue"></i>'+json[i].tituloincidencia+'  estado '+json[i].estado+'</a></li>');
-              numIncidencias2++;
-            }            
-          }
-        }
-        $("#li-header1").html('Tienes '+numIncidencias1+' incidencias Nuevas');
-        $("#muestra1").html(''+numIncidencias1+'');
-        $("#li-header2").html('Tienes '+numIncidencias2+' incidencias Nuevas');
-        $("#muestra2").html(''+numIncidencias2+'');
+  //           if (json[i].estado=="NUEVO")
+  //           {
+  //             $("#ul-noti1").append('<li id="'+json[i].idincidencias+'" onclick="myFunction(this)"><a href="#"><i class="li_notificacion fa fa-book" style="color:green"></i>'+json[i].tituloincidencia+'  estado '+json[i].estado+'</a></li>');
+  //             numIncidencias1++;
+  //           }else{
+  //             $("#ul-noti2").append('<li id="'+json[i].idincidencias+'" onclick="myFunction(this)"><a href="#"><i class="li_notificacion fa fa-book" style="color:blue"></i>'+json[i].tituloincidencia+'  estado '+json[i].estado+'</a></li>');
+  //             numIncidencias2++;
+  //           }            
+  //         }
+  //       }
+  //       $("#li-header1").html('Tienes '+numIncidencias1+' incidencias Nuevas');
+  //       $("#muestra1").html(''+numIncidencias1+'');
+  //       $("#li-header2").html('Tienes '+numIncidencias2+' incidencias Nuevas');
+  //       $("#muestra2").html(''+numIncidencias2+'');
         
-      },
-      error: function (xhr, exception) {
-        location.reload(true);
-      }
+  //     },
+  //     error: function (xhr, exception) {
+  //       location.reload(true);
+  //     }
 
-    });
-  }
+  //   });
+  // }
 
-  function notifyMe() {
-    // Let's check if the browser supports notifications
-    if (!("Notification" in window)) {
-      alert("This browser does not support desktop notification");
-    }
+  // function notifyMe() {
+  //   // Let's check if the browser supports notifications
+  //   if (!("Notification" in window)) {
+  //     alert("This browser does not support desktop notification");
+  //   }
 
-    // Let's check whether notification permissions have already been granted
-    else if (Notification.permission === "granted") {
-      // If it's okay let's create a notification
-      var notification = new Notification("Nueva Incidencia Registrada");
-    }
+  //   // Let's check whether notification permissions have already been granted
+  //   else if (Notification.permission === "granted") {
+  //     // If it's okay let's create a notification
+  //     var notification = new Notification("Nueva Incidencia Registrada");
+  //   }
 
-    // Otherwise, we need to ask the user for permission
-    else if (Notification.permission !== 'denied') {
-      Notification.requestPermission(function (permission) {
-        // If the user accepts, let's create a notification
-        if (permission === "granted") {
-          var notification = new Notification("Hi there!");
-        }
-      });
-    }
-  }
+  //   // Otherwise, we need to ask the user for permission
+  //   else if (Notification.permission !== 'denied') {
+  //     Notification.requestPermission(function (permission) {
+  //       // If the user accepts, let's create a notification
+  //       if (permission === "granted") {
+  //         var notification = new Notification("Hi there!");
+  //       }
+  //     });
+  //   }
+  // }
 
   function formato(texto){
     return texto.replace(/^(\d{4})-(\d{2})-(\d{2})$/g,'$3/$2/$1');

@@ -157,6 +157,17 @@ class Incidencias extends CI_Controller
 		}
 	}
 
+	public function EstadisticasIncidenciasUrgencia()
+	{
+		if ($this->session->userdata('login')==TRUE) {
+			$this->load->model('incidencia');
+			$estadistica_estados = $this->incidencia->getEstadisticasIncidenciasUrgencia($this->session->userdata('idusuario'));
+			echo json_encode($estadistica_estados);
+		}else{
+			show_404();
+		}
+	}
+
 	public function IngresarCalificacionesIncidencias()
 	{
 		if ($this->session->userdata('login')==TRUE) {
@@ -227,7 +238,41 @@ class Incidencias extends CI_Controller
 		}
 	}
 
-public function mostartecnicos()
+	public function ReDibujaTablaIncidenciasNormal()
+	{
+		if ($this->session->userdata('login')==TRUE) {
+			$this->load->model('incidencia');
+			$incidentes_todos = $this->incidencia->getlistartabla();
+			echo '<TABLE id="tablaincidencias" class="table table-striped table-bordered table-hover">';
+			echo '<THEAD>';
+			echo '<TR><TH>N°</TH><TH>Titulo</TH><TH>Estado</TH><TH>Fecha Apertura</TH><TH>Prioridad</TH><TH>Solicitante</TH><TH>Ultima Modificacion</TH><TH>Fecha Vencimiento</TH><TH>Acción</TH></TR>';
+			echo '</THEAD>';
+			echo '<TBODY>';
+			$num=0;
+			if($incidentes_todos){
+				foreach ($incidentes_todos as $fila) {
+					if( $fila->estado == 'NUEVO' ) {
+						$num++;
+						echo '<TR id="'.$fila->idincidencias.'"><TD>'.$num.'</TD><TD>'.$fila->tituloincidencia.'</TD><TD>'.$fila->estado.'</TD><TD>'.$fila->fechaapertura.'</TD><TD>'.$fila->prioridad.'</TD><TD>'.$fila->usuariocreador.'</TD>
+						<TD>'.$fila->ultimamodificacion.'</TD><TD>'.$fila->fechavencimiento.'</TD>
+						<TD>
+							<div class="row col-center">
+							<div class="col-xs-1 col-sm-1" onclick="EditarIncidencia('.$fila->idincidencias.')"><a href="#" class="btn btn-sm btn-info"><span class="glyphicon glyphicon-edit"></span></a></div>
+							<div class="col-xs-1 col-sm-1"></div>
+							<div class="col-xs-1 col-sm-1" onclick="EliminarIncidencia('.$fila->idincidencias.')"><a href="#" class="btn btn-sm btn-danger"><span class="glyphicon glyphicon-trash"></span></a></div>
+							</div>
+						</TD></TR>'; 
+					}	
+				}
+			}
+			echo '</TBODY>';
+			echo '</TABLE>';
+		}else{
+			show_404();
+		}
+	}
+
+	public function mostartecnicos()
 	{
 		if ($this->session->userdata('login')==TRUE) {
 			$this->load->model('incidencia');
@@ -237,7 +282,6 @@ public function mostartecnicos()
 			show_404();
 		}
 	}
-
 
 	public function planificaciones()
 	{
@@ -250,5 +294,15 @@ public function mostartecnicos()
 		}
 	}
 
-
+	public function EliminarIncidenciasNormal()
+	{
+		if ($this->session->userdata('login')==TRUE) {
+			$idIncidencia = $this->input->post('idIncidencia');
+			$this->load->model('incidencia');
+			$eliminaincidencia= $this->incidencia->setEliminarIncidenciasNormal($idIncidencia);
+			echo json_encode($eliminaincidencia);
+		}else{
+			show_404();
+		}
+	}
 }

@@ -19,7 +19,17 @@
 							echo '<THEAD>';
 							echo '<TR><TH>N°</TH><TH>Titulo</TH><TH>Fecha Apertura</TH><TH>Fecha Resolución</TH><TH>Asignado al técnico</TH></TR>';
 							echo '</THEAD>';
-							echo '<TBODY>';							
+							echo '<TBODY>';
+							$num=0;
+							if($incidentes){
+								foreach ($incidentes as $fila) {
+									if( $fila->estado == 'RESUELTO' ) {
+										$num++;
+										echo '<TR id="'.$fila->idincidencias.'" onclick="Llama_modal_calificacion(this)"><TD>'.$num.'</TD><TD>'.$fila->tituloincidencia.'</TD><TD>'.$fila->fechaapertura.'</TD><TD>'.$fila->fechavencimiento.'</TD>
+										<TD>'.$fila->tecnicoasignado.'</TD></TR>';
+									}
+								}
+							}
 							echo '</TBODY>';
 						?>
 					</TABLE>
@@ -31,7 +41,6 @@
         </div>
 </div>
 <script type="text/javascript">
-	ReDibujaTablaCalificacion();
 
 	$('#tablaincidencias1').dataTable({
 		//quitar para paginacion por defecto
