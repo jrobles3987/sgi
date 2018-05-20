@@ -24,8 +24,8 @@
 									echo '</THEAD>';
 									echo '<TBODY>';
 									$num=0;
-									if($incidentes){
-										foreach ($incidentes as $fila) {
+									if($incidentes_todos){
+										foreach ($incidentes_todos as $fila) {
 											if( $fila->estado == 'NUEVO' ) {
 												$num++;
 												echo '<TR id="'.$fila->idincidencias.'" onclick="myFunction(this)"><TD>'.$num.'</TD><TD>'.$fila->tituloincidencia.'</TD><TD>'.$fila->estado.'</TD><TD>'.$fila->fechaapertura.'</TD><TD>'.$fila->prioridad.'</TD><TD>'.$fila->usuariocreador.'</TD>
@@ -59,8 +59,8 @@
 									echo '</THEAD>';
 									echo '<TBODY>';
 									$num=0;
-									if($incidentes){
-										foreach ($incidentes as $fila) {
+									if($incidentes_todos){
+										foreach ($incidentes_todos as $fila) {
 											if( $fila->estado == 'EN CURSO (PLANIFICACIÓN)' || $fila->estado == 'EN CURSO (ASIGNADO)') {
 												$num++;
 												echo '<TR id="'.$fila->idincidencias.'" onclick="myFunction(this)"><TD>'.$num.'</TD><TD>'.$fila->tituloincidencia.'</TD><TD>'.$fila->estado.'</TD><TD>'.$fila->fechaapertura.'</TD><TD>'.$fila->prioridad.'</TD><TD>'.$fila->usuariocreador.'</TD>
@@ -94,8 +94,8 @@
 									echo '</THEAD>';
 									echo '<TBODY>';
 									$num=0;
-									if($incidentes){
-										foreach ($incidentes as $fila) {
+									if($incidentes_todos){
+										foreach ($incidentes_todos as $fila) {
 											if( $fila->estado == 'EN ESPERA (OBSERVACIÓN)' ) {
 												$num++;
 												echo '<TR id="'.$fila->idincidencias.'" onclick="myFunction(this)"><TD>'.$num.'</TD><TD>'.$fila->tituloincidencia.'</TD><TD>'.$fila->estado.'</TD><TD>'.$fila->fechaapertura.'</TD><TD>'.$fila->prioridad.'</TD><TD>'.$fila->usuariocreador.'</TD>
