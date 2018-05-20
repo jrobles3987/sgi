@@ -141,4 +141,27 @@ class Equipos extends CI_Model
 		}		
 	}
 
+	public function getListarEquiposDarbaja()
+	{
+		try {
+			$result = $this->db->query("SELECT * from incidencias.v_listar_equipos where estado_equipo <> 'DE BAJA' order by fechaingreso;");
+			if($result->num_rows() > 0 ){
+				return $result->result();
+			}
+		} catch (Exception $e) {
+			return false;
+		}		
+	}
+
+	public function setDardeBajaEquipos($idEquipo)
+	{
+		try {
+			$result = $this->db->query("UPDATE incidencias.equipos set idestadoequipo = 6, fechabajaequipo=CURRENT_DATE where idequipo = ".$idEquipo.";");
+			return $result;			
+		} catch (Exception $e) {
+			return false;
+		}		
+	}
+
+
 }

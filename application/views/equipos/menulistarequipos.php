@@ -10,7 +10,7 @@
 						<TABLE id="tablaequipos" class="table table-striped table-bordered table-hover">
 							<?php
 								echo '<THEAD>';
-								echo '<TR><TH>N°</TH><TH>Descripción</TH><TH>Codigo Equipo</TH><TH>Codigo Inventario</TH><TH>Garantia</TH><TH>Valor compra</TH><TH>Fecha Compra</TH><TH>Fecha Ingreso</TH><TH>Custodio</TH></TR>';
+								echo '<TR><TH>N°</TH><TH>Descripción</TH><TH>Codigo Equipo</TH><TH>Codigo Inventario</TH><TH>Garantia</TH><TH>Valor compra</TH><TH>Fecha Compra</TH><TH>Fecha Ingreso</TH><TH>Custodio</TH><TH>Estado</TH></TR>';
 								echo '</THEAD>';
 								echo '<TBODY>';
 								$num=0;
@@ -18,7 +18,7 @@
 									foreach ($lista_equipos as $fila) {
 										$num++;
 										echo '<TR id="'.$fila->idequipo.'" onclick="myFunctio(this)"><TD>'.$num.'</TD><TD>'.$fila->descripcion.'</TD><TD>'.$fila->codigoequipo.'</TD><TD>'.$fila->codinventario.'</TD><TD>'.$fila->garantia.'</TD><TD>'.$fila->valorcompra.'</TD>
-										<TD>'.$fila->fechacompra.'</TD><TD>'.$fila->fechaingreso.'</TD><TD>'.$fila->custodio.'</TD></TR>';
+										<TD>'.$fila->fechacompra.'</TD><TD>'.$fila->fechaingreso.'</TD><TD>'.$fila->custodio.'</TD><TD>'.$fila->estado_equipo.'</TD></TR>';
 									}
 								}
 								echo '</TBODY>';

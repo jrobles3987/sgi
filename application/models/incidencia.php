@@ -140,7 +140,57 @@ class incidencia extends CI_Model
 		}
 	}
 
-	public function getlistartabla()
+	public function GetListarTabla()
+	{
+		$this->db->order_by('fechaapertura','DESC');
+	  	$result=$this->db->get('incidencias.v_listar_incidencias');
+	  	if ($result->num_rows()>0)
+	  	{
+			return $result->result();
+	  	}else {
+			return null;
+	  	}
+	}
+
+	public function GetListarTablaAdministrador()
+	{
+		$this->db->order_by('fechaapertura','DESC');
+	  	$result=$this->db->get('incidencias.v_listar_incidencias');
+	  	if ($result->num_rows()>0)
+	  	{
+			return $result->result();
+	  	}else {
+			return null;
+	  	}
+	}
+
+	public function GetListarTablaTecnico($idpersonal)
+	{
+		$this->db->order_by('fechaapertura','DESC');
+		$this->db->where('tecnico',$idpersonal);
+	  	$result=$this->db->get('incidencias.v_listar_incidencias');
+	  	if ($result->num_rows()>0)
+	  	{
+			return $result->result();
+	  	}else {
+			return null;
+	  	}
+	}
+
+	public function GetListarTablaNormal($idpersonal)
+	{
+		$this->db->order_by('fechaapertura','DESC');
+		$this->db->where('creador',$idpersonal);
+	  	$result=$this->db->get('incidencias.v_listar_incidencias');
+	  	if ($result->num_rows()>0)
+	  	{
+			return $result->result();
+	  	}else {
+			return null;
+	  	}
+	}
+
+	public function GetListarTablaSupervisor()
 	{
 		$this->db->order_by('fechaapertura','DESC');
 	  	$result=$this->db->get('incidencias.v_listar_incidencias');

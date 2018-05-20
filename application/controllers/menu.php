@@ -17,7 +17,7 @@ class Menu extends CI_Controller
 		
 		$DataPublic = array(
 			'contenido' => $Contenido,
-			'incidentes'=>$this->incidencia->getlistartabla(),
+			'incidentes_todos'=>$this->incidencia->getlistartabla(),
 			'incidencia_fuente' => $this->incidencia->getlistarfuenteincidencia(),
 			'incidencia_estados' => $this->incidencia->getlistarestado(),
 			'incidencia_necesidades' => $this->incidencia->getlistarnecesidades(),
@@ -34,6 +34,7 @@ class Menu extends CI_Controller
 		$data = array();
 		$menu = '';
 		$contenido = '';
+		$this->load->model('incidencia');
 		if ($this->session->userdata('login') == TRUE) {
 			if ( $this->session->userdata('rol')!=0 ) {
 				if ( $this->session->userdata('rol') == 1 ){
@@ -41,8 +42,11 @@ class Menu extends CI_Controller
 					$contenido = 'menuinicio';
 				}
 				if ( $this->session->userdata('rol') == 2 ){
+					$data = array(
+						'incidentes'=>$this->incidencia->GetListarTablaTecnico($this->session->userdata('idusuario'))
+					);
 					$menu = 'menutecnico';
-					$contenido = 'menuinicio';
+					$contenido = 'menuinicio3';
 				}
 				if ( $this->session->userdata('rol') == 3 ){
 					$menu = 'menusupervisor';
@@ -50,6 +54,9 @@ class Menu extends CI_Controller
 				}
 				$this->MuestraVista($data, $contenido, $menu);
 			}else{
+				$data = array(
+					'incidentes'=>$this->incidencia->GetListarTablaNormal($this->session->userdata('idusuario'))
+				);
 				$this->MuestraVista($data, 'menuinicio2', 'menu2');
 			}
 		}else{
@@ -91,7 +98,7 @@ class Menu extends CI_Controller
 				}
 				$this->MuestraVista($data, $contenido, $menu);
 			}else{
-				$this->MuestraVista($data, 'menuinicio2', 'menu2');
+				show_404();
 			}
 		}else{
 			$this->load->view('login');
@@ -99,30 +106,31 @@ class Menu extends CI_Controller
 	}
 
 	public function IngresoEquiposExcel()
-	{
-		if ($this->session->userdata('login')==TRUE) {
+	{	
+		$data = array();
+		$menu = '';
+		$contenido = '';
+		$this->load->model('incidencia');
+		if ($this->session->userdata('login')==TRUE) {			
 			if ( $this->session->userdata('rol')!=0 ) {
-				$this->load->model('incidencia');
-				$this->load->model('usuarios');
-				$data = array(
-					'contenido' => 'equipos/menuingresoequiposlote',
-					'incidencia_fuente' => $this->incidencia->getlistarfuenteincidencia(),
-					'incidencia_estados' => $this->incidencia->getlistarestado(),
-					'incidencia_necesidades' => $this->incidencia->getlistarnecesidades(),
-					'incidencia_tecnicos' => $this->usuarios->getListarUsuariosSistemaTipo('TÉCNICO'),
-					'incidencias_categorias'  => $this->incidencia->getlistarcategorias()
-				);
 				if ( $this->session->userdata('rol') == 1 ){
-					$this->load->view('menu',$data);
+					$menu = 'menu';
+					$contenido = 'equipos/menuingresoequiposlote';					
 				}
 				if ( $this->session->userdata('rol') == 2 ){
-					$this->load->view('menutecnico',$data);
+					$menu = 'menutecnico';
+					$contenido = 'menuinicio3';
+					$data = array(
+						'incidentes'=>$this->incidencia->GetListarTablaTecnico($this->session->userdata('idusuario'))
+					);
 				}
 				if ( $this->session->userdata('rol') == 3 ){
-					$this->load->view('menusupervisor',$data);
+					$menu = 'menusupervisor';
+					$contenido = 'equipos/menuingresoequiposlote';					
 				}
+				$this->MuestraVista($data, $contenido, $menu);
 			}else{
-				$this->load->view('menu2',$data);
+				show_404();
 			}
 		}else{
 			$this->load->view('login');
@@ -130,32 +138,38 @@ class Menu extends CI_Controller
 	}
 
 	public function IngresoSistemas()
-	{
+	{	
+		$data = array();
+		$menu = '';
+		$contenido = '';
+		$this->load->model('tiposbienes');
+		$this->load->model('incidencia');
 		if ($this->session->userdata('login')==TRUE) {
 			if ( $this->session->userdata('rol')!=0 ) {
-				$this->load->model('tiposbienes');
-				$this->load->model('incidencia');
-				$this->load->model('usuarios');
-				$data = array(
-					'contenido' => 'equipos/menuingresosistemas',
-					'tiposbienes' => $this->tiposbienes->getListarTiposBienesSistemas(),
-					'incidencia_fuente' => $this->incidencia->getlistarfuenteincidencia(),
-					'incidencia_estados' => $this->incidencia->getlistarestado(),
-					'incidencia_necesidades' => $this->incidencia->getlistarnecesidades(),
-					'incidencia_tecnicos' => $this->usuarios->getListarUsuariosSistemaTipo('TÉCNICO'),
-					'incidencias_categorias'  => $this->incidencia->getlistarcategorias()
-				);
 				if ( $this->session->userdata('rol') == 1 ){
-					$this->load->view('menu',$data);
+					$menu = 'menu';
+					$contenido = 'equipos/menuingresosistemas';
+					$data = array(
+						'tiposbienes' => $this->tiposbienes->getListarTiposBienesSistemas()
+					);
 				}
 				if ( $this->session->userdata('rol') == 2 ){
-					$this->load->view('menutecnico',$data);
+					$menu = 'menutecnico';
+					$contenido = 'menuinicio3';
+					$data = array(
+						'incidentes'=>$this->incidencia->GetListarTablaTecnico($this->session->userdata('idusuario'))
+					);
 				}
 				if ( $this->session->userdata('rol') == 3 ){
-					$this->load->view('menusupervisor',$data);
+					$menu = 'menusupervisor';
+					$contenido = 'equipos/menuingresosistemas';
+					$data = array(
+						'tiposbienes' => $this->tiposbienes->getListarTiposBienesSistemas()
+					);				
 				}
+				$this->MuestraVista($data, $contenido, $menu);
 			}else{
-				$this->load->view('menu2',$data);
+				show_404();
 			}
 		}else{
 			$this->load->view('login');
@@ -466,6 +480,44 @@ class Menu extends CI_Controller
 			$this->load->view('login');
 		}
 
+	}
+
+	public function darbajaequipos()
+	{
+		$data = array();
+		$menu = '';
+		$contenido = '';
+		$this->load->model('equipos');
+		if ($this->session->userdata('login') == TRUE) {
+			if ( $this->session->userdata('rol')!=0 ) {
+				if ( $this->session->userdata('rol') == 1 ){
+					$menu = 'menu';
+					$contenido = 'equipos/menudarbajaequipos';
+					$data = array(
+						'lista_equipos' => $this->equipos->getListarEquiposDarbaja()
+					);
+				}
+				if ( $this->session->userdata('rol') == 2 ){
+					$menu = 'menutecnico';
+					$contenido = 'equipos/menudarbajaequipos';
+					$data = array(
+						'lista_equipos' => $this->equipos->getListarEquiposDarbaja()
+					);
+				}
+				if ( $this->session->userdata('rol') == 3 ){
+					$menu = 'menusupervisor';
+					$contenido = 'equipos/menudarbajaequipos';
+					$data = array(
+						'lista_equipos' => $this->equipos->getListarEquiposDarbaja()
+					);
+				}
+				$this->MuestraVista($data, $contenido, $menu);
+			}else{
+				show_404();
+			}
+		}else{
+			$this->load->view('login');
+		}
 	}
 
 	public function listadoequipos()

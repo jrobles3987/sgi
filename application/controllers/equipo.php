@@ -41,6 +41,18 @@ class Equipo extends CI_Controller
 		}
 	}
 
+	public function DardeBajaEquipos()
+	{
+		if ($this->input->is_ajax_request()) {
+			$IdEquipo	= $this->input->post('idEquipo');		
+			$this->load->model('equipos');
+			$modelos = $this->equipos->setDardeBajaEquipos($IdEquipo);				
+			echo json_encode($modelos);
+		}else{
+			show_404();
+		}
+	}
+
 	public function GuardarSistemas()
 	{
 		if ($this->input->is_ajax_request()) {
@@ -132,6 +144,31 @@ class Equipo extends CI_Controller
 		}
 		echo '</TBODY>';
 		echo '</TABLE>';
+	}
+
+	public function ReDibujaTablaEquiposDeBaja()
+	{
+		if ($this->session->userdata('login')==TRUE) {
+			$this->load->model('equipos');
+			$lista_equipos = $this->equipos->getListarEquiposDarbaja();
+			echo '<TABLE id="tablaequipos" class="table table-striped table-bordered table-hover">';
+					echo '<THEAD>';
+					echo '<TR><TH>N°</TH><TH>Descripción</TH><TH>Codigo Equipo</TH><TH>Codigo Inventario</TH><TH>Garantia</TH><TH>Valor compra</TH><TH>Fecha Compra</TH><TH>Fecha Ingreso</TH><TH>Estado</TH><TH>Acción</TH></TR>';
+					echo '</THEAD>';
+					echo '<TBODY>';
+					$num=0;
+					if($lista_equipos){
+						foreach ($lista_equipos as $fila) {
+							$num++;
+							echo '<TR id="'.$fila->idequipo.'"><TD>'.$num.'</TD><TD>'.$fila->descripcion.'</TD><TD>'.$fila->codigoequipo.'</TD><TD>'.$fila->codinventario.'</TD><TD>'.$fila->garantia.'</TD><TD>'.$fila->valorcompra.'</TD>
+							<TD>'.$fila->fechacompra.'</TD><TD>'.$fila->fechaingreso.'</TD><TD>'.$fila->estado_equipo.'</TD><TD><div onclick="Dardebajaequipo('.$fila->idequipo.')"><a class="btn btn-xs btn-danger"><span class="glyphicon glyphicon-cloud-download"></span> Dar de Baja</a></div></TD></TR>';
+						}
+					}
+					echo '</TBODY>';
+			echo '</TABLE>';
+		}else{
+			show_404();
+		}
 	}
 
 	public function index()

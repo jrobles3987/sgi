@@ -218,7 +218,7 @@
             <li><a href="<?=base_url('menu/ingresosistemas')?>">Agregar nuevos sistemas</a></li>
             <li><a href="<?=base_url('menu/modificacionequipos')?>">Modificar Equipos</a></li>
             <li><a href="<?=base_url('menu/modificacionsistemas')?>">Modificar sistemas</a></li>
-            <li><a href="#">Dar de baja a equipos</a></li>
+            <li><a href="<?=base_url('menu/darbajaequipos')?>">Dar de baja a equipos</a></li>
             <li><a href="<?=base_url('menu/reportes_equipo')?>">Reportes</a></li>
           </ul>
         </li>
