@@ -57,6 +57,30 @@ class Incidencias extends CI_Controller
 		}
 	}
 
+	public function ActualizarIncidenciasNormal()
+	{
+		if ($this->input->is_ajax_request()) {
+			$data = array(
+				'idincidencia'		=> $this->input->post('idincidencia'),
+				'urgencia'			=> $this->input->post('urgencia'),
+				'tituloincidencia'	=> $this->input->post('tituloincidencia'),
+				'descripcion'		=> $this->input->post('descripcion'),
+				'idlugarincidente'	=> $this->input->post('idlocalizacion'),
+				'idcategoria'		=> $this->input->post('categoria')
+			);
+
+			if ($data) {
+				$this->load->model('incidencia');
+				$modelos = $this->incidencia->setActualizarIncidenciaNormal($data);
+				echo json_encode($modelos);	
+			}else{
+				show_404();
+			}			
+		}else{
+			show_404();
+		}
+	}
+
 	public function ActualizarIncidencias()
 	{
 		if ($this->input->is_ajax_request()) {
@@ -242,7 +266,7 @@ class Incidencias extends CI_Controller
 	{
 		if ($this->session->userdata('login')==TRUE) {
 			$this->load->model('incidencia');
-			$incidentes_todos = $this->incidencia->getlistartabla();
+			$incidentes_todos = $this->incidencia->GetListarTablaNormal($this->session->userdata('idusuario'));
 			echo '<TABLE id="tablaincidencias" class="table table-striped table-bordered table-hover">';
 			echo '<THEAD>';
 			echo '<TR><TH>N°</TH><TH>Titulo</TH><TH>Estado</TH><TH>Fecha Apertura</TH><TH>Prioridad</TH><TH>Solicitante</TH><TH>Ultima Modificacion</TH><TH>Fecha Vencimiento</TH><TH>Acción</TH></TR>';

@@ -112,6 +112,21 @@ class incidencia extends CI_Model
 
 	}
 
+	public function setActualizarIncidenciaNormal($data)
+	{
+		$result = $this->db->query("UPDATE
+	    incidencias.incidencias set
+				urgencia =".$data['urgencia'].",
+				tituloincidencia ='".$data['tituloincidencia']."',
+				descripcion ='".$data['descripcion']."',
+				idlugarincidente =".$data['idlugarincidente'].",
+				ultimamodificacion = CURRENT_TIMESTAMP,
+				idcategoria = ".$data['idcategoria']."
+				WHERE idincidencias = ".$data['idincidencia'].";");
+
+		return $result;		
+	}
+
 	public function setActualizarIncidencia($data)
 	{
 		$result = $this->db->query("SELECT

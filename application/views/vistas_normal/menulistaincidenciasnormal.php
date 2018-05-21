@@ -1,4 +1,4 @@
-<?php //include("Vmodalincidencia.php");?>
+<?php include("Vmodalincidenciamodificacion.php");?>
 <?php //include("Vmodalincidencia_nueva.php");?>
 <div class="row container col-lg-12 col-center">
 	<div class="panel panel-default panel-fade">		
@@ -45,8 +45,7 @@
 	</div>
 
 <script>
-    function EliminarIncidencia(x)
-	{
+    function EliminarIncidencia(x){
 		swal({
             title: "",
             text: "Eliminar Incidencia \n Desea realmente eliminar la incidencia...",
@@ -95,33 +94,25 @@
             }
         });    	
 	}
-	function EditarIncidencia(x)
-	{
-		/*$.ajax({
+	function EditarIncidencia(x){
+		$.ajax({
             type: "POST",
             url: "<?php echo base_url('incidencias/mostrarincidentes');?>",
-            data: {idincidencia: x.id},
+            data: {idincidencia: x},
             success: function (data) {
 				var json1 = JSON.parse(data);
-				$('#txtidincidencia').val(x.id);
-				$('#txttituloincidencia').val(json1.tituloincidencia);
-				$('#fechaapertura').val(json1.fechaapertura);
-				$('#fechavencimiento').val(json1.fechavencimiento);
-				$('#selectestado').val(json1.idincidenciaestado);
-				$('#selecturgencia').val(json1.urgencia);
-				$('#selectimpacto').val(json1.impacto);
-				$('#selectprioridad').val(json1.prioridad);
-				$('#selectecnico').val(json1.tecnicoasignado);
-				$('#selecfuenteincidencia').val(json1.idincidenciafuente);
-				$('#seleclocalizacion').val(json1.idlugarincidente);
-				$('#txtareadescripcion').val(json1.descripcion);
-				$('#selectcategoria').val(json1.idcategoria);
+				$('#txtidincidencia').val(x);
+				$('#txttituloincidencia2').val(json1.tituloincidencia);
+				$('#selecturgencia2').val(json1.urgencia);
+				$('#selectlocalizacion2').val(json1.idlugarincidente);
+				$('#txtareadescripcion2').val(json1.descripcion);
+				$('#selectcategoria2').val(json1.idcategoria);
             },
             error: function (xhr, exception) {
 				alert("error");
             }
 	    });
-		$('#vmodalincidencia').modal({show:true});*/
+		$('#vmodalincidenciamodificacion').modal({show:true});
 	}
 
 	$('#tablaincidencias').dataTable({
@@ -141,12 +132,7 @@
 		$('#txtareadescripcion2').val('');
 	}
 
-	$('#btn_incidencias_Nuevas').click(function() {
-		LimpiarModalIngresoIncidencias();
-		$('#Vmodalincidencia_nueva').modal({show:true});
-	});
-
-     function ReDibujaTablaIncidenciasNormal () {
+    function ReDibujaTablaIncidenciasNormal () {
         $('#div_loading_cargando').css('display','inline');
         $.ajax({
             type: "POST",
