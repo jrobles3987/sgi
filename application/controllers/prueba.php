@@ -1,6 +1,8 @@
-<?php //if (!defined('BASEPATH')) exit('No direct script access allowed');
+<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
+
 require_once 'application/libraries/PHPWord-master/src/PhpWord/Autoloader.php';
 use PhpOffice\PhpWord\TemplateProcessor;
+
 \PhpOffice\PhpWord\Autoloader::register();  
 
 class Prueba extends CI_Controller {
