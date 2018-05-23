@@ -100,12 +100,27 @@
                 <p>
                     <a class="btn btn-primary btn-block">Guardar Datos</a>
                 </p>
+			</div>
+			<div class="col-md-3" id="btn-guardar-incidencia2">
+                <p>
+                    <a class="btn btn-primary btn-block">Guardar Datos</a>
+                </p>
             </div>
         </div>
 	</div>
 </div>
 <script src="<?=base_url('plantilla/dist/js/datepicker.js');?>"></script>
 <script >
+	$('#btn-guardar-incidencia2').click(function() {
+		$.ajax({
+			type: "POST",
+			url: "<?php echo base_url('prueba/funcionprueba');?>",
+			success: function (data) {
+				var json = JSON.parse(data);
+				console.log(json);
+			}
+		});
+	});
 	//$(document).ready(function() {
 		$('.daterange').daterangepicker({
 	        format: 'yyyy-mm-dd',
