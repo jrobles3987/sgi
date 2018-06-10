@@ -1,4 +1,4 @@
-function Validar_Formularios () {
+function Validar_Formularios() {
 	var error = 0;
 	$('.requerido').each(function(i, elem){
 		if($(elem).val() == '' || $(elem).val()==0){
@@ -13,8 +13,33 @@ function Validar_Formularios () {
 		}
 	});
 
-	if(error > 0){
+	if(error > 0) {
 		//event.preventDefault();
+		toastr.info("Debe llenar todos los campos obligatorios del formulario","Atención",{
+			"timeOut": "5000",
+			"extendedTImeout": "5000",
+			"closeButton": true,
+			"positionClass": "toast-bottom-left"
+		});
+		return false;
+	}else{
+		return true;
+	}
+}
+
+function Validar_Formularios_General(clase) {
+	var error = 0;
+	$(clase).each(function(i, elem){
+		if($(elem).val() == '' || $(elem).val()==0){
+			$(elem).css({'border':'1px solid red'});
+			error++;
+		}else{
+			$(elem).css({'box-shadow':'none'});
+			$(elem).css({'border-color':'#d2d6de'});
+		}
+	});
+
+	if(error > 0) {
 		toastr.info("Debe llenar todos los campos obligatorios del formulario","Atención",{
 			"timeOut": "5000",
 			"extendedTImeout": "5000",
@@ -71,7 +96,7 @@ function Validar_Formularios3 () {
 		}
 	});
 
-	if(error > 0){
+	if(error > 0) {
 		//event.preventDefault();
 		toastr.info("Debe llenar todos los campos obligatorios del formulario","Atención",{
 			"timeOut": "5000",

@@ -65,7 +65,7 @@
 					    <div class="row">
 					      	<div class="col-xs-4 col-md-12">
 					      		<span>*Descripción</span>
-					        	<textarea class="form-control requerido2" id="txtareadescripcion" rows="5" style="resize: none;"></textarea>
+					        	<textarea class="form-control requerido2" id="txtareadescripcion1" rows="5" style="resize: none;"></textarea>
 					      	</div>
 					    </div>						   
 				    </div>
@@ -132,7 +132,7 @@ $(document).ready(function() {
 			//idsubfamiliabien: $('#selectsubequipo').val(),
 			fechaingreso: $('#fechaingreso').val(),
 			idlocalizacion: $('#cmb_localizacion').val(),
-			descripcion: document.getElementById("txtareadescripcion").value,
+			descripcion: $('#txtareadescripcion1').val(),//document.getElementById("txtareadescripcion").value,
 			codigosistema: $('#codigosistema').val()
 		}
 

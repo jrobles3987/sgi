@@ -141,6 +141,18 @@ class Equipos extends CI_Model
 		}		
 	}
 
+	public function getListarSistemas()
+	{
+		try {
+			$result = $this->db->query("SELECT * from incidencias.v_listar_sistemas order by fechaingreso;");
+			if($result->num_rows() > 0 ){
+				return $result->result();
+			}
+		} catch (Exception $e) {
+			return false;
+		}		
+	}
+
 	public function getListarEquiposDarbaja()
 	{
 		try {

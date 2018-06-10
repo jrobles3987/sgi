@@ -216,9 +216,9 @@
             <li><a href="<?=base_url('menu/ingresoequiposexcel')?>">Agregar nuevos equipos en Lote</a></li>
             <li><a href="<?=base_url('menu/listadoequipos')?>">Listado de Equipos</a></li>
             <li><a href="<?=base_url('menu/ingresosistemas')?>">Agregar nuevos sistemas</a></li>
-            <li><a href="<?=base_url('menu/modificacionequipos')?>">Modificar Equipos</a></li>
-            <li><a href="<?=base_url('menu/modificacionsistemas')?>">Modificar sistemas</a></li>
+            <li><a href="<?=base_url('menu/listadosistemas')?>">Listado de Sistemas</a></li>
             <li><a href="<?=base_url('menu/darbajaequipos')?>">Dar de baja a equipos</a></li>
+            <li><a href="<?=base_url('menu/listadoequiposdebaja')?>">Listado de Equipos dados de Baja</a></li>
             <li><a href="<?=base_url('menu/reportes_equipo')?>">Reportes</a></li>
           </ul>
         </li>
@@ -229,7 +229,7 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="<?=base_url('menu/incidentes')?>">Incidentes</a></li>
+            <li><a href="<?=base_url('menu/ListarIncidentes')?>">Incidentes</a></li>
             <li><a href="<?=base_url('menu/planificacion')?>">Problemas</a></li>
             <li><a href="#">Incidentes recurrentes</a></li>
             <li><a href="<?=base_url('menu/Planificaciones')?>">Planificaciones</a></li>
@@ -374,8 +374,7 @@
     return texto.replace(/^(\d{4})-(\d{2})-(\d{2})$/g,'$3/$2/$1');
   }
 
-  function myFunction(x)
-  {
+  function myFunction(x) {
     $.ajax({
             type: "POST",
             url: "<?php echo base_url('incidencias/mostrarincidentes');?>",

@@ -176,10 +176,15 @@ class Menu extends CI_Controller
 		}
 	}
 
-	public function Incidentes()
-	{
+	public function ListarIncidentes()
+	{	
+		$data = array();
+		$menu = '';
+		$contenido = '';
+		$this->load->model('tiposbienes');
+		$this->load->model('incidencia');
 		if ($this->session->userdata('login')==TRUE) {
-			if ( $this->session->userdata('rol')!=0 ) {
+			/*if ( $this->session->userdata('rol')!=0 ) {
 				$this->load->model('incidencia');
 				$this->load->model('usuarios');
 				$data = array(
@@ -203,6 +208,23 @@ class Menu extends CI_Controller
 				}
 			}else{
 				$this->load->view('menu2',$data);
+			}*/
+			if ( $this->session->userdata('rol')!=0 ) {
+				if ( $this->session->userdata('rol') == 1 ){
+					$menu = 'menu';
+					$contenido = 'incidencias/menuincidentes';					
+				}
+				if ( $this->session->userdata('rol') == 2 ){
+					$menu = 'menutecnico';
+					$contenido = 'incidencias/menuincidentes';					
+				}
+				if ( $this->session->userdata('rol') == 3 ){
+					$menu = 'menusupervisor';
+					$contenido = 'incidencias/menuincidentes';									
+				}
+				$this->MuestraVista($data, $contenido, $menu);
+			}else{
+				show_404();
 			}
 		}else{
 			$this->load->view('login');
@@ -552,8 +574,7 @@ class Menu extends CI_Controller
 		}
 	}
 
-	public function listadoequipos()
-	{
+	public function listadoequipos(){
 		if ($this->session->userdata('login')==TRUE) {
 			$this->load->model('incidencia');
 			$this->load->model('localizacion');
@@ -578,9 +599,34 @@ class Menu extends CI_Controller
 		}else{
 			$this->load->view('login');
 		}
-
 	}
 
+	public function listadoequiposdebaja(){
+		if ($this->session->userdata('login')==TRUE) {
+			$this->load->model('incidencia');
+			$this->load->model('localizacion');
+			$this->load->model('usuarios');
+			$this->load->model('equipos');
+			if ( $this->session->userdata('rol')!=0 ) {
+				$data = array(
+					'contenido' => 'equipos/menulistarequiposdebaja',
+					'usuarios'=>$this->usuarios->getUsuariosSistema(),
+					'incidencia_fuente' => $this->incidencia->getlistarfuenteincidencia(),
+					'incidencia_estados' => $this->incidencia->getlistarestado(),
+					'incidencia_necesidades' => $this->incidencia->getlistarnecesidades(),
+					'incidencia_tecnicos' => $this->usuarios->getListarUsuariosSistemaTipo('TÉCNICO'),
+					'incidencia_localizacion' => $this->localizacion->getLocalizacion(),
+					'incidencias_categorias'  => $this->incidencia->getlistarcategorias(),
+					'tecnicos'  => $this->incidencia->getlistarpersonal(),
+					'lista_equipos' => $this->equipos->getListarEquipos()
+
+				);
+				$this->load->view('menu',$data);
+			}
+		}else{
+			$this->load->view('login');
+		}
+	}
 
 	public function marca_equipos()
 	{
@@ -639,8 +685,7 @@ class Menu extends CI_Controller
 
 	}
 
-	public function Cambios_Incidencias()
-	{	
+	public function Cambios_Incidencias(){	
 		$data = array();
 		$menu = '';
 		$contenido = '';
@@ -665,6 +710,46 @@ class Menu extends CI_Controller
 					'incidentes'=>$this->incidencia->GetListarTablaNormal($this->session->userdata('idusuario'))
 				);		
 				$this->MuestraVista($data, 'vistas_normal/menulistaincidenciasnormal', 'menu2');
+			}
+		}else{
+			$this->load->view('login');
+		}
+	}
+
+	public function listadosistemas(){	
+		$data = array();
+		$menu = '';
+		$contenido = '';
+		$this->load->model('equipos');
+		if ($this->session->userdata('login') == TRUE) {
+			if ( $this->session->userdata('rol')!=0 ) {
+				if ( $this->session->userdata('rol') == 1 ){
+					$menu = 'menu';
+					$contenido = 'equipos/menulistarsistemas';
+					$data = Array (
+						'lista_sistemas'=>$this->equipos->getListarSistemas()
+					);
+				}
+				if ( $this->session->userdata('rol') == 2 ){
+					$menu = 'menutecnico';
+					$contenido = 'equipos/menulistarsistemas';
+					$data = Array (
+						'lista_sistemas'=>$this->equipos->getListarSistemas()
+					);
+				}
+				if ( $this->session->userdata('rol') == 3 ){
+					$menu = 'menusupervisor';
+					$contenido = 'equipos/menulistarsistemas';
+					$data = Array (
+						'lista_sistemas'=>$this->equipos->getListarSistemas()
+					);
+				}
+				$this->MuestraVista($data, $contenido, $menu);
+			}else{
+				$data = Array (
+					'incidentes'=>$this->incidencia->GetListarTablaNormal($this->session->userdata('idusuario'))
+				);		
+				$this->MuestraVista($data, 'menuinicio2', 'menu2');
 			}
 		}else{
 			$this->load->view('login');

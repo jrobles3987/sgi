@@ -13,13 +13,13 @@
            		 <div class="row">
 			      	<div class="col-xs-4 col-md-8 col-center">
 			      		<span>* Titulo de la incidencia</span>
-			        	<textarea class="form-control requerido" id="txttituloincidencia2" rows="1" style="resize: none;" autofocus></textarea>
+			        	<textarea class="form-control nueva_incidencia" id="txttituloincidencia2" rows="1" style="resize: none;" autofocus></textarea>
 			      	</div>
 				</div>
 				<div  class="row">
 					<div class="col-xs-4 col-md-8  col-center">
 						<span>* Categoria de la incidencia</span>
-						<select id="selectcategoria2" class="form-control requerido">
+						<select id="selectcategoria2" class="form-control nueva_incidencia">
 						<option value="0">Seleccione la categoria de la incidencia...</option>
 							<?php
 								foreach ($incidencias_categorias as $c) {
@@ -34,7 +34,7 @@
 					<div class="col-xs-4 col-md-6">
 						<span>* Fecha de Apertura y Vencimiento</span>
 						<div class="input-group daterangeico">
-		                  	<input type="text" class="form-control pull-right daterange requerido" align="center" id="fechainicio-fechafin2" readonly="readonly">
+		                  	<input type="text" class="form-control pull-right daterange nueva_incidencia" align="center" id="fechainicio-fechafin2" readonly="readonly">
 		                  	<span class="input-group-addon">
 								<span class="fa fa-calendar"></span>
 							</span>	
@@ -42,7 +42,7 @@
 		            </div>
 		            <div class="col-xs-4 col-md-6">
 			      		<span>* Estado incidencia</span>
-			        	<select id="selectestado2" class="form-control requerido">
+			        	<select id="selectestadoincidencia" class="form-control nueva_incidencia">
 							<option value="0">Seleccione el estado de la incidencia...</option>
 							<?php
 					      		foreach ($incidencia_estados as $k) {
@@ -78,7 +78,7 @@
                 <div class="row" >
 			      	<div class="col-xs-4 col-md-6">
                       <span>* Urgencia</span>
-                      <select id="selecturgencia2" class="form-control requerido">
+                      <select id="selecturgencia2" class="form-control nueva_incidencia">
                           <option value="0">Seleccione la urgencia de incidencia...</option>
                           	<?php
 								foreach ($incidencia_necesidades as $l) {
@@ -93,7 +93,7 @@
                     </div>
                     <div class="col-xs-4 col-md-6">
                       	<span>* Prioridad</span>
-                      	<select id="selectprioridad2" class="form-control requerido">
+                      	<select id="selectprioridad2" class="form-control nueva_incidencia">
                       		<option value="0">Seleccione la prioridad de la incidencia...</option>
                       		<?php
 								foreach ($incidencia_necesidades as $l) {
@@ -110,7 +110,7 @@
 				<div class="row" >
 			      	<div class="col-xs-4 col-md-6">
 	                  <span>* Impacto</span>
-	                  	<select id="selectimpacto2" class="form-control requerido">
+	                  	<select id="selectimpacto2" class="form-control nueva_incidencia">
 	                      <option value="0">Seleccione impacto incidencia...</option>
 	                      	<?php
 								foreach ($incidencia_necesidades as $l) {
@@ -125,7 +125,7 @@
 			      	</div>
 			      	<div class="col-xs-4 col-md-6">
                       	<span>* Fuente incidencia</span>
-                      	<select id="selectfuenteincidencia2" class="form-control requerido"autofocus>
+                      	<select id="selectfuenteincidencia2" class="form-control nueva_incidencia" autofocus>
                           	<option value="0">Seleccione la fuente de la incidencia...</option>
                           	<?php
                                 foreach ($incidencia_fuente as $j) {
@@ -142,7 +142,7 @@
 				<div class="row">
 			      	<div class="col-xs-4 col-lg-8">
                       <span>* Tecnico asignado</span>
-                      <select id="selectecnico2" class="form-control requerido">
+                      <select id="selectecnico2" class="form-control" disabled="true">
                       		<option value="0">Seleccione un técnico...</option>
                           	<?php
 					    		foreach ($incidencia_tecnicos as $k) {
@@ -154,20 +154,21 @@
 				</div>
 				<div class="row">
 					<div class="col-xs-4 col-md-12">
-                      <span>* Localización</span>
-                      <select id="selectlocalizacion2" class="form-control requerido">
-                          <?php
-                                foreach ($incidencia_fuente as $j) {
-                                    echo '<option value="'.$j->idincidenciafuente.'">'.$j->nombre.'</option>';
-                                }
-                            ?>
-                      </select>
+                    	<span>* Localización</span>
+                      	<select id="selectlocalizacionincidencianueva" class="form-control nueva_incidencia">
+					  		<option value="0">Seleccione una localización...</option>
+                        	<?php
+                            	foreach ($incidencia_localizacion as $j) {
+                                	echo '<option value="'.$j->idlocalizacion.'">'.$j->nombrelocalizacion.'</option>';
+                            	}
+                        	?>
+                      	</select>
 			        </div>
 				</div>
                 <div class="row">
 			      	<div class="col-xs-4 col-md-12">
 			      		<span>* Descripcion</span>
-			        	<textarea class="form-control requerido" id="txtareadescripcion2" rows="2" style="resize: none;"></textarea>
+			        	<textarea class="form-control nueva_incidencia" id="txtareadescripcion2" rows="2" style="resize: none;"></textarea>
 			        	<div style="margin:10px"></div>
 			      	</div>
 			    </div>
@@ -195,75 +196,87 @@
 		//// Funcion valodar formulario
 		function validar_formulario(){
 			
-			var retorno = true;
-			
+			var retorno = true;			
 			// separa las fechas que vienen desde el daterange
 			var fechainicioyfin = $('#fechainicio-fechafin2').val();
 			arreglo_fechas = fechainicioyfin.split('-');
 			var fecha1 = arreglo_fechas[0];
-			var fecha2 = arreglo_fechas[1];
+			var fecha2 = arreglo_fechas[1];			
 			dataform = {
 				//llenar con los campos que estan en la bd 
 				tituloincidencia: $('#txttituloincidencia2').val(),
-				//fechaapertura: $('#fechaapertura2').val(),
 				fechaapertura: fecha1,
-				//fechavencimiento: $('#fechavencimiento2').val(),
 				fechavencimiento: fecha2,
-				//fechaaceptacion: $('#fechaaceptacion').val(),
-				//fechaaprovacion: $('#fechaaprovacion').val(),
-				incidenciaestado: $('#selectestado2').val(),
+				incidenciaestado: $('#selectestadoincidencia').val(),
 				urgencia: $('#selecturgencia2').val(),
 				impacto: $('#selectimpacto2').val(),
 				prioridad: $('#selectprioridad2').val(),
 				tecnicoasignado: $('#selectecnico2').val(),
 				idincidenciafuente: $('#selectfuenteincidencia2').val(),
-				idlocalizacion: $('#selectlocalizacion2').val(),
+				idlocalizacion: $('#selectlocalizacionincidencianueva').val(),
 				idcategorias: $('#selectcategoria2').val(),
 				descripcion: $('#txtareadescripcion2').val()
 			}
-			retorno = Validar_Formularios();
+
+			retorno = Validar_Formularios_General('.nueva_incidencia');
+			
 			return retorno;			
 		}
 	
 		$('#btn-guardar-incidencia').click(function() {
-			if(validar_formulario()){										
-				$('#div_loading').css('display','inline');
+			if(validar_formulario()){
+				$('#div_loading_cargando').css('display','inline');
 				$.ajax({
 		            type: "POST",
 		            url: "<?php echo base_url('incidencias/guardarincidencias');?>",
 		            data: dataform,
 		            success: function (data) {
 		                var json = JSON.parse(data);
-		                $('#div_loading').css('display','none');
+		                $('#div_loading_cargando').css('display','none');
 		                if (json.res=="t") {
-							//sweetAlert("", "Datos guardados!", "success");*/
 							toastr.success("Datos Guardados correctamente","",{
 								"timeOut": "5000",
 								"extendedTImeout": "5000",
 								"closeButton": true,
 								"positionClass": "toast-bottom-left"
 							});
-							//setTimeout ("location.replace('<?php echo base_url('menu/Incidentes')?>');", 3000);							
+							setTimeout("$('#Vmodalincidencia_nueva').modal('hide');",500)
+							ReDibujaTablaIncidenciasNuevas();
 		                }else{
-		                	//swal("","Ocurrio un error al guardar!","error");
-		                	toastr.success("Datos Guardados correctamente","",{
+		                	toastr.error("Error al guardar los datos","",{
 								"timeOut": "5000",
 								"extendedTImeout": "5000",
 								"closeButton": true,
 								"positionClass": "toast-bottom-left"
-							});
+							});							
 		                }
 		            },
 		            complete : function(xhr, status) {
-		                $('#div_loading').css('display','none');
+		                $('#div_loading_cargando').css('display','none');
 		            },
 		            error: function (xhr, exception) {
 
 		            }
 		        });
-			}		
+			}
 		});
 	});	
+
+	$('#selectestadoincidencia').change(function(){
+		$('#selectestadoincidencia option:selected').each(function(){
+			idestado = $('#selectestadoincidencia').val();
+			if (idestado == 1 ||  idestado == 0){
+				$('#selectecnico2').val(0);
+				document.getElementById("selectecnico2").disabled=true;
+				document.getElementById("selectecnico2").className = "form-control";
+				$("#selectecnico2").css('box-shadow','none');
+				$("#selectecnico2").css('border-color','#d2d6de');
+			}else{
+				document.getElementById("selectecnico2").disabled=false;
+				document.getElementById("selectecnico2").className = "form-control nueva_incidencia";
+			}
+		});
+	});
 
 	$('#selectecnico2').change(function(){
 		$('#selectecnico2 option:selected').each(function(){
@@ -304,4 +317,5 @@
 			});
 		});
 	});
+
 </script>
