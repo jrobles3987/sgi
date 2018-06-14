@@ -132,6 +132,7 @@ class incidencia extends CI_Model
 		$result = $this->db->query("SELECT
 	    incidencias.f_actualiza_incidencias(
 				".$data['idincidencia'].",
+				'".$data['fechaapertura']."',
 				'".$data['fechavencimiento']."',
 				null,
 				null,
@@ -267,7 +268,7 @@ class incidencia extends CI_Model
 								from incidencias.incidencias,
 								incidencias.incidencias_estados
 								where incidencias.idincidenciaestado = incidencias_estados.idincidenciaestado
-							    and  (estado = 'NUEVO' or estado = 'EN CURSO (ASIGNADO)' or estado = 'EN CURSO (PLANIFICACIÓN)')ORDER BY fechahoracreacion DESC;
+							    and (estado = 'NUEVO' or estado = 'EN CURSO (ASIGNADO)' or estado = 'EN CURSO (PLANIFICACIÓN)' or estado = 'EN ESPERA (OBSERVACIÓN)') ORDER BY fechahoracreacion DESC;
 		");
 
 	  	if ($result->num_rows()>0)

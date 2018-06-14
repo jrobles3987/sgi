@@ -86,6 +86,7 @@ class Incidencias extends CI_Controller
 		if ($this->input->is_ajax_request()) {
 			$data = array(
 				'idincidencia'		=> $this->input->post('idincidencia'),
+				'fechaapertura'		=> $this->input->post('fechaapertura'),
 				'fechavencimiento'	=> $this->input->post('fechavencimiento'),
 				//'fechaaceptacion'	=> $this->input->post('fechaaceptacion'),
 				//'fechaaprovacion'	=> $this->input->post('fechaaprovacion'),
@@ -279,9 +280,8 @@ class Incidencias extends CI_Controller
 						echo '<TR id="'.$fila->idincidencias.'"><TD>'.$num.'</TD><TD>'.$fila->tituloincidencia.'</TD><TD>'.$fila->estado.'</TD><TD>'.$fila->fechaapertura.'</TD><TD>'.$fila->prioridad.'</TD><TD>'.$fila->usuariocreador.'</TD>
 						<TD>'.$fila->ultimamodificacion.'</TD><TD>'.$fila->fechavencimiento.'</TD>
 						<TD>
-							<div class="row col-center">
+							<div class="row">
 							<div class="col-xs-1 col-sm-1" onclick="EditarIncidencia('.$fila->idincidencias.')"><a href="#" class="btn btn-sm btn-info"><span class="glyphicon glyphicon-edit"></span></a></div>
-							<div class="col-xs-1 col-sm-1"></div>
 							<div class="col-xs-1 col-sm-1" onclick="EliminarIncidencia('.$fila->idincidencias.')"><a href="#" class="btn btn-sm btn-danger"><span class="glyphicon glyphicon-trash"></span></a></div>
 							</div>
 						</TD></TR>'; 
@@ -308,12 +308,13 @@ class Incidencias extends CI_Controller
 			if($incidentes_todos){
 				foreach ($incidentes_todos as $fila) {
 					$num++;
+					$fechamodificacion = date_create($fila->ultimamodificacion);
+					$fechamodificacion2 = date_format($fechamodificacion, 'Y-m-d H:i');
 					echo '<TR id="'.$fila->idincidencias.'"><TD>'.$num.'</TD><TD>'.$fila->tituloincidencia.'</TD><TD>'.$fila->estado.'</TD><TD>'.$fila->fechaapertura.'</TD><TD>'.$fila->prioridad.'</TD><TD>'.$fila->usuariocreador.'</TD>
-					<TD>'.$fila->tecnicoasignado.'</TD><TD>'.$fila->ultimamodificacion.'</TD><TD>'.$fila->fechavencimiento.'</TD>
+					<TD>'.$fila->tecnicoasignado.'</TD><TD>'.$fechamodificacion2.'</TD><TD>'.$fila->fechavencimiento.'</TD>
 					<TD>
-						<div class="row col-center">
+						<div class="row">
 						<div class="col-xs-1 col-sm-1" onclick="EditarIncidencia('.$fila->idincidencias.')"><a href="#" class="btn btn-sm btn-info"><span class="glyphicon glyphicon-edit"></span></a></div>
-						<div class="col-xs-1 col-sm-1"></div>
 						<div class="col-xs-1 col-sm-1" onclick="EliminarIncidencia('.$fila->idincidencias.')"><a href="#" class="btn btn-sm btn-danger"><span class="glyphicon glyphicon-trash"></span></a></div>
 						</div>
 					</TD>

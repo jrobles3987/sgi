@@ -183,32 +183,7 @@ class Menu extends CI_Controller
 		$contenido = '';
 		$this->load->model('tiposbienes');
 		$this->load->model('incidencia');
-		if ($this->session->userdata('login')==TRUE) {
-			/*if ( $this->session->userdata('rol')!=0 ) {
-				$this->load->model('incidencia');
-				$this->load->model('usuarios');
-				$data = array(
-					'contenido' => 'incidencias/menuincidentes',
-					'incidentes'=>$this->incidencia->getlistartabla(),
-					'incidencia_fuente' => $this->incidencia->getlistarfuenteincidencia(),
-					'incidencia_estados' => $this->incidencia->getlistarestado(),
-					'incidencia_necesidades' => $this->incidencia->getlistarnecesidades(),
-					'incidencia_tecnicos' => $this->usuarios->getListarUsuariosSistemaTipo('TÉCNICO'),
-					'incidencias_categorias'  => $this->incidencia->getlistarcategorias(),
-					'tecnicos'  => $this->incidencia->getlistarpersonal()
-				);
-				if ( $this->session->userdata('rol') == 1 ){
-					$this->load->view('menu',$data);
-				}
-				if ( $this->session->userdata('rol') == 2 ){
-					$this->load->view('menutecnico',$data);
-				}
-				if ( $this->session->userdata('rol') == 3 ){
-					$this->load->view('menusupervisor',$data);
-				}
-			}else{
-				$this->load->view('menu2',$data);
-			}*/
+		if ($this->session->userdata('login')==TRUE) {			
 			if ( $this->session->userdata('rol')!=0 ) {
 				if ( $this->session->userdata('rol') == 1 ){
 					$menu = 'menu';
@@ -231,9 +206,7 @@ class Menu extends CI_Controller
 		}
 	}
 
-	public function ingresonuevaincidencia()
-	{
-
+	public function ingresonuevaincidencia() {
 		if ($this->session->userdata('login')==TRUE) {
 			$this->load->model('incidencia');
 			$this->load->model('usuarios');
@@ -274,46 +247,59 @@ class Menu extends CI_Controller
 ///REPORTE DE EQUIPO
 	public function Reportes_equipo()
 	{
-		if ($this->session->userdata('login')==TRUE) {
+		$data = array();
+		$menu = '';
+		$contenido = '';
+		$this->load->model('tiposbienes');
+		$this->load->model('incidencia');
+		if ($this->session->userdata('login')==TRUE) {			
 			if ( $this->session->userdata('rol')!=0 ) {
-				$this->load->model('incidencia');
-				$this->load->model('usuarios');
-				$this->load->model('localizacion');
-				$data = array(
-					'contenido' => 'reportes/reporte-equipos',
-					'incidencia_fuente' => $this->incidencia->getlistarfuenteincidencia(),
-					'incidencia_estados' => $this->incidencia->getlistarestado(),
-					'incidencia_necesidades' => $this->incidencia->getlistarnecesidades(),
-					'incidencia_tecnicos' => $this->usuarios->getListarUsuariosSistemaTipo('TÉCNICO'),
-					'incidencias_categorias'  => $this->incidencia->getlistarcategorias()
-				);
-				$this->load->view('menu',$data);
+				if ( $this->session->userdata('rol') == 1 ){
+					$menu = 'menu';
+					$contenido = 'reportes/reporte-equipos';
+				}
+				if ( $this->session->userdata('rol') == 2 ){
+					$menu = 'menutecnico';
+					$contenido = 'reportes/reporte-equipos';
+				}
+				if ( $this->session->userdata('rol') == 3 ){
+					$menu = 'menusupervisor';
+					$contenido = 'reportes/reporte-equipos';
+				}
+				$this->MuestraVista($data, $contenido, $menu);
 			}else{
-				$this->load->view('menu2',$data);
+				show_404();
 			}
 		}else{
 			$this->load->view('login');
 		}
 	}
+
 ///REPORTE DE INCIDENCIA
 	public function Reportes_incidencia()
 	{
-		if ($this->session->userdata('login')==TRUE) {
+		$data = array();
+		$menu = '';
+		$contenido = '';
+		$this->load->model('tiposbienes');
+		$this->load->model('incidencia');
+		if ($this->session->userdata('login')==TRUE) {			
 			if ( $this->session->userdata('rol')!=0 ) {
-				$this->load->model('incidencia');
-				$this->load->model('usuarios');
-				$this->load->model('localizacion');
-				$data = array(
-					'contenido' => 'reportes/reporte-incidencia',
-					'incidencia_fuente' => $this->incidencia->getlistarfuenteincidencia(),
-					'incidencia_estados' => $this->incidencia->getlistarestado(),
-					'incidencia_necesidades' => $this->incidencia->getlistarnecesidades(),
-					'incidencia_tecnicos' => $this->usuarios->getListarUsuariosSistemaTipo('TÉCNICO'),
-					'incidencias_categorias'  => $this->incidencia->getlistarcategorias()
-				);
-				$this->load->view('menu',$data);
+				if ( $this->session->userdata('rol') == 1 ){
+					$menu = 'menu';
+					$contenido = 'reportes/reporte-incidencia';
+				}
+				if ( $this->session->userdata('rol') == 2 ){
+					$menu = 'menutecnico';
+					$contenido = 'reportes/reporte-incidencia';
+				}
+				if ( $this->session->userdata('rol') == 3 ){
+					$menu = 'menusupervisor';
+					$contenido = 'reportes/reporte-incidencia';
+				}
+				$this->MuestraVista($data, $contenido, $menu);
 			}else{
-				$this->load->view('menu2',$data);
+				show_404();
 			}
 		}else{
 			$this->load->view('login');
@@ -482,31 +468,31 @@ class Menu extends CI_Controller
 	}
 
 	public function Planificaciones()
-	{
-		if ($this->session->userdata('login')==TRUE) {
-			$this->load->model('incidencia');
-			$this->load->model('localizacion');
-			$this->load->model('usuarios');
-			$this->load->model('planificacion');
+	{		
+		$data = array();
+		$menu = '';
+		$contenido = '';
+		if ($this->session->userdata('login') == TRUE) {
 			if ( $this->session->userdata('rol')!=0 ) {
-				$data = array(
-					'contenido' => 'incidencias/menuplanificaciones',
-					'incidencia_fuente' => $this->incidencia->getlistarfuenteincidencia(),
-					'incidencia_estados' => $this->incidencia->getlistarestado(),
-					'incidencia_necesidades' => $this->incidencia->getlistarnecesidades(),
-					'incidencia_tecnicos' => $this->usuarios->getListarUsuariosSistemaTipo('TÉCNICO'),
-					'incidencia_localizacion' => $this->localizacion->getLocalizacion(),
-					'incidencias_categorias'  => $this->incidencia->getlistarcategorias()
-					//'id_planificaciones'=>$this->planificacion->setultimaplanificacion()
-					//'planificacion_tecnico'=>$this->planificacion->setguardarplanificacion()
-
-				);
-				$this->load->view('menu',$data);
+				if ( $this->session->userdata('rol') == 1 ){
+					$menu = 'menu';
+					$contenido = 'incidencias/menuplanificaciones';
+				}
+				if ( $this->session->userdata('rol') == 2 ){
+					$menu = 'menutecnico';
+					$contenido = 'incidencias/menuplanificaciones';
+				}
+				if ( $this->session->userdata('rol') == 3 ){
+					$menu = 'menusupervisor';
+					$contenido = 'incidencias/menuplanificaciones';
+				}
+				$this->MuestraVista($data, $contenido, $menu);
+			}else{
+				show_404();
 			}
 		}else{
 			$this->load->view('login');
 		}
-
 	}
 
 	public function Fuente_Incidencia()
@@ -574,27 +560,37 @@ class Menu extends CI_Controller
 		}
 	}
 
-	public function listadoequipos(){
-		if ($this->session->userdata('login')==TRUE) {
-			$this->load->model('incidencia');
-			$this->load->model('localizacion');
-			$this->load->model('usuarios');
-			$this->load->model('equipos');
+	public function listadoequipos(){		
+		$data = array();
+		$menu = '';
+		$contenido = '';
+		$this->load->model('equipos');
+		if ($this->session->userdata('login') == TRUE) {
 			if ( $this->session->userdata('rol')!=0 ) {
-				$data = array(
-					'contenido' => 'equipos/menulistarequipos',
-					'usuarios'=>$this->usuarios->getUsuariosSistema(),
-					'incidencia_fuente' => $this->incidencia->getlistarfuenteincidencia(),
-					'incidencia_estados' => $this->incidencia->getlistarestado(),
-					'incidencia_necesidades' => $this->incidencia->getlistarnecesidades(),
-					'incidencia_tecnicos' => $this->usuarios->getListarUsuariosSistemaTipo('TÉCNICO'),
-					'incidencia_localizacion' => $this->localizacion->getLocalizacion(),
-					'incidencias_categorias'  => $this->incidencia->getlistarcategorias(),
-					'tecnicos'  => $this->incidencia->getlistarpersonal(),
-					'lista_equipos' => $this->equipos->getListarEquipos()
-
-				);
-				$this->load->view('menu',$data);
+				if ( $this->session->userdata('rol') == 1 ){
+					$menu = 'menu';
+					$contenido = 'equipos/menulistarequipos';
+					$data = array(
+						'lista_equipos' => $this->equipos->getListarEquipos()
+					);
+				}
+				if ( $this->session->userdata('rol') == 2 ){
+					$menu = 'menutecnico';
+					$contenido = 'equipos/menulistarequipos';
+					$data = array(
+						'lista_equipos' => $this->equipos->getListarEquipos()
+					);
+				}
+				if ( $this->session->userdata('rol') == 3 ){
+					$menu = 'menusupervisor';
+					$contenido = 'equipos/menulistarequipos';
+					$data = array(
+						'lista_equipos' => $this->equipos->getListarEquipos()
+					);
+				}
+				$this->MuestraVista($data, $contenido, $menu);
+			}else{
+				show_404();
 			}
 		}else{
 			$this->load->view('login');

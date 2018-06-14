@@ -166,7 +166,7 @@
 								"closeButton": true,
 								"positionClass": "toast-bottom-left"
 							});
-							//setTimeout ("location.replace('<?php echo base_url('menu/Incidentes')?>');", 3000);							
+							setTimeout ("location.replace('<?php echo base_url()?>');", 500);							
 		                }else{
 		                	//swal("","Ocurrio un error al guardar!","error");
 		                	toastr.success("Datos Guardados correctamente","",{

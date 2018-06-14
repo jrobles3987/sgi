@@ -125,7 +125,7 @@
                   <!-- end notification -->
                 </ul>
               </li>
-              <li class="footer"><a href="<?=base_url('menu/incidentes')?>"> Ver todas</a></li>
+              <li class="footer"><a href="<?=base_url('menu/ListarIncidentes')?>"> Ver todas</a></li>
             </ul>
           </li>
 
@@ -145,7 +145,7 @@
                   <!-- end notification -->
                 </ul>
               </li>
-              <li class="footer"><a href="<?=base_url('menu/incidentes')?>"> Ver todas</a></li>
+              <li class="footer"><a href="<?=base_url('menu/ListarIncidentes')?>"> Ver todas</a></li>
             </ul>
           </li>
 
@@ -310,7 +310,6 @@
   var va = '';
   Notificaciones();
   socket.on('connected', function (data) {
-
       socket.emit('ready for data', {});
   });
 
@@ -325,16 +324,15 @@
 
   function Notificaciones(tiponotificacion){
     var numIncidencias1=0;
-    var numIncidencias2=0;
-
+    var numIncidencias2=0;        
     $.ajax({
       type: "POST",
       url: "<?php echo base_url('incidencias/mostrarincidentesnotificaciones');?>",
       success: function (data) {
         var json = JSON.parse(data);
         if (json){
-          $("#ul-noti1").innerHTML='';
-          $("#ul-noti2").innerHTML='';
+          document.getElementById("ul-noti1").innerHTML = "";
+          document.getElementById("ul-noti2").innerHTML = "";
           for (var i=0, len=json.length; i < len; i++) {
 
             if (json[i].estado=="NUEVO")
@@ -353,7 +351,8 @@
         $("#muestra2").html(''+numIncidencias2+'');
       },
       error: function (xhr, exception) {
-        location.reload(true);
+        //location.reload(true);
+        alert("error");
       }
 
     });
@@ -374,7 +373,7 @@
     return texto.replace(/^(\d{4})-(\d{2})-(\d{2})$/g,'$3/$2/$1');
   }
 
-  function myFunction(x) {
+  function myFunction (x) {
     $.ajax({
             type: "POST",
             url: "<?php echo base_url('incidencias/mostrarincidentes');?>",

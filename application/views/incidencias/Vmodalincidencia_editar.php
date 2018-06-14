@@ -215,14 +215,14 @@
 
 	$('#guardar-modal-incidencia-editar').click(function() {
 		if(validar_formulario()){										
-			$('#div_loading_cargando').css('display','inline');
+			$('#div_loading').css('display','inline');
 			$.ajax({
 				type: "POST",
 				url: "<?php echo base_url('incidencias/ActualizarIncidencias');?>",
 				data: dataform,
-				success: function (data) {	            	
+				success: function (data) {
 					var json = JSON.parse(data);
-					$('#div_loading_cargando').css('display','none');
+					$('#div_loading').css('display','none');
 					if (json.res=="t") {
 						toastr.success("Datos Actualizados correctamente","Hecho",{
 							"timeOut": "5000",
@@ -230,7 +230,8 @@
 							"closeButton": true,
 							"positionClass": "toast-bottom-left"
 						});
-						//setTimeout ("location.replace('<?php echo base_url('menu/Incidentes')?>');", 3000);
+						setTimeout("$('#vmodalincidencia_editar').modal('hide');",500)
+						ReDibujaTablaIncidenciasNuevas();
 					}else{
 						toastr.error("Error al guardar los datos","Error",{
 							"timeOut": "5000",
@@ -241,12 +242,29 @@
 					}
 				},
 				complete : function(xhr, status) {
-					$('#div_loading_cargando').css('display','none');
+					$('#div_loading').css('display','none');
 				},
 				error: function (xhr, exception) {
+					$('#div_loading').css('display','none');
 				}
 			});
 		}		
+	});
+
+	$('#selectestado_editar').change(function(){
+		$('#selectestado_editar option:selected').each(function(){
+			idestado = $('#selectestado_editar').val();
+			if (idestado == 1 ||  idestado == 0){
+				$('#selectecnico_editar').val(0);
+				document.getElementById("selectecnico_editar").disabled=true;
+				document.getElementById("selectecnico_editar").className = "form-control";
+				$("#selectecnico_editar").css('box-shadow','none');
+				$("#selectecnico_editar").css('border-color','#d2d6de');
+			}else{
+				document.getElementById("selectecnico_editar").disabled=false;
+				document.getElementById("selectecnico_editar").className = "form-control incidencia_editar";
+			}
+		});
 	});
 	 
 </script>

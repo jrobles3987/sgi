@@ -224,7 +224,7 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="<?=base_url('menu/incidentes')?>">Incidentes</a></li>
+            <li><a href="<?=base_url('menu/listarincidentes')?>">Incidentes</a></li>
             <li><a href="<?=base_url('menu/planificacion')?>">Problemas</a></li>
             <li><a href="#">Incidentes recurrentes</a></li>
             <li><a href="<?=base_url('menu/Planificaciones')?>">Planificaciones</a></li>

@@ -122,11 +122,8 @@
                 </p>
               </li>
               <!-- Menu Footer-->
-              <li class="user-footer">
-                <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">Perfil</a>
-                </div>
-                <div class="pull-right" action="<?=base_url('login/logout')?>" id="btn-cs">
+              <li class="user-footer">                
+                <div class="pull-center" action="<?=base_url('login/logout')?>" id="btn-cs">
                   <a href="#" class="btn btn-default btn-flat">Cerrar Sesión</a>
                 </div>
               </li>

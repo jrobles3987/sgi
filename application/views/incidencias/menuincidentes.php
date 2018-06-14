@@ -27,12 +27,13 @@
 								if($incidentes_todos){
 									foreach ($incidentes_todos as $fila) {
 										$num++;
+										$fechamodificacion = date_create($fila->ultimamodificacion);
+										$fechamodificacion2 = date_format($fechamodificacion, 'Y-m-d H:i');
 										echo '<TR id="'.$fila->idincidencias.'"><TD>'.$num.'</TD><TD>'.$fila->tituloincidencia.'</TD><TD>'.$fila->estado.'</TD><TD>'.$fila->fechaapertura.'</TD><TD>'.$fila->prioridad.'</TD><TD>'.$fila->usuariocreador.'</TD>
-										<TD>'.$fila->tecnicoasignado.'</TD><TD>'.$fila->ultimamodificacion.'</TD><TD>'.$fila->fechavencimiento.'</TD>
+										<TD>'.$fila->tecnicoasignado.'</TD><TD>'.$fechamodificacion2.'</TD><TD>'.$fila->fechavencimiento.'</TD>
 										<TD>
-											<div class="row col-center">
+											<div class="row">
 											<div class="col-xs-1 col-sm-1" onclick="EditarIncidencia('.$fila->idincidencias.')"><a href="#" class="btn btn-sm btn-info"><span class="glyphicon glyphicon-edit"></span></a></div>
-											<div class="col-xs-1 col-sm-1"></div>
 											<div class="col-xs-1 col-sm-1" onclick="EliminarIncidencia('.$fila->idincidencias.')"><a href="#" class="btn btn-sm btn-danger"><span class="glyphicon glyphicon-trash"></span></a></div>
 											</div>
 										</TD>
@@ -53,7 +54,7 @@
 
 <script>
 
-	function EditarIncidencia(x){
+	function EditarIncidencia (x) {
 		$.ajax({
             type: "POST",
             url: "<?php echo base_url('incidencias/mostrarincidentes');?>",
@@ -68,6 +69,16 @@
 				$('#selecturgencia_editar').val(json1.urgencia);
 				$('#selectimpacto_editar').val(json1.impacto);
 				$('#selectprioridad_editar').val(json1.prioridad);
+				if (json1.idincidenciaestado == 1 ||  json1.idincidenciaestado == 0){
+					$('#selectecnico_editar').val(0);
+					document.getElementById("selectecnico_editar").disabled=true;
+					document.getElementById("selectecnico_editar").className = "form-control";
+					$("#selectecnico_editar").css('box-shadow','none');
+					$("#selectecnico_editar").css('border-color','#d2d6de');
+				}else{
+					document.getElementById("selectecnico_editar").disabled=false;
+					document.getElementById("selectecnico_editar").className = "form-control incidencia_editar";
+				}
 				$('#selectecnico_editar').val(json1.tecnicoasignado);
 				$('#selecfuenteincidencia_editar').val(json1.idincidenciafuente);
 				$('#selectlocalizacion_editar').val(json1.idlugarincidente);
@@ -127,7 +138,7 @@
         });
 	}
 	
-	function EliminarIncidencia(x){
+	function EliminarIncidencia (x) {
 		swal({
             title: "",
             text: "Eliminar Incidencia \n Desea realmente eliminar la incidencia...",
@@ -138,10 +149,10 @@
             closeOnConfirm: true,
             closeOnCancel: true
         },
-        function(isConfirm){
+        function(isConfirm) {
             if (isConfirm) {
                 //alert(idEquipo);
-                $('#div_loading_cargando').css('display','inline');
+                $('#div_loading').css('display','inline');
                 $.ajax({
                     type: "POST",
                     url: "<?php echo base_url('incidencias/EliminarIncidenciasNormal');?>",
@@ -166,11 +177,11 @@
                         }
                     },
                     complete : function(xhr, status) {
-		                $('#div_loading_cargando').css('display','none');
+		                $('#div_loading').css('display','none');
 		            },
                     error: function (xhr, exception) {
                         alert("error");
-                        $('#div_loading_cargando').css('display','none');
+                        $('#div_loading').css('display','none');
                     }
                 });
             }

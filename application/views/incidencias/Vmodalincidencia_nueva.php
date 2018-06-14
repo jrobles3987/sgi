@@ -255,7 +255,7 @@
 		                $('#div_loading_cargando').css('display','none');
 		            },
 		            error: function (xhr, exception) {
-
+						$('#div_loading_cargando').css('display','none');
 		            }
 		        });
 			}
